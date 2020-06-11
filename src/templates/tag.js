@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
+import PostListing from "../components/post-listing"
 
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
@@ -12,6 +13,7 @@ const Tags = ({ pageContext, data }) => {
     <Layout>
     <div>
       <h1>{tag}</h1>
+      <PostListing postEdges={postEdges} />
     </div>
     </Layout>
   )
