@@ -22,16 +22,21 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const result = await graphql(`
     query {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-              }
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
             }
           }
         }
       }
+      tagsGroup: allMarkdownRemark {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
+    }
     `)
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
