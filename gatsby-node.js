@@ -39,6 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
     `)
 
+    // Create blog post pages
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
         createPage(
             {
