@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
+import "../styles/layout.scss"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,11 +25,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <div id="flex-wrapper">
       <Header siteTitle={data.site.siteMetadata.title} />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
       <Footer />
-    </>
+    </div>
   )
 }
 
