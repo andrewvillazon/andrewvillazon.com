@@ -3,6 +3,7 @@
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
 
+$navbar-height: 6rem;
 @import "../../node_modules/bulma/sass/components/navbar.sass";
 
 @import "../../node_modules/bulma/sass/elements/button.sass";
@@ -14,8 +15,13 @@
 
 @import "../../node_modules/bulma/sass/grid/columns.sass";
 
+@import "../../node_modules/bulma/sass/helpers/spacing.sass";
+@import "../../node_modules/bulma/sass/helpers/typography.sass";
+@import "../../node_modules/bulma/sass/helpers/color.sass";
+
 $footer-background-color: $white;
 @import "../../node_modules/bulma/sass/layout/footer.sass";
 
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
+
