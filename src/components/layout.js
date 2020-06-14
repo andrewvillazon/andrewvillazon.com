@@ -27,7 +27,11 @@ const Layout = ({ children }) => {
   return (
     <div id="flex-wrapper">
       <Header siteTitle={data.site.siteMetadata.title} />
-      <main id="main-content">{children}</main>
+      <main id="main-content">
+        <div className="container">
+          {children}
+        </div>
+      </main>
       <Footer />
     </div>
   )
