@@ -3,18 +3,20 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const Header = ({ siteTitle }) => (
-  <header>
-    <div>
-      <h1>
-        <Link to="/">{siteTitle}</Link>
-      </h1>
-      <nav>
-        <Link to="/blog/">Articles</Link>
-        <Link to="/about/">About</Link>
-        <Link to="/contact/">Contact</Link>
-      </nav>
+  <nav>
+    <div className="container">
+      <div className="nav-container">
+        <h2>
+          <Link to="/">{siteTitle}</Link>
+        </h2>
+        <div className="nav-links">
+          <Link to="/blog/" className="nav-link">Articles</Link>
+          <Link to="/about/" className="nav-link">About</Link>
+          <Link to="/contact/" className="nav-link">Contact</Link>
+        </div>
+      </div>
     </div>
-  </header>
+  </nav>
 )
 
 Header.propTypes = {
