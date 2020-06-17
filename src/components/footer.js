@@ -1,14 +1,16 @@
 import React from "react"
+import GatsbyLogo from "../components/gatsby-logo"
+import "../styles/main.scss"
 
 const Footer = () => (
     <footer>
-        <div>
-            <div>
-                Email icon
-                Github icon
-            </div>
-            <div>
-                Copyright
+        <div className="container">
+            <div className="footer-container">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a id="gatsby-href" href="https://www.gatsbyjs.org/" title="Made with Gatsby" target="_blank">
+                    <GatsbyLogo />
+                </a>
             </div>
         </div>
     </footer>

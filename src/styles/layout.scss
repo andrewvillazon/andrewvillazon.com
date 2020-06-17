@@ -20,7 +20,7 @@
 .nav-container {
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 70px;
     justify-content: space-between;
 }
 
@@ -32,4 +32,22 @@
 .nav-link {
     margin: 0 .75rem;
     padding: .75rem;
+}
+
+.footer-container {
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.footer-container i {
+    font-size: 32px;
+}
+
+#gatsby-href {
+    margin: 0;
+    padding: 0;
+    height: 32px;
+    width: 32px;
 }
