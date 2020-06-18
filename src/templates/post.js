@@ -11,19 +11,19 @@ export default function BlogPost({ data }) {
     return (
         <Layout>
             <article>
-                <h1>{post.frontmatter.title}</h1>
-                <div className="post-info">
-                    <Link to="/about/">Andrew</Link>
-                    {' '}
-                    <small><time className="publish-date">{post.frontmatter.date}</time></small>
-                    <div>
+                <header className="post-header">
+                    <h1>{post.frontmatter.title}</h1>
+                    <p className="post-info">
+                        <small><time>{post.frontmatter.date}</time></small>
+                    </p>
+                    <div className="tag-container">
                         {
                             tags.map(tag => (
                                 <Link to={`/tags/${_.kebabCase(tag)}/`}>{tag}</Link>
                             ))
                         }
                     </div>
-                </div>
+                </header>
                 <div dangerouslySetInnerHTML={{ __html: post.html }} />
             </article>
         </Layout>
