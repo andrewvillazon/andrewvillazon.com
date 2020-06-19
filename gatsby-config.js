@@ -27,6 +27,12 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              showLineNumbers: true,
+            }
+          }
         ],
       },
     },
