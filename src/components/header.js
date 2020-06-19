@@ -10,7 +10,7 @@ const Header = ({ siteTitle }) => (
           <Link to="/">{siteTitle}</Link>
         </h2>
         <div className="nav-links">
-          <Link to="/blog/" className="nav-link">Articles</Link>
+          <Link to="/articles/" className="nav-link">Articles</Link>
           <Link to="/about/" className="nav-link">About</Link>
           <Link to="/contact/" className="nav-link">Contact</Link>
         </div>
