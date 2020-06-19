@@ -1,11 +1,13 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import PostListing from "../components/post-listing"
 import { graphql, Link } from "gatsby"
 const _ = require("lodash")
 
 const ArticlePage = ({ data }) => {
     const tags = data.tagsGroup.group
+    const postEdges = data.allMarkdownRemark.edges
 
     return (
         <Layout>
@@ -16,7 +18,7 @@ const ArticlePage = ({ data }) => {
                     {
                         tags.map(tag => {
                             return (
-                                <Link 
+                                <Link
                                     to={`/tags/${_.kebabCase(tag.fieldValue)}/`}
                                     key={tag.fieldValue}
                                 >{tag.fieldValue}</Link>
@@ -24,6 +26,9 @@ const ArticlePage = ({ data }) => {
                         })
                     }
                 </div>
+                <section>
+                    <PostListing postEdges={postEdges} />
+                </section>
             </section>
         </Layout>
     )
