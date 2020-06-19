@@ -1,16 +1,39 @@
-/* 
- Required for line numbers with gatsby-remark-prismjs
+/*
+Formatting for code blocks that are handled by prismjs via gatsby-remark-prismjs
 */
 .gatsby-highlight {
-    background-color: #fdf6e3;
-    border-radius: 0.3em;
-    margin: 0.5em 0;
-    padding: 1em;
-    overflow: auto;
-  }
-  
-  .gatsby-highlight pre[class*="language-"].line-numbers {
-    padding: 0;
-    padding-left: 2.8em;
-    overflow: initial;
-  }
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+.gatsby-highlight pre[class*="language-"] {
+  -webkit-overflow-scrolling: touch;
+}
+
+.gatsby-highlight pre[class*="language-"]::before {
+  background: black;
+  border-radius: 0px 0px 4px 4px;
+  color: white;
+  font-size: 0.75rem;
+  letter-spacing: 0.025rem;
+  padding: 0.1rem 0.5rem;
+  position: absolute;
+  right: 1rem;
+  text-align: right;
+  text-transform: uppercase;
+  top: 0;
+}
+
+/*
+  Language tabs
+*/
+.gatsby-highlight pre[class="language-python"]::before {
+  content: "python";
+  background: #424242;
+  color: white;
+}
+
+.gatsby-highlight pre[class="language-sql"]::before {
+  content: "SQL";
+  background: #f7df1e;
+  color: black;
+}
