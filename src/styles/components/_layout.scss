@@ -1,7 +1,8 @@
-/* 
- Sticky footer setup
-*/
+/**
+ * Layout
+ */
 
+// Sticky footer setup
 #flex-wrapper {
     display: flex;
     flex-direction: column;
@@ -10,11 +11,6 @@
 
 #main-content {
     flex: 1;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
 }
 
 .nav-container {
