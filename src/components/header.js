@@ -3,12 +3,10 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const Header = ({ siteTitle }) => (
-  <nav>
+  <nav className="navigation">
     <div className="small-container">
       <div className="nav-container">
-        <h2>
           <Link to="/">{siteTitle}</Link>
-        </h2>
         <div className="nav-links">
           <Link to="/articles/" className="nav-link">Articles</Link>
           <Link to="/about/" className="nav-link">About</Link>

@@ -13,10 +13,17 @@
     flex: 1;
 }
 
+.navigation {
+    background: #202b33;
+    position: sticky;
+    top: 0px;
+    z-index: 9999;
+}
+
 .nav-container {
     display: flex;
     align-items: center;
-    height: 70px;
+    height: 60px;
     justify-content: space-between;
 }
 
