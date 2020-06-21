@@ -4,7 +4,7 @@ import React from "react"
 
 const Header = ({ siteTitle }) => (
   <nav>
-    <div className="container">
+    <div className="small-container">
       <div className="nav-container">
         <h2>
           <Link to="/">{siteTitle}</Link>

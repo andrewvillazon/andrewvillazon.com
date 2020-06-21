@@ -4,7 +4,7 @@ import "../styles/main.scss"
 
 const Footer = () => (
     <footer>
-        <div className="container">
+        <div className="small-container">
             <div className="footer-container">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <i class="fa fa-github" aria-hidden="true"></i>
