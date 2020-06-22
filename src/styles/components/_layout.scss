@@ -27,6 +27,12 @@
     justify-content: space-between;
 }
 
+.nav-home, .nav-home:hover {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
 .nav-links {
     display: flex;
     flex-direction: row;

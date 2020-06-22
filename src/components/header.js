@@ -6,7 +6,7 @@ const Header = ({ siteTitle }) => (
   <nav className="navigation">
     <div className="small-container">
       <div className="nav-container">
-          <Link to="/">{siteTitle}</Link>
+          <Link to="/" className="nav-home">{siteTitle}</Link>
         <div className="nav-links">
           <Link to="/articles/" className="button">Articles</Link>
           <Link to="/about/" className="button">About</Link>
