@@ -23,18 +23,19 @@
 .nav-container {
     display: flex;
     align-items: center;
-    height: 60px;
+    height: 62px;
     justify-content: space-between;
 }
 
 .nav-links {
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
 }
 
-.nav-link {
-    margin: 0 .75rem;
-    padding: .75rem;
+.nav-links a {
+    margin: 0 .5rem;
+    padding: 1rem;
 }
 
 .footer-container {
