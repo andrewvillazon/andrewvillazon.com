@@ -14,13 +14,14 @@ const ArticlePage = ({ data }) => {
             <SEO title="Articles" />
             <section>
                 <h1>Articles</h1>
-                <div className="article-tag-container">
+                <div className="site-tags">
                     {
                         tags.map(tag => {
                             return (
                                 <Link
                                     to={`/tags/${_.kebabCase(tag.fieldValue)}/`}
                                     key={tag.fieldValue}
+                                    className="tag"
                                 >{tag.fieldValue}</Link>
                             )
                         })

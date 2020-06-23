@@ -44,7 +44,7 @@
 .nav-links a {
     background-color: $primary-color;
     border: none;
-    margin: 0;
+    margin: 0 .5rem 0 0;
 }
 
 .nav-links a:hover {
@@ -80,6 +80,25 @@
     margin: 0 .5rem 0 0;
 }
 
-.article-tag-container {
+.site-tags {
     display: flex;
+    margin-bottom: 2rem;
+}
+
+.tag {
+    border: none;
+    border-radius: $border-radius;
+    margin: 0 .5rem 0 0;
+    background-color: #bdccd6a2;
+    color: $primary-color;
+    padding: 0.3rem 0.75rem;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.tag:hover {
+    border: none;
+    background-color: darken(#bdccd6a2, 15%);
+    color: $primary-color;
+    text-decoration: none;
 }
