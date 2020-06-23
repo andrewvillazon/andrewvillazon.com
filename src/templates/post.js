@@ -11,7 +11,7 @@ export default function BlogPost({ data }) {
     return (
         <Layout>
             <article>
-                <header className="padding-bottom margin-bottom">
+                <header className="post-header padding-bottom margin-bottom">
                     <h1>{post.frontmatter.title}</h1>
                     <p className="post-info">
                         <small><time>{post.frontmatter.date}</time></small>
