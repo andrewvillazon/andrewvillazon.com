@@ -11,7 +11,7 @@ export default function BlogPost({ data }) {
     return (
         <Layout>
             <article>
-                <header className="post-header">
+                <header className="padding-bottom margin-bottom">
                     <h1>{post.frontmatter.title}</h1>
                     <p className="post-info">
                         <small><time>{post.frontmatter.date}</time></small>
@@ -19,7 +19,9 @@ export default function BlogPost({ data }) {
                     <div className="tag-container">
                         {
                             tags.map(tag => (
-                                <Link to={`/tags/${_.kebabCase(tag)}/`}>{tag}</Link>
+                                <Link 
+                                to={`/tags/${_.kebabCase(tag)}/`}
+                                className="tag">{tag}</Link>
                             ))
                         }
                     </div>
