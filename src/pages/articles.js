@@ -27,7 +27,7 @@ const ArticlePage = ({ data }) => {
                         })
                     }
                 </div>
-                <section>
+                <section className="padding-top">
                     <PostListing postEdges={postEdges} />
                 </section>
             </section>
