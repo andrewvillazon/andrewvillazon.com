@@ -24,9 +24,10 @@ class PostListing extends Component {
             <div>
                 {
                     postList.map(post => (
-                        <article>
+                        <article className="post-list-item">
                             <Link to={post.path} key={post.title}>
-                                <h4>{post.title}</h4>
+                                <h2>{post.title}</h2>
+                                <div className="post-date"><time>{post.date}</time></div>
                             </Link>
                         </article>
                     ))}
