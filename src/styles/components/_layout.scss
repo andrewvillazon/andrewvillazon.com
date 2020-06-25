@@ -52,22 +52,33 @@
     background-color: lighten($button-background, 5%);
 }
 
+.footer {
+    background-color: #fafbfc;
+}
+
+.footer-item {
+    margin: 0 1.5rem 0 0;
+}
+
 .footer-container {
     display: flex;
+    flex-direction: row;
     height: 100px;
+    margin: 25px auto;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.footer-container i {
-    font-size: 32px;
+.footer-right {
+    display: flex;
+    align-items: center;
 }
 
-#gatsby-href {
-    margin: 0;
-    padding: 0;
+.footer-logo {
     height: 32px;
     width: 32px;
+    margin: 0 0 0 1.5rem;
 }
 
 .tag-container a {
