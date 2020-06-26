@@ -6,15 +6,17 @@ import PostListing from "../components/post-listing"
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
   const postEdges = data.allMarkdownRemark.edges
-  
+
   console.log(postEdges)
 
   return (
     <Layout>
-    <div>
-      <h1>{tag}</h1>
-      <PostListing postEdges={postEdges} />
-    </div>
+      <div className="padding-bottom">
+        <h1>Posts tagged <u>{tag}</u></h1>
+      </div>
+      <div>
+        <PostListing postEdges={postEdges} />
+      </div>
     </Layout>
   )
 }
