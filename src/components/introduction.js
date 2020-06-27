@@ -2,8 +2,8 @@ import React from "react"
 import {Link} from "gatsby"
 
 const Introduction = () => (
-    <section>
-        <h1>Hi, I'm Andrew.</h1>
+    <section className="introduction">
+        <h1>Hi, I'm Andrew</h1>
         <p>
             I'm a Data Analyst that specialises in SQL, Python, and Data Visualisation. My website is a collection of the things I've learned over the years - a place to document those "Aha!" moments.
         </p>
