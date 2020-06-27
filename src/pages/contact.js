@@ -8,7 +8,9 @@ const ContactPage = () => (
         <SEO title="Contact" />
         <section>
             <h1>Contact</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>
+                If you'd like to get in touch you can email me at: <strong>andrew</strong> dot <strong>villazon</strong> at <strong>gmail</strong> dot com.
+            </p>
         </section>
     </Layout>
 )
