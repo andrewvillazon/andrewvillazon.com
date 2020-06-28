@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { Link } from "gatsby"
 const _ = require("lodash");
 
@@ -10,6 +11,7 @@ export default function BlogPost({ data }) {
 
     return (
         <Layout>
+            <SEO title={post.frontmatter.title} description={post.excerpt} />
             <article>
                 <header className="post-header padding-bottom margin-bottom">
                     <h1>{post.frontmatter.title}</h1>
@@ -41,6 +43,7 @@ export const query = graphql`
                 date(formatString: "DD MMMM, YYYY")
                 tags
             }
+            excerpt
         }
     }
 `

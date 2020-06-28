@@ -1,5 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import PostListing from "../components/post-listing"
 
@@ -11,6 +12,7 @@ const Tags = ({ pageContext, data }) => {
 
   return (
     <Layout>
+      <SEO title={`Posts tagged as ${tag}`} description={`Posts tagged as ${tag}`} />
       <div className="padding-bottom">
         <h1>Posts tagged <u>{tag}</u></h1>
       </div>
