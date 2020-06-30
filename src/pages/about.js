@@ -10,7 +10,7 @@ const AboutPage = () => (
         <section>
             <h1>About me</h1>
             <p>
-            I'm Andrew Villazon, a Data Analyst. Day to day I write SQL and Python in a Data Warehouse environment. I also use tools like Tableau and PowerBI for Data Visualisation.
+            I'm Andrew Villazon, a Data Professional. Day to day I write SQL and Python in a Data Warehouse environment. I also use tools like Tableau and PowerBI for Data Visualisation.
             </p>
         </section>
         <section>
