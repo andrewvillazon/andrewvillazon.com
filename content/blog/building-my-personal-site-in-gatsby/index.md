@@ -31,7 +31,7 @@ Gatsby does a bunch of cool things like pre-fetch data and predicts where the ne
 
 However, what really caught my attention was the ability to store content as Markdown and have Gatsby turn it into pages.
 
-I liked this for a couple of reasons. Firstly you can store your posts as an '.md' file in your project and secondly if you're developing with git you can use it to version control your content—a kind of rudimentary form of content management.
+I liked this for a couple of reasons. Firstly you can store your posts as an **.md** file in your project and secondly if you're developing with git you can use it to version control your content—a kind of rudimentary form of content management.
 
 ### The development experience
 
