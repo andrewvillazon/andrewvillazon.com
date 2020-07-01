@@ -22,7 +22,7 @@ const AboutPage = () => (
                 If you're interested in reading about the experience of working with Gatsby I documented it <Link to="/building-my-personal-site-in-gatsby/">here</Link>.
             </p>
             <p>
-                The design of this site is heavily influenced by the design of <a href="https://www.taniarascia.com/">taniaracsia.com</a>, the author of Primitive. I hope she doesn't mind. I like the clean minimal design that really helps focus in on the content. I've never met Tania but have really enjoyed using her site and it's full of useful content.
+                The design of this site is heavily influenced by the design of <a href="https://www.taniarascia.com/">taniaracsia.com</a>, the author of Primitive. I hope she doesn't mind. I like the clean minimal design that helps focus on the content. I've never met Tania but have enjoyed using her site and it's full of useful content.
         </p>
         </section>
     </Layout>
