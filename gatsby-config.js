@@ -28,6 +28,7 @@ module.exports = {
         plugins: [
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`,
+          `gatsby-remark-images`,
         ],
       },
     },
