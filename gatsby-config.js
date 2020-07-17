@@ -28,6 +28,12 @@ module.exports = {
         plugins: [
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-images`,
+          {
+            resolve: `gatsby-remark-vscode`,
+            options: {
+              theme: 'Solarized Light' // Or install your favorite theme from GitHub
+            },
+          },
         ],
       },
     },
