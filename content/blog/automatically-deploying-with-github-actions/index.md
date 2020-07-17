@@ -6,9 +6,9 @@ tags:
 - Gatsby
 ---
 
-When I built this site a decision I made was taking care of the web hosting myself. The drawback of a DIY approach is you’ve got to do build and deployment yourself.
+When I built this site a decision I made was taking care of the web hosting myself. The drawback of going DIY is you’ve got to do build and deployment yourself.
 
-Recently I discovered Github Actions as a way to automate tasks on a repository and wondered if it would be possible to have Github Actions build and deploy the site for me? A week's worth of tinkering and I managed to establish a process that builds and deploys with every commit to the master branch.
+Recently I discovered Github Actions as a way to automate tasks on a repository and wondered would it be possible to have Github Actions build and deploy the site for me? A few hours of tinkering and I managed to establish a process that builds and deploys with every commit to the master branch.
 
 This isn’t a tutorial but something closer to a walk-through of how I setup Github Actions to deploy my site. Hopefully it gives you an idea of what may be possible with your own Gatsby sites.
 
