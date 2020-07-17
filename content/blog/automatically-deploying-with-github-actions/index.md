@@ -8,13 +8,13 @@ tags:
 
 When I built this site a decision I made was taking care of the web hosting myself. The drawback of going DIY is you’ve got to do build and deployment yourself.
 
-Recently I discovered Github Actions as a way to automate tasks on a repository and wondered would it be possible to have Github Actions build and deploy the site for me? A few hours of tinkering and I managed to establish a process that builds and deploys with every commit to the master branch.
+Recently I discovered [Github Actions](https://github.com/features/actions) as a way to automate tasks on a repository and wondered would it be possible to have Github Actions build and deploy the site for me? A few hours of tinkering and I managed to establish a process that builds and deploys with every commit to the master branch.
 
-This isn’t a tutorial but something closer to a walk-through of how I setup Github Actions to deploy my site. Hopefully it gives you an idea of what may be possible with your own Gatsby sites.
+In this post I'll walk-through how I setup Github Actions to deploy my site. Hopefully it gives you an idea of what may be possible with your own [Gatsby](https://www.gatsbyjs.org/) sites.
 
 ## What are Github Actions?
 
-Github Actions are a feature of Github that allows the automation of tasks in response to events on a repository. This enables Continous Integration/Continuous Deployment functionality as part of a Github repository.
+[Github Actions](https://github.com/features/actions) are a feature of [Github](https://github.com/) that provides the automation of tasks in response to events on a repository. This enables Continous Integration/Continuous Deployment functionality as part of a Github repository.
 
 Before getting into Github Actions here is a brief overview of some of the core ideas.
 
@@ -36,21 +36,19 @@ Steps are collections of commands or Actions that perform each "Step" in a Job. 
 
 Actions are the lowest grain or unit of Github Actions. They perform very specific tasks in a Workflow such as installing Node.js or uploading files.
 
-Actions come in two flavors: Docker container actions and JavaScript actions.
+Actions come in two flavors: [Docker container actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action) and [JavaScript actions](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action). On the Workflow for this site, I only use Docker container actions.
 
-On the Workflow for this site, I only used Docker container actions. Details for JavaScript actions are found [here](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action).
+When Docker actions are called (invoked) as part of a Workflow, the Github runner automatically builds the Docker container based on the Docker File in the Action's repository.
 
-When Docker actions are called (invoked) as part of a Workflow, the Github runner automatically builds the Docker container based on the Docker File in the Action's repository. The Action's running environment is the Docker Container.
-
-There are Actions for just about any task you can think of, and most live on Github as public repositories. The catalog of Actions is available through the Github Actions Marketplace.
+There are Actions for just about any task you can think of, and most live on Github as public repositories. The catalog of Actions is available through the [Github Actions Marketplace](https://github.com/marketplace?type=actions).
 
 ## A Workflow for Building and Deploying a Gatsby Site
 
 **The repository accompanying this walkthrough is available on [my Github](https://github.com/andrewvillazon/gatsby-github-actions-demo)*
 
-The Docker container(s) that run inside the Github runners are mostly empty. Much of the Workflow involves setting up the environment to enable the building of the Gatsby site and deploying. This means installing Node.js and making sure authentication details are available to use for uploading.
+Much of the Workflow involves setting up the environment to enable the building of the Gatsby site and deploying. This means tasks like installing Node.js and making sure authentication details are available to use for uploading.
 
-Here is an overview of what the Workflow needs to do:
+Here is an overview of what the Workflow does:
 1. Checkout the code
 2. Install project dependencies including the Gatsby CLI
 3. Build the site using Gatsby CLI
@@ -61,7 +59,7 @@ Here is an overview of what the Workflow needs to do:
 
 To enable Github Actions on a repository there are two requirements:
 1. A directory at the top level (root) of the repository named `.github/workflows`
-2. Inside the `.github/workflows` directory a Workflow metadata file stored as `.yml` or `.yaml` (YAML files).
+2. Inside the `.github/workflows` directory a Workflow metadata file stored as `.yml` or `.yaml` ([YAML](https://en.wikipedia.org/wiki/YAML) files).
 
 Github will look for any `.yml` or `.yaml` files to see if they contain Workflows regardless of their name.
 
@@ -124,11 +122,11 @@ jobs:
     # highlight-end
 ```
 
-The Checkout Code Action comes from the official Github Actions account, funnily enough, called "actions". This account provides a range of useful official Actions.
+The [Checkout Code Action](https://github.com/actions/checkout) comes from the official [Github Actions account](https://github.com/actions), funnily enough, called "actions". This account provides a range of useful official Actions.
 
 ### Installing Node.js
 
-To install project dependancies the Docker container needs to have Node.js which will enable the use of npm. This can be done through the offical action `setup-node`.
+To install project dependancies the Docker container needs to have [Node.js](https://nodejs.org) which will enable the use of [npm](https://www.npmjs.com/). This can be done through the offical action `setup-node`.
 
 ```yaml
 ...
@@ -149,7 +147,7 @@ jobs:
       # highlight-end
 ```
 
-The `setup-node` Action comes with options to specify a particular version of Node.js to use. Exact versions can be listed, or the latest in a version e.g., `12.x` indicates the newest release of version 12.
+The `setup-node` [Action](https://github.com/actions/setup-node) comes with options to specify a particular version of Node.js to use. Exact versions can be listed, or the latest in a version e.g., `13.x` indicates the newest release of version 13.
 
 Most Actions list the available parameters in their documentation, so it's worth checking the repository to find the available options.
 
@@ -182,7 +180,7 @@ jobs:
       # highlight-end
 ```
 
-The command `npm ci` (ci for 'clean install') installs the project's dependencies. To run the build process requires the Gatsby CLI. This is included as another Step and uses npm with the command `npm install -g gatsby-cli`.
+The command `npm ci` (ci for 'clean install') installs the project's dependencies. To run the build process requires the [Gatsby CLI](https://www.gatsbyjs.org/docs/gatsby-cli/). This is included as another Step and uses npm with the command `npm install -g gatsby-cli`.
 
 ### Running Gatsby build
 
@@ -223,7 +221,7 @@ Following the Build step is a simple directory listing command to verify that th
 
 ### Setting up for SFTP
 
-Moving files from the Docker Container to the webserver (host) uses the SSH File Transfer Protocol. SFTP uses SSH to provide secure file transfer.
+Moving files from the running environment to the webserver (host) uses the [SSH File Transfer Protocol](https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol). SFTP uses SSH to provide secure file transfer.
 
 #### Using Github Secrets
 
@@ -239,17 +237,17 @@ If these details are compromised, an attacker may be able to log in but be preve
 
 #### Storing authentication details as Secrets
 
-Secrets are located in the " tab of the repository. 
+Secrets are located in the "Secrets" tab of the repository. 
 
 ![Github Secrets available from the Secrets tab of the repository](secrets.png "Github Secrets")
 
-For my Gatsby site Workflow, I store the following as secrets: username, SSH private key, web server's IP address, and the directory on the webserver to upload to (destination).
+For my Gatsby site Workflow, I store the following as secrets: username, SSH private key, webserver's IP address, and the directory on the webserver to upload to (destination).
 
 ![List of secrets to use in this Github Workflow](secrets_list.png "Github Secrets List")
 
 #### Setting up for SFTP in the Workflow file
 
-To work with SFTP involves getting two things into the Docker Container: The SSH private key to connect to the server (the public key will be on the server), and the keys ensuring connection to the correct server.
+To work with SFTP involves getting two things into the running environment: The SSH private key to connect to the server (the public key will be on the server), and the keys ensuring connection to the correct server.
 
 Note this time we'll run the Step one command after the other. We can do this by adding the pipe `|` symbol after the `run` key followed by each command on a new line.
 
@@ -291,7 +289,7 @@ jobs:
       # highlight-end
 ```
 
-To get the private key into the container involves creating an `.ssh` directory and piping the contents of the SSH key secret into a key file. A similar technique is used with the server keys by taking the results of the `ssh-keyscan` command and piping them into the `known-hosts` file.
+To get the private key into the container involves creating an `.ssh` directory and redirecting the contents of the SSH key secret into a key file. A similar technique is used with the server keys by taking the results of the `ssh-keyscan` command and redirecting them into the `known-hosts` file.
 
 ### Running SFTP commands
 
@@ -327,7 +325,7 @@ sftp -i ~/.ssh/deploy_key ${{ secrets.deploy_user }}@${{ secrets.host }} <<< $'c
 
 ### Full Workflow file
 
-To finish off here is the workflow file in full:
+To finish off this is the Workflow file in full:
 
 ```yaml
 name: Build and Deploy
@@ -374,15 +372,17 @@ jobs:
 
 ### Checking the status of the Workflow
 
-Progress of the Workflow is viewed on the Actions Tab of the repository which displays output from the Github Runner. This is also useful for diagnosing issues with the Workflow.
+Progress of the Workflow is tracked on the Actions Tab of the repository which displays progress and output from the Github Runner. This is also useful for diagnosing issues with the Workflow.
 
 ![Workflow progress](action_run.png "Workflow progress")
 
 ### Conclusion
 
+I'm pleased with how the Workflow turned out. Now when I commit to the master branch a couple of minutes later the changes are already online. 
+
 If you're running a Gatsby site, or a site with a build process, then I recommend experimenting with Github Actions. Hopefully this Workflow has given you a starting point to automate yours.
 
-Lastly a list of the useful links that helped me to create my own Workflow:
+Finally a list of the useful links that helped me create my own Workflow:
 
 * [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)
 * [SFTP-Deploy-Action](https://github.com/wlixcc/SFTP-Deploy-Action)
