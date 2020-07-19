@@ -79,19 +79,18 @@ on:
 
 After the Workflow and its trigger is the Jobs definition. Each job is defined as a key and must be unique. The keys that follow configure the job.
 
-```yaml
+```yaml{7-11}
 name: Build and Deploy
 
 on:
   push:
     branches: master
-# highlight-start
+
 jobs:
   build-and-deploy:
     name: Build and deploy Gatsby site
     runs-on: ubuntu-latest
     steps: []
-# highlight-end
 ```
 
 The `name` key is optional but is useful to include as it will appear in the Github runner. The `runs-on` key is required and specifies the operating system that the job will run on, the latest version of Ubuntu.
@@ -104,7 +103,7 @@ When the Workflow process starts, it's important to check out the repository cod
 
 Referencing an Action in a Step involves adding a `uses` key followed by `account/repository-name` as the value. A specific version of the repository can be used by including an `@` symbol and version number.
 
-```yaml
+```yaml{10-15}
 name: Build and Deploy
 
 on:
@@ -115,11 +114,10 @@ jobs:
   build-and-deploy:
     name: Build and deploy Gatsby site
     runs-on: ubuntu-latest
-    # highlight-start
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2.3.1
-    # highlight-end
 ```
 
 The [Checkout Code Action](https://github.com/actions/checkout) comes from the official [Github Actions account](https://github.com/actions), funnily enough, called "actions". This account provides a range of useful official Actions.
@@ -128,7 +126,7 @@ The [Checkout Code Action](https://github.com/actions/checkout) comes from the o
 
 To install project dependancies the Docker container needs to have [Node.js](https://nodejs.org) which will enable the use of [npm](https://www.npmjs.com/). This can be done through the offical action `setup-node`.
 
-```yaml
+```yaml{11-14}
 ...
 
 jobs:
@@ -139,12 +137,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2.3.1
 
-      # highlight-start
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '13.x'
-      # highlight-end
 ```
 
 The `setup-node` [Action](https://github.com/actions/setup-node) comes with options to specify a particular version of Node.js to use. Exact versions can be listed, or the latest in a version e.g., `13.x` indicates the newest release of version 13.
@@ -155,7 +151,7 @@ Most Actions list the available parameters in their documentation, so it's worth
 
 When Node.js is installed npm can be used to install the project's dependencies. This step doesn't use an Action but instead uses the `run` keyword to indicate that what follows are terminal commands.
 
-```yaml
+```yaml{16-20}
 ...
 
 jobs:
@@ -171,13 +167,11 @@ jobs:
         with:
           node-version: '13.x'
 
-      # highlight-start
       - name: Install Project Dependencies
         run: npm ci
 
       - name: Install Gatsby CLI
         run: npm install -g gatsby-cli@2.12.34
-      # highlight-end
 ```
 
 The command `npm ci` (ci for 'clean install') installs the project's dependencies. To run the build process requires the [Gatsby CLI](https://www.gatsbyjs.org/docs/gatsby-cli/). This is included as another Step and uses npm with the command `npm install -g gatsby-cli`.
@@ -186,7 +180,7 @@ The command `npm ci` (ci for 'clean install') installs the project's dependencie
 
 With project dependencies and Gatsby CLI installed the build process can run. Once again, this is a terminal command: `gatsby build`.
 
-```yaml
+```yaml{22-26}
 ...
 
 jobs:
@@ -208,13 +202,11 @@ jobs:
       - name: Install Gatsby CLI
         run: npm install -g gatsby-cli@2.12.34
       
-      # highlight-start
       - name: Build
         run: gatsby build
       
       - name: Verify build
         run: ls -la public
-      # highlight-end
 ```
 
 Following the Build step is a simple directory listing command to verify that the `gatsby build` command generated the site contents.
@@ -251,7 +243,7 @@ To work with SFTP involves getting two things into the running environment: The 
 
 Note this time we'll run the Step one command after the other. We can do this by adding the pipe `|` symbol after the `run` key followed by each command on a new line.
 
-```yaml
+```yaml{28-33}
 ...
 
 jobs:
@@ -279,14 +271,12 @@ jobs:
       - name: Verify build
         run: ls -la public
       
-      # highlight-start
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.ssh_private_key }}" > ~/.ssh/deploy_key
           sudo chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.host }}" > ~/.ssh/known_hosts
-      # highlight-end
 ```
 
 To get the private key into the container involves creating an `.ssh` directory and redirecting the contents of the SSH key secret into a key file. A similar technique is used with the server keys by taking the results of the `ssh-keyscan` command and redirecting them into the `known-hosts` file.
@@ -295,7 +285,7 @@ To get the private key into the container involves creating an `.ssh` directory 
 
 After SSH is setup the last step is to construct the command that uploads the contents of the `./public` directory to the webserver.
 
-```yaml
+```yaml{10-11}
 ...
       
       - name: Setup SSH
@@ -304,8 +294,7 @@ After SSH is setup the last step is to construct the command that uploads the co
           echo "${{ secrets.ssh_private_key }}" > ~/.ssh/deploy_key
           sudo chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.host }}" > ~/.ssh/known_hosts
-      
-      # highlight-start
+
       - name: SFTP upload
         run: sftp -i ~/.ssh/deploy_key ${{ secrets.deploy_user }}@${{ secrets.host }} <<< $'cd ${{ secrets.destination_path }} \n put -r public/*'
 ```
@@ -314,7 +303,7 @@ After SSH is setup the last step is to construct the command that uploads the co
 
 SFTP presents a small problem. Using SFTP on a terminal involves entering commands into an prompt. In the Github runner this isn't possible. Working around this involves issuing the login and upload as one command. Here is a breakdown of the full command:
 
-```shell
+```sh
 sftp -i ~/.ssh/deploy_key ${{ secrets.deploy_user }}@${{ secrets.host }} <<< $'cd ${{ secrets.destination_path }} \n put -r public/*'
 ```
 
