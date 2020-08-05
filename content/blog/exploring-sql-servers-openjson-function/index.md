@@ -47,7 +47,7 @@ To start, let's use the function to inspect some JSON text. We'll pass in the on
 
 To call the function, we include it in the `FROM` clause of the query.
 
-```sql
+```sql{22-22}
 DECLARE @json_text NVARCHAR(MAX)
 SET @json_text = N'
     {
@@ -85,7 +85,7 @@ is_good|	true|	3
 aliases|	["Bag-Man","Black Marvel","Peter Palmer"]|	4
 vitals|	{"species": "Human","height": {"measure": 178,"unit": "cm"}}|	5
 
-The function's default action is to loop through each key at the top level (root) of the JSON text and return a row, which includes the **key** name, its **value**, and an integer indicating its JSON data **type**.
+The function's default action is to loop through each key at the top level (root) of the JSON text and return a row, which includes the **key** name, its **value**, and an integer indicating its [JSON data](https://docs.microsoft.com/en-us/sql/t-sql/functions/openjson-transact-sql?view=sql-server-ver15#return-value) **type**.
 
 Notice that the function only loops through the top level of the JSON text.
 
@@ -93,7 +93,7 @@ Notice that the function only loops through the top level of the JSON text.
 
 Before we move onto the next use of `OPENJSON`, let's look at the optional **path** argument. 
 
-The **path** argument allows us to target a specific object in the JSON text by defining a **JSON Path Expression** pointing to the object. The use of the path argument becomes essential as we deal with more complex JSON.
+The **path** argument allows us to target a specific object in the JSON text by defining a **JSON Path Expression** pointing to the object. The use of the **path** argument becomes essential as we deal with more complex JSON.
 
 The **JSON Path Expression** has the following syntax:
 
@@ -113,7 +113,7 @@ Now that we know about the JSON Path Expression let's see an example of its use.
 
 ### Using the JSON Path Expression
 
-To target a specific object, we include the JSON Path Expression after the jsonText argument.
+To target a specific object, we include the **JSON Path Expression** after the jsonText argument.
 
 ```sql{5-10,22-22}
 DECLARE @json_text NVARCHAR(MAX)
@@ -188,7 +188,7 @@ In the next example, we'll see how to build a more useful result set from the JS
 
 So far, we've seen `OPENJSON` return information about a JSON text. However, the function's real utility comes from its ability to overlay a result set over a JSON text.
 
-To define a result set, we use the other optional argument, the **with_clause**. The **WITH** clause comes after the call to `OPENJSON` and has the following syntax:
+To define a result set, we use the other optional argument, the **with_clause**. The `WITH` clause comes after the call to `OPENJSON` and has the following syntax:
 
 ```sql
 OPENJSON(jsonText)
@@ -238,7 +238,7 @@ The result set we define in the `WITH` clause will behave just like a regular ta
 
 ### Automatically convert Data Types
 
-A helpful feature of the `WITH` clause is that it supports sensible Data Type conversions within the schema definition.
+A helpful feature of the `WITH` clause is that it supports sensible **data type** conversions within the schema definition.
 
 The automatic conversion reduces the need to use `CAST` or `CONVERT` explicitly in the `SELECT` statement.
 
