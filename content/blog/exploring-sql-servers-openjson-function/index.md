@@ -274,11 +274,15 @@ Results:
 :-----------| :------------- | :------------------------| :-------|
 |1969-07-20 02:56:00.0000000 |	24 | 1|	37.5782881002088 |
 
+You may have also noticed above that the **JSON Path Expression** was not used in the `WITH` clause. Where column names match keys in the current object then the JSON path is not required.
+
 ## Query JSON text from a table
 
 All the examples up to this point have used `OPENJSON` with a variable that stores the JSON text. In reality, JSON text will be stored in a table, so how do we query this?
 
-Lets assume we're using a database called **nobel** which has a table of nobel laureates aptly named **laureates** and contains rows of JSON text. To query JSON text in the table, we use the `CROSS APPLY` operand to *apply* `OPENJSON` per row and pass in the column name containing the JSON text.
+Lets assume we're using a database called **nobel** which has a table of nobel laureates aptly named **laureates** and contains rows of JSON text. 
+
+To query JSON text in the table, we use the `CROSS APPLY` operand to *apply* `OPENJSON` per row and pass in the column name containing the JSON text.
 
 ```sql
 SELECT
@@ -307,7 +311,7 @@ Results:
 :---------| :--------- | :---| :------| :------------- |
 | Curie | Marie | 1867-11-07 | female | Russian Empire (now Poland) |
 
-Once applied, `OPENJSON` can be used in the same way as the examples above, the only difference being it will be called per row.
+Once applied, `OPENJSON` can be used in the same way as the examples above, the only difference being it is called per row.
 
 ## Working with Arrays
 
@@ -362,7 +366,7 @@ Results:
 | Speed |	65 |
 | *etc*	|  |
 
-Notice that when using the JSON Path Expression, the path is defined relative to the JSON fragment and not original JSON text.
+Notice that when using the **JSON Path Expression**, the path is defined relative to the JSON fragment and not original JSON text.
 
 Where the Array *does <u>not</u>* contain objects, we can simply reference the items with the `$` dollar sign.
 
@@ -385,9 +389,9 @@ FROM
 
 ### Array index support
 
-The JSON path expression also supports Array Indexing when a path refers to an Array. This is useful in situations where you always want to query the same item in an Array, e.g., the first item in an Array.
+The **JSON Path Expression** also supports Array Indexing when a path refers to an Array. This is useful in situations where you always want to query the same item in an Array, e.g., the first item in an Array.
 
-To use Array Indexing, use the square bracket notation with the number of the Index you wish to target. As is familiar with programming languages, Arrays are zero-based (start at zero).
+To use Array Indexing, use the square bracket notation, `[]`, with the number of the Index you wish to target. As is familiar with programming languages, Arrays are zero-based (start at zero).
 
 ```sql
 DECLARE @meteor_landings NVARCHAR(MAX)
@@ -502,4 +506,5 @@ What makes SQL Server's JSON support effective is it allows you to leverage JSON
 
 * [OPENJSON (Transact-SQL)](https://docs.microsoft.com/en-us/sql/t-sql/functions/openjson-transact-sql?view=sql-server-ver15)
 * [JSON data in SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/json/json-data-sql-server?view=sql-server-ver15)
+* [JSON Path Expressions](https://docs.microsoft.com/en-us/sql/relational-databases/json/json-path-expressions-sql-server?view=sql-server-ver15)
 * [ jdorfman / awesome-json-datasets ](https://github.com/jdorfman/awesome-json-datasets)
