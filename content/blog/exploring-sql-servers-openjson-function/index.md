@@ -29,7 +29,7 @@ Lets look at the function in more detail.
 
 * **jsonExpression**: required (Unicode) text containing the JSON to parse
 * **path**: an optional JSON Path Expression which lets you target specific objects within a JSON text
-* **with_clause**: an optional WITH clause which defines the outputted result set. The WITH clause effectively maps JSON values to columns in a result set.
+* **with_clause**: an optional `WITH` clause which defines the outputted result set. The `WITH` clause effectively maps JSON values to columns in a result set.
 
 The function is set out like this:
 
