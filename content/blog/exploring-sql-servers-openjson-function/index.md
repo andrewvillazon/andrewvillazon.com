@@ -5,7 +5,7 @@ tags:
     - SQL Server
 ---
 
-Thanks to the rise of JavaScript, Rest APIs, and No-SQL databases, JSON has become *the* data exchange format. However, JSON is a different way of representing data to a traditional relational database where data is stored as tables with rows, and often it can seem like the two paradigms aren't compatible.
+Thanks to the rise of JavaScript, Rest APIs, and No-SQL databases, [JSON](https://www.json.org/json-en.html) has become *the* data exchange format. However, JSON is a different way of representing data to a traditional relational database where data is stored as tables with rows, and often it can seem like the two paradigms aren't compatible.
 
 In this post, I'll look at how to work with JSON in SQL Server by exploring the `OPENJSON` function and demonstrating how you can use SQL Server to make use of JSON-based data.
 
@@ -19,7 +19,7 @@ First of all Microsoft [suggest](https://docs.microsoft.com/en-us/sql/relational
 
 Secondly the `OPENJSON` function is only available under compatibility level 130.
 
-Lets look at `OPENJSON`.
+Lets look at the function in more detail.
 
 ## What is the OPENJSON function?
 
