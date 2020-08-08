@@ -5,13 +5,11 @@ tags:
     - Python
 ---
 
-In Data Analysis a common task is taking data from an external source, such as a text file, and storing it in a Database. There are many different tools and methods for this but a great option is to use Python.
+In Data Analysis a common task is taking data from an external source, such as a text file, and storing it in a Database. There are many different tools and methods for this but a great option to use is Python.
 
-This tutorial will cover moving data to a Database with just Python and intentionally avoids using additional libraries.
+Often external data can be dirty or in formats that aren't suited to Databases such as JSON or XML and require transformation before storing. Using a language like Python gives us greater control and flexibility over this process.
 
-## Why use Python?
-
-Often external data can be dirty or in formats that aren't suited to Databases such as JSON or XML and require transformation before storing. Using Python gives us greater control and flexibility over this process.
+This tutorial will cover moving data to a Database with just Python and intentionally avoids using additional libraries. The tutorial is written using **Python 3.6.5**.
 
 ## Setting up
 
@@ -19,7 +17,7 @@ Before we start we'll need some data to work with.
 
 The data we'll be using is a csv file of 1000 rows of various data types. The data was created using the excellent [Faker library](https://pypi.org/project/Faker/). Faker is a library that generates fake data that looks like real-life data.
 
-You can find the data and the code in the repository for this tutorial at my github.
+You can find the data and the code in the repository for this tutorial on github.
 
 ## Getting started
 
@@ -103,7 +101,7 @@ Now that we have our Database and table setup we can move data into it.
 
 We start by opening the csv file using a context manager.
 
-Inside the `with` block we call `csv.reader()`, pass in our file variable, and specify that our columns are seperated by a pipe character "|". This gives us back a csv reader object that we can use to retrieve row data from our csv file.
+Inside the `with` block we call `csv.reader()`, pass in our file variable, and specify that our columns are seperated by a pipe character `|`. This returns a csv reader object that we can use to retrieve row data from our csv file.
 
 ```python
 with open("big_data.csv", "r", encoding="utf-8") as csv_file:
