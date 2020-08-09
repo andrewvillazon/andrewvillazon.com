@@ -21,6 +21,8 @@ You can find the data and the code in the repository for this tutorial on github
 
 ## Getting started
 
+Start by creating a new python file called **pure_python.py**
+
 To start loading our external data we'll need import two libraries:
 * `sqlite3` - gives us a Database to work with
 * `csv` - for working with csv files
@@ -36,9 +38,11 @@ import csv
 
 Before we can store data we'll need to create the Database and setup a table.
 
-To interact with the Database we use the `sqlite.connect()` method which takes the file name of our database. 
+To interact with the Database we'll use the `sqlite.connect()` method which takes the file name of our database. The `connect()` method returns a connection object that we assign to the variable `conn`.
 
-After this we get a new cursor object from the connection. The cursor object allows us to issue SQL commands to the Database.
+We can use `conn.cursor()` to return a new cursor object from the connection. The cursor object allows us to issue SQL commands to the Database.
+
+<div class="code-filename">pure_python.py</div>
 
 ```python
 import sqlite3
@@ -52,6 +56,8 @@ curs = conn.cursor()
 You might have noticed that we're passing in a file name to the `connect()` method. This is because sqlite is a file-based Database. Another feature of sqlite is if the file name does not exist then it will be created for us.
 
 Now that we have a cursor object we can use it to perform SQL commands on our Database. The first command we issue is to create the table if it doesn't exist. Our data will be stored in this table.
+
+<div class="code-filename">pure_python.py</div>
 
 ```python
 curs.execute(
@@ -71,11 +77,15 @@ curs.execute(
 
 The second part of our Database setup is to remove any existing data so we're working with an empty table. This is known as truncating a table.
 
+<div class="code-filename">pure_python.py</div>
+
 ```python
 curs.execute("DELETE FROM pure_python")
 ```
 
 Finally we save, or more precisely *commit*, the changes to the Database.
+
+<div class="code-filename">pure_python.py</div>
 
 ```python
 conn.commit()
@@ -84,6 +94,37 @@ conn.commit()
 It's worth mentioning here that while we have *executed* our SQL commands the changes actually remain in a tentative state and aren't yet visible on the Database. 
 
 To fully save we call the `commit()` method which saves the changes and ends the Database transaction.
+
+Here is the code so far.
+
+<div class="code-filename">pure_python.py</div>
+
+```python
+import sqlite3
+import csv
+
+
+conn = sqlite3.connect("big_data.db")
+curs = conn.cursor()
+
+curs.execute(
+    """
+    CREATE TABLE IF NOT EXISTS pure_python (
+        transaction_date TEXT,
+        bban TEXT,
+        color TEXT,
+        phone_number TEXT,
+        lat REAL,
+        long REAL,
+        age INT
+    )
+ """
+)
+
+curs.execute("DELETE FROM pure_python")
+conn.commit()
+```
+
 
 #### A note about Database providers
 
@@ -105,6 +146,8 @@ We start by opening the csv file using a context manager.
 
 Inside the `with` block we call `csv.reader()`, pass in our file variable, and specify that our columns are seperated by a pipe character `|`. This returns a csv reader object that we can use to retrieve row data from our csv file.
 
+<div class="code-filename">pure_python.py</div>
+
 ```python
 with open("big_data.csv", "r", encoding="utf-8") as csv_file:
     data_reader = csv.reader(csv_file, delimiter="|")
@@ -116,6 +159,8 @@ If you're unfamiliar with context managers these are a Python language feature t
 You might also be wondering why we call `next()` on `data_reader`? This instructs the `data_reader` to move it's pointer to the next line in the csv, effectively ignoring the header row.
 
 We're now ready to loop through the lines in the file and add them to the Database.
+
+<div class="code-filename">pure_python.py</div>
 
 ```python
 with open("big_data.csv", "r", encoding="utf-8") as csv_file:
@@ -138,12 +183,16 @@ This is also good security practise as it mitigates against executing malicious 
 
 As we did before we must commit our changes to the Database and lastly close the database connection.
 
+<div class="code-filename">pure_python.py</div>
+
 ```python
 conn.commit()
 conn.close()
 ```
 
 The final code will look something like this.
+
+<div class="code-filename">pure_python.py</div>
 
 ```python
 import sqlite3
