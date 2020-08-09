@@ -13,7 +13,7 @@ This tutorial will cover moving data to a Database with just Python and intentio
 
 ## Setting up
 
-Before we start we'll need some data to work with. You can find the data and the code in the repository for this tutorial on github.
+Before we start we'll need some data to work with. You can find the [data](https://raw.githubusercontent.com/andrewvillazon/move-data-to-a-db-python/master/big_data.csv) and the [code](https://github.com/andrewvillazon/move-data-to-a-db-python/blob/master/pure_python.py) in the [repository for this tutorial](https://github.com/andrewvillazon/move-data-to-a-db-python) on github.
 
 The data we'll be using is a csv file of 1000 rows of various data types. The data was created using the excellent [Faker library](https://pypi.org/project/Faker/). Faker is a library that generates fake data that looks like real-life data.
 
