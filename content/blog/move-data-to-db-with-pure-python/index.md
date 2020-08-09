@@ -25,6 +25,8 @@ To start loading our external data we'll need import two libraries:
 * `sqlite3` - gives us a Database to work with
 * `csv` - for working with csv files
 
+<div class="code-filename">pure_python.py</div>
+
 ```python
 import sqlite3
 import csv
