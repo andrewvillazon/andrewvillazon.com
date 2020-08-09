@@ -36,7 +36,7 @@ import csv
 
 Before we can store data, we'll need to create the Database and set up a table.
 
-To interact with the Database we'll use the `sqlite.connect()` method, which takes the file name of our database. The `sqlite.connect()` method returns a connection object that we assign to the variable `conn`.
+To interact with the Database, we'll use the `sqlite.connect()` method, which takes the file name of our database. The `sqlite.connect()` method returns a connection object that we assign to the variable `conn`.
 
 We can use `conn.cursor()` to return a new cursor object from the connection. The cursor object allows us to issue SQL commands to the Database.
 
@@ -229,3 +229,11 @@ with open("big_data.csv", "r", encoding="utf-8") as csv_file:
 conn.commit()
 conn.close()
 ```
+
+And we're done. The script is complete!
+
+## Conclusion
+
+Hopefully, this article has given you a good feel for how you can move your data into a Database with Python.
+
+Check back again soon for future articles where I'll explore other methods using the popular libraries sqlalchemy and pandas.
