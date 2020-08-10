@@ -7,7 +7,7 @@ tags:
 
 In Data Analysis, a common task is taking data from an external source, such as a text file, and storing it in a Database. There are many different tools and methods for this, but a great option to use is [Python](https://www.python.org/downloads/).
 
-External data can often be dirty or in formats that aren't suited to Databases such as JSON or XML and require transformation before storing. Using a language like Python gives us greater control and flexibility over this process.
+External data can often be dirty or in formats that aren't suited to Databases such as **JSON** or **XML** and require transformation before storing. Using a language like Python gives us greater control and flexibility over this process.
 
 This tutorial will cover moving data to a Database with just Python and intentionally avoids using additional libraries. The tutorial uses Python **3.6.5.**
 
@@ -51,7 +51,7 @@ conn = sqlite3.connect("big_data.db")
 curs = conn.cursor()
 ```
 
-You might have noticed that we're passing in a file name to the `connect()` method. We provide a filename because [SQLite](https://www.sqlite.org/index.html) is a file-based Database. If the file name does not exist, SQLite creates it for us.
+You might have noticed that we're passing in a file name to the `connect()` method. We provide a file name because [SQLite](https://www.sqlite.org/index.html) is a **file-based Database**. If the file name does not exist, SQLite creates it for us.
 
 Now that we have a cursor object, we can use it to perform SQL commands on our Database. The first command we issue is to create the table if it doesn't exist. Our data will go into this table.
 
@@ -128,7 +128,7 @@ conn.commit()
 
 In this tutorial, we've used [SQLite](https://docs.python.org/3/library/sqlite3.html) because it is part of the standard Python library and easy to use. In the real world, you're likely working with full-featured Databases such as [SQL Server](https://www.microsoft.com/en-us/sql-server), [MySQL](https://www.mysql.com/), or [PostgreSQL](https://www.postgresql.org/).
 
-In this case, you'll need the specific library that talks to your Database provider. This library is also known as the Database driver or connector. Thankfully these libraries all provide very similar, if not identical, methods making it easy to swap out SQLite for different providers.
+In this case, you'll need the specific library that talks to your Database provider. This library is also known as the **Database driver** or **connector**. Thankfully these libraries all provide very similar, if not identical, methods making it easy to swap out SQLite for different providers.
 
 Some of the popular database libraries are:
 * [pyodbc](https://github.com/mkleehammer/pyodbc/wiki) - for SQL Server
@@ -140,7 +140,7 @@ Some of the popular database libraries are:
 
 Now that we have our Database and table setup we can move data into it. 
 
-We start by opening the CSV file using a context manager.
+We start by opening the CSV file using a **context manager**.
 
 Inside the `with` block we call `csv.reader()`, pass in our file variable, and specify that the columns are separated by a `|` (pipe character). `csv.reader()` returns a CSV reader object that we can use to retrieve row data from our CSV file.
 
