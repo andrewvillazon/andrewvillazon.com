@@ -1,6 +1,6 @@
 ---
 title: "Move data to a Database with Python: Pure Python"
-date: "2020-08-13"
+date: "2020-08-10"
 tags:
     - Python
 ---
