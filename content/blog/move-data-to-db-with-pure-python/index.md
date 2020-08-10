@@ -5,7 +5,7 @@ tags:
     - Python
 ---
 
-In Data Analysis, a common task is taking data from an external source, such as a text file, and storing it in a Database. There are many different tools and methods for this, but a great option to use is Python.
+In Data Analysis, a common task is taking data from an external source, such as a text file, and storing it in a Database. There are many different tools and methods for this, but a great option to use is [Python](https://www.python.org/downloads/).
 
 External data can often be dirty or in formats that aren't suited to Databases such as JSON or XML and require transformation before storing. Using a language like Python gives us greater control and flexibility over this process.
 
@@ -36,7 +36,7 @@ import csv
 
 Before we can store data, we'll need to create the Database and set up a table.
 
-To interact with the Database, we'll use the `sqlite.connect()` method, which takes the file name of our database. The `sqlite.connect()` method returns a connection object that we assign to the variable `conn`.
+To interact with the Database, we'll use the `sqlite3.connect()` method, which takes the file name of our database. The `sqlite3.connect()` method returns a connection object that we assign to the variable `conn`.
 
 We can use `conn.cursor()` to return a new cursor object from the connection. The cursor object allows us to issue SQL commands to the Database.
 
@@ -51,7 +51,7 @@ conn = sqlite3.connect("big_data.db")
 curs = conn.cursor()
 ```
 
-You might have noticed that we're passing in a file name to the `connect()` method. We provide a filename because SQLite is a file-based Database. If the file name does not exist, SQLite creates it for us.
+You might have noticed that we're passing in a file name to the `connect()` method. We provide a filename because [SQLite](https://www.sqlite.org/index.html) is a file-based Database. If the file name does not exist, SQLite creates it for us.
 
 Now that we have a cursor object, we can use it to perform SQL commands on our Database. The first command we issue is to create the table if it doesn't exist. Our data will go into this table.
 
@@ -73,7 +73,7 @@ curs.execute(
 )
 ```
 
-The second part of our Database setup is to remove any existing data so we're working with an empty table. The second part of our Database setup is to remove existing data, so we're working with an empty table. Removing data without deleting the table is known as **truncation**.
+The second part of our Database setup is to remove any existing data so we're working with an empty table. Removing data without deleting the table is known as **truncation**.
 
 <div class="code-filename">pure_python.py</div>
 
@@ -126,7 +126,7 @@ conn.commit()
 
 #### A note about Database providers
 
-In this tutorial, we've used SQLite because it is part of the standard Python library and easy to use. In the real world, you're likely working with full-featured Databases such as SQL Server, MySQL, or PostgreSQL.
+In this tutorial, we've used [SQLite](https://docs.python.org/3/library/sqlite3.html) because it is part of the standard Python library and easy to use. In the real world, you're likely working with full-featured Databases such as [SQL Server](https://www.microsoft.com/en-us/sql-server), [MySQL](https://www.mysql.com/), or [PostgreSQL](https://www.postgresql.org/).
 
 In this case, you'll need the specific library that talks to your Database provider. This library is also known as the Database driver or connector. Thankfully these libraries all provide very similar, if not identical, methods making it easy to swap out SQLite for different providers.
 
@@ -154,7 +154,7 @@ with open("big_data.csv", "r", encoding="utf-8") as csv_file:
 
 If you're unfamiliar with context managers, these are a Python language feature that abstracts away the management of things like files, or more broadly resources. When the code exits the `with` block, Python will properly close the file without us explicitly coding it.
 
-You might also be wondering why we call `next()` on `data_reader`? Calling `next(data_reader)` moves the objects' pointer to the next line in the CSV, effectively ignoring the header row.
+You might also be wondering why we call `next()` on `data_reader`? Calling `next(data_reader)` moves the object's pointer to the next line in the CSV, effectively ignoring the header row.
 
 We're now ready to loop through the lines in the file and add them to the Database.
 
@@ -175,7 +175,7 @@ There's a couple of important things to point out here. The first is the stateme
 curs.execute("INSERT INTO pure_python VALUES(?,?,?,?,?,?,?)", row)
 ```
 
-Here we're using a query with question mark placeholders. A query like this is known as a parameterized query. 
+Here we're using a query with question mark placeholders. A query like this is known as a [parameterized query](https://en.wikipedia.org/wiki/Prepared_statement). 
 
 When we call the `execute` method, it takes a couple of arguments: a statement to execute and our data. Remember that the `row` variable coming from the `data_reader` is a list, and so the `execute()` method will place the row items where there are question marks.
 
