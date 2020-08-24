@@ -51,6 +51,15 @@ When working with SQLAlchemy, the starting point is the Engine. The Engine gives
 
 We create an engine through the create_engine function passing in a database URL (akin to a connection string).
 
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import create_engine
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+```
+
 The optional echo flag sets up SQLAlchemy logging. We'll enable it to see the SQL statements produced by SQLAlchemy.
 
 While the Engine is our source of database connectivity, we have not yet connected or interacted with the database.
@@ -61,6 +70,19 @@ To enable SQLAlchemy to move our data, we need to declare a mapping between our 
 
 To create a mapping, we first define a "Base" Class. We will associate our mapped Classes with the Base. We generate the Base Class through the declaritive_base function.
 
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+
+Base = declarative_base()
+
+```
+
 Now we have what we need to create a mapped class.
 
 ## Create a mapped class
@@ -69,15 +91,52 @@ The work of mapping our data to a table occurs with a mapped Class. This Class d
 
 The mapped Class has a couple of basic requirements. It must inherit from our Base Class, have a \_\_tablename\_\_ attribute (the table to map to), and a primary key column.
 
-Let's add this Class to our file. We'll call it AirbnbListing, to indicate what each row represents.
+Let's add this Class to our file. We'll call it Listing, to indicate what each row represents.
 
-We create the table's columns and data types by defining attributes on AirbnbListing and assigning each one a new Column object, passing in the respective data type.
+We create the table's columns and data types by defining attributes on Listing and assigning each one a new Column object, passing in the respective data type.
+
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import Column, Date, Float, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+
+Base = declarative_base()
+
+
+class Listing(Base):
+    __tablename__ = 'listings_sqlalchemy'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    
+    host_id = Column(Integer)
+    host_name = Column(String(50))
+    
+    neighbourhood_group = Column(String(20))
+    neighbourhood = Column(String(20))
+    
+    latitude = Column(Float)
+    longitude = Column(Float)
+    
+    room_type = Column(String(20))
+    price = Column(Integer)
+    minimum_nights = Column(Integer)
+    
+    number_of_reviews = Column(Integer)
+    last_review = Column(Date, nullable=True)
+    reviews_per_month = Column(Integer)
+    calculated_host_listings_count = Column(Integer)
+    availability_365 = Column(Integer)
+
+```
 
 Because SQLAlchemy is mapping an Object to a row in a table, it expects that each mapped Class defines a primary key column. Without a primary key, SQLAlchemy has no way of knowing which objects map to which rows.
 
-Later you'll see how we can create rows in our table by creating objects from AirbnbListing.
-
-Let's look at how we can leverage the AirbnbListing Class to create a table in the database.
+Later you'll see how we can create rows in our table by creating objects from Listing. Let's look at how we can leverage the Listing Class to create a table in the database.
 
 ## Create the table on the database
 
@@ -85,7 +144,49 @@ Recall from above that a mapped Class was required to inherit from the Base Clas
 
 To create the table defined by our mapped Class we call the Base.metadata.create_all function passing in our database Engine.
 
-Let's stop at this point and execute the script. Watch what happens. You should see some SQL statements printed to your terminal. If you inspect the database, you should see a new table named X with column names corresponding to those on the mapped Class.
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import Column, Date, Float, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+
+Base = declarative_base()
+
+
+class Listing(Base):
+    __tablename__ = 'listings_sqlalchemy'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    
+    host_id = Column(Integer)
+    host_name = Column(String(50))
+    
+    neighbourhood_group = Column(String(20))
+    neighbourhood = Column(String(20))
+    
+    latitude = Column(Float)
+    longitude = Column(Float)
+    
+    room_type = Column(String(20))
+    price = Column(Integer)
+    minimum_nights = Column(Integer)
+    
+    number_of_reviews = Column(Integer)
+    last_review = Column(Date, nullable=True)
+    reviews_per_month = Column(Integer)
+    calculated_host_listings_count = Column(Integer)
+    availability_365 = Column(Integer)
+
+
+Base.metadata.create_all(engine)
+
+```
+
+Let's stop at this point and execute the script. Watch what happens. You should see some SQL statements printed to your terminal. If you inspect the database, you should see a new table named listings_sqlalchemy with column names corresponding to those on the mapped Class.
 
 Pretty neat, right? We haven't had to write any SQL to make this happen. We described the table to SQLAlchemy, and it handled the rest.
 
@@ -95,13 +196,36 @@ Everything is now in place to start moving our data across.
 
 To insert data into the database, we'll need to do the following:
 * Define a database session
-* Loop through each line of the CSV and turn its contents into an AirbnbListing Object
+* Loop through each line of the CSV and turn its contents into a Listing Object
 * Pass a list of those objects to a database session to insert them into the database table.
 
 ##### Define a database session
+
 To store the data, we'll need a database session. The Session handles the specifics of talking to the database and inserting data.
 
 To define a session, we use the sessionmaker method and bind our engine object to it.
+
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import Column, Date, Float, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+
+Base = declarative_base()
+
+
+class Listing(Base):
+    ...
+
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+
+```
 
 Although we have our Session defined and ready to go, we haven't made any connections to the database yet.
 
@@ -115,6 +239,46 @@ To read the CSV contents, we use csv.DictReader. The DictReader returns each row
 
 With a list comprehension, we loop through each row of the csvreader. The function prepare_listing performs some light transformation of the data and returns a Listing object made from our previously defined mapped Class.
 
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import Column, Date, Float, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+
+Base = declarative_base()
+
+
+class Listing(Base):
+    ...
+
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+
+
+def parse_none(dt):
+    try:
+        return parse(dt)
+    except:
+        return None
+
+
+def prepare_listing(row):
+    row["last_review"] = parse_none(row["last_review"])
+    return Listing(**row)
+
+
+with open('AB_NYC_2019.csv', encoding='utf-8', newline='') as csv_file:
+    csvreader = csv.DictReader(csv_file, quotechar='"')
+
+    listings = [prepare_listing(row) for row in csvreader]
+
+```
+
 ##### Store in the database
 
 Now we have a list of mapped Objects we have everything we need to insert the data in the database.
@@ -122,6 +286,50 @@ Now we have a list of mapped Objects we have everything we need to insert the da
 We do this by creating a new Session object from the Session class we defined earlier.
 
 Because our list contains thousands of records, we'll use the session.add_all method, one of the bulk insert options available in SQLAlchemy. The add_all method will perform batches of INSERTs rather than inserting one at a time.
+
+<div class="code-filename">sa.py</div>
+
+```python
+from sqlalchemy import Column, Date, Float, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
+
+Base = declarative_base()
+
+
+class Listing(Base):
+    ...
+
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+
+
+def parse_none(dt):
+    try:
+        return parse(dt)
+    except:
+        return None
+
+
+def prepare_listing(row):
+    row["last_review"] = parse_none(row["last_review"])
+    return Listing(**row)
+
+
+with open('AB_NYC_2019.csv', encoding='utf-8', newline='') as csv_file:
+    csvreader = csv.DictReader(csv_file, quotechar='"')
+
+    listings = [prepare_listing(row) for row in csvreader]
+
+    session = Session()
+    session.add_all(listings)
+    session.commit()
+
+```
 
 To complete the database transaction and store the data, we call session.commit.
 
