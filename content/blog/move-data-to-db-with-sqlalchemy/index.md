@@ -218,7 +218,7 @@ Base = declarative_base()
 
 
 class Listing(Base):
-    ...
+    # ...
 
 
 Base.metadata.create_all(engine)
@@ -252,7 +252,7 @@ Base = declarative_base()
 
 
 class Listing(Base):
-    ...
+    # ...
 
 
 Base.metadata.create_all(engine)
@@ -283,9 +283,9 @@ with open('AB_NYC_2019.csv', encoding='utf-8', newline='') as csv_file:
 
 Now we have a list of mapped Objects we have everything we need to insert the data in the database.
 
-We do this by creating a new Session object from the Session class we defined earlier.
+We do this by creating a new Session object from the Session class defined earlier.
 
-Because our list contains thousands of records, we'll use the session.add_all method, one of the bulk insert options available in SQLAlchemy. The add_all method will perform batches of INSERTs rather than inserting one at a time.
+Because our list contains thousands of records, we'll use the session.add\_all method, one of the bulk insert options available in SQLAlchemy. The add\_all method will perform batches of INSERTs rather than inserting one at a time.
 
 <div class="code-filename">sa.py</div>
 
@@ -300,7 +300,7 @@ Base = declarative_base()
 
 
 class Listing(Base):
-    ...
+    # ...
 
 
 Base.metadata.create_all(engine)
