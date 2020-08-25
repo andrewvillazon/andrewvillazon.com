@@ -5,11 +5,11 @@ tags:
     - Python
 ---
 
-When analyzing data, a common task is moving data from a source to a database. However, external data isn't always straightforward, and sometimes you need a tool with flexibility and granular control over the process. Python is an excellent choice for this kind of task.
+When analyzing data, a common task is moving data from a source to a database. However, external data isn't always straightforward, and sometimes you need a tool with flexibility and granular control over the process. [Python](https://www.python.org/downloads/) is an excellent choice for this kind of task.
 
-In the first article of this series, we looked at how to move data to a Database with just Python. In this article, we'll look at another method using SQLAlchemy, a popular Python library for working with databases.
+In the first article of this series, we looked at how to move data to a Database with just Python. In this article, we'll look at another method using [SQLAlchemy](https://www.sqlalchemy.org/), a popular Python library for working with databases.
 
-SQLAlchemy is an excellent choice of ETL tool because it abstracts away a lot of the database-specific code and lets you work just in Python.
+SQLAlchemy is an excellent choice of [ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load) tool because it abstracts away a lot of the database-specific code and lets you work just in Python.
 
 The article is not intended to be a definitive tutorial on SQLAlchemy but aims to show how you can take advantage of its features to move data into a database.
 
@@ -21,21 +21,21 @@ In writing this, I'm assuming a couple of things:
 
 ## Setting up
 
-For this tutorial, we'll be using the New York City Airbnb Open Data from Kaggle's excellent public dataset repository. 
+For this tutorial, we'll be using the [New York City Airbnb Open Data](https://www.kaggle.com/dgomonov/new-york-city-airbnb-open-data) from Kaggle's excellent [public dataset repository](https://www.kaggle.com/datasets). 
 
-Each row of the CSV represents a listing on Airbnb and includes a range of data types. I've chosen this dataset because its typical of the kinds of datasets encountered in the real world.
+Each row of the CSV represents a listing on [Airbnb](https://www.airbnb.com) and includes a range of data types. I've chosen this dataset because its typical of the kinds of datasets encountered in the real world.
 
-You can find the CSV file and final code in the accompanying repository for this tutorial on my GitHub.
+You can find the [CSV file](https://github.com/andrewvillazon/move-data-to-a-db-python/raw/master/AB_NYC_2019.csv) and [final code](https://github.com/andrewvillazon/move-data-to-a-db-python/blob/master/sa.py) in the [accompanying repository](https://github.com/andrewvillazon/move-data-to-a-db-python) for this tutorial on my [GitHub](https://github.com/andrewvillazon).
 
 Let's get started.
 
 ## ORMs
 
-Before using SQLAlchemy, we need to cover off a related concept: ORMs. 
+Before using [SQLAlchemy](https://docs.sqlalchemy.org/en/13/intro.html), we need to cover off a related concept: ORMs. 
 
 ##### What's an ORM?
 
-Languages like Python are Object-Oriented, a programming paradigm where code is organized into 'Objects' that have data (attributes) and methods (functions or behavior). However, in a relational database, data exists in tables with columns and rows. To bridge across these two different systems, we use an ORM or Object Relational Mapper.
+Languages like Python are [Object-Oriented](https://en.wikipedia.org/wiki/Object-oriented_programming), a programming paradigm where code is organized into 'Objects' that have data (attributes) and methods (functions or behavior). However, in a [relational database](https://en.wikipedia.org/wiki/Relational_database), data exists in tables with columns and rows. To bridge across these two different systems, we use an ORM or Object Relational Mapper.
 
 ORMs allow us to map Objects in our code to tables and columns in a database. Objects can be stored (persisted) to and loaded from the database.
 
