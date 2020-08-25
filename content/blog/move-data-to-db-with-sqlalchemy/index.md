@@ -47,9 +47,9 @@ Now, onto the code.
 
 Start by creating a new file. I've called mine **sa.py**
 
-When working with SQLAlchemy, the starting point is the Engine. The Engine gives us database connectivity and related functionality.
+When working with SQLAlchemy, the starting point is the `Engine`. The [Engine](https://docs.sqlalchemy.org/en/13/core/engines.html) gives us database connectivity and related functionality.
 
-We create an engine through the create_engine function passing in a database URL (akin to a connection string).
+We create an `Engine` through the `create_engine` function passing in a [database URL](https://docs.sqlalchemy.org/en/13/core/engines.html?highlight=database%20urls#database-urls) (akin to a connection string).
 
 <div class="code-filename">sa.py</div>
 
@@ -60,15 +60,15 @@ from sqlalchemy import create_engine
 engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
 ```
 
-The optional echo flag sets up SQLAlchemy logging. We'll enable it to see the SQL statements produced by SQLAlchemy.
+The optional `echo` flag sets up SQLAlchemy logging. We'll enable it to see the SQL statements produced by SQLAlchemy.
 
-While the Engine is our source of database connectivity, we have not yet connected or interacted with the database.
+While the `Engine` is our source of database connectivity, we have not yet connected or interacted with the database.
 
 ## Setting up a mapping
 
-To enable SQLAlchemy to move our data, we need to declare a mapping between our data and a database table. We do this with SQLAlchemy's Declarative system.
+To enable SQLAlchemy to move our data, we need to *declare* a mapping between our data and a database table. We do this with [SQLAlchemy's Declarative](https://docs.sqlalchemy.org/en/13/orm/extensions/declarative/index.html) system.
 
-To create a mapping, we first define a "Base" Class. We will associate our mapped Classes with the Base. We generate the Base Class through the declaritive_base function.
+To create a mapping, we first define a `Base` Class. We will associate our mapped Classes with the `Base`. We generate the `Base` Class through the `declaritive_base` function.
 
 <div class="code-filename">sa.py</div>
 
@@ -87,13 +87,13 @@ Now we have what we need to create a mapped class.
 
 ## Create a mapped class
 
-The work of mapping our data to a table occurs with a mapped Class. This Class describes the table we'll be mapping to, its name, columns, and data types.
+The work of mapping our data to a table occurs with a mapped Class. This Class describes the **table** we'll be mapping to, its **name**, **columns**, and **data types**.
 
-The mapped Class has a couple of basic requirements. It must inherit from our Base Class, have a \_\_tablename\_\_ attribute (the table to map to), and a primary key column.
+The mapped Class has a couple of basic requirements. It must inherit from our `Base` Class, have a `__tablename__` attribute (the table to map to), and a **primary key** column.
 
-Let's add this Class to our file. We'll call it Listing, to indicate what each row represents.
+Let's add this Class to our file. We'll call it `Listing`, to indicate what each row represents.
 
-We create the table's columns and data types by defining attributes on Listing and assigning each one a new Column object, passing in the respective data type.
+We create the table's columns and data types by defining attributes on `Listing` and assigning each one a new `Column` object, passing in the respective **data type**.
 
 <div class="code-filename">sa.py</div>
 
@@ -140,9 +140,9 @@ Later you'll see how we can create rows in our table by creating objects from Li
 
 ## Create the table on the database
 
-Recall from above that a mapped Class was required to inherit from the Base Class. When we did this, our mapped Class got placed into a registry on the Base Class called 'metadata.' 
+Recall from above that a mapped Class was required to inherit from the `Base` Class. When we did this, our mapped Class got placed into a registry on the `Base` Class called **metadata**. 
 
-To create the table defined by our mapped Class we call the Base.metadata.create_all function passing in our database Engine.
+To create the table defined by our mapped Class we call the `Base.metadata.create_all` function passing in our database `engine`.
 
 <div class="code-filename">sa.py</div>
 
@@ -186,7 +186,7 @@ Base.metadata.create_all(engine)
 
 ```
 
-Let's stop at this point and execute the script. Watch what happens. You should see some SQL statements printed to your terminal. If you inspect the database, you should see a new table named listings_sqlalchemy with column names corresponding to those on the mapped Class.
+Let's stop at this point and execute the script. Watch what happens. You should see some SQL statements printed to your terminal. If you inspect the database, you should see a new table named `listings_sqlalchemy` with column names corresponding to those on the `Listing` Class.
 
 Pretty neat, right? We haven't had to write any SQL to make this happen. We described the table to SQLAlchemy, and it handled the rest.
 
@@ -201,9 +201,9 @@ To insert data into the database, we'll need to do the following:
 
 ##### Define a database session
 
-To store the data, we'll need a database session. The Session handles the specifics of talking to the database and inserting data.
+To store the data, we'll need a database session. The session handles the specifics of talking to the database and inserting data.
 
-To define a session, we use the sessionmaker method and bind our engine object to it.
+To define a session, we use the `sessionmaker` method and bind our `engine` object to it.
 
 <div class="code-filename">sa.py</div>
 
@@ -228,17 +228,17 @@ Session = sessionmaker(bind=engine)
 
 ```
 
-Although we have our Session defined and ready to go, we haven't made any connections to the database yet.
+Although we have our `Session` defined and ready to go, we haven't made any connections to the database yet.
 
 ##### Create mapped Objects
 
 We can now start creating mapped Objects from our CSV data.
 
-To do this, we first open the CSV file using the with statement (context manager).
+To do this, we first open the CSV file using the `with` statement ([context manager](https://stackabuse.com/python-context-managers/)).
 
-To read the CSV contents, we use csv.DictReader. The DictReader returns each row as a dictionary with key names from the header row. By using dictionaries, we'll also be able to use the dictionary unpacking operator when creating our objects.
+To read the CSV contents, we use `csv.DictReader`. The `DictReader` returns each row as a dictionary with key names from the header row. By using dictionaries, we'll also be able to use the [dictionary unpacking operator](https://stackabuse.com/unpacking-in-python-beyond-parallel-assignment/) when creating our objects.
 
-With a list comprehension, we loop through each row of the csvreader. The function prepare_listing performs some light transformation of the data and returns a Listing object made from our previously defined mapped Class.
+With a list comprehension, we loop through each row of the `csvreader`. The function `prepare_listing` performs some light transformation of the data and returns a `Listing` Object made from our previously defined mapped Class.
 
 <div class="code-filename">sa.py</div>
 
@@ -288,9 +288,9 @@ with open('AB_NYC_2019.csv', encoding='utf-8', newline='') as csv_file:
 
 Now we have a list of mapped Objects we have everything we need to insert the data in the database.
 
-We do this by creating a new Session object from the Session class defined earlier.
+We do this by creating a new `Session` object from the `Session` class defined earlier.
 
-Because our list contains thousands of records, we'll use the session.add\_all method, one of the bulk insert options available in SQLAlchemy. The add\_all method will perform batches of INSERTs rather than inserting one at a time.
+Because our list contains thousands of records, we'll use the `session.add_all method`, one of the [bulk insert options](https://docs.sqlalchemy.org/en/13/_modules/examples/performance/bulk_inserts.html) available in SQLAlchemy. The `add_all` method will perform batches of inserts rather than inserting one at a time.
 
 <div class="code-filename">sa.py</div>
 
@@ -340,7 +340,7 @@ with open('AB_NYC_2019.csv', encoding='utf-8', newline='') as csv_file:
 
 ```
 
-To complete the database transaction and store the data, we call session.commit.
+To complete the database transaction and store the data, we call `session.commit`
 
 Lastly, all that's left to do is run our file and inspect the results in our database browser. You should see the data added as rows in the table.
 
