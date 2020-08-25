@@ -245,6 +245,7 @@ With a list comprehension, we loop through each row of the csvreader. The functi
 ```python
 import csv
 
+from dateutil.parser import parse
 from sqlalchemy import Column, Date, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -296,6 +297,7 @@ Because our list contains thousands of records, we'll use the session.add\_all m
 ```python
 import csv
 
+from dateutil.parser import parse
 from sqlalchemy import Column, Date, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
