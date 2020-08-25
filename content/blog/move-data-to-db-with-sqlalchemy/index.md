@@ -210,6 +210,7 @@ To define a session, we use the sessionmaker method and bind our engine object t
 ```python
 from sqlalchemy import Column, Date, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 
 engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
@@ -242,8 +243,11 @@ With a list comprehension, we loop through each row of the csvreader. The functi
 <div class="code-filename">sa.py</div>
 
 ```python
+import csv
+
 from sqlalchemy import Column, Date, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 
 engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
@@ -290,8 +294,11 @@ Because our list contains thousands of records, we'll use the session.add\_all m
 <div class="code-filename">sa.py</div>
 
 ```python
+import csv
+
 from sqlalchemy import Column, Date, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 
 engine = create_engine('sqlite:///ab_nyc.sqlite3', echo=True)
