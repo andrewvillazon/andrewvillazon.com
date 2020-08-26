@@ -1,13 +1,13 @@
 ---
 title: "Move data to a Database with Python: SQLAlchemy"
-date: "2020-08-24"
+date: "2020-08-26"
 tags:
     - Python
 ---
 
 When analyzing data, a common task is moving data from a source to a database. However, external data isn't always straightforward, and sometimes you need a tool with flexibility and granular control over the process. [Python](https://www.python.org/downloads/) is an excellent choice for this kind of task.
 
-In the first article of this series, we looked at how to move data to a Database with just Python. In this article, we'll look at another method using [SQLAlchemy](https://www.sqlalchemy.org/), a popular Python library for working with databases.
+In the [first article](https://www.andrewvillazon.com/move-data-to-db-with-pure-python/) of this series, we looked at how to move data to a Database with just Python. In this article, we'll look at another method using [SQLAlchemy](https://www.sqlalchemy.org/), a popular Python library for working with databases.
 
 SQLAlchemy is an excellent choice of [ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load) tool because it abstracts away a lot of the database-specific code and lets you work just in Python.
 
@@ -134,9 +134,9 @@ class Listing(Base):
 
 ```
 
-Because SQLAlchemy is mapping an Object to a row in a table, it expects that each mapped Class defines a primary key column. Without a primary key, SQLAlchemy has no way of knowing which objects map to which rows.
+Because SQLAlchemy is mapping an Object to a row in a table, it expects that each mapped Class defines a **primary key column**. Without a primary key, SQLAlchemy has no way of knowing which Objects map to which rows.
 
-Later you'll see how we can create rows in our table by creating objects from Listing. Let's look at how we can leverage the Listing Class to create a table in the database.
+Later you'll see how we can create rows in our table by creating objects from `Listing`. Let's look at how we can leverage the `Listing` Class to create a table in the database.
 
 ## Create the table on the database
 
@@ -196,7 +196,7 @@ Everything is now in place to start moving our data across.
 
 To insert data into the database, we'll need to do the following:
 * Define a database session
-* Loop through each line of the CSV and turn its contents into a Listing Object
+* Loop through each line of the CSV and turn its contents into a `Listing` Object
 * Pass a list of those objects to a database session to insert them into the database table.
 
 ##### Define a database session
@@ -348,6 +348,6 @@ Lastly, all that's left to do is run our file and inspect the results in our dat
 
 There we have it. You've successfully moved data to a database with SQLAlchemy.
 
-The neat thing about this method is we didn't have to write any SQL and kept everything inside Python. And it didn't even matter that SQLite only supports limited data types, SQLAlchemy took care of this for us.
+The neat thing about this method is we didn't have to write any SQL and kept everything inside Python. And it didn't even matter that [SQLite only supports limited data types](https://www.sqlite.org/datatype3.html), SQLAlchemy took care of this for us.
 
 Check back soon for the final article in this series, where we'll take a look at the most straightforward method for moving data to a database - with pandas.
