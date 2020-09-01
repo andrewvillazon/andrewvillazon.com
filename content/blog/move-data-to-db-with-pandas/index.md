@@ -8,7 +8,7 @@ In Data Analysis, a common task is taking data from external sources, such as CS
 
 In the final article of this series, we'll look at one more method for moving data to a Database using the popular data library, [pandas](pandas.pydata.org/). Pandas is *the* Python library for data manipulation and analysis. Think of pandas as the data swiss army knife for Python.
 
-In the previous articles in this series, we looked at using [pure Python](https://www.andrewvillazon.com/move-data-to-db-with-pure-python/) and [SQLAlchemy](https://www.andrewvillazon.com/move-data-to-db-with-pure-python/). These methods offer high levels of flexibility but are somewhat "code-heavy" when compared to pandas.
+In the previous articles in this series, we looked at using [pure Python](https://www.andrewvillazon.com/move-data-to-db-with-pure-python/) and [SQLAlchemy](https://www.andrewvillazon.com/move-data-to-db-with-pure-python/). These methods offer high levels of flexibility but are somewhat *code-heavy* when compared to pandas.
 
 ##### Prerequisites:
 
@@ -64,7 +64,7 @@ Now that we have prepared a DataFrame let's look at how we can use it to move da
 
 ## Store the data in the Database
 
-One of the (many) useful features of pandas is it works with [SQLAlchemy](https://www.sqlalchemy.org/). Pandas can use any Database supported by SQLAlchemy.
+One of the (many) useful features of pandas is it works with [SQLAlchemy](https://www.sqlalchemy.org/). Pandas can use any [Database supported](https://docs.sqlalchemy.org/en/13/dialects/) by SQLAlchemy.
 
 Because we'll use SQLAlchemy for Database support, we need to generate a SQLAlchemy `Engine` object. The [Engine object](https://docs.sqlalchemy.org/en/13/core/connections.html) gives pandas the database connectivity it needs to store the data. We do this through the `create_engine` method and pass in a [database URL](https://docs.sqlalchemy.org/en/13/core/engines.html?highlight=database%20urls#database-urls) (similar to a connection string).
 
@@ -115,7 +115,9 @@ You might have noticed the work of storing the data occurs inside a `with` state
 
 It's important to note that pandas doesn't close a Database connection when it's finished. According to their [documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_sql.html), *"The user is responsible for engine disposal and connection closure for the SQLAlchemy connectable."*
 
-Using `to_sql` inside a `with` statement ensures that the database connection will be closed appropriately and released when the code block finishes. Not explicitly closing a Database connection can lead to other Database users getting locked out of a table because pandas hasn't released the lock on the table.
+Using `to_sql` inside a `with` statement ensures that the database connection will be closed appropriately and released when the code block finishes. 
+
+Not explicitly closing a Database connection can lead to other Database users getting locked out of a table because pandas hasn't released the lock on the table.
 
 #### Finishing up
 
@@ -161,4 +163,5 @@ As you've seen, this common Data Analysis task was easy with pandas. For a relat
 I hope you've found this series on moving data to a Database with Python useful. 
 
 #### Further reading
-
+* [pandas input/output](https://pandas.pydata.org/pandas-docs/stable/reference/io.html)
+* [insertion methods](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#io-sql-method)
