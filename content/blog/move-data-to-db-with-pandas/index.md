@@ -1,6 +1,6 @@
 ---
 title: "Move data to a Database with Python: Pandas"
-date: "2020-09-02"
+date: "2020-09-01"
 tags:
     - Python
 ---
