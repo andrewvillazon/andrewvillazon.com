@@ -23,13 +23,13 @@ Let's get started.
 
 ## Getting started
 
-Start by creating a new python file called **pure_python.py**
+Start by creating a new python file called **pp.py**
 
 To start loading our external data, we'll need to import two libraries:
 * `sqlite3` - gives us a Database to work with
 * `csv` - for working with CSV files
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 import sqlite3
@@ -44,7 +44,7 @@ To interact with the Database, we'll use the `sqlite3.connect()` method, which t
 
 We can use `conn.cursor()` to return a new cursor object from the connection. The cursor object allows us to issue SQL commands to the Database.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 import sqlite3
@@ -59,7 +59,7 @@ You might have noticed that we're passing in a file name to the `connect()` meth
 
 Now that we have a cursor object, we can use it to perform SQL commands on our Database. The first command we issue is to create the table if it doesn't exist. Our data will go into this table.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 curs.execute(
@@ -79,7 +79,7 @@ curs.execute(
 
 The second part of our Database setup is to remove any existing data so we're working with an empty table. Removing data without deleting the table is known as **truncation**.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 curs.execute("DELETE FROM pure_python")
@@ -87,7 +87,7 @@ curs.execute("DELETE FROM pure_python")
 
 Finally, we save, or more precisely *commit*, the changes to the Database.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 conn.commit()
@@ -99,7 +99,7 @@ To properly save, we call the `commit()` method saving the changes and ending th
 
 Here is the code so far.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 import sqlite3
@@ -148,7 +148,7 @@ We start by opening the CSV file using a **context manager**.
 
 Inside the `with` block we call `csv.reader()`, pass in our file variable, and specify that the columns are separated by a `|` (pipe character). `csv.reader()` returns a CSV reader object that we can use to retrieve row data from our CSV file.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 with open("big_data.csv", "r", encoding="utf-8") as csv_file:
@@ -162,7 +162,7 @@ You might also be wondering why we call `next()` on `data_reader`? Calling `next
 
 We're now ready to loop through the lines in the file and add them to the Database.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 with open("big_data.csv", "r", encoding="utf-8") as csv_file:
@@ -187,7 +187,7 @@ Parameterized queries are also a good security practice as it mitigates against 
 
 As we did before, we must commit our changes to the Database then close the database connection.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 conn.commit()
@@ -196,7 +196,7 @@ conn.close()
 
 The final code will look something like this.
 
-<div class="code-filename">pure_python.py</div>
+<div class="code-filename">pp.py</div>
 
 ```python
 import sqlite3
