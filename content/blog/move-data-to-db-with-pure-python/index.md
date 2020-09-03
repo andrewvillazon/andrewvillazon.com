@@ -13,9 +13,13 @@ This tutorial will cover moving data to a Database with just Python and intentio
 
 ## Setting up
 
-Before we start, we'll need some data to work with. You can find the [CSV file](https://raw.githubusercontent.com/andrewvillazon/move-data-to-a-db-python/master/big_data.csv) and [code](https://github.com/andrewvillazon/move-data-to-a-db-python/blob/master/pure_python.py) in the [repository for this tutorial](https://github.com/andrewvillazon/move-data-to-a-db-python) on GitHub.
+For this tutorial, we'll be using the [New York City Airbnb Open Data](https://www.kaggle.com/dgomonov/new-york-city-airbnb-open-data) from Kaggle's excellent [public dataset repository](https://www.kaggle.com/datasets). 
 
-The data we'll be using consists of 1000 rows of various data types. The data was created using the excellent [Faker library](https://pypi.org/project/Faker/). Faker is a library that generates fake data that looks like real-life data.
+Each row of the CSV represents a listing on [Airbnb](https://www.airbnb.com) and includes a range of data types. I've chosen this dataset because its typical of the kinds of datasets encountered in the real world.
+
+You can find the [CSV file](https://github.com/andrewvillazon/move-data-to-a-db-python/raw/master/AB_NYC_2019.csv) and [final code](https://github.com/andrewvillazon/move-data-to-a-db-python/blob/master/pp.py) in the [accompanying repository](https://github.com/andrewvillazon/move-data-to-a-db-python) for this tutorial on my [GitHub](https://github.com/andrewvillazon).
+
+Let's get started.
 
 ## Getting started
 
