@@ -51,7 +51,7 @@ import sqlite3
 import csv
 
 
-conn = sqlite3.connect("big_data.db")
+conn = sqlite3.connect("ab_nyc.sqlite3")
 curs = conn.cursor()
 ```
 
@@ -64,17 +64,27 @@ Now that we have a cursor object, we can use it to perform SQL commands on our D
 ```python
 curs.execute(
     """
-    CREATE TABLE IF NOT EXISTS pure_python (
-        transaction_date TEXT,
-        bban TEXT,
-        color TEXT,
-        phone_number TEXT,
-        lat REAL,
-        long REAL,
-        age INT
+    CREATE TABLE IF NOT EXISTS listings_pure_python (
+        id INT,
+        name TEXT,
+        host_id INT,
+        host_name TEXT,
+        neighbourhood_group TEXT,
+        neighbourhood TEXT,
+        latitude REAL,
+        longitude REAL,
+        room_type TEXT,
+        price INT,
+        minimum_nights INT,
+        number_of_reviews INT,
+        last_review TEXT,
+        reviews_per_month REAL,
+        calculated_host_listings_count INT,
+        availability_365 INT
     )
  """
 )
+
 ```
 
 The second part of our Database setup is to remove any existing data so we're working with an empty table. Removing data without deleting the table is known as **truncation**.
@@ -82,7 +92,7 @@ The second part of our Database setup is to remove any existing data so we're wo
 <div class="code-filename">pp.py</div>
 
 ```python
-curs.execute("DELETE FROM pure_python")
+curs.execute("DELETE FROM listings_pure_python")
 ```
 
 Finally, we save, or more precisely *commit*, the changes to the Database.
@@ -106,24 +116,34 @@ import sqlite3
 import csv
 
 
-conn = sqlite3.connect("big_data.db")
+conn = sqlite3.connect("ab_nyc.sqlite3")
 curs = conn.cursor()
 
+# Table setup
 curs.execute(
     """
-    CREATE TABLE IF NOT EXISTS pure_python (
-        transaction_date TEXT,
-        bban TEXT,
-        color TEXT,
-        phone_number TEXT,
-        lat REAL,
-        long REAL,
-        age INT
+    CREATE TABLE IF NOT EXISTS listings_pure_python (
+        id INT,
+        name TEXT,
+        host_id INT,
+        host_name TEXT,
+        neighbourhood_group TEXT,
+        neighbourhood TEXT,
+        latitude REAL,
+        longitude REAL,
+        room_type TEXT,
+        price INT,
+        minimum_nights INT,
+        number_of_reviews INT,
+        last_review TEXT,
+        reviews_per_month REAL,
+        calculated_host_listings_count INT,
+        availability_365 INT
     )
  """
 )
 
-curs.execute("DELETE FROM pure_python")
+curs.execute("DELETE FROM listings_pure_python")
 conn.commit()
 ```
 
@@ -146,13 +166,13 @@ Now that we have our Database and table setup we can move data into it.
 
 We start by opening the CSV file using a **context manager**.
 
-Inside the `with` block we call `csv.reader()`, pass in our file variable, and specify that the columns are separated by a `|` (pipe character). `csv.reader()` returns a CSV reader object that we can use to retrieve row data from our CSV file.
+Inside the `with` block we call `csv.reader()` and pass in our file variable. `csv.reader()` returns a **CSV reader object** that we can use to retrieve row data from our CSV file.
 
 <div class="code-filename">pp.py</div>
 
 ```python
-with open("big_data.csv", "r", encoding="utf-8") as csv_file:
-    data_reader = csv.reader(csv_file, delimiter="|")
+with open("AB_NYC_2019.csv", "r", encoding="utf-8", newline="") as csv_file:
+    data_reader = csv.reader(csv_file, quotechar='"')
     next(data_reader)
 ```
 
@@ -165,25 +185,28 @@ We're now ready to loop through the lines in the file and add them to the Databa
 <div class="code-filename">pp.py</div>
 
 ```python
-with open("big_data.csv", "r", encoding="utf-8") as csv_file:
-    data_reader = csv.reader(csv_file, delimiter="|")
-    next(data_reader)
+with open("AB_NYC_2019.csv", "r", encoding="utf-8", newline="") as csv_file:
+    data_reader = csv.reader(csv_file, quotechar='"')
+    next(data_reader)  # skip over header row if it has column names
 
     for row in data_reader:
-        curs.execute("INSERT INTO pure_python VALUES(?,?,?,?,?,?,?)", row)
+        curs.execute(
+            "INSERT INTO listings_pure_python VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            row,
+        )
 ```
 
 There's a couple of important things to point out here. The first is the statement inside the execute method.
 
 ```python
-curs.execute("INSERT INTO pure_python VALUES(?,?,?,?,?,?,?)", row)
+curs.execute("INSERT INTO listings_pure_python VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", row)
 ```
 
 Here we're using a query with question mark placeholders. A query like this is known as a [parameterized query](https://en.wikipedia.org/wiki/Prepared_statement). 
 
 When we call the `execute` method, it takes a couple of arguments: a statement to execute and our data. Remember that the `row` variable coming from the `data_reader` is a list, and so the `execute()` method will place the row items where there are question marks.
 
-Parameterized queries are also a good security practice as it mitigates against executing malicious SQL posing as data inside our file. By separating the SQL and the data, the Database knows what it should execute and what it should store.
+Parameterized queries are also a good security practice as they mitigate against executing malicious SQL posing as data inside our file. By separating the SQL and the data, the Database knows what it should execute and what it should store.
 
 As we did before, we must commit our changes to the Database then close the database connection.
 
@@ -203,35 +226,48 @@ import sqlite3
 import csv
 
 
-conn = sqlite3.connect("big_data.db")
+conn = sqlite3.connect("ab_nyc.sqlite3")
 curs = conn.cursor()
 
 curs.execute(
     """
-    CREATE TABLE IF NOT EXISTS pure_python (
-        transaction_date TEXT,
-        bban TEXT,
-        color TEXT,
-        phone_number TEXT,
-        lat REAL,
-        long REAL,
-        age INT
+    CREATE TABLE IF NOT EXISTS listings_pure_python (
+        id INT,
+        name TEXT,
+        host_id INT,
+        host_name TEXT,
+        neighbourhood_group TEXT,
+        neighbourhood TEXT,
+        latitude REAL,
+        longitude REAL,
+        room_type TEXT,
+        price INT,
+        minimum_nights INT,
+        number_of_reviews INT,
+        last_review TEXT,
+        reviews_per_month REAL,
+        calculated_host_listings_count INT,
+        availability_365 INT
     )
  """
 )
 
-curs.execute("DELETE FROM pure_python")
+curs.execute("DELETE FROM listings_pure_python")
 conn.commit()
 
-with open("big_data.csv", "r", encoding="utf-8") as csv_file:
-    data_reader = csv.reader(csv_file, delimiter="|")
+with open("AB_NYC_2019.csv", "r", encoding="utf-8", newline="") as csv_file:
+    data_reader = csv.reader(csv_file, quotechar='"')
     next(data_reader)
 
     for row in data_reader:
-        curs.execute("INSERT INTO pure_python VALUES(?,?,?,?,?,?,?)", row)
+        curs.execute(
+            "INSERT INTO listings_pure_python VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            row,
+        )
 
 conn.commit()
 conn.close()
+
 ```
 
 And we're done. The script is complete!
@@ -240,4 +276,4 @@ And we're done. The script is complete!
 
 Hopefully, this article has given you a good feel for how you can move your data into a Database with Python.
 
-Check back again soon for future articles where I'll explore other methods using the popular libraries sqlalchemy and pandas.
+For more from this series checkout my other articles using the popular libraries [SQLAlchemy](https://www.andrewvillazon.com/move-data-to-db-with-sqlalchemy/) and [pandas](https://www.andrewvillazon.com/move-data-to-db-with-pandas/).
