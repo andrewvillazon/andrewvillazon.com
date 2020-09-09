@@ -14,11 +14,41 @@ TRY\_CAST & TRY\_CONVERT follow the same syntax as CAST and CONVERT but with one
 
 The functions are laid out like this:
 
+##### TRY_CAST
+
+```SQL
+TRY_CAST (column_or_value AS data_type)
+```
+
+##### TRY_CONVERT
+
+```SQL
+TRY_CONVERT (data_type, column_or_value, optional_style)
+```
+
 Let's look at a couple of simple examples.
+
+```SQL
+SELECT
+    TRY_CAST('42' AS INTEGER) as result
+    ,TRY_CAST('42' AS INTEGER) * TRY_CAST('42' AS INTEGER) as result_sq
+```
+
+```SQL
+SELECT
+    TRY_CAST('To be, or not to be' AS DATE) as result
+```
 
 Notice when the conversion failed, the column has a NULL value, and the query successfully ran.
 
-There is one catch to be aware of, however. TRY\_CAST and TRY\_CONVERT will still error if the conversion is not permitted. This example returns an error because an integer to date conversion is not allowed.
+There is one catch to be aware of, however. TRY\_CAST and TRY\_CONVERT will still error if the conversion is not permitted. 
+
+This example returns an error because an integer to date conversion is not allowed.
+
+```SQL
+SELECT
+    TRY_CAST(42 AS DATE) as result
+```
 
 For more details on permitted conversions, see the table here.
 
@@ -28,10 +58,43 @@ Firstly because it won't break a query if conversion fails (some exceptions), th
 
 Secondly, TRY\_CAST and TRY\_CONVERT are useful because they allow you to try alternatives if conversion fails. When used in a CASE statement, this lets you test if a conversion is possible and respond if not. You can keep trying other conversions until you've exhausted all options and return NULL.
 
-An example
+## An example
+
 Let's pretend for a moment that the data in this example represents a table of imported Microsoft Excel data. We need to convert the X column, a VARCHAR, to a DATE, but (typically) it's full of mixed formats.
 
 We can use TRY\_CONVERT here to test three different conversions and then return NULL.
+
+```SQL
+-- Setup example data
+DROP TABLE IF EXISTS #excel_data
+CREATE TABLE #excel_data (
+    messy_date VARCHAR(100)
+)
+INSERT INTO #excel_data(messy_date)
+VALUES
+    ('30/08/2020')
+    ,('02/25/2020')
+    ,('44081')
+    ,(NULL)
+    ,('#N/A')
+
+
+DECLARE @excel_serial_start DATE = '1900-01-01'
+
+SELECT
+    CASE
+        WHEN TRY_CONVERT(DATE, #excel_data.messy_date, 103) IS NOT NULL THEN
+            CONVERT(DATE, #excel_data.messy_date, 103)
+        WHEN TRY_CONVERT(DATE, #excel_data.messy_date, 101) IS NOT NULL THEN
+            CONVERT(DATE, #excel_data.messy_date, 101)
+        WHEN TRY_CAST(#excel_data.messy_date AS INT) IS NOT NULL THEN
+            DATEADD(DAY, CAST(#excel_data.messy_date AS INT), @excel_serial_start)
+        ELSE
+            NULL
+    END as result
+FROM
+    #excel_data
+```
 
 First, we test for the British date format. If that fails, we try the US format.  Our example data also includes dates represented as the excel serial number. To handle this, we test if we can convert it to an integer and if we can use the DATEADD function to return the date. If all of these are unsuccessful, then we return NULL.
 
