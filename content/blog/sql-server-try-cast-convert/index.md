@@ -10,7 +10,7 @@ This post will look at these two functions, how to use them, and what makes them
 
 ## TRY\_CAST & TRY\_CONVERT
 
-`TRY_CAST` & `TRY_CONVERT` follow the same syntax as `CAST` and `CONVERT` but with *one key difference*: `TRY_CAST` and `TRY_CONVERT` return `NULL` if the conversion fails.
+`TRY_CAST` & `TRY_CONVERT` follow the same syntax as `CAST` and `CONVERT` but with **one key difference**: `TRY_CAST` and `TRY_CONVERT` return `NULL` if the conversion fails.
 
 The functions are laid out like this:
 
@@ -54,7 +54,7 @@ For more details on permitted conversions, see the table here.
 
 ## Why is this useful?
 
-Firstly because it won't break a query if conversion fails (some exceptions), the returned value will be `NULL` instead of an error.
+Firstly because it won't break a query if conversion fails (some exceptions, see above), the returned value will be `NULL` instead of an error.
 
 Secondly, `TRY_CAST` and `TRY_CONVERT` are useful because they allow you to try alternatives if conversion fails. 
 
@@ -98,7 +98,9 @@ FROM
     #excel_data
 ```
 
-First, we test for the British date format (103). If that fails, we try the US format (101).  Our example data also includes dates represented as the Excel serial number. To handle this, we test if we can convert it to an `INTEGER` and if we can use the `DATEADD` function to return the date. If all of these are unsuccessful, then we return `NULL`.
+First, we test for the British date format (103). If that fails, we try the US format (101). 
+
+Our example data includes dates represented as the Excel serial number. To handle this, we test if we can convert it to an `INTEGER` and if we can use the `DATEADD` function to return the date. If all of these are unsuccessful, then we return `NULL`.
 
 Pretty handy, right? We've managed to convert three different date formats without using convoluted string manipulation.
 
