@@ -1,16 +1,16 @@
 ---
-title: "Useful SQL Server functions: TRY\_CAST & TRY\_CONVERT"
+title: "Useful SQL Server functions: TRY_CAST & TRY_CONVERT"
 date: "2020-09-09"
 tags:
     - SQL Server
 ---
-You've probably used the CAST and CONVERT functions to switch between data types, but did you know there's a couple of handy counterparts to these? The TRY\_CAST and TRY\_CONVERT functions.
+You've probably used the `CAST` and `CONVERT` functions to switch between data types, but did you know there's a couple of handy counterparts to these? The `TRY_CAST` and `TRY_CONVERT` functions.
 
 This post will look at these two functions, how to use them, and what makes them useful.
 
 ## TRY\_CAST & TRY\_CONVERT
 
-TRY\_CAST & TRY\_CONVERT follow the same syntax as CAST and CONVERT but with one key difference: TRY\_CAST and TRY\_CONVERT return NULL if the conversion fails.
+`TRY_CAST` & `TRY_CONVERT` follow the same syntax as `CAST` and `CONVERT` but with *one key difference*: `TRY_CAST` and `TRY_CONVERT` return `NULL` if the conversion fails.
 
 The functions are laid out like this:
 
@@ -39,11 +39,11 @@ SELECT
     TRY_CAST('To be, or not to be' AS DATE) as result
 ```
 
-Notice when the conversion failed, the column has a NULL value, and the query successfully ran.
+Notice when the conversion failed, the column has a `NULL` value, and the query successfully ran.
 
-There is one catch to be aware of, however. TRY\_CAST and TRY\_CONVERT will still error if the conversion is not permitted. 
+**There is one catch to be aware of, however**. `TRY_CAST` and `TRY_CONVERT` will still error if the conversion is not permitted. 
 
-This example returns an error because an integer to date conversion is not allowed.
+This example returns an error because an `INTEGER` to `DATE` conversion is not allowed.
 
 ```SQL
 SELECT
@@ -54,15 +54,17 @@ For more details on permitted conversions, see the table here.
 
 ## Why is this useful?
 
-Firstly because it won't break a query if conversion fails (some exceptions), the returned value will be NULL instead of an error.
+Firstly because it won't break a query if conversion fails (some exceptions), the returned value will be `NULL` instead of an error.
 
-Secondly, TRY\_CAST and TRY\_CONVERT are useful because they allow you to try alternatives if conversion fails. When used in a CASE statement, this lets you test if a conversion is possible and respond if not. You can keep trying other conversions until you've exhausted all options and return NULL.
+Secondly, `TRY_CAST` and `TRY_CONVERT` are useful because they allow you to try alternatives if conversion fails. 
+
+When used in a `CASE` statement, this lets you test if a conversion is possible and respond if not. You can keep trying other conversions until you've exhausted all options and return `NULL`.
 
 ## An example
 
-Let's pretend for a moment that the data in this example represents a table of imported Microsoft Excel data. We need to convert the X column, a VARCHAR, to a DATE, but (typically) it's full of mixed formats.
+Let's pretend for a moment that the data in this example represents a table of imported Microsoft Excel data. We need to convert the `messy_date` column, a `VARCHAR`, to a `DATE`, but (typically) it's full of mixed formats.
 
-We can use TRY\_CONVERT here to test three different conversions and then return NULL.
+We can use `TRY_CONVERT` and `TRY_CAST` here to test three different conversions and then return `NULL`.
 
 ```SQL
 -- Setup example data
@@ -96,14 +98,14 @@ FROM
     #excel_data
 ```
 
-First, we test for the British date format. If that fails, we try the US format.  Our example data also includes dates represented as the excel serial number. To handle this, we test if we can convert it to an integer and if we can use the DATEADD function to return the date. If all of these are unsuccessful, then we return NULL.
+First, we test for the British date format (103). If that fails, we try the US format (101).  Our example data also includes dates represented as the Excel serial number. To handle this, we test if we can convert it to an `INTEGER` and if we can use the `DATEADD` function to return the date. If all of these are unsuccessful, then we return `NULL`.
 
 Pretty handy, right? We've managed to convert three different date formats without using convoluted string manipulation.
 
 ## Conclusion
 
-In this article, we've taken a look at two useful SQL Server conversion functions, TRY\_CAST and TRY\_CONVERT. 
+In this article, we've taken a look at two useful SQL Server conversion functions, `TRY_CAST` and `TRY_CONVERT`. 
 
-Next time you've got any messy Data Type conversions, give TRY\_CAST or TRY\_CONVERT a try (pun intended).
+Next time you've got any messy Data Type conversions, give `TRY_CAST` or `TRY_CONVERT` a try (pun intended).
 
 ### Further reading
