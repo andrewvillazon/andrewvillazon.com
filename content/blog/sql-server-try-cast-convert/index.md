@@ -50,7 +50,7 @@ SELECT
     TRY_CAST(42 AS DATE) as result
 ```
 
-For more details on permitted conversions, see the table here.
+For more details on permitted conversions, see the table [here](https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-type-conversion-database-engine?view=sqlallproducts-allversions).
 
 ## Why is this useful?
 
@@ -58,7 +58,7 @@ Firstly because it won't break a query if conversion fails (some exceptions, see
 
 Secondly, `TRY_CAST` and `TRY_CONVERT` are useful because they allow you to try alternatives if conversion fails. 
 
-When used in a `CASE` statement, this lets you test if a conversion is possible and respond if not. You can keep trying other conversions until you've exhausted all options and return `NULL`.
+When used in a `CASE` [statement](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql?view=sqlallproducts-allversions), this lets you test if a conversion is possible and respond if not. You can keep trying other conversions until you've exhausted all options and return `NULL`.
 
 ## An example
 
@@ -98,9 +98,9 @@ FROM
     #excel_data
 ```
 
-First, we test for the British date format (103). If that fails, we try the US format (101). 
+First, we test for the [British date format](https://en.wikipedia.org/wiki/Date_and_time_notation_in_the_United_Kingdom) (**103**). If that fails, we try the [US date format](https://en.wikipedia.org/wiki/Date_and_time_notation_in_the_United_States) (**101**). 
 
-Our example data includes dates represented as the Excel serial number. To handle this, we test if we can convert it to an `INTEGER` and if we can use the `DATEADD` function to return the date. If all of these are unsuccessful, then we return `NULL`.
+Our example data includes dates represented as the [Excel serial number](https://excel.tips.net/T002176_How_Excel_Stores_Dates_and_Times.html). To handle this, we test if we can convert it to an `INTEGER` and if we can use the `DATEADD` function to return the date. If all of these are unsuccessful, then we return `NULL`.
 
 Pretty handy, right? We've managed to convert three different date formats without using convoluted string manipulation.
 
@@ -111,3 +111,7 @@ In this article, we've taken a look at two useful SQL Server conversion function
 Next time you've got any messy Data Type conversions, give `TRY_CAST` or `TRY_CONVERT` a try (pun intended).
 
 ### Further reading
+* [CAST and CONVERT](https://docs.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sqlallproducts-allversions)
+* [Data type conversion](https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-type-conversion-database-engine?view=sqlallproducts-allversions)
+* [TRY_CAST](https://docs.microsoft.com/en-us/sql/t-sql/functions/try-cast-transact-sql?view=sqlallproducts-allversions)
+* [TRY_CONVERT](https://docs.microsoft.com/en-us/sql/t-sql/functions/try-convert-transact-sql?view=sqlallproducts-allversions)
