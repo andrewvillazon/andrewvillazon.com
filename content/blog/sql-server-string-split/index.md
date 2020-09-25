@@ -12,13 +12,13 @@ Before the inclusion of `STRING_SPLIT`, there were a couple of options to achiev
 
 ## STRING_SPLIT
 
-`STRING_SPLIT` takes two required inputs, a string (varchar, nvarchar, nchar, or char type), and a separator. The function has the following syntax.
+`STRING_SPLIT` takes two required inputs, a string (**varchar**, **nvarchar**, **nchar**, or **char** type), and a separator. The function has the following syntax.
 
 ```sql
 STRING_SPLIT(string, seperator)
 ```
 
-The function returns a table with a single column called value with a row per separated value.
+The function returns a table with a single column called **value** with a row per separated value.
 
 Let's see a simple example.
 
