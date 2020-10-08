@@ -423,26 +423,25 @@ Configuration is valid.
 
 Schema can also work with Lists and validate list items. To do this, we set a list as a value and define validation rules that will apply to each item. Each item must evaluate to True for validation to pass.
 
-```python{6-10}
-from schema import Regex, Schema
+```python{8-10}
+from schema import Regex, Schema, SchemaError
 import yaml
 
 
-config_schema = Schema({
-    "tracking_list":[
-        {"name": str,
-        "url": Regex(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))'),
-        "check": str}
-    ]
-})
+ip4_regex = r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
 
-conf_as_yaml = """tracking_list:
-    - name: Fluent Python
-      url: https://www.amazon.com/Fluent-Python-Concise-Effective-Programming/dp/1491946008
-      check: daily
-    - name: Python Cookbook
-      url: https://www.amazon.com/Python-Cookbook-Third-David-Beazley/dp/1449340377
-      check: daily
+config_schema = Schema({
+    "servers": [
+        {"host": Regex(ip4_regex), "port": int}
+        ]
+    })
+
+conf_as_yaml = """
+servers:
+    - host: 146.180.127.85
+      port: 5000
+    - host: 89.79.252.148
+      port: 5001
 """
 
 configuration = yaml.safe_load(conf_as_yaml)
@@ -450,12 +449,12 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
-Notice that when Schema encounters the `tracking_list` key, it will check that the value is a list. It will then apply the validation rules defined in this list to each list item under validation.
+Notice that when Schema encounters the `servers` key, it will check that the value is a list. It will then validate each input list item against the rules defined in the Schema list.
 
 ## Custom error messages
 
