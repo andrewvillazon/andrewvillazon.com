@@ -4,7 +4,7 @@ date: "2020-10-08"
 tags:
     - Python
 ---
-When working with YAML files, e.g., using a YAML file for configuration, it's useful to validate the file's contents to ensure data in the file is the right types, within valid ranges, etc.
+When working with YAML files, e.g., using a YAML file for configuration, it's useful to validate the contents to ensure data in the file is the right types, within valid ranges, etc.
 
 In this post, I'll look at a useful Python library to validate YAML called Schema. 
 
