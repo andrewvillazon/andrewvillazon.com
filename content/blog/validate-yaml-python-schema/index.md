@@ -486,6 +486,6 @@ Or('fixed', 'double') did not validate 'random'
 
 As you can see, Schema provides a range of useful functionality for validating YAML-based data.
 
-Lastly, we didn't cover off everything Schema can do, just the features I've found most helpful while using the library. Other features worth mentioning are Hooks (functions executed on validation) and JSON validation.
+Lastly, we didn't cover off everything Schema can do, just the features I've found most helpful while using the library. Other features not mentioned but worth checking out are Hooks (functions executed on validation) and JSON validation.
 
 For more detailed information, check out the [Schema Github repository](https://github.com/keleshev/schema).
