@@ -97,7 +97,7 @@ Key 'token' error:
 Before we move on, let's fix up the YAML and see what happens when it's valid. Re-run the code below.
 
 ```python
-rom schema import Schema
+from schema import Schema
 import yaml
 
 
