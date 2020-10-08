@@ -21,7 +21,7 @@ Let's use Schema to define some simple rules for this configuration data.
 We start by creating a new Schema Object passing in a dict that defines the structure we expect the data to have.
 
 ```python
-from schema import Schema
+from schema import Schema, SchemaError
 import yaml
 
 
@@ -43,7 +43,7 @@ Let's add some YAML and load it with the yaml library. We can use the `validate(
 We'll deliberately make this invalid to demonstrate what happens when we validate it. Run the code below and notice what happens.
 
 ```python
-from schema import Schema
+from schema import Schema, SchemaError
 import yaml
 
 
@@ -53,7 +53,8 @@ config_schema = Schema({
     }
 })
 
-conf_yaml = """api:
+conf_yaml = """
+api:
     passkey: 625c2043c132485b
 """
 
@@ -62,8 +63,8 @@ configuration = yaml.safe_load(conf_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
@@ -79,7 +80,8 @@ Let's fix the problem with the required key but change the value to an integer t
 ```python
 # ...
 
-conf_yaml = """api:
+conf_yaml = """
+api:
     token: 12345
 """
 
@@ -97,7 +99,7 @@ Key 'token' error:
 Before we move on, let's fix up the YAML and see what happens when it's valid. Re-run the code below.
 
 ```python
-from schema import Schema
+from schema import Schema, SchemaError
 import yaml
 
 
@@ -107,7 +109,8 @@ config_schema = Schema({
     }
 })
 
-conf_yaml = """api:
+conf_yaml = """
+api:
     token: 625c2043c132485b
 """
 
@@ -116,8 +119,8 @@ configuration = yaml.safe_load(conf_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
@@ -137,8 +140,8 @@ We can use a callable as part of our validation. When Schema encounters a callab
 
 Here we use a lambda (anonymous) function to validate that the `workers` key is between 1 and 10 inclusive.
 
-```python{7,12}
-from schema import Schema
+```python{7,13}
+from schema import Schema, SchemaError
 import yaml
 
 
@@ -148,7 +151,8 @@ config_schema = Schema({
     }
 })
 
-conf_as_yaml = """concurrency:
+conf_as_yaml = """
+concurrency:
     workers: 20
 """
 
@@ -157,8 +161,8 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
@@ -176,10 +180,8 @@ Schema can validate data using regular expressions. To do this, Schema provides 
 
 Here we check for a valid email using a regular expression pattern.
 
-```python{1,3,9,14}
-import re
-
-from schema import Schema, Regex
+```python{1,7,13}
+from schema import Schema, SchemaError, Regex
 import yaml
 
 
@@ -189,7 +191,8 @@ config_schema = Schema({
     }
 })
 
-conf_as_yaml = """email:
+conf_as_yaml = """
+email:
     support: support_team_at_domain.tld
 """
 
@@ -198,8 +201,9 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
+
 ```
 
 ```shell
@@ -214,8 +218,8 @@ Schema supports boolean logic operations for validation. It does this by providi
 
 In this example, all the validation rules passed to the `And()` object must evaluate to True for validation to pass.
 
-```python
-from schema import Schema, And
+```python{1,7,13}
+from schema import And, Schema, SchemaError
 import yaml
 
 
@@ -225,7 +229,8 @@ config_schema = Schema({
     }
 })
 
-conf_as_yaml = """concurrency:
+conf_as_yaml = """
+concurrency:
     workers: 5.0
 """
 
@@ -234,8 +239,9 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
+
 ```
 
 ```shell
@@ -246,8 +252,8 @@ Key 'workers' error:
 
 While in this example, only one of the validation rules needs to evaluate to True for validation to pass.
 
-```python{1,7,12}
-from schema import Schema, Or
+```python{1,7,13}
+from schema import Or, Schema, SchemaError
 import yaml
 
 
@@ -257,7 +263,8 @@ config_schema = Schema({
     }
 })
 
-conf_as_yaml = """chart_settings:
+conf_as_yaml = """
+chart_settings:
     color_palette: RdYlGn
 """
 
@@ -266,8 +273,8 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
@@ -284,8 +291,8 @@ Or('Accent', 'Dark2', 'Pastel1') did not validate 'RdYlGn'
 
 To make an optional key, Schema provides a class named Optional. To use, we define the key as an Optional object passing in a description. Validation rules on the proceeding value(s) are defined as any other validation rule.
 
-```python
-from schema import Optional, Schema
+```python{1,9-11}
+from schema import Optional, Schema, SchemaError
 import yaml
 
 
@@ -301,7 +308,8 @@ config_schema = Schema(
     }
 )
 
-conf_as_yaml = """settings:
+conf_as_yaml = """
+settings:
     temp_dir: /tmp
     proxy_server: 
         address: proxy.mydomain.com
@@ -313,8 +321,8 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
@@ -324,7 +332,7 @@ Configuration is valid.
 
 Note that if we remove the optional key from the YAML, the data is still valid. However, if the optional data is invalid, this will raise a SchemaError.
 
-```python
+```python{6}
 # ...
 
 conf_as_yaml = """settings:
@@ -347,8 +355,8 @@ Missing key: 'address'
 
 Sometimes it is useful to ignore parts of the dict or only validate some sections of it. We can do this by setting the `ignore_extra_keys` argument to True when defining the Schema.
 
-```python
-from schema import Schema
+```python{11}
+from schema import Schema, SchemaError
 import yaml
 
 
@@ -357,11 +365,11 @@ config_schema = Schema({
         "logging": {
                 "filename": lambda fp: fp.endswith(".log")
             }
-    }
-    
+    }    
 }, ignore_extra_keys=True)
 
-conf_as_yaml = """application:
+conf_as_yaml = """
+application:
     database:
         connection_string: sqlite:///app.db
     logging:
@@ -375,8 +383,8 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
-    raise ex
+except SchemaError as se:
+    raise se
 
 ```
 
@@ -402,7 +410,8 @@ config_schema = Schema({
     
 }, ignore_extra_keys=True)
 
-conf_as_yaml = """application:
+conf_as_yaml = """
+application:
     database:
         connection_string: sqlite:///app.db
     logging:
@@ -462,8 +471,8 @@ One of the minor drawbacks of Schema is that it's error messaging can be a littl
 
 To customize error messages, we pass in an `error` argument with a message. This message will be available on any raised SchemaError.
 
-```python{11,28-34}
-from schema import Or, Schema
+```python{11,29-35}
+from schema import Or, Schema, SchemaError
 import yaml
 
 
@@ -479,7 +488,8 @@ config_schema = Schema(
     }
 )
 
-conf_as_yaml = """retry_parameters:
+conf_as_yaml = """
+retry_parameters:
     strategy: random
 """
 
@@ -488,13 +498,13 @@ configuration = yaml.safe_load(conf_as_yaml)
 try:
     config_schema.validate(configuration)
     print("Configuration is valid.")
-except Exception as ex:
+except SchemaError as se:
 
-    for error in ex.errors:
+    for error in se.errors:
         if error:
             print(error)
 
-    for error in ex.autos:
+    for error in se.autos:
         if error:
             print(error)
 
