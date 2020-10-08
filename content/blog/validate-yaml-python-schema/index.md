@@ -246,8 +246,38 @@ Key 'workers' error:
 
 While in this example, only one of the validation rules needs to evaluate to True for validation to pass.
 
-```python
-"""TODO: Or example"""
+```python{1,7,12}
+from schema import Schema, Or
+import yaml
+
+
+config_schema = Schema({
+    "chart_settings": {
+        "color_palette": Or("Accent", "Dark2", "Pastel1")
+    }
+})
+
+conf_as_yaml = """chart_settings:
+    color_palette: RdYlGn
+"""
+
+configuration = yaml.safe_load(conf_as_yaml)
+
+try:
+    config_schema.validate(configuration)
+    print("Configuration is valid.")
+except Exception as ex:
+    raise ex
+
+```
+
+Schema raises a SchemaError because `RdYlGn` is neither `Accent`, `Dark2`, or `Pastel1`.
+
+```shell
+schema.SchemaError: Key 'chart_settings' error:
+Key 'color_palette' error:
+Or('Accent', 'Dark2', 'Pastel1') did not validate 'RdYlGn'
+'Pastel1' does not match 'RdYlGn'
 ```
 
 ## Making a key optional
