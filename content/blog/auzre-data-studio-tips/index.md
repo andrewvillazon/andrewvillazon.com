@@ -16,8 +16,8 @@ For this post, I'm going to assume that you're familiar with writing SQL queries
 The Command Palette is the searchable prompt where Azure Data Studio's many commands are accessed. Commands do things such as modify your current code, connect to a data source, or change a setting.
 
 To access the Command Palette in Azure Data Studio press:
-  * On Windows: <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
-  * On Mac: <kbd>⌘ (Cmd)</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
+  * **Windows**: <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
+  * **Mac**: <kbd>⌘ (Cmd)</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
 
 ![Command Palette](CommandPalette.gif "Command Palette")
 
