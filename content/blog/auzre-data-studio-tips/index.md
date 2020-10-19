@@ -19,6 +19,6 @@ To access the Command Palette in Azure Data Studio press:
   * **Windows**: <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
   * **Mac**: <kbd>⌘ (Cmd)</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
 
-![Command Palette](CommandPalette.gif "Command Palette")
+<p><img src="CommandPalette.gif" class="article-img" title="Command Palette" alt="Command Palette"></p>
 
 The Command Palette is designed for performing actions from the keyboard. Familiarising yourself with this tool will help you get a lot more out of Azure Data Studio.
