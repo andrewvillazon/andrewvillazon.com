@@ -31,8 +31,8 @@ Let's look at some tips that will help you write and edit queries faster.
 
 Try Side by Side editing:
 
-* Windows: <kbd>ctrl + \\</kbd>
-* Mac: <kbd>ctrl + \\</kbd>
+* **Windows**: <kbd>ctrl + \\</kbd>
+* **Mac**: <kbd>ctrl + \\</kbd>
 
 [EXAMPLE]
 
@@ -48,8 +48,22 @@ Side by side editing also supports a Grid Style layout, a 2x2 grid. Arrange the 
 
 ##### Side by side editing of the same file
 
-ADS also supports viewing the *same* file side-by-side, handy for working on a long query that spans greater than the screen height.
+ADS also supports viewing the *same* file side-by-side, handy when working on a long query spanning greater than the screen height.
 
 This functions just like Side by Side editing, but instead, you drag the same file or Open Editor group onto the editing pane.
+
+[EXAMPLE]
+
+### Quickly comment lines or blocks of code
+
+Comment out the current line:
+* **Windows**: <kbd>ctrl + /</kbd>
+* **Mac**: <kbd>cmd + /</kbd>
+
+[EXAMPLE]
+
+Add a block comment:
+* **Windows**:
+* **Mac**:
 
 [EXAMPLE]
