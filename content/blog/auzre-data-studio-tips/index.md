@@ -11,7 +11,7 @@ Azure Data Studio (ADS) has a slew of features that can improve the speed and ef
 
 For this post, I'm going to assume that you're familiar with writing SQL queries and have used a code editor.
 
-## First tip: Become familiar with the Command Palette.
+## First tip: Become familiar with the Command Palette
 
 The Command Palette is the searchable prompt where Azure Data Studio's many commands are accessed. Commands do things such as modify your current code, connect to a data source, or change a setting.
 
@@ -67,3 +67,11 @@ Add a block comment:
 * **Mac**:
 
 [EXAMPLE]
+
+### Turn a block of code into one line
+
+Got a compact statement that could fit on one line? Use the **Join Lines** command. On Mac, the shortcut for this is <kbd>control + j</kbd>
+
+[EXAMPLE]
+
+On Windows, the Join Lines command is not bound to a keyboard shortcut but can be set in Keyboard Shortcuts.
