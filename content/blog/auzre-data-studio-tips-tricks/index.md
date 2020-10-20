@@ -1,5 +1,5 @@
 ---
-title: "Azure Data Studio tips"
+title: "Azure Data Studio tips and tricks"
 date: "2020-10-21"
 tags:
     - SQL Server
