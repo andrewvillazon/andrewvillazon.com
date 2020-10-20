@@ -25,8 +25,6 @@ The Command Palette is designed for performing actions from the keyboard. Famili
 
 ## Query editing tips
 
-Let's look at some tips that will help you write and edit queries faster.
-
 ### Work on one query while referring to another
 
 Try Side by Side editing:
