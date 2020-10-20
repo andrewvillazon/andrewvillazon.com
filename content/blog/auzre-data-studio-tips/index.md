@@ -104,7 +104,7 @@ The search and replace above will remove open and closing square brackets from a
 
 To change:
 * Highlight some text
-* Bring up the Command Palette (Windows: <kbd>ctrl + shift + p</kbd>, Mac: <kbd>ctrl + shift + p</kbd>) and type either 'upper' or 'lower'
+* Bring up the Command Palette (Windows: <kbd>ctrl + shift + p</kbd>, Mac: <kbd>cmd + shift + p</kbd>) and type either 'upper' or 'lower'
 * Press enter to transform.
 
 [EXAMPLE]
@@ -114,3 +114,12 @@ Transforming the case is even more useful when you combine with multiple selecti
 [CLAUSES EXAMPLE]
 
 Further, the commands can be bound to a keyboard shortcut reducing the need to use the command palette.
+
+### Change all occurrences of text.
+
+Want to rename something, and in all the places it's used, e.g., rename a variable? Try Changing all occurrences.
+
+* Windows: <kbd>ctrl + f2</kbd>
+* Mac: <kbd>cmd + f2</kbd>
+
+[EXAMPLE]
