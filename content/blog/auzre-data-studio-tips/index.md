@@ -75,3 +75,14 @@ Got a compact statement that could fit on one line? Use the **Join Lines** comma
 [EXAMPLE]
 
 On Windows, the Join Lines command is not bound to a keyboard shortcut but can be set in Keyboard Shortcuts.
+
+### Hide a region of a query
+
+Want to hide a region of a query, e.g., hide a sub-query while editing the outer query. Try Code Folding.
+
+* **Windows**: <kbd>ctrl + shift + [</kbd>, to unfold <kbd>ctrl + shift + ]</kbd>
+* **Mac**: <kbd>alt + cmd + [</kbd>, to unfold <kbd>alt + cmd + ]</kbd>
+
+[EXAMPLE]
+
+ADS determines a foldable region by evaluating the indentation of lines. A foldable region starts at a line whose next line has a greater indent and ends when the indent is the same as the starting line.
