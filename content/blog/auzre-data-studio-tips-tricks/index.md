@@ -161,3 +161,61 @@ This same feature can highlight multiple bits of code. Holding down <kbd>alt</kb
 A variation on this is Box Selection, highlighting text in a square or rectangular block. Use Box Selection by holding down <kbd>shift + alt</kbd> (Mac: <kbd>shift + opt</kbd>), then holding the left mouse button and drag where you want to highlight.
 
 [EXAMPLE]
+
+## Other tips and tricks
+
+### Compare differences
+
+Need to see the differences in queries or see what might have changed between two files? Let ADS show you with Compare differences.
+
+To compare the differences:
+
+[EXAMPLE]
+
+### Zen Mode
+
+If you want to focus on a query without the extra distractions of File Menu's, notifications, etc., use Zen Mode. 
+
+Activate/Deactivate Zen Mode from the Command Palette.
+
+[EXAMPLE]
+
+### Auto Save
+
+Turn on Auto Save, so you'll never forget to save your work.
+
+Auto Save is disabled by default. To enable:
+1. Click the File menu
+2. Tick Auto Save
+
+[EXAMPLE]
+
+### Get information about a Database Object
+
+Use Peek Definition to quickly get information about an Object, such as column names and data types, without leaving the editor and hunting around in the Object Explorer.
+
+To use: 
+1. highlight an Object
+2. right-click, choose Peek Definition (Windows: <kbd>alt + f12</kbd>, Mac: <kbd>opt + f12</kbd>.
+
+### Find Database Objects fast
+
+Need to search for Database objects quickly? Use the Database object search tool.
+
+To access the search:
+1. Open the connections pane.
+2. Expand a connection to view all Databases in the connection.
+3. Highlight a Database, right mouse click, and select "Manage."
+4. Start typing the object you want to search for.
+
+[EXAMPLE]
+
+The search also supports filtering. To filter for a specific type of Database object (e.g., table, stored procedure), we use the corresponding character followed by a colon. For example, "t:users" will search for all tables containing the text "users" in their name.
+
+The following filters are supported:
+"sp:" stored procedure
+"t:" table
+"v:" view
+"f:" function
+
+[EXAMPLE]
