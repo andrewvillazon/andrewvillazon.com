@@ -141,3 +141,23 @@ The same goes for copying a line.
 * Mac: <kbd>opt + shift + up</kbd> or <kbd>opt + shift + down</kbd>
 
 [EXAMPLE]
+
+### Make many changes at the same time.
+
+If you want to make a change in many places simultaneously, then try Multiple Cursors.
+
+To drop multiple cursors into a query is as easy as holding down the <kbd>alt</kbd> (Mac: <kbd>opt</kbd>) key and left-clicking with the mouse where you want the additional cursors.
+
+[EXAMPLE]
+
+#### Multiple highlighting
+
+This same feature can highlight multiple bits of code. Holding down <kbd>alt</kbd> (Mac: <kbd>opt</kbd>) and double-clicking a word will add it to the currently highlighted selection.
+
+[EXAMPLE]
+
+#### Box selecting
+
+A variation on this is Box Selection, highlighting text in a square or rectangular block. Use Box Selection by holding down <kbd>shift + alt</kbd> (Mac: <kbd>shift + opt</kbd>), then holding the left mouse button and drag where you want to highlight.
+
+[EXAMPLE]
