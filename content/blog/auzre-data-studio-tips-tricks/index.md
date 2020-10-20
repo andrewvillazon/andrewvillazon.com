@@ -70,7 +70,7 @@ Add a block comment:
 
 Got a compact statement that could fit on one line? Use the **Join Lines** command. On Mac, the shortcut for this is <kbd>control + j</kbd>
 
-[EXAMPLE]
+<p><img src="OneLine.gif" class="article-img" title="Join Lines" alt="Join Lines. Shortcut: control + j"></p>
 
 On Windows, the Join Lines command is not bound to a keyboard shortcut but can be set in Keyboard Shortcuts.
 
