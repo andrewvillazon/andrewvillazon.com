@@ -86,3 +86,16 @@ Want to hide a region of a query, e.g., hide a sub-query while editing the outer
 [EXAMPLE]
 
 ADS determines a foldable region by evaluating the indentation of lines. A foldable region starts at a line whose next line has a greater indent and ends when the indent is the same as the starting line.
+
+### Search and Replace more text with Regular Expressions
+
+With a Regular Expression search and replace, we search for a *text pattern* instead of exact text, which lets you modify more text in one go.
+
+To open:
+* **Windows**: <kbd>ctrl + f</kbd>, **Mac**: <kbd>cmd + f</kbd>
+* Set the search to use Regular Expressions
+* Expand the Replace text area and enter the Regular Expression
+
+[EXAMPLE]
+
+The search and replace above will remove open and closing square brackets from a query in one action (if you, like me, find the square bracket syntax noisy and hard to read).*
