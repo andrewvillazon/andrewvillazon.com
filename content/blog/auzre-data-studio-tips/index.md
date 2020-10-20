@@ -92,10 +92,25 @@ ADS determines a foldable region by evaluating the indentation of lines. A folda
 With a Regular Expression search and replace, we search for a *text pattern* instead of exact text, which lets you modify more text in one go.
 
 To open:
-* **Windows**: <kbd>ctrl + f</kbd>, **Mac**: <kbd>cmd + f</kbd>
+* Open Search and Replace (Windows: <kbd>ctrl + f</kbd>, Mac: <kbd>cmd + f</kbd>)
 * Set the search to use Regular Expressions
 * Expand the Replace text area and enter the Regular Expression
 
 [EXAMPLE]
 
-The search and replace above will remove open and closing square brackets from a query in one action (if you, like me, find the square bracket syntax noisy and hard to read).*
+The search and replace above will remove open and closing square brackets from a query in one action (if you, like me, find the square bracket syntax noisy and hard to read).
+
+### Transform to Uppercase or Lowercase
+
+To change:
+* Highlight some text
+* Bring up the Command Palette (Windows: <kbd>ctrl + shift + p</kbd>, Mac: <kbd>ctrl + shift + p</kbd>) and type either 'upper' or 'lower'
+* Press enter to transform.
+
+[EXAMPLE]
+
+Transforming the case is even more useful when you combine with multiple selections.
+
+[CLAUSES EXAMPLE]
+
+Further, the commands can be bound to a keyboard shortcut reducing the need to use the command palette.
