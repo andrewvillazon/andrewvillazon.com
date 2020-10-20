@@ -123,3 +123,21 @@ Want to rename something, and in all the places it's used, e.g., rename a variab
 * Mac: <kbd>cmd + f2</kbd>
 
 [EXAMPLE]
+
+### Move a line up or down.
+
+We don't need to cut and paste to move a line. This shortcut also works with blocks of selected text.
+
+* Windows: <kbd>alt + up</kbd> or <kbd>alt + down</kbd>
+* Mac: <kbd>opt + up</kbd> or <kbd>opt + down</kbd>
+
+[EXAMPLE]
+
+### Copy a line up or down
+
+The same goes for copying a line.
+
+* Windows: <kbd>alt + shift + down</kbd> or <kbd>alt + shift + up</kbd>
+* Mac: <kbd>opt + shift + up</kbd> or <kbd>opt + shift + down</kbd>
+
+[EXAMPLE]
