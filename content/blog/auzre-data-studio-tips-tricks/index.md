@@ -91,7 +91,7 @@ Want to rename something, and in all the places it's used, e.g., rename a variab
 * Windows: <kbd>ctrl + f2</kbd>
 * Mac: <kbd>cmd + f2</kbd>
 
-[EXAMPLE]
+<p><img src="ChangeAllOccurrences.gif" class="article-img" title="Highlight some text and change all occurrences" alt="Change all occurrences"></p>
 
 ### Move a line up or down.
 
