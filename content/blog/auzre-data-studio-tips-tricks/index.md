@@ -25,33 +25,6 @@ The Command Palette is designed for performing actions from the keyboard. Famili
 
 ## Query editing tips
 
-### Work on one query while referring to another
-
-Try Side by Side editing:
-
-* **Windows**: <kbd>ctrl + \\</kbd>
-* **Mac**: <kbd>ctrl + \\</kbd>
-
-[EXAMPLE]
-
-Alternatively:
-* From the Explorer sidebar, drag and drop either a file or Open Editor group onto the editing area
-* Or clicking the Side by Side editing icon in the top right corner
-
-[EXAMPLE]
-
-Side by side editing also supports a Grid Style layout, a 2x2 grid. Arrange the 2x2 grid by grabbing the center of the grid and moving to suit.
-
-[EXAMPLE]
-
-##### Side by side editing of the same file
-
-ADS also supports viewing the *same* file side-by-side, handy when working on a long query spanning greater than the screen height.
-
-This functions just like Side by Side editing, but instead, you drag the same file or Open Editor group onto the editing pane.
-
-[EXAMPLE]
-
 ### Quickly comment lines or blocks of code
 
 Comment out the current line:
@@ -161,6 +134,22 @@ A variation on this is Box Selection, highlighting text in a square or rectangul
 [EXAMPLE]
 
 ## Other tips and tricks
+
+### Work on one query while referring to another
+
+Try Side by Side editing. 
+
+The easiest way to do this in ADS is:
+* From the Explorer sidebar, drag and drop either a File or Open Editor group to the desired area
+* Alternatively, drag and drop an editor tab to the desired area
+
+<p><img src="SideBySideEditing.gif" class="article-img" title="Drag and drop a File or Open Editor to the desired area" alt="Side by Side Editing"></p>
+
+##### Side by side editing of the same file
+
+Side by Side editing also works for the *same file*, handy when working on a long query spanning greater than the screen height.
+
+This functions just like Side by Side editing, but instead, you drag the same file or Open Editor group from the Explorer Side Bar onto the desired area.
 
 ### Compare differences
 
