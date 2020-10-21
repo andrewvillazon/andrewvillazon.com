@@ -31,13 +31,11 @@ Comment out the current line:
 * **Windows**: <kbd>ctrl + /</kbd>
 * **Mac**: <kbd>cmd + /</kbd>
 
-[EXAMPLE]
-
 Add a block comment:
 * **Windows**:
 * **Mac**:
 
-[EXAMPLE]
+<p><img src="QuickComment.gif" class="article-img" title="Quickly comment a line or block" alt="Quick Comment"></p>
 
 ### Turn a block of code into one line
 
