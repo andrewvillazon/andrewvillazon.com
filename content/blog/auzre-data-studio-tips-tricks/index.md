@@ -100,7 +100,7 @@ We don't need to cut and paste to move a line. This shortcut also works with blo
 * Windows: <kbd>alt + up</kbd> or <kbd>alt + down</kbd>
 * Mac: <kbd>opt + up</kbd> or <kbd>opt + down</kbd>
 
-[EXAMPLE]
+<p><img src="MoveLine.gif" class="article-img" title="Move a line up or down" alt="Move a line up or down"></p>
 
 ### Copy a line up or down
 
