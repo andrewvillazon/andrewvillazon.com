@@ -76,11 +76,11 @@ To change:
 * Bring up the Command Palette (Windows: <kbd>ctrl + shift + p</kbd>, Mac: <kbd>cmd + shift + p</kbd>) and type either 'upper' or 'lower'
 * Press enter to transform.
 
-[EXAMPLE]
+<p><img src="TransformCase.gif" class="article-img" title="Highlight text. Open the Command Palette and type Upper" alt="Transform Case"></p>
 
 Transforming the case is even more useful when you combine with multiple selections.
 
-[CLAUSES EXAMPLE]
+<p><img src="TransformCaseMultiselect.gif" class="article-img" title="Multi Select text. Open the Command Palette and type Upper" alt="Combine Transform Case and Multi Select"></p>
 
 Further, the commands can be bound to a keyboard shortcut reducing the need to use the command palette.
 
