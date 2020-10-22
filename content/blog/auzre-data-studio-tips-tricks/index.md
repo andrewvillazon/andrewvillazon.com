@@ -50,9 +50,9 @@ On Windows, the Join Lines command is not bound to a keyboard shortcut but can b
 Want to hide a region of a query, e.g., hide a sub-query while editing the outer query. Try Code Folding.
 
 * **Windows**: <kbd>ctrl + shift + [</kbd>, to unfold <kbd>ctrl + shift + ]</kbd>
-* **Mac**: <kbd>alt + cmd + [</kbd>, to unfold <kbd>alt + cmd + ]</kbd>
+* **Mac**: <kbd>opt + cmd + [</kbd>, to unfold <kbd>opt + cmd + ]</kbd>
 
-[EXAMPLE]
+<p><img src="CodeFolding.gif" class="article-img" title="Use Code Folding to hide a block of code" alt="Code Folding"></p>
 
 ADS determines a foldable region by evaluating the indentation of lines. A foldable region starts at a line whose next line has a greater indent and ends when the indent is the same as the starting line.
 
