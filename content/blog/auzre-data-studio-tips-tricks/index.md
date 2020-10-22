@@ -195,7 +195,7 @@ To access the search:
 3. Highlight a Database, right mouse click, and select "Manage."
 4. Start typing the object you want to search for.
 
-[EXAMPLE]
+<p><img src="DBSearch.gif" class="article-img" title="Database Object Search" alt="Database Object Search"></p>
 
 The search also supports filtering. To filter for a specific type of Database object (e.g., table, stored procedure), we use the corresponding character followed by a colon. For example, "t:users" will search for all tables containing the text "users" in their name.
 
