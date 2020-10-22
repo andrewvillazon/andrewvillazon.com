@@ -183,6 +183,8 @@ To use:
 1. highlight an Object
 2. right-click, choose Peek Definition (Windows: <kbd>alt + f12</kbd>, Mac: <kbd>opt + f12</kbd>.
 
+<p><img src="PeekDefinition.gif" class="article-img" title="Drag and drop a File or Open Editor to the desired area" alt="Side by Side Editing"></p>
+
 ### Find Database Objects fast
 
 Need to search for Database objects quickly? Use the Database object search tool.
