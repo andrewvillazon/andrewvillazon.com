@@ -109,7 +109,7 @@ The same goes for copying a line.
 * Windows: <kbd>alt + shift + down</kbd> or <kbd>alt + shift + up</kbd>
 * Mac: <kbd>opt + shift + up</kbd> or <kbd>opt + shift + down</kbd>
 
-[EXAMPLE]
+<p><img src="CopyLine.gif" class="article-img" title="Copy a line up or down" alt="Copy a line up or down"></p>
 
 ### Make many changes at the same time.
 
