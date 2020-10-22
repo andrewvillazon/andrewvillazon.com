@@ -173,7 +173,7 @@ Auto Save is disabled by default. To enable:
 1. Click the File menu
 2. Tick Auto Save
 
-[EXAMPLE]
+![Auto Save](AutoSave.png "Auto Save")
 
 ### Get information about a Database Object
 
