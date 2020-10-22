@@ -155,7 +155,7 @@ Need to see the differences in queries or see what might have changed between tw
 
 To compare the differences:
 
-[EXAMPLE]
+<p><img src="CompareDiff.gif" class="article-img" title="Compare Differences" alt="Compare Differences"></p>
 
 ### Zen Mode
 
