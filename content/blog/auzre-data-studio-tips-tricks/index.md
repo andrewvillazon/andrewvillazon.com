@@ -197,12 +197,12 @@ To access the search:
 
 <p><img src="DBSearch.gif" class="article-img" title="Database Object Search" alt="Database Object Search"></p>
 
-The search also supports filtering. To filter for a specific type of Database object (e.g., table, stored procedure), we use the corresponding character followed by a colon. For example, "t:users" will search for all tables containing the text "users" in their name.
+The search also supports filtering. To filter for a specific type of Database object (e.g., table, stored procedure), we use the corresponding character followed by a colon. For example, `t:users` will search for all tables containing the text "users" in their name.
 
 The following filters are supported:
-"sp:" stored procedure
-"t:" table
-"v:" view
-"f:" function
+* `sp:` stored procedure
+* `t:` table
+* `v:` view
+* `f:` function
 
 [EXAMPLE]
