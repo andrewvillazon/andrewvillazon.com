@@ -118,7 +118,7 @@ If you want to make a change in many places simultaneously, then try Multiple Cu
 
 To drop multiple cursors into a query is as easy as holding down the <kbd>alt</kbd> (Mac: <kbd>opt</kbd>) key and left-clicking with the mouse where you want the additional cursors.
 
-[EXAMPLE]
+<p><img src="MultipleCursors.gif" class="article-img" title="Use Multiple Cursors to make many changes at once." alt="Multiple Cursors"></p>
 
 #### Multiple highlighting
 
