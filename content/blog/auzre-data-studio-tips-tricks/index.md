@@ -65,7 +65,7 @@ To open:
 * Set the search to use Regular Expressions
 * Expand the Replace text area and enter the Regular Expression
 
-[EXAMPLE]
+<p><img src="RegexReplace.gif" class="article-img" title="Use Regex Search and Replace to modify more text in one go" alt="Regex Search and Replace"></p>
 
 The search and replace above will remove open and closing square brackets from a query in one action (if you, like me, find the square bracket syntax noisy and hard to read).
 
