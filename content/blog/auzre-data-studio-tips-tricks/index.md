@@ -60,10 +60,11 @@ ADS determines a foldable region by evaluating the indentation of lines. A folda
 
 With a Regular Expression search and replace, we search for a *text pattern* instead of exact text, which lets you modify more text in one go.
 
-To open:
-* Open Search and Replace (Windows: <kbd>ctrl + f</kbd>, Mac: <kbd>cmd + f</kbd>)
-* Set the search to use Regular Expressions
-* Expand the Replace text area and enter the Regular Expression
+To search and replace:
+1. Open the Command Palette and type "replace."
+2. Choose the "Replace" command.
+3. Set the search to use Regular Expressions.
+4. Enter the search pattern and replace as required.
 
 <p><img src="RegexReplace.gif" class="article-img" title="Use Regex Search and Replace to modify more text in one go" alt="Regex Search and Replace"></p>
 
