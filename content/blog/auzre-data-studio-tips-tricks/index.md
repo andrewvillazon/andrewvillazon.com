@@ -124,13 +124,13 @@ To drop multiple cursors into a query is as easy as holding down the <kbd>alt</k
 
 This same feature can highlight multiple bits of code. Holding down <kbd>alt</kbd> (Mac: <kbd>opt</kbd>) and double-clicking a word will add it to the currently highlighted selection.
 
-[EXAMPLE]
+<p><img src="TransformCaseMultiselect.gif" class="article-img" title="Hold alt (Windows), or opt (Mac), and double click a word to add to selection" alt="Multiple Highlighting"></p>
 
 #### Box selecting
 
 A variation on this is Box Selection, highlighting text in a square or rectangular block. Use Box Selection by holding down <kbd>shift + alt</kbd> (Mac: <kbd>shift + opt</kbd>), then holding the left mouse button and drag where you want to highlight.
 
-[EXAMPLE]
+<p><img src="BoxSelect.gif" class="article-img" title="Box Selecting" alt="Box Selecting"></p>
 
 ## Other tips and tricks
 
@@ -162,9 +162,11 @@ To compare the differences:
 
 If you want to focus on a query without the extra distractions of File Menu's, notifications, etc., use Zen Mode. 
 
+![Activate Zen Mode from the Command Palette](ZenMode1.png "Zen Mode")
+
 Activate/Deactivate Zen Mode from the Command Palette.
 
-[EXAMPLE]
+![Zen Mode](ZenMode2.png "Zen Mode")
 
 ### Auto Save
 
