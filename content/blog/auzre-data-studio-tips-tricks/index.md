@@ -156,8 +156,8 @@ Need to see the differences in queries or see what might have changed between tw
 
 To compare the differences:
 
-1. From the Explorer Side Bar, right-click on the file and click "Select for Compare."
-2. From the Explorer Side Bar, right-click on the file for comparison and click "Compare with Selected."
+1. From the Explorer Side Bar, right-click on the file and click **Select for Compare**
+2. From the Explorer Side Bar, right-click on the file for comparison and click **Compare with Selected**
 
 <p><img src="CompareDiff.gif" class="article-img" title="Compare Differences" alt="Compare Differences"></p>
 
