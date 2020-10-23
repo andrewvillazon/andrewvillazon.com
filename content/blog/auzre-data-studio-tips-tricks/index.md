@@ -23,21 +23,19 @@ To access the Command Palette in Azure Data Studio press:
 
 The Command Palette is designed for performing actions from the keyboard. Familiarising yourself with this tool will help you get a lot more out of Azure Data Studio.
 
-## Query editing tips
-
-### Quickly comment lines or blocks of code
+## Quickly comment lines or blocks of code
 
 Comment out the current line:
 * **Windows**: <kbd>ctrl + /</kbd>
 * **Mac**: <kbd>cmd + /</kbd>
 
 Add a block comment:
-* **Windows**:
-* **Mac**:
+* **Windows**: <kbd>alt + shift + a</kbd>
+* **Mac**: <kbd>opt + shift + a</kbd>
 
 <p><img src="QuickComment.gif" class="article-img" title="Quickly comment a line or block" alt="Quick Comment"></p>
 
-### Turn a block of code into one line
+## Turn a block of code into one line
 
 Got a compact statement that could fit on one line? Use the **Join Lines** command. On Mac, the shortcut for this is <kbd>control + j</kbd>
 
@@ -45,7 +43,7 @@ Got a compact statement that could fit on one line? Use the **Join Lines** comma
 
 On Windows, the Join Lines command is not bound to a keyboard shortcut but can be set in Keyboard Shortcuts.
 
-### Hide a region of a query
+## Hide a region of a query
 
 Want to hide a region of a query, e.g., hide a sub-query while editing the outer query. Try Code Folding.
 
@@ -56,7 +54,7 @@ Want to hide a region of a query, e.g., hide a sub-query while editing the outer
 
 ADS determines a foldable region by evaluating the indentation of lines. A foldable region starts at a line whose next line has a greater indent and ends when the indent is the same as the starting line.
 
-### Search and Replace more text with Regular Expressions
+## Search and Replace with Regular Expressions
 
 With a Regular Expression search and replace, we search for a *text pattern* instead of exact text, which lets you modify more text in one go.
 
@@ -70,7 +68,7 @@ To search and replace:
 
 The search and replace above will remove open and closing square brackets from a query in one action (if you, like me, find the square bracket syntax noisy and hard to read).
 
-### Transform to Uppercase or Lowercase
+## Transform to Uppercase or Lowercase
 
 To change:
 * Highlight some text
@@ -85,7 +83,7 @@ Transforming the case is even more useful when you combine with multiple selecti
 
 Further, the commands can be bound to a keyboard shortcut reducing the need to use the command palette.
 
-### Change all occurrences of text.
+## Change all occurrences of text.
 
 Want to rename something, and in all the places it's used, e.g., rename a variable? Try Changing all occurrences.
 
@@ -94,7 +92,7 @@ Want to rename something, and in all the places it's used, e.g., rename a variab
 
 <p><img src="ChangeAllOccurrences.gif" class="article-img" title="Highlight some text and change all occurrences" alt="Change all occurrences"></p>
 
-### Move a line up or down.
+## Move a line up or down.
 
 We don't need to cut and paste to move a line. This shortcut also works with blocks of selected text.
 
@@ -103,7 +101,7 @@ We don't need to cut and paste to move a line. This shortcut also works with blo
 
 <p><img src="MoveLine.gif" class="article-img" title="Move a line up or down" alt="Move a line up or down"></p>
 
-### Copy a line up or down
+## Copy a line up or down
 
 The same goes for copying a line.
 
@@ -112,7 +110,7 @@ The same goes for copying a line.
 
 <p><img src="CopyLine.gif" class="article-img" title="Copy a line up or down" alt="Copy a line up or down"></p>
 
-### Make many changes at the same time.
+## Make many changes at the same time.
 
 If you want to make a change in many places simultaneously, then try Multiple Cursors.
 
@@ -132,9 +130,7 @@ A variation on this is Box Selection, highlighting text in a square or rectangul
 
 <p><img src="BoxSelect.gif" class="article-img" title="Box Selecting" alt="Box Selecting"></p>
 
-## Other tips and tricks
-
-### Work on one query while referring to another
+## Work on one query while referring to another
 
 Try Side by Side editing. 
 
@@ -150,7 +146,7 @@ Side by Side editing also works for the *same file*, handy when working on a lon
 
 This functions just like Side by Side editing, but instead, you drag the same file or Open Editor group from the Explorer Side Bar onto the desired area.
 
-### Compare differences
+## Compare differences
 
 Need to see the differences in queries or see what might have changed between two files? Let ADS show you with Compare differences.
 
@@ -161,7 +157,7 @@ To compare the differences:
 
 <p><img src="CompareDiff.gif" class="article-img" title="Compare Differences" alt="Compare Differences"></p>
 
-### Zen Mode
+## Zen Mode
 
 If you want to focus on a query without the extra distractions of File Menu's, notifications, etc., use Zen Mode. 
 
@@ -171,7 +167,7 @@ Activate/Deactivate Zen Mode from the Command Palette.
 
 ![Zen Mode](ZenMode2.png "Zen Mode")
 
-### Auto Save
+## Auto Save
 
 Turn on Auto Save, so you'll never forget to save your work.
 
@@ -181,7 +177,7 @@ Auto Save is disabled by default. To enable:
 
 ![Auto Save](AutoSave.png "Auto Save")
 
-### Get information about a Database Object
+## Get information about a Database Object
 
 Use Peek Definition to quickly get information about an Object, such as column names and data types, without leaving the editor and hunting around in the Object Explorer.
 
@@ -191,7 +187,7 @@ To use:
 
 <p><img src="PeekDefinition.gif" class="article-img" title="Drag and drop a File or Open Editor to the desired area" alt="Side by Side Editing"></p>
 
-### Find Database Objects fast
+## Find Database Objects fast
 
 Need to search for Database objects quickly? Use the Database object search tool.
 
