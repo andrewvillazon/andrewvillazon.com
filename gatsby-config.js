@@ -26,6 +26,16 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              exclude: "Contents",
+              tight: false,
+              fromHeading: 2,
+              toHeading: 2,
+              className: "table-of-contents"
+            },
+          },
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-images`,
           `gatsby-remark-copy-linked-files`,
