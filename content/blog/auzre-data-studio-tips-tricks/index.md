@@ -207,4 +207,4 @@ The following filters are supported:
 * `v:` view
 * `f:` function
 
-[EXAMPLE]
+![Search Filter](SearchFilter.png "Search Filter")
