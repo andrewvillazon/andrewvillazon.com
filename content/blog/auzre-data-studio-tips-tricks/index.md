@@ -11,6 +11,13 @@ tags:
 
 For this post, I'm going to assume that you're familiar with writing SQL queries and have used a code editor.
 
+## Tips:
+
+```toc
+# This code block gets replaced with the TOC
+exclude: ["Tips:", "See also"]
+```
+
 ## First tip: Become familiar with the Command Palette
 
 The **Command Palette** is the searchable prompt where Azure Data Studio's many commands are accessed. **Commands** do things such as modify your current code, connect to a data source, or change a setting.
