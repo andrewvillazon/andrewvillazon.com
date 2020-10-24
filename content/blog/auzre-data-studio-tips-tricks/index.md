@@ -208,3 +208,10 @@ The following filters are supported:
 * `f:` function
 
 ![Search Filter](SearchFilter.png "Search Filter")
+
+
+## See also
+
+* [VS Code Tips and Tricks](https://github.com/microsoft/vscode-tips-and-tricks) (VSCode and Azure Data Studio share the same code base)
+* Gif recording via [LICEcap](https://www.cockos.com/licecap/)
+* [Demo Database](https://www.brentozar.com/archive/2015/10/how-to-download-the-stack-overflow-database-via-bittorrent/)
