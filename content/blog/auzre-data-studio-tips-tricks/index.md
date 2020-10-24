@@ -90,7 +90,7 @@ Transforming the case is even more useful when you combine with **multiple selec
 
 Further, the commands can be bound to a [keyboard shortcut](https://docs.microsoft.com/en-us/sql/azure-data-studio/keyboard-shortcuts?view=sql-server-ver15#edit-existing-keyboard-shortcuts) reducing the need to use the Command Palette.
 
-## Change all occurrences of text.
+## Change all occurrences of text
 
 Want to rename something, and in all the places it's used, e.g., rename a variable? Try **Change all occurrences**.
 
@@ -99,7 +99,7 @@ Want to rename something, and in all the places it's used, e.g., rename a variab
 
 <p><img src="ChangeAllOccurrences.gif" class="article-img" title="Highlight some text and change all occurrences" alt="Change all occurrences"></p>
 
-## Move a line up or down.
+## Move a line up or down
 
 We don't need to cut and paste to move a line. This shortcut also works with blocks of selected text.
 
@@ -117,7 +117,7 @@ The same goes for copying a line.
 
 <p><img src="CopyLine.gif" class="article-img" title="Copy a line up or down" alt="Copy a line up or down"></p>
 
-## Make many changes at the same time.
+## Make many changes at the same time
 
 If you want to make a change in many places simultaneously, then try **Multiple Cursors**.
 
