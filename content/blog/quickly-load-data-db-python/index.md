@@ -9,7 +9,7 @@ In this post, I'm going walk through a way to quickly move a large amount of dat
 
 This post came from a project requirement to read around 20 million JSON records and load their contents to a SQL Server Database.
 
-**Prerequisites**
+*Prerequisites*
 
 I'm going to assume a couple of things:
 * First, you're somewhat familiar with Python and some concepts like using modules, importing libraries, and common data structures.
