@@ -212,3 +212,74 @@ def read_csv(csv_file):
 ```
 
 Using a generator avoids putting all the data in a list and running out of memory. Instead, data is read in chunks (in this case, a single line), discarding each chunk when finished with it. Remember that once data has made it to the Database, there's no need to keep it in memory.
+
+## Setting up Threads
+
+#### Setting up a queue
+
+Recall earlier that the faster approach is to insert as many records as possible in a single transaction? Or put another way, **batching**. 
+
+Batching requires a data structure to hold row data temporarily. The best choice here is a queue which has useful features for this kind of task:
+
+1. Queues are locked whenever modifications take place on them. If we pull a value off the queue, no other thread can simultaneously modify the queue. This property is known as being "thread safe" and addresses a problem called a race condition.
+2. Queues are optimized for pulling data from the start and adding data to the end, i.e., we don't need to access values at any other place in the queue.
+
+<div class="code-filename">loadcsv.py</div>
+
+```python{6}
+# ...
+
+def load_csv(csv_file, table_def, conn_params):
+    # ...
+
+    batch = queue.Queue(MULTI_ROW_INSERT_LIMIT)
+
+    # ...
+
+```
+
+As a side note, the pattern used here is known as the **producer-consumer pattern**.
+
+#### Working with Threads
+
+The simplest way to use Threads is with the concurrent module, part of the Python standard library. The module abstracts away much of the detail of using Threads.
+
+The recommended way of using Threads is to instantiate a `ThreadPoolExecutor` inside a context manager.
+
+Inside the context manager, work for the Threads needs to be scheduled. 
+
+Scheduling happens by creating a `Future` object with the `executor.submit` method adding it to a `todo` list. Each future gets passed a function definition (a callable) and any required arguments.
+
+At this point, the work is s*cheduled but not executed*.
+
+What is a Future object? A Future is a representation of some work to happen in the future. In this context, the future is a call to the process_row method with some row data and the batch queue.
+
+To execute the scheduled work, we use the method, `futures.as_completed()`, which takes a list (iterable) of futures and yields their result as they complete.
+
+<div class="code-filename">loadcsv.py</div>
+
+```python{9-19}
+# ...
+
+def load_csv(csv_file, table_def, conn_params):
+    # Optional, drops table if it exists before creating
+    sqlactions.make_table(table_def, conn_params)
+
+    batch = queue.Queue(MULTI_ROW_INSERT_LIMIT)
+
+    with futures.ThreadPoolExecutor(max_workers=WORKERS) as executor:
+        todo = []
+
+        for row in read_csv(csv_file):
+            future = executor.submit(
+                process_row, row, batch, table_def["name"], conn_params
+            )
+            todo.append(future)
+
+        for future in futures.as_completed(todo):
+            result = future.result()
+
+# ...
+```
+
+The code above is adapted from the book Fluent Python by Luciano Ramalho. The book features two excellent chapters on concurrency with `concurrent.futures` and `asyncio`.
