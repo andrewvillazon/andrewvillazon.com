@@ -441,3 +441,18 @@ The code we walked through deliberately omits exceptions so we can focus on the 
 Loading large amounts of data to a Database can take a non-trivial amount of time. 
 
 It's worth considering handling exceptions in a way that doesn't kill the load and force you to start over—for example, logging any data that caused an insert to fail, continuing, and then addressing those separately.
+
+## Conclusion
+
+Phew! There we have it.
+
+Hopefully, this article has given you a good idea of the techniques you can employ to load large datasets to your Database quickly.
+
+There's a couple of other things we didn't try, derived table Inserts, reading the data in larger chunks, or using asyncio. I'll leave those for you to consider.
+
+### Further reading
+
+* [Python Cookbook: Concurrency](https://www.oreilly.com/content/python-cookbook-concurrency/)
+* [Fluent Python, by Luciano Ramalho](https://www.oreilly.com/library/view/fluent-python/9781491946237/)
+* [Multi-row Inserts (SQL Server)](https://docs.microsoft.com/en-us/sql/t-sql/queries/table-value-constructor-transact-sql?view=sql-server-ver15#a-inserting-multiple-rows-of-data)
+* [Connecting to SQL Server from Mac OSX](https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Mac-OSX)
