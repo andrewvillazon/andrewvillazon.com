@@ -283,3 +283,27 @@ def load_csv(csv_file, table_def, conn_params):
 ```
 
 The code above is adapted from the book Fluent Python by Luciano Ramalho. The book features two excellent chapters on concurrency with `concurrent.futures` and `asyncio`.
+
+## Processing each row
+
+The `process_row()` function does a couple of things:
+
+1. Takes a row and adds the row to the batch queue.
+2. Then, checks if the batch queue is full. If it is, the batch queue is passed to one of the `sqlactions` functions to insert into the Database.
+3. Finally, it returns the queue. We could get to the end of the CSV file and find the queue isn't full. Returning the partially full queue means we can insert the remaining rows separately.
+
+<div class="code-filename">loadcsv.py</div>
+
+```python
+# ...
+
+def process_row(row, batch, table_name, conn_params):
+    batch.put(row)
+
+    if batch.full():
+        sqlactions.multi_row_insert(batch, table_name, conn_params)
+
+    return batch
+
+# ...
+```
