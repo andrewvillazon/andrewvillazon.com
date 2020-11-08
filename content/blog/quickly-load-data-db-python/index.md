@@ -93,7 +93,7 @@ To make the code more manageable, I've split it across two modules:
 * `loadcsv` - the module that manages the fast loading of the source data
 * `sqlactions` - module containing functions that perform actions on the destination Database.
 
-You'll find the modules and code in full at the end of this post.
+You'll find the modules and code in full in the repository accompanying this post.
 
 First, let's look at the module `loadcsv`.
 
@@ -449,6 +449,8 @@ Phew! There we have it.
 Hopefully, this article has given you a good idea of the techniques you can employ to load large datasets to your Database quickly.
 
 There's a couple of other things we didn't try, derived table Inserts, reading the data in larger chunks, or using asyncio. I'll leave those for you to consider.
+
+For the full code, see the accompanying repository for this post.
 
 ### Further reading
 
