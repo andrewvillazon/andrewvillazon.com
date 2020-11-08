@@ -307,3 +307,90 @@ def process_row(row, batch, table_name, conn_params):
 
 # ...
 ```
+
+### sqlactions
+
+At this point, it's worth introducing the `sqlactions` module.
+
+The module is a collection of functions that do actions on the Database. The module uses the query building library pypika to construct SQL queries and combine them with data.
+
+<div class="code-filename">sqlactions.py</div>
+
+```python
+import pyodbc
+from pypika import Column, Query, Table
+
+
+def execute_query(q, conn_params):
+    connection = pyodbc.connect(**conn_params)
+    cursor = connection.cursor()
+
+    cursor.execute(q)
+    connection.commit()
+
+    connection.close()
+
+
+def make_table(table_def, conn_params):
+    table = Table(table_def["name"])
+    cols = [Column(k, v) for k, v, in table_def["columns"].items()]
+
+    drop = Query.drop_table(table).if_exists()
+    create = Query.create_table(table).columns(*cols)
+
+    execute_query(str(drop) + "\n" + str(create), conn_params)
+
+
+def multi_row_insert(batch, table_name, conn_params):
+    row_expressions = []
+
+    for _ in range(batch.qsize()):
+        row_data = tuple(batch.get())
+        row_expressions.append(row_data)
+
+    table = Table(table_name)
+    insert_into = Query.into(table).insert(*row_expressions)
+
+    execute_query(str(insert_into), conn_params)
+
+```
+
+### Inserting each batch
+
+The essential function here is the `multi_row_insert`. Inserting each batch happens by constructing an `INSERT` statement and executing it on the Database.
+
+<div class="code-filename">sqlactions.py</div>
+
+```python{6-8}
+# ...
+
+def multi_row_insert(batch, table_name, conn_params):
+    row_expressions = []
+
+    for _ in range(batch.qsize()):
+        row_data = tuple(batch.get())
+        row_expressions.append(row_data)
+
+    table = Table(table_name)
+    insert_into = Query.into(table).insert(*row_expressions)
+
+    execute_query(str(insert_into), conn_params)
+```
+
+The code starts building the Multi-row Insert by iterating through the batch queue, removing each row from the front of the queue. The row data is converted to a tuple and added to a row_expression list.
+
+Removing items from the front of the queue creates places at the end that are filled by waiting threads.
+
+With the row data prepared, it gets combined into a Multi-row Insert via the pypika `Query.into().insert()` function, which takes tuples as row data.
+
+Lastly, the statement is executed and uses a transaction scope that ties a Database connection and transactions to a batch of records.
+
+#### Why build a query?
+
+You may be wondering why we're constructing raw SQL and not using a parameterized query? The simple answer is that there are limits on the number of parameters we can use in a parameterized query. In SQL Server, this limit is 2100.
+
+In a parameterized query, every piece of data is a parameter and significantly decreases the amount of data committed in one transaction.
+
+It's necessary to point out that constructing raw SQL and concatenating with data is a big security no-no. Building raw SQL could make the destination Database prone to SQL injection attacks. 
+
+You'll need to evaluate if this approach is right for you and potentially take steps to protect against this.
