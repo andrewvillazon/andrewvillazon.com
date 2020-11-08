@@ -16,4 +16,4 @@ I'm going to assume a couple of things:
 * You're familiar with using Python to move data to a Database and using Database connectors.
 * Lastly, I will assume the destination Database is an enterprise-level Relational Database such as Postgres or SQL Server. These have features that are helpful for loading data quickly, such as concurrency and multiple connections.
 
-This post intends to walk through an approach to a problem rather than present a tutorial. The purpose being you pick up ideas to incorporate into your own solutions.
+This post intends to walk through an approach to a problem rather than provide a tutorial.
