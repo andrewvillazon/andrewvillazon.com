@@ -187,3 +187,28 @@ if __name__ == "__main__":
 The module starts by importing the required libraries, `concurrent.futures`, `csv`, and `queue`, all from the standard library, followed by the `sqlactions` module.
 
 After the imports, constants get defined. These include the `MULTI_ROW_INSERT_LIMIT`, determining the queue size, and the number of threads, or `WORKERS`.
+
+### Reading the data
+
+Next comes reading the data from the CSV file.
+
+Reading the data is done with a generator. Generators are a particular type of function that returns values one at a time (`yield`) rather than returning them all at once (`return`).
+
+<div class="code-filename">loadcsv.py</div>
+
+```python{9}
+# ...
+
+def read_csv(csv_file):
+    with open(csv_file, encoding="utf-8", newline="") as in_file:
+        reader = csv.reader(in_file, delimiter="|")
+        next(reader)  # Header row
+
+        for row in reader:
+            yield row
+
+# ...
+
+```
+
+Using a generator avoids putting all the data in a list and running out of memory. Instead, data is read in chunks (in this case, a single line), discarding each chunk when finished with it. Remember that once data has made it to the Database, there's no need to keep it in memory.
