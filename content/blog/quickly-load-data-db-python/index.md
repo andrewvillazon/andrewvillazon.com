@@ -394,3 +394,50 @@ In a parameterized query, every piece of data is a parameter and significantly d
 It's necessary to point out that constructing raw SQL and concatenating with data is a big security no-no. Building raw SQL could make the destination Database prone to SQL injection attacks. 
 
 You'll need to evaluate if this approach is right for you and potentially take steps to protect against this.
+
+## Final clean up
+
+The final step in the process is to commit any remaining rows. 
+
+Because records get inserted when the batch queue is full, we may reach the dataset's end and find the queue is not full.
+
+The partially full queue is passed to the `sqlactions.multi_row_insert()` function to ensure the remaining records are loaded.
+
+<div class="code-filename">loadcsv.py</div>
+
+```python{21-23}
+# ...
+
+def load_csv(csv_file, table_def, conn_params):
+    # Optional, drops table if it exists before creating
+    sqlactions.make_table(table_def, conn_params)
+
+    batch = queue.Queue(MULTI_ROW_INSERT_LIMIT)
+
+    with futures.ThreadPoolExecutor(max_workers=WORKERS) as executor:
+        todo = []
+
+        for row in read_csv(csv_file):
+            future = executor.submit(
+                process_row, row, batch, table_def["name"], conn_params
+            )
+            todo.append(future)
+
+        for future in futures.as_completed(todo):
+            result = future.result()
+
+    # Handle left overs
+    if not result.empty():
+        sqlactions.multi_row_insert(result, table_def["name"], conn_params)
+
+
+# ...
+```
+
+## A word on Exceptions
+
+The code we walked through deliberately omits exceptions so we can focus on the logic and process.
+
+Loading large amounts of data to a Database can take a non-trivial amount of time. 
+
+It's worth considering handling exceptions in a way that doesn't kill the load and force you to start over—for example, logging any data that caused an insert to fail, continuing, and then addressing those separately.
