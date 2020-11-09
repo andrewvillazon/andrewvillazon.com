@@ -93,7 +93,7 @@ To make the code more manageable, I've split it across two files (modules):
 * `loadcsv.py` - the module that manages the fast loading of the source data
 * `sqlactions.py` - module containing functions that perform actions on the destination Database.
 
-You'll find the code in full in the repository accompanying this post.
+You'll find the code in full in the [repository accompanying this post](https://github.com/andrewvillazon/quickly-load-data-db-python).
 
 First, let's look at the module `loadcsv`.
 
@@ -452,7 +452,7 @@ Hopefully, this article has given you a good idea of the techniques you can empl
 
 There's a couple of other things we didn't try, derived table Inserts, reading the data in larger chunks, or using [asyncio](https://docs.python.org/3/library/asyncio.html). I'll leave those for you to consider.
 
-For the full code, see the accompanying repository for this post.
+For the full code, see the [accompanying repository for this post](https://github.com/andrewvillazon/quickly-load-data-db-python).
 
 ### Further reading
 
