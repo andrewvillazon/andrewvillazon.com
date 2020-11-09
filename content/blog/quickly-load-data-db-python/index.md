@@ -5,7 +5,7 @@ tags:
     - Python
 ---
 
-In this post, I'm going walk through a way to quickly move a large amount of data to a Database using Python.
+In this post, I'm going walk through a way to quickly move a large amount of data to a Database using [Python](https://www.python.org/downloads/).
 
 This post came from a project requirement to read around 20 million JSON records and load their contents to a SQL Server Database.
 
@@ -13,8 +13,8 @@ This post came from a project requirement to read around 20 million JSON records
 
 I'm going to assume a couple of things:
 * First, you're somewhat familiar with Python and some concepts like using modules, importing libraries, and common data structures.
-* You're familiar with using Python to move data to a Database and using Database connectors.
-* Lastly, I will assume the destination Database is an enterprise-level Relational Database such as Postgres or SQL Server. These have features that are helpful for loading data quickly, such as concurrency and multiple connections.
+* You're familiar with [using Python to move data to a Database](https://www.andrewvillazon.com/move-data-to-db-with-pure-python/) and using Database connectors.
+* Lastly, I will assume the destination Database is an enterprise-level Relational Database such as [Postgres](https://www.postgresql.org/) or [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). These have features that are helpful for loading data quickly, such as concurrency and multiple connections.
 
 This post intends to walk through an approach to a problem rather than provide a tutorial.
 
@@ -33,7 +33,7 @@ Before we look at code, let's explore some ways to go faster when loading data t
 
 #### Threads
 
-Repeatedly performing the same action on data is a good hint that the task could benefit from concurrency, namely Threads.
+Repeatedly performing the same action on data is a good hint that the task could benefit from **concurrency**, namely **Threads**.
 
 Threading allows us to break up a task into chunks of work and execute them concurrently instead of sequentially. We can do more work in the same amount of time.
 
@@ -41,11 +41,11 @@ Threading allows us to break up a task into chunks of work and execute them conc
 
 Inserting one row at a time might only take a microsecond but adds up if done millions of times.
 
-To maximize speed, we'll commit the maximum records possible in a single Database transaction. The specific INSERT statement used is called a Multi-row Insert.
+To maximize speed, we'll commit the maximum records possible in a single Database transaction. The specific `INSERT` statement used is called a [Multi-row Insert](https://docs.microsoft.com/en-us/sql/t-sql/queries/table-value-constructor-transact-sql?view=sql-server-ver15#a-inserting-multiple-rows-of-data).
 
 #### Raw SQL
 
-Usually, it makes sense to use an ORM (Object Relational Mapper) to interact with a Database in Python.  However, creating thousands or millions of ORM specific objects adds overhead we could avoid.
+Usually, it makes sense to use an [ORM (Object Relational Mapper)](https://www.andrewvillazon.com/move-data-to-db-with-sqlalchemy/) to interact with a Database in Python.  However, creating thousands or millions of ORM specific objects adds overhead we could avoid.
 
 Instead, raw SQL will be built from the data and executed with the Database API.
 
@@ -53,9 +53,9 @@ Let's take a look at the code.
 
 ## Setting Up
 
-If you want to follow along, you'll need some source data. The source in this walkthrough is a CSV file.
+If you want to follow along, you'll need some source data. The source in this walkthrough is a **CSV file**.
 
-This post aims to cover loading data quickly, so I won't detail how this works. However, the script uses the excellent Faker library to generate fake personal data and pandas to write out to CSV.
+This post aims to cover loading data quickly, so I won't detail how this works. However, the script uses the excellent [Faker](https://faker.readthedocs.io/en/master/) library to generate fake personal data and [pandas](https://pandas.pydata.org/) to write out to CSV.
 
 <div class="code-filename">data_gen.py</div>
 
@@ -89,11 +89,11 @@ Unfortunately, this task isn't quick. The script takes about 5 minutes to run on
 
 ## Loading the data
 
-To make the code more manageable, I've split it across two modules:
-* `loadcsv` - the module that manages the fast loading of the source data
-* `sqlactions` - module containing functions that perform actions on the destination Database.
+To make the code more manageable, I've split it across two files (modules):
+* `loadcsv.py` - the module that manages the fast loading of the source data
+* `sqlactions.py` - module containing functions that perform actions on the destination Database.
 
-You'll find the modules and code in full in the repository accompanying this post.
+You'll find the code in full in the repository accompanying this post.
 
 First, let's look at the module `loadcsv`.
 
@@ -186,13 +186,13 @@ if __name__ == "__main__":
 
 The module starts by importing the required libraries, `concurrent.futures`, `csv`, and `queue`, all from the standard library, followed by the `sqlactions` module.
 
-After the imports, constants get defined. These include the `MULTI_ROW_INSERT_LIMIT`, determining the queue size, and the number of threads, or `WORKERS`.
+After the imports, constants get defined. These include the `MULTI_ROW_INSERT_LIMIT`, determining the queue size (see below), and the number of threads, or `WORKERS`.
 
 ### Reading the data
 
-Next comes reading the data from the CSV file.
+Next comes reading the data from the **CSV file**.
 
-Reading the data is done with a generator. Generators are a particular type of function that returns values one at a time (`yield`) rather than returning them all at once (`return`).
+Reading the data is done with a **generator**. [Generators](https://wiki.python.org/moin/Generators) are a particular type of function that returns values one at a time (`yield`) rather than returning them all at once (`return`).
 
 <div class="code-filename">loadcsv.py</div>
 
@@ -211,7 +211,9 @@ def read_csv(csv_file):
 
 ```
 
-Using a generator avoids putting all the data in a list and running out of memory. Instead, data is read in chunks (in this case, a single line), discarding each chunk when finished with it. Remember that once data has made it to the Database, there's no need to keep it in memory.
+Using a generator avoids putting all the data in a list and running out of memory. 
+
+Instead, data is read in chunks (in this case, a single line), discarding each chunk when finished with it. Remember that once data has made it to the Database, there's no need to keep it in memory.
 
 ## Setting up Threads
 
@@ -219,9 +221,9 @@ Using a generator avoids putting all the data in a list and running out of memor
 
 Recall earlier that the faster approach is to insert as many records as possible in a single transaction? Or put another way, **batching**. 
 
-Batching requires a data structure to hold row data temporarily. The best choice here is a queue which has useful features for this kind of task:
+Batching requires a data structure to hold row data temporarily. The best choice here is a [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) which has useful features for this kind of task:
 
-1. Queues are locked whenever modifications take place on them. If we pull a value off the queue, no other thread can simultaneously modify the queue. This property is known as being "thread safe" and addresses a problem called a race condition.
+1. Queues are locked whenever modifications take place on them. If we pull a value off the queue, no other thread can simultaneously modify the queue. This property is known as being "**thread safe**" and addresses a problem called a [race condition](https://stackoverflow.com/a/34550/7372226).
 2. Queues are optimized for pulling data from the start and adding data to the end, i.e., we don't need to access values at any other place in the queue.
 
 <div class="code-filename">loadcsv.py</div>
@@ -238,21 +240,21 @@ def load_csv(csv_file, table_def, conn_params):
 
 ```
 
-As a side note, the pattern used here is known as the **producer-consumer pattern**.
+As a side note, the pattern used here is known as the [producer-consumer](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem).
 
 #### Working with Threads
 
-The simplest way to use Threads is with the concurrent module, part of the Python standard library. The module abstracts away much of the detail of using Threads.
+The simplest way to use Threads is with the [concurrent.futures](https://docs.python.org/3/library/concurrent.futures.html) module, part of the Python standard library. The module abstracts away much of the detail of using Threads.
 
-The recommended way of using Threads is to instantiate a `ThreadPoolExecutor` inside a context manager.
+The recommended way of using Threads is to **instantiate a** `ThreadPoolExecutor` **inside a context manager**.
 
-Inside the context manager, work for the Threads needs to be scheduled. 
+Inside the context manager, work for the Threads needs to be **scheduled**. 
 
-Scheduling happens by creating a `Future` object with the `executor.submit` method adding it to a `todo` list. Each future gets passed a function definition (a callable) and any required arguments.
+Scheduling happens by creating a `Future` object with the `executor.submit()` method adding it to a `todo` list. Each future gets passed a function definition (a callable) and any required arguments.
 
-At this point, the work is s*cheduled but not executed*.
+At this point, the work is *scheduled but not executed*.
 
-What is a Future object? A Future is a representation of some work to happen in the future. In this context, the future is a call to the process_row method with some row data and the batch queue.
+**What is a Future object?** A Future is a representation of some work to happen in the future. In this context, the future is a call to the `process_row()` method with some row data and the batch queue.
 
 To execute the scheduled work, we use the method, `futures.as_completed()`, which takes a list (iterable) of futures and yields their result as they complete.
 
@@ -282,15 +284,15 @@ def load_csv(csv_file, table_def, conn_params):
 # ...
 ```
 
-The code above is adapted from the book Fluent Python by Luciano Ramalho. The book features two excellent chapters on concurrency with `concurrent.futures` and `asyncio`.
+The code above is adapted from the book [Fluent Python by Luciano Ramalho](https://www.amazon.com/Fluent-Python-Concise-Effective-Programming/dp/1491946008/ref=sr_1_1?dchild=1&keywords=Fluent+PYthon&qid=1601795080&sr=8-1). The book features two excellent chapters on concurrency with `concurrent.futures` and [`asyncio`](https://docs.python.org/3/library/asyncio.html).
 
 ## Processing each row
 
 The `process_row()` function does a couple of things:
 
-1. Takes a row and adds the row to the batch queue.
-2. Then, checks if the batch queue is full. If it is, the batch queue is passed to one of the `sqlactions` functions to insert into the Database.
-3. Finally, it returns the queue. We could get to the end of the CSV file and find the queue isn't full. Returning the partially full queue means we can insert the remaining rows separately.
+1. Takes a row and adds the row to the **batch queue**.
+2. Then, checks **if the batch queue is full**. If it is, the batch queue is passed to one of the `sqlactions` functions to insert into the Database.
+3. Finally, it **returns the queue**. We could get to the end of the **CSV file** and find the queue isn't full. Returning the partially full queue means we can insert the remaining rows separately.
 
 <div class="code-filename">loadcsv.py</div>
 
@@ -310,9 +312,9 @@ def process_row(row, batch, table_name, conn_params):
 
 ### sqlactions
 
-At this point, it's worth introducing the `sqlactions` module.
+At this point, it's time to introduce the `sqlactions` module.
 
-The module is a collection of functions that do actions on the Database. The module uses the query building library pypika to construct SQL queries and combine them with data.
+The module is a collection of functions that do actions on the Database. The module uses the query building library [PyPika](https://pypika.readthedocs.io/en/latest/index.html) to construct SQL queries and combine them with data.
 
 <div class="code-filename">sqlactions.py</div>
 
@@ -357,7 +359,7 @@ def multi_row_insert(batch, table_name, conn_params):
 
 ### Inserting each batch
 
-The essential function here is the `multi_row_insert`. Inserting each batch happens by constructing an `INSERT` statement and executing it on the Database.
+The essential function here is the `multi_row_insert()`. Inserting each batch happens by constructing an `INSERT` statement and executing it on the Database.
 
 <div class="code-filename">sqlactions.py</div>
 
@@ -377,21 +379,21 @@ def multi_row_insert(batch, table_name, conn_params):
     execute_query(str(insert_into), conn_params)
 ```
 
-The code starts building the Multi-row Insert by iterating through the batch queue, removing each row from the front of the queue. The row data is converted to a tuple and added to a row_expression list.
+The code starts building the Multi-row Insert by iterating through the batch queue, removing each row from the front of the queue. The row data is converted to a tuple and added to a `row_expressions` list.
 
 Removing items from the front of the queue creates places at the end that are filled by waiting threads.
 
-With the row data prepared, it gets combined into a Multi-row Insert via the pypika `Query.into().insert()` function, which takes tuples as row data.
+With the row data prepared, it gets combined into a Multi-row Insert via the PyPika `Query.into().insert()` function, which **takes tuples as row data**.
 
-Lastly, the statement is executed and uses a transaction scope that ties a Database connection and transactions to a batch of records.
+Lastly, the statement is executed and uses a [transaction scope](https://docs.sqlalchemy.org/en/13/orm/session_basics.html#when-do-i-construct-a-session-when-do-i-commit-it-and-when-do-i-close-it) that ties a Database connection and transactions to a batch of records.
 
 #### Why build a query?
 
-You may be wondering why we're constructing raw SQL and not using a parameterized query? The simple answer is that there are limits on the number of parameters we can use in a parameterized query. In SQL Server, this limit is 2100.
+You may be wondering why we're constructing raw SQL and not using a [parameterized query](https://stackoverflow.com/a/4712113/7372226)? The simple answer is that there are limits on the number of parameters we can use in a parameterized query. In SQL Server, [this limit is 2100](https://docs.microsoft.com/en-us/sql/sql-server/maximum-capacity-specifications-for-sql-server?view=sql-server-ver15).
 
 In a parameterized query, every piece of data is a parameter and significantly decreases the amount of data committed in one transaction.
 
-It's necessary to point out that constructing raw SQL and concatenating with data is a big security no-no. Building raw SQL could make the destination Database prone to SQL injection attacks. 
+It's necessary to point out that constructing raw SQL and concatenating with data is a big security no-no. Building raw SQL could make the destination Database prone to [SQL injection attacks](https://www.w3schools.com/sql/sql_injection.asp). 
 
 You'll need to evaluate if this approach is right for you and potentially take steps to protect against this.
 
@@ -401,7 +403,7 @@ The final step in the process is to commit any remaining rows.
 
 Because records get inserted when the batch queue is full, we may reach the dataset's end and find the queue is not full.
 
-The partially full queue is passed to the `sqlactions.multi_row_insert()` function to ensure the remaining records are loaded.
+The **partially full queue** is passed to the `sqlactions.multi_row_insert()` function to ensure the remaining records are loaded.
 
 <div class="code-filename">loadcsv.py</div>
 
@@ -436,7 +438,7 @@ def load_csv(csv_file, table_def, conn_params):
 
 ## A word on Exceptions
 
-The code we walked through deliberately omits exceptions so we can focus on the logic and process.
+The code we walked through *deliberately omits exceptions* so we can focus on the logic and process.
 
 Loading large amounts of data to a Database can take a non-trivial amount of time. 
 
@@ -448,7 +450,7 @@ Phew! There we have it.
 
 Hopefully, this article has given you a good idea of the techniques you can employ to load large datasets to your Database quickly.
 
-There's a couple of other things we didn't try, derived table Inserts, reading the data in larger chunks, or using asyncio. I'll leave those for you to consider.
+There's a couple of other things we didn't try, derived table Inserts, reading the data in larger chunks, or using [asyncio](https://docs.python.org/3/library/asyncio.html). I'll leave those for you to consider.
 
 For the full code, see the accompanying repository for this post.
 
