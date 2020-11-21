@@ -21,7 +21,7 @@ export default function BlogPost({ data }) {
             </p>
             <div class="flex article-tags">
               {tags.map(tag => (
-                <Link to={`/tags/${_.kebabCase(tag)}/`}>{tag}</Link>
+                <Link to={`/tags/${_.kebabCase(tag)}/`} className="tag">{tag}</Link>
               ))}
             </div>
           </header>

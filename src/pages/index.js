@@ -35,7 +35,7 @@ const IndexPage = ({ data }) => {
       <section>
         <div class="container">
           <h2>Latest Articles</h2>
-        <PostListing postEdges={postEdges} />
+          <PostListing postEdges={postEdges} />
         </div>
       </section>
 
@@ -43,10 +43,11 @@ const IndexPage = ({ data }) => {
       <section>
         <div class="container">
           <h2>Topics</h2>
-          <DistinctTags/>
+          <div class="flex article-tags">
+            <DistinctTags />
+          </div>
         </div>
       </section>
-
     </Layout>
   )
 }
