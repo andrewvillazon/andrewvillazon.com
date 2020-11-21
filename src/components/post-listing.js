@@ -1,39 +1,42 @@
-import React, { Component } from 'react'
-import { Link } from 'gatsby'
+import React, { Component } from "react"
+import { Link } from "gatsby"
 
 class PostListing extends Component {
-    getPostList() {
-        const { postEdges } = this.props;
-        const postList = [];
+  getPostList() {
+    const { postEdges } = this.props
+    const postList = []
 
-        postEdges.forEach(postEdge => {
-            postList.push({
-                path: postEdge.node.fields.slug,
-                title: postEdge.node.frontmatter.title,
-                date: postEdge.node.frontmatter.date,
-            });
-        });
+    postEdges.forEach(postEdge => {
+      postList.push({
+        path: postEdge.node.fields.slug,
+        title: postEdge.node.frontmatter.title,
+        summary: postEdge.node.frontmatter.summary,
+        date: postEdge.node.frontmatter.date,
+      })
+    })
 
-        return postList;
-    }
+    return postList
+  }
 
-    render() {
-        const postList = this.getPostList();
+  render() {
+    const postList = this.getPostList()
 
-        return (
-            <div>
-                {
-                    postList.map(post => (
-                        <article className="post-list-item">
-                            <Link to={post.path} key={post.title}>
-                                <h2>{post.title}</h2>
-                                <div className="post-date"><time>{post.date}</time></div>
-                            </Link>
-                        </article>
-                    ))}
-            </div>
-        )
-    }
+    return (
+      <>
+        {postList.map(post => (
+          <article class="post-item">
+            <Link to={post.path} key={post.title}>
+              <div class="flex post-row">
+                <h3>{post.title}</h3>
+                <time>{post.date}</time>
+              </div>
+              <p>{post.summary}</p>
+            </Link>
+          </article>
+        ))}
+      </>
+    )
+  }
 }
 
 export default PostListing

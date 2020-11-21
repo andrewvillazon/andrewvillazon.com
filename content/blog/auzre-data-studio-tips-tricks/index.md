@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Studio tips and tricks"
+summary: "Over a dozen tips and tricks to be more productive in Azure Data Studio"
 date: "2020-10-25"
 tags:
     - SQL Server

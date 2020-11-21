@@ -13,6 +13,8 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
+
+      {/* Intro Hero */}
       <section class="introduction">
         <div class="container">
           <h1>Hi, I'm Andrew.</h1>
@@ -27,16 +29,13 @@ const IndexPage = ({ data }) => {
           </p>
         </div>
       </section>
-      <section className="margin-top padding-top margin-bottom">
-        <h2 className="latest-header">Latest Articles</h2>
-        <div className="article-count">
-          <Link to="/articles/">
-            <small>
-              View all <ArticleCount /> articles
-            </small>
-          </Link>
-        </div>
+
+      {/* Latest Articles */}
+      <section>
+        <div class="container">
+          <h2>Latest Articles</h2>
         <PostListing postEdges={postEdges} />
+        </div>
       </section>
     </Layout>
   )
@@ -57,7 +56,8 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            summary
+            date(formatString: "DD MMM")
           }
         }
       }
