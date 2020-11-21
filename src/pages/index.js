@@ -13,11 +13,28 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Introduction />
+      <section class="introduction">
+        <div class="container">
+          <h1>Hi, I'm Andrew.</h1>
+          <p>
+            I'm a Data Professional that specialises in SQL, Python, and Data
+            Visualisation. My website is a collection of the things I've learned
+            over the years - a place to document those "Aha!" moments.
+          </p>
+          <p>
+            Feel free to read my <a href="#">posts</a> or{" "}
+            <a href="#">get in touch</a>.
+          </p>
+        </div>
+      </section>
       <section className="margin-top padding-top margin-bottom">
         <h2 className="latest-header">Latest Articles</h2>
         <div className="article-count">
-          <Link to="/articles/"><small>View all <ArticleCount /> articles</small></Link>
+          <Link to="/articles/">
+            <small>
+              View all <ArticleCount /> articles
+            </small>
+          </Link>
         </div>
         <PostListing postEdges={postEdges} />
       </section>
