@@ -6,6 +6,7 @@ import SEO from "../components/seo"
 import { Link, graphql } from "gatsby"
 import PostListing from "../components/post-listing"
 import ArticleCount from "../components/article-count"
+import DistinctTags from "../components/distinct-tags"
 
 const IndexPage = ({ data }) => {
   const postEdges = data.allMarkdownRemark.edges
@@ -37,6 +38,15 @@ const IndexPage = ({ data }) => {
         <PostListing postEdges={postEdges} />
         </div>
       </section>
+
+      {/* Topics */}
+      <section>
+        <div class="container">
+          <h2>Topics</h2>
+          <DistinctTags/>
+        </div>
+      </section>
+
     </Layout>
   )
 }
