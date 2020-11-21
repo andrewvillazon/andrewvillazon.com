@@ -1,7 +1,6 @@
 import React from "react"
 import GatsbyLogo from "../components/gatsby-logo"
 import Octocat from "../components/octocat"
-import "../styles/main.scss"
 
 const Footer = () => (
     <footer className="footer">
