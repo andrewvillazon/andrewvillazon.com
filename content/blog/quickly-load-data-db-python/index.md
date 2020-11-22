@@ -396,7 +396,7 @@ In a parameterized query, every piece of data is a parameter and significantly d
 <div class="call-out call-out-warning">
     <h4>Combining raw SQL and Data</h4>
     <p>
-        It's necessary to point out that constructing raw SQL and concatenating with data is a big security no-no. Building raw SQL could make the destination Database prone to <a href="https://www.w3schools.com/sql/sql_injection.asp">SQL injection attacks</a>. 
+        It's necessary to point out that constructing raw SQL and concatenating with data is a big security no-no. Building raw SQL could make the destination Database prone to <a href="https://www.w3schools.com/sql/sql_injection.asp" target="_blank">SQL injection attacks</a>. 
     </p>
     <p>
         You'll need to evaluate if this approach is right for you and potentially take steps to protect against this.
