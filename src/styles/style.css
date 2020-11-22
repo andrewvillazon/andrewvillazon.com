@@ -377,6 +377,36 @@ article img {
   margin-right: 0.25rem;
 }
 
+.call-out {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
+  border-left-width: .25rem;
+  border-radius: .25rem;
+  border-left-color: #004085;
+  background-color: #cce5ff;
+}
+
+.call-out-warning {
+  background-color: #fff3cd;
+  border-left-color: #f0ad4e;
+}
+
+.call-out p {
+  font-size: 1rem;
+}
+
+.call-out h4 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.call-out p:last-of-type {
+  margin-bottom: 0;
+}
+
+
+
 /* Footer */
 footer {
   padding: 3rem 0;
