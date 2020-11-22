@@ -10,6 +10,7 @@
   --font-color: #333;
   /* --font-family: --apple-system, sans-serif; */
   --font-family: "Inter", sans-serif;
+  --code-font-family: "Menlo", monospace;
   --std-font-size: 1.125rem;
 }
 
@@ -157,6 +158,37 @@ li {
   margin-bottom: 0.5rem;
 }
 
+/* Code blocks */
+pre {
+  border: 0;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: transparent;
+}
+
+code {
+  font-size: 1rem;
+  font-family: var(--code-font-family);
+}
+
+/* Inline code block */
+:not(pre) > code {
+  font-weight: 500;
+  background: transparent;
+  padding: 0 0.25rem;
+  border: 1px solid #dedede;
+  border-radius: .25rem;
+}
+
+.code-filename {
+  background-color: #f4f4f4;
+  padding: .5rem .5rem .5rem 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+
+/* Layout */
 section {
     margin-bottom: 3rem;
 }
@@ -165,7 +197,7 @@ section:last-of-type {
     margin-bottom: 4rem;
 }
 
-/* Layout */
+
 .container {
   max-width: 800px;
   padding: 0 1.5rem;
