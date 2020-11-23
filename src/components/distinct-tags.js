@@ -31,7 +31,7 @@ export default function DistinctTags() {
                 <Link 
                 to={`/tags/${_.kebabCase(tag)}/`}
                 className="tag"
-                key={tag}><FontAwesomeIcon icon={icons[tag]} /> {tag}</Link>
+                key={tag}><FontAwesomeIcon icon={icons[tag]} />{tag}</Link>
             ))
         }
         </>
