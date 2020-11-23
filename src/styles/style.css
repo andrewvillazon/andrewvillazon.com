@@ -392,6 +392,11 @@ article img {
   border-left-color: #f0ad4e;
 }
 
+.call-out-info {
+  background-color: #d1ecf1;
+  border-left-color: #0c5460;
+}
+
 .call-out p {
   font-size: 1rem;
 }

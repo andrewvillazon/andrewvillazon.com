@@ -148,11 +148,19 @@ The easiest way to do this in ADS is:
 
 <p><img src="SideBySideEditing.gif" class="article-img" title="Drag and drop a file or Open Editor to the desired area" alt="Side by Side Editing"></p>
 
-##### Side by side editing of the same file
-
-Side by Side editing also works for the *same file*, handy when working on a long query spanning greater than the screen height.
-
-This functions just like Side by Side editing, but instead, you **drag the same file** or Open Editor group from the Explorer sidebar onto the desired area.
+<div class="call-out call-out-info">
+  <h4>
+    Side by side editing of the same file
+  </h4>
+  
+  <p>
+    Side by Side editing also works for the <strong>same file</strong>, handy when working on a long query spanning greater than the screen height.
+  </p>
+  
+  <p>
+    This functions just like Side by Side editing, but instead, you <em>drag the same file</em> or Open Editor group from the Explorer sidebar onto the desired area.
+  </p>
+</div>
 
 ## Compare differences
 
