@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 :root {
   --bg-color: #fff;
@@ -348,6 +347,10 @@ section:last-of-type {
   line-height: 1.4;
   background-color: gainsboro;
   color: var(--font-color);
+}
+
+.tag svg {
+  margin-right: 0.125rem;
 }
 
 /* Article Formatting */
