@@ -7,17 +7,25 @@ import PostListing from "../components/post-listing"
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
   const postEdges = data.allMarkdownRemark.edges
+  const totalPosts = data.allMarkdownRemark.totalCount
 
   console.log(postEdges)
 
   return (
     <Layout>
-      <SEO title={`Posts tagged as ${tag}`} description={`Posts tagged as ${tag}`} />
-      <div className="padding-bottom">
-        <h1>Posts tagged <u>{tag}</u></h1>
-      </div>
-      <div>
-        <PostListing postEdges={postEdges} />
+      <SEO
+        title={`Posts tagged as ${tag}`}
+        description={`Posts tagged as ${tag}`}
+      />
+      <div className="container">
+        <header>
+          <h1>
+            Posts tagged <u>{tag}</u> <span className="post-count">({totalPosts})</span>
+          </h1>
+        </header>
+        <section>
+          <PostListing postEdges={postEdges} />
+        </section>
       </div>
     </Layout>
   )
@@ -40,7 +48,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            date(formatString: "DD MMM")
           }
         }
       }
