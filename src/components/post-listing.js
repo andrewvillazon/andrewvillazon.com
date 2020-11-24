@@ -30,7 +30,6 @@ class PostListing extends Component {
                 <h3>{post.title}</h3>
                 <time>{post.date}</time>
               </div>
-              <p>{post.summary}</p>
             </Link>
           </article>
         ))}

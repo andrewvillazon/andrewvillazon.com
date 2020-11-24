@@ -1,11 +1,9 @@
 import React from "react"
 
-import Introduction from "../components/introduction"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import PostListing from "../components/post-listing"
-import ArticleCount from "../components/article-count"
 import DistinctTags from "../components/distinct-tags"
 
 const IndexPage = ({ data }) => {
@@ -67,7 +65,6 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            summary
             date(formatString: "DD MMM")
           }
         }
