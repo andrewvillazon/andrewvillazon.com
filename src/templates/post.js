@@ -3,9 +3,9 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Link } from "gatsby"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDatabase } from '@fortawesome/free-solid-svg-icons'
-import { faGithub, faPython, faReact} from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faDatabase } from "@fortawesome/free-solid-svg-icons"
+import { faGithub, faPython, faReact } from "@fortawesome/free-brands-svg-icons"
 const _ = require("lodash")
 
 export default function BlogPost({ data }) {
@@ -13,30 +13,33 @@ export default function BlogPost({ data }) {
   const tags = post.frontmatter.tags
 
   const icons = {
-    "Github": faGithub,
-    "Python": faPython,
+    Github: faGithub,
+    Python: faPython,
     "SQL Server": faDatabase,
-    "Gatsby": faReact,
+    Gatsby: faReact,
   }
 
   return (
     <Layout>
-      <SEO title={post.frontmatter.title} description={post.excerpt} />
+      <SEO title={post.frontmatter.title} description={post.frontmatter.summary} />
       <section>
         <article>
           <div class="container">
             <header>
-              <h1>Automatically deploying a Gatsby site with Github Actions</h1>
+              <h1>{post.frontmatter.title}</h1>
               <p>
                 <time class="article-time">17 July, 2020</time>
               </p>
               <div class="flex article-tags">
                 {tags.map(tag => (
-                  <Link to={`/tags/${_.kebabCase(tag)}/`} className="tag"><FontAwesomeIcon icon={icons[tag]} />{tag}</Link>
+                  <Link to={`/tags/${_.kebabCase(tag)}/`} className="tag">
+                    <FontAwesomeIcon icon={icons[tag]} />
+                    {tag}
+                  </Link>
                 ))}
               </div>
             </header>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+            <div dangerouslySetInnerHTML={{ __html: post.html }} />
           </div>
         </article>
       </section>
