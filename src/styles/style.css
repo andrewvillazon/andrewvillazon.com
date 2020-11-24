@@ -358,6 +358,10 @@ section:last-of-type {
   margin-right: 0.5rem;
 }
 
+.tag:first-child {
+  margin-left: 0;
+}
+
 /* Article Formatting */
 
 /* Give some breathing room between nav and headers */
@@ -377,9 +381,7 @@ article img {
   font-size: 1rem;
 }
 
-.article-tags > .tag:first-child {
-  margin-left: 0;
-}
+
 
 .article-tags i {
   margin-right: 0.25rem;

@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostListing from "../components/post-listing"
 import { graphql, Link } from "gatsby"
+import DistinctTags from "../components/distinct-tags"
 const _ = require("lodash")
 
 const ArticlePage = ({ data }) => {
@@ -13,23 +14,17 @@ const ArticlePage = ({ data }) => {
         <Layout>
             <SEO title="Articles" />
             <section>
-                <h1>Articles</h1>
-                <div className="site-tags">
-                    {
-                        tags.map(tag => {
-                            return (
-                                <Link
-                                    to={`/tags/${_.kebabCase(tag.fieldValue)}/`}
-                                    key={tag.fieldValue}
-                                    className="tag"
-                                >{tag.fieldValue}</Link>
-                            )
-                        })
-                    }
+                <div className="container">
+                    <header>
+                        <h1>Articles</h1>
+                        <div className="flex">
+                            <DistinctTags/>
+                        </div>
+                    </header>
+                    <section>
+                        <PostListing postEdges={postEdges} />
+                    </section>
                 </div>
-                <section className="padding-top">
-                    <PostListing postEdges={postEdges} />
-                </section>
             </section>
         </Layout>
     )
@@ -45,6 +40,7 @@ export const query = graphql`
             id
             frontmatter {
                 title
+                summary
                 date(formatString:  "DD MMM")
             }
             fields {
