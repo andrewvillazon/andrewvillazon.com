@@ -99,7 +99,6 @@ ul {
 }
 
 blockquote,
-code,
 p,
 ul,
 ol {
@@ -193,6 +192,10 @@ pre {
   margin-bottom: 1.5rem;
   background: transparent;
   border-radius: .25rem;
+}
+
+pre.grvsc-container {
+  padding: 1.5rem 1rem;
 }
 
 code {
