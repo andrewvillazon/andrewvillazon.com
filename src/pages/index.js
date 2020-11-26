@@ -32,7 +32,7 @@ const IndexPage = ({ data }) => {
       {/* Latest Articles */}
       <section>
         <div class="container">
-          <h2>Latest Articles</h2>
+          <h2>Latest</h2>
           <PostListing postEdges={postEdges} />
         </div>
       </section>
