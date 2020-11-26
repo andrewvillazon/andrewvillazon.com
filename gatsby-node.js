@@ -29,6 +29,7 @@ exports.createPages = async ({ graphql, actions }) => {
             fields {
               slug
             }
+            fileAbsolutePath
           }
         }
       }
@@ -39,13 +40,38 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
     `)
+  
+  // Parse graphql data
+  const markdownContent = result.data.allMarkdownRemark.edges
+  
+  const tags = result.data.tagsGroup.group
+  const blogPosts = markdownContent.filter((post) => post.node.fileAbsolutePath.includes("content/blog"))
+  const sitePages = markdownContent.filter((page) => page.node.fileAbsolutePath.includes("content/site"))
+
+  // Templates to render data
+  const tagTemplate = path.resolve("src/templates/tag.js")
+  const blogPostTemplate = path.resolve("src/templates/post.js")
+  const pageTemplate = path.resolve("src/templates/site-content.js")
 
   // Create blog post pages
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  blogPosts.forEach(({ node }) => {
     createPage(
       {
         path: node.fields.slug,
-        component: path.resolve(`./src/templates/post.js`),
+        component: blogPostTemplate,
+        context: {
+          slug: node.fields.slug,
+        }
+      }
+    )
+  });
+
+  // Create content pages
+  sitePages.forEach(({ node }) => {
+    createPage(
+      {
+        path: node.fields.slug,
+        component: pageTemplate,
         context: {
           slug: node.fields.slug,
         }
@@ -54,10 +80,10 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // Create tag pages
-  result.data.tagsGroup.group.forEach(tag => {
+  tags.forEach(tag => {
     createPage({
       path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
-      component: path.resolve("src/templates/tag.js"),
+      component: tagTemplate,
       context: {
         tag: tag.fieldValue,
       },
