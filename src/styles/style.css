@@ -82,6 +82,11 @@ ul {
 a {
   text-decoration: none;
   font-weight: 600;
+  border-bottom: solid .25rem;
+}
+
+a.anchor.before {
+  border: none;
 }
 
 /* Reading elements */
@@ -313,6 +318,7 @@ section:last-of-type {
   margin: 0 1rem;
   font-size: 1.25rem;
   font-weight: 600;
+  border: none;
 }
 
 .nav-container a:first-child {
@@ -464,6 +470,7 @@ footer {
 
 .footer-nav nav a {
   margin: 0 0.5rem;
+  border: none;
 }
 
 .footer-nav nav a:first-child {
