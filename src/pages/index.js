@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import PostListing from "../components/post-listing"
 import DistinctTags from "../components/distinct-tags"
 
@@ -23,8 +23,8 @@ const IndexPage = ({ data }) => {
             over the years - a place to document those "Aha!" moments.
           </p>
           <p>
-            Feel free to read my <a href="#">posts</a> or{" "}
-            <a href="#">get in touch</a>.
+            Feel free to read my <Link to="/articles/">posts</Link> or{" "}
+            <Link to="/contact/">get in touch</Link>.
           </p>
         </div>
       </section>
