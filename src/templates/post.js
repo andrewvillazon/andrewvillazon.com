@@ -32,7 +32,7 @@ export default function BlogPost({ data }) {
               </p>
               <div class="flex article-tags">
                 {tags.map(tag => (
-                  <Link to={`/tags/${_.kebabCase(tag)}/`} className="tag">
+                  <Link to={`/tags/${_.kebabCase(tag)}/`} className={`tag ${_.kebabCase(tag)}`}>
                     <FontAwesomeIcon icon={icons[tag]} />
                     {tag}
                   </Link>

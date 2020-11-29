@@ -30,7 +30,7 @@ export default function DistinctTags() {
             tags.map(tag => (
                 <Link 
                 to={`/tags/${_.kebabCase(tag)}/`}
-                className="tag"
+                className={`tag ${_.kebabCase(tag)}`}
                 key={tag}><FontAwesomeIcon icon={icons[tag]} />{tag}</Link>
             ))
         }
