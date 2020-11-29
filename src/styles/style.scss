@@ -12,7 +12,7 @@ $color-hero-primary: lighten(black, 96);
 $color-hero-secondary: black;
 $color-hero-tertiary: #32ae85;
 
-$color-header-primary:  #404040;
+$color-header-primary: #404040;
 $color-header-secondary: lighten($color-header-primary, 65);
 
 $color-link-primary: #32ae85;
@@ -36,7 +36,6 @@ $color-callout-info-border-left: #0c5460;
 $font-family: "Inter", sans-serif;
 $font-family-code: "Menlo", monospace;
 $font-size-std: 1.125rem;
-
 
 *,
 ::before,
@@ -108,7 +107,7 @@ ul {
 a {
   text-decoration: none;
   font-weight: 600;
-  border-bottom: solid .25rem $color-link-primary;
+  border-bottom: solid 0.25rem $color-link-primary;
   color: $color-link-primary;
 }
 
@@ -140,9 +139,10 @@ table {
   margin-bottom: 2.5rem;
 }
 
-th, td {
+th,
+td {
   text-align: left;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 th {
@@ -219,7 +219,7 @@ pre {
   padding: 1rem;
   margin-bottom: 1.5rem;
   background: transparent;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 pre.grvsc-container {
@@ -247,8 +247,8 @@ code {
   font-weight: 700;
   font-size: 1rem;
   color: $color-text-primary;
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 
 /* Make code highlight extend all the way */
@@ -257,7 +257,7 @@ code {
 }
 
 kbd {
-  margin-right: .125rem;
+  margin-right: 0.125rem;
 }
 
 /**
@@ -271,49 +271,83 @@ kbd {
  */
 
 /* Base style, essential for every key. */
-kbd, .key {
-	display: inline;
-	display: inline-block;
-	min-width: 1em;
-	padding: .2em .3em;
-	font: normal 1rem "Lucida Grande", Lucida, Arial, sans-serif;
-	text-align: center;
-	text-decoration: none;
-	-moz-border-radius: .3em;
-	-webkit-border-radius: .3em;
-	border-radius: .3em;
-	border: none;
-	cursor: default;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
+kbd,
+.key {
+  display: inline;
+  display: inline-block;
+  min-width: 1em;
+  padding: 0.2em 0.3em;
+  font: normal 1rem "Lucida Grande", Lucida, Arial, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  -moz-border-radius: 0.3em;
+  -webkit-border-radius: 0.3em;
+  border-radius: 0.3em;
+  border: none;
+  cursor: default;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
-kbd[title], .key[title] {
-	cursor: help;
+kbd[title],
+.key[title] {
+  cursor: help;
 }
 
 /* Dark style for display on light background. This is the default style. */
-kbd, kbd.dark, .dark-keys kbd, .key, .key.dark, .dark-keys .key {
-	background: rgb(80, 80, 80);
-	background: -moz-linear-gradient(top, rgb(60, 60, 60), rgb(80, 80, 80));
-	background: -webkit-gradient(linear, left top, left bottom, from(rgb(60, 60, 60)), to(rgb(80, 80, 80)));
-	color: rgb(250, 250, 250);
-	text-shadow: -1px -1px 0 rgb(70, 70, 70);
-	-moz-box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
-	-webkit-box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
-	box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+kbd,
+kbd.dark,
+.dark-keys kbd,
+.key,
+.key.dark,
+.dark-keys .key {
+  background: rgb(80, 80, 80);
+  background: -moz-linear-gradient(top, rgb(60, 60, 60), rgb(80, 80, 80));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgb(60, 60, 60)),
+    to(rgb(80, 80, 80))
+  );
+  color: rgb(250, 250, 250);
+  text-shadow: -1px -1px 0 rgb(70, 70, 70);
+  -moz-box-shadow: inset 0 0 1px rgb(150, 150, 150),
+    inset 0 -0.05em 0.4em rgb(80, 80, 80), 0 0.1em 0 rgb(30, 30, 30),
+    0 0.1em 0.1em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 1px rgb(150, 150, 150),
+    inset 0 -0.05em 0.4em rgb(80, 80, 80), 0 0.1em 0 rgb(30, 30, 30),
+    0 0.1em 0.1em rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 1px rgb(150, 150, 150),
+    inset 0 -0.05em 0.4em rgb(80, 80, 80), 0 0.1em 0 rgb(30, 30, 30),
+    0 0.1em 0.1em rgba(0, 0, 0, 0.3);
 }
 
 /* Light style for display on dark background. */
-kbd.light, .light-keys kbd, .key.light, .light-keys .key {
-	background: rgb(250, 250, 250);
-	background: -moz-linear-gradient(top, rgb(210, 210, 210), rgb(255, 255, 255));
-	background: -webkit-gradient(linear, left top, left bottom, from(rgb(210, 210, 210)), to(rgb(255, 255, 255)));
-	color:  rgb(50, 50, 50);
-	text-shadow: 0 0 2px rgb(255, 255, 255);
-	-moz-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
-	-webkit-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
-	box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+kbd.light,
+.light-keys kbd,
+.key.light,
+.light-keys .key {
+  background: rgb(250, 250, 250);
+  background: -moz-linear-gradient(top, rgb(210, 210, 210), rgb(255, 255, 255));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgb(210, 210, 210)),
+    to(rgb(255, 255, 255))
+  );
+  color: rgb(50, 50, 50);
+  text-shadow: 0 0 2px rgb(255, 255, 255);
+  -moz-box-shadow: inset 0 0 1px rgb(255, 255, 255),
+    inset 0 0 0.4em rgb(200, 200, 200), 0 0.1em 0 rgb(130, 130, 130),
+    0 0.11em 0 rgba(0, 0, 0, 0.4), 0 0.1em 0.11em rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: inset 0 0 1px rgb(255, 255, 255),
+    inset 0 0 0.4em rgb(200, 200, 200), 0 0.1em 0 rgb(130, 130, 130),
+    0 0.11em 0 rgba(0, 0, 0, 0.4), 0 0.1em 0.11em rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 1px rgb(255, 255, 255),
+    inset 0 0 0.4em rgb(200, 200, 200), 0 0.1em 0 rgb(130, 130, 130),
+    0 0.11em 0 rgba(0, 0, 0, 0.4), 0 0.1em 0.11em rgba(0, 0, 0, 0.9);
 }
 
 /* Layout */
@@ -381,7 +415,7 @@ section:last-of-type {
 
 .introduction a {
   color: $color-hero-tertiary;
-  border-bottom: solid .25rem $color-hero-tertiary;
+  border-bottom: solid 0.25rem $color-hero-tertiary;
 }
 
 /* Post Listings */
@@ -444,13 +478,13 @@ section:last-of-type {
 }
 
 .tag.python {
-  background-color: #3773A5;
-  color: #FFD242; 
+  background-color: #3773a5;
+  color: #ffd242;
 }
 
 .tag.sql-server {
-  background-color: #909CA9;
-  color: #B71F25;
+  background-color: #909ca9;
+  color: #b71f25;
 }
 
 /* Article Formatting */
@@ -484,20 +518,20 @@ article img {
   padding: 1rem;
   margin-bottom: 1.5rem;
   border: 1px solid $color-callout-border;
-  border-left-width: .25rem;
-  border-radius: .25rem;
+  border-left-width: 0.25rem;
+  border-radius: 0.25rem;
   border-left-color: $color-callout-border-left;
   background-color: $color-callout-bg;
 }
 
 .call-out-warning {
   background-color: $color-callout-warning-bg;
-  border-left-color:  $color-callout-warning-border-left;
+  border-left-color: $color-callout-warning-border-left;
 }
 
 .call-out-info {
   background-color: $color-callout-info-bg;
-  border-left-color:$color-callout-info-border-left;
+  border-left-color: $color-callout-info-border-left;
 }
 
 .call-out p {
@@ -512,8 +546,6 @@ article img {
 .call-out p:last-of-type {
   margin-bottom: 0;
 }
-
-
 
 /* Footer */
 footer {
@@ -544,5 +576,5 @@ footer p {
   margin-top: 1rem;
   margin-bottom: 0;
   color: $color-text-tertiary;
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
