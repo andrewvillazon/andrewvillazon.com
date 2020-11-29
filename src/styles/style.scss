@@ -8,14 +8,14 @@ $color-text-primary: #404040;
 $color-text-secondary: lighten($color-text-primary, 15);
 $color-text-tertiary: lighten($color-text-primary, 30);
 
-$color-hero-primary: #0366ee;
-$color-hero-secondary: white;
-$color-hero-tertiary: rgb(255, 255, 255);
+$color-hero-primary: lighten(black, 96);
+$color-hero-secondary: black;
+$color-hero-tertiary: black;
 
 $color-header-primary:  #404040;
 $color-header-secondary: lighten($color-header-primary, 65);
 
-$color-link-primary: #0366ee;
+$color-link-primary: #404040;
 
 $color-tag-bg: lightgray;
 $color-tag-border: #404040;
