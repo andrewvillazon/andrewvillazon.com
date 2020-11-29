@@ -14,13 +14,13 @@ const Tags = ({ pageContext, data }) => {
   return (
     <Layout>
       <SEO
-        title={`Posts tagged as ${tag}`}
-        description={`Posts tagged as ${tag}`}
+        title={`Articles tagged as ${tag}`}
+        description={`Articles tagged as ${tag}`}
       />
       <div className="container">
         <header>
           <h1>
-            Posts tagged <u>{tag}</u> <span className="post-count">({totalPosts})</span>
+            Articles tagged <u>{tag}</u> <span className="post-count">({totalPosts})</span>
           </h1>
         </header>
         <section>
