@@ -1,6 +1,5 @@
 @import url("destyle.css");
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 $color-bg: white;
@@ -34,15 +33,10 @@ $color-callout-warning-border-left: #f0ad4e;
 $color-callout-info-bg: #d1ecf1;
 $color-callout-info-border-left: #0c5460;
 
+$font-family: "Inter", sans-serif;
+$font-family-code: "Menlo", monospace;
+$font-size-std: 1.125rem;
 
-
-:root {
-  --bg-color: #fff;
-  --font-color: #333;
-  --font-family: "Inter", sans-serif;
-  --code-font-family: "Menlo", monospace;
-  --std-font-size: 1.125rem;
-}
 
 *,
 ::before,
@@ -61,7 +55,7 @@ html {
 body {
   background-color: $color-bg;
   color: $color-text-primary;
-  font-family: var(--font-family);
+  font-family: $font-family;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
@@ -128,7 +122,7 @@ li,
 p,
 ol,
 ul {
-  font-size: var(--std-font-size);
+  font-size: $font-size-std;
 }
 
 blockquote,
@@ -234,7 +228,7 @@ pre.grvsc-container {
 
 code {
   font-size: 1rem;
-  font-family: var(--code-font-family);
+  font-family: $font-family-code;
 }
 
 /* Inline code block */
