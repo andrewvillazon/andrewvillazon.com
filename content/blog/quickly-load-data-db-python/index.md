@@ -254,7 +254,12 @@ Scheduling happens by creating a `Future` object with the `executor.submit()` me
 
 At this point, the work is *scheduled but not executed*.
 
-**What is a Future object?** A Future is a representation of some work to happen in the future. In this context, the future is a call to the `process_row()` method with some row data and the batch queue.
+<div class="call-out call-out-info">
+    <h4>What is a Future object?</h4>
+    <p>
+        A <strong>Future</strong> is a representation of some work to happen in the <em>future</em>. In this context, the future is a call to the <code>process_row()</code> method with some row data and the batch queue.
+    </p>
+</div>
 
 To execute the scheduled work, we use the method, `futures.as_completed()`, which takes a list (iterable) of futures and yields their result as they complete.
 
