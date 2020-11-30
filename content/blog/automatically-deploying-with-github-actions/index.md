@@ -4,6 +4,7 @@ date: "2020-07-17"
 tags:
 - Github
 - Gatsby
+- Site
 ---
 
 When I built this site a decision I made was taking care of the web hosting myself. The drawback of going DIY is you’ve got to do build and deployment yourself.

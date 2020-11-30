@@ -3,6 +3,7 @@ title: "Building my personal site in Gatsby without web development experience"
 date: "2020-07-01"
 tags:
     - Gatsby
+    - Site
 ---
 
 Earlier this year I wanted to try something a bit different and create a personal website. Before this project I had tinkered with HTML, CSS, and JavaScript but had no real web development experience.
