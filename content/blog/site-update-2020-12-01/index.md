@@ -42,7 +42,7 @@ I decided to tweak the layout and made the following changes:
 * Use [8pt grid](https://spec.fm/specifics/8-pt-grid), a design system that uses **multiples of 8** to define a site's dimensions. **8pt grid** works quite well and doesn't require too much thinking to get a consistent site layout.
 * Sticky Nav is gone. I like [Sticky Navs](https://www.w3schools.com/howto/howto_js_navbar_sticky.asp) on other sites, but here I don't think it adds much. 
 * Include useful links in the Footer.
-* Use a Dark Theme for code blocks to improve the separation of article text and code samples.
+* Use a [Dark Theme](https://github.com/sdras/night-owl-vscode-theme) for code blocks to improve the separation of article text and code samples.
 
 ## In the pipeline
 
