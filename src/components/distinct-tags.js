@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDatabase } from '@fortawesome/free-solid-svg-icons'
+import { faDatabase, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faPython, faReact} from "@fortawesome/free-brands-svg-icons"
 
 const _ = require("lodash");
@@ -22,6 +22,7 @@ export default function DistinctTags() {
         "Python": faPython,
         "SQL Server": faDatabase,
         "Gatsby": faReact,
+        Site: faInfoCircle,
     }
 
     return (
