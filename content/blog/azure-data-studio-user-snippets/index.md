@@ -38,3 +38,21 @@ Press <kbd>cmd + shift + p</kbd> (Windows: <kbd>ctrl + shift + p</kbd>) to open 
 <p><img src="DefaultSnippetsCommandPalette.gif" class="article-img" title="Default snippets in Azure Data Studio" alt="Default snippets in Azure Data Studio"></p>
 
 Let's take a look at creating our own snippets.
+
+## Creating custom user snippets
+
+ADS stores snippets in a **JSON file** for each language. To create a new (or edit existing) snippet file:
+1. Press <kbd>ctrl + shift + p</kbd> to open the Command Palette and search for the command **"Preferences: Configure User Snippets"**.
+2. Select (or type) **"sql"** from the list of languages and press <kbd>Enter</kbd>.
+3. ADS creates a new `sql.json` document with an empty **object** `{}` (curly braces). This object will contain any custom user snippets we define.
+
+<p><img src="NewSnippetsFile.gif" class="article-img" title="Default snippets in Azure Data Studio" alt="Default snippets in Azure Data Studio"></p>
+
+<div class="call-out call-out-info">
+    <h4>
+    Snippet scope
+    </h4>
+    <p>
+        Snippets are language-specific; for example, you won't see SQL snippets in the Intellisense if you work on a PowerShell script.
+    </p>
+</div>
