@@ -31,7 +31,7 @@ You can also press <kbd>ctrl + space</kbd> to see more detail about the snippet.
 
 #### From the Command Palette
 
-Alternatively, you can insert snippets from the C**ommand Palette**.
+Alternatively, you can insert snippets from the **Command Palette**.
 
 Press <kbd>cmd + shift + p</kbd> (Windows: <kbd>ctrl + shift + p</kbd>) to open the Command Palette and then choose **"Insert snippet"** to see the default snippets list.
 
