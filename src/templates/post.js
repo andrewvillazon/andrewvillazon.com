@@ -29,7 +29,7 @@ export default function BlogPost({ data }) {
             <header>
               <h1>{post.frontmatter.title}</h1>
               <p>
-                <time class="article-time">17 July, 2020</time>
+                <time class="article-time">{post.frontmatter.date}</time>
               </p>
               <div class="flex article-tags">
                 {tags.map(tag => (
