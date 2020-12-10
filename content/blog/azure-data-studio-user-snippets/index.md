@@ -56,3 +56,47 @@ ADS stores snippets in a **JSON file** for each language. To create a new (or ed
         Snippets are language-specific; for example, you won't see SQL snippets in the Intellisense if you work on a PowerShell script.
     </p>
 </div>
+
+### Create a new snippet
+
+To create a new snippet, we add a new snippet property and object to the document with the following syntax.
+
+```json
+{
+    "snippet name": {
+        "prefix": "abc",
+        "body": [
+            "line1", "line2", "etc"
+        ],
+        "description": "lorem ipsum"
+    }
+}
+```
+
+Snippet objects have the following properties:
+* `prefix` - a sequence of text that, when typed, will list the snippet in the Intellisense.
+* `body` - a list of the lines of code inserted when the snippet is triggered. Each item in this list represents a new line of code.
+* `description` - a short description of the snippet that appears in Intellisense.
+
+To create additional snippets, add more properties and objects separated by a comma.
+
+```json{8}
+{
+    "snippet one": {
+        "prefix": "abc",
+        "body": [
+            "line1", "line2", "etc"
+        ],
+        "description": "snippet one description"
+    },
+    "snippet two": {
+        "prefix": "xyz",
+        "body": [
+            "line1", "line2", "etc"
+        ],
+        "description": "snippet two description"
+    }
+}
+```
+
+Keep in mind that this is a JSON document, so JSON syntax and rules apply.
