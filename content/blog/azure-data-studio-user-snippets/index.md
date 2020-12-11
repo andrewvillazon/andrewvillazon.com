@@ -100,3 +100,31 @@ To create additional snippets, add more properties and objects separated by a co
 ```
 
 Keep in mind that this is a JSON document, so JSON syntax and rules apply.
+
+### But wait, there's more - Snippet features
+
+User snippets have particular constructs that can enhance the usefulness of the snippet.
+
+#### Tabstops
+
+Tabstops are cursor locations that you can place inside the body of a snippet. Each Tabstop includes a number indicating the order in which the cursor will be moved when pressing <kbd>tab</kbd>.
+
+The syntax for a Tabstop is: `$cursor_number`
+
+e.g., `$1`, `$2`, etc., with `$0` indicating the cursor's final position.
+
+Multiple occurrences of the same Tabstop number will be highlighted and updated together.
+
+```json{5-7}
+{
+    "Declare and set": {
+        "prefix": "dec",
+        "body": [
+            "DECLARE @$1 $2",
+            "SET @$1 = $3",
+            "$0"
+        ],
+        "description": "Declares and sets a variable."
+        }
+}
+```
