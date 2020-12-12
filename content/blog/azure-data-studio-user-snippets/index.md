@@ -128,3 +128,5 @@ Multiple occurrences of the same Tabstop number will be highlighted and updated 
         }
 }
 ```
+
+<p><img src="Tabstops.gif" class="article-img" title="Tabstops in a user snippet" alt="Tabstops in a user snippet"></p>
