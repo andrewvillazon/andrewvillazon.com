@@ -130,3 +130,22 @@ Multiple occurrences of the same Tabstop number will be highlighted and updated 
 ```
 
 <p><img src="Tabstops.gif" class="article-img" title="Tabstops in a user snippet" alt="Tabstops in a user snippet"></p>
+
+#### Placeholders
+
+Placeholders are **Tabstops** with default values: `${number:default}` e.g., `${1:MAX}`, `${1:GETDATE()}`
+
+```json{5}
+{
+    "Declare varchar": {
+        "prefix": "decv",
+        "body": [
+            "DECLARE @${1:name} VARCHAR(${2:MAX})",
+            "$0"
+        ],
+        "description": "DECLARE VARCHAR with default max"
+    }
+}
+```
+
+<p><img src="Placeholders.gif" class="article-img" title="Placeholders in a user snippet" alt="Placeholders in a user snippet"></p>
