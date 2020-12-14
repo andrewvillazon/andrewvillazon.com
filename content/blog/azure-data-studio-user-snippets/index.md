@@ -149,3 +149,23 @@ Placeholders are **Tabstops** with default values: `${number:default}` e.g., `${
 ```
 
 <p><img src="Placeholders.gif" class="article-img" title="Placeholders in a user snippet" alt="Placeholders in a user snippet"></p>
+
+#### Choices
+
+These are placeholders with a *list* of options instead of default text. Options are placed in between two pipe-characters ("|") and separated by a comma: `${number|opt_one,opt_two,opt_three|}`
+
+When you call the snippet, the options will appear as a drop-down of selectable values.
+
+```json
+{
+    "DATENAME choices": {
+        "prefix": "dn",
+        "body": [
+            "DATENAME (${1|DAY,WEEK,MONTH,YEAR|}, ${2:date})$0",
+        ],
+        "description": "DATENAME function with datepart as choices"
+    }
+}
+```
+
+<p><img src="Choices.gif" class="article-img" title="Choices placeholder in a user snippet" alt="Choices placeholder in a user snippet"></p>
