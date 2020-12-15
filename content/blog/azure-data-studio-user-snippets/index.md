@@ -169,3 +169,49 @@ When you call the snippet, the options will appear as a drop-down of selectable 
 ```
 
 <p><img src="Choices.gif" class="article-img" title="Choices placeholder in a user snippet" alt="Choices placeholder in a user snippet"></p>
+
+#### Variables
+
+User Snippets can include unique variables such as file or current time information. Like Tabstops, they are specified with a `$` (dollar sign) e.g. `$TM_FILENAME`
+
+```json
+{
+    "Dated line comment": {
+        "prefix": "lcd",
+        "body": [
+            "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE ${1:comment}$0",
+        ],
+        "description": "Line comment prefixed with current date"
+    }
+}
+```
+
+<p><img src="Variables.gif" class="article-img" title="Variables in a user snippet" alt="Variables in a user snippet"></p>
+
+Available variables:
+* `$TM_SELECTED_TEXT`: Selected text or an empty string if nothing selected
+* `$TM_CURRENT_LINE`: Everything in the current line
+* `$TM_CURRENT_WORD`: Contents of the word under the cursor or an empty string
+* `$TM_LINE_INDEX`: Index number of the line starting at 0
+* `$TM_LINE_NUMBER`: Index number of the line starting at 1
+* `$CLIPBOARD`: Contents of the clipboard
+* `$TM_FILENAME`: Filename of the current document
+* `$TM_FILENAME_BASE`: The filename of the current file without the file extension
+* `$TM_FILEPATH`: Full file path of the current file
+* `$TM_DIRECTORY`: Directory name of the current file
+* `$WORKSPACE_NAME`: Name of the opened workspace or folder
+* `$CURRENT_YEAR`: Current year
+* `$CURRENT_YEAR_SHORT`: Current year's last two digits, e.g., 20
+* `$CURRENT_MONTH`: Current month as two digits, e.g., 02
+* `$CURRENT_MONTH_NAME`: Full name of the current month, e.g., December
+* `$CURRENT_MONTH_NAME_SHORT`: Shortened form of the month name
+* `$CURRENT_DATE`: Day of the month
+* `$CURRENT_DAY_NAME`: Weekday name, e.g., Tuesday
+* `$CURRENT_DAY_NAME_SHORT`: Short weekday name, e.g., Tue
+* `$CURRENT_HOUR`: Hour of the current time (24-hour clock)
+* `$CURRENT_MINUTE`: Minute of the current time
+* `$CURRENT_SECOND`: Second of the current time
+* `$CURRENT_SECONDS_UNIX`: Number of seconds since the Unix epoch
+* `$BLOCK_COMMENT_START`: Block comment start in the language of the file
+* `$BLOCK_COMMENT_END`: Block comment end in the language of the file
+* `$LINE_COMMENT`: Line comment in the language of the file
