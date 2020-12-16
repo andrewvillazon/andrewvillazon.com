@@ -237,3 +237,60 @@ It's also possible to add some basic formatting with the `\t` tab escape charact
     }
 }
 ```
+
+## Examples
+
+Here is a selection of snippets I regularly use to give you an idea of what you can do.
+
+#### LIKE operator with wildcards
+
+This snippet inserts a `LIKE` operator with two percent `%` wildcards and the cursor placed between them.
+
+```json
+{
+    "Like with wildcards": {
+        "prefix": "ll",
+        "body": [
+            "LIKE '%${1:pattern}%'$0"
+        ],
+        "description": "LIKE operator with two wildcards and cursor in middle"
+    }
+}
+```
+
+#### DATEDIFF with choices
+
+With this snippet, we include (most of) the available date part options in the `DATEDIFF` function. This snippet saves hunting around online for the date part we need.
+
+```json
+{
+    "DATEDIFF options": {
+        "prefix": "dd",
+        "body": [
+            "${0:,}DATEDIFF(${1|SECOND,MINUTE,HOUR,DAY,WEEK,MONTH,YEAR|}, ${2:start}, ${3:end})"
+        ],
+        "description":"DATEDIFF with selectable dateparts"
+    }
+}
+```
+
+The same idea works with other functions such as `DATEADD` or `DATEPART`.
+
+#### Comment header or banner
+
+If I'm working on a large query with different sections, I find it useful to add a header or banner. This snippet helps ensure my headings are consistent each time.
+
+```json
+{
+    "Section header comment": {
+        "prefix": "header",
+        "body": [
+            "$BLOCK_COMMENT_START ===============================================================",
+            "${1:section title}",
+            "=============================================================== $BLOCK_COMMENT_END",
+            "$0",
+        ],
+        "description": "Header for a section or block of code"
+    }
+}
+```
