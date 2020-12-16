@@ -215,3 +215,25 @@ Available variables:
 * `$BLOCK_COMMENT_START`: Block comment start in the language of the file
 * `$BLOCK_COMMENT_END`: Block comment end in the language of the file
 * `$LINE_COMMENT`: Line comment in the language of the file
+
+#### Add indents with the tab escape character
+
+It's also possible to add some basic formatting with the `\t` tab escape character. This lets you apply your SQL style to the snippet.
+
+```json{6-9, 11-11}
+{
+    "List all tables": {
+        "prefix": "tables",
+        "body": [
+            "SELECT",
+            "\tTABLE_CATALOG",
+            "\t,TABLE_SCHEMA",
+            "\t,TABLE_NAME",
+            "\t,TABLE_TYPE",
+            "FROM",
+            "\tINFORMATION_SCHEMA.TABLES"
+        ],
+        "description": "List all tables for the current database"
+    }
+}
+```
