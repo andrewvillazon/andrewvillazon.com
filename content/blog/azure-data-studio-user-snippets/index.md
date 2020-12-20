@@ -5,13 +5,13 @@ tags:
     - SQL Server
 ---
 
-In a [previous post](/auzre-data-studio-tips-tricks/), we looked at various tips and tricks to help you be more productive in Azure Data Studio (ADS).
+In a [previous post](/auzre-data-studio-tips-tricks/), we looked at various tips and tricks to help you be more productive in [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15) (**ADS**).
 
-This post will take that productivity to the next level by exploring **user snippets** in ADS.
+This post will take that productivity to the next level by exploring **user snippets**.
 
 ## What are user snippets?
 
-User snippets are a feature of modern code editors that insert pre-defined code blocks with a trigger. User snippets let you write repetitive or routine code quicker and easier.
+**User snippets** are a feature of modern code editors that **insert pre-defined code blocks** with a **trigger**. User snippets let you write repetitive or routine code quicker and easier.
 
 ## User Snippets in Azure Data Studio
 
@@ -21,7 +21,7 @@ There are two ways to access the default snippets:
 
 #### Access snippets from the text editor
 
-To access the default snippets from the text editor, start typing **"sql"**
+To access the default snippets from the text editor, start typing **sql**
 
 When you do this, you should see the list of snippets appear in the **Intellisense**. Pressing <kbd>Tab</kbd> or <kbd>Enter</kbd> will insert that snippet into the text editor. 
 
@@ -42,7 +42,7 @@ Let's take a look at creating our own snippets.
 ## Creating custom user snippets
 
 ADS stores snippets in a **JSON file** for each language. To create a new (or edit existing) snippet file:
-1. Press <kbd>ctrl + shift + p</kbd> to open the Command Palette and search for the command **"Preferences: Configure User Snippets"**.
+1. Press <kbd>ctrl + shift + p</kbd> (Windows: <kbd>ctrl + shift + p</kbd>) to open the Command Palette and search for the command **"Preferences: Configure User Snippets"**.
 2. Select (or type) **"sql"** from the list of languages and press <kbd>Enter</kbd>.
 3. ADS creates a new `sql.json` document with an empty **object** `{}` (curly braces). This object will contain any custom user snippets we define.
 
@@ -66,7 +66,9 @@ To create a new snippet, we add a new snippet property and object to the documen
     "snippet name": {
         "prefix": "abc",
         "body": [
-            "line1", "line2", "etc"
+            "line1",
+            "line2",
+            "etc"
         ],
         "description": "lorem ipsum"
     }
@@ -80,26 +82,30 @@ Snippet objects have the following properties:
 
 To create additional snippets, add more properties and objects separated by a comma.
 
-```json{8}
+```json{10}
 {
     "snippet one": {
         "prefix": "abc",
         "body": [
-            "line1", "line2", "etc"
+            "line1",
+            "line2",
+            "etc"
         ],
         "description": "snippet one description"
     },
     "snippet two": {
         "prefix": "xyz",
         "body": [
-            "line1", "line2", "etc"
+            "line1",
+            "line2",
+            "etc"
         ],
         "description": "snippet two description"
     }
 }
 ```
 
-Keep in mind that this is a JSON document, so JSON syntax and rules apply.
+Keep in mind that this is a **JSON document**, so [JSON syntax](https://www.w3schools.com/js/js_json_syntax.asp) and rules apply.
 
 ### But wait, there's more - Snippet features
 
@@ -107,13 +113,13 @@ User snippets have particular constructs that can enhance the usefulness of the 
 
 #### Tabstops
 
-Tabstops are cursor locations that you can place inside the body of a snippet. Each Tabstop includes a number indicating the order in which the cursor will be moved when pressing <kbd>tab</kbd>.
+Tabstops are cursor locations that you can place inside the body of a snippet. Each Tabstop includes a **number** indicating the order in which the cursor will be moved when pressing <kbd>tab</kbd>.
 
 The syntax for a Tabstop is: `$cursor_number`
 
 e.g., `$1`, `$2`, etc., with `$0` indicating the cursor's final position.
 
-Multiple occurrences of the same Tabstop number will be highlighted and updated together.
+Multiple occurrences of the same Tabstop number **will be highlighted and updated together**.
 
 ```json{5-7}
 {
@@ -133,7 +139,7 @@ Multiple occurrences of the same Tabstop number will be highlighted and updated 
 
 #### Placeholders
 
-Placeholders are **Tabstops** with default values: `${number:default}` e.g., `${1:MAX}`, `${1:GETDATE()}`
+Placeholders are Tabstops with **default values**: `${number:default}` e.g., `${1:MAX}`, `${1:GETDATE()}`
 
 ```json{5}
 {
@@ -152,9 +158,9 @@ Placeholders are **Tabstops** with default values: `${number:default}` e.g., `${
 
 #### Choices
 
-These are placeholders with a *list* of options instead of default text. Options are placed in between two pipe-characters ("|") and separated by a comma: `${number|opt_one,opt_two,opt_three|}`
+These are placeholders with a *list* of options instead of default text. Options are placed in between two pipe-characters, `|`, and separated by a comma: `${number|opt_one,opt_two,opt_three|}`
 
-When you call the snippet, the options will appear as a drop-down of selectable values.
+When you call the snippet, the options will appear as a **drop-down** of selectable values.
 
 ```json
 {
@@ -196,7 +202,7 @@ Available variables:
 * `$TM_LINE_NUMBER`: Index number of the line starting at 1
 * `$CLIPBOARD`: Contents of the clipboard
 * `$TM_FILENAME`: Filename of the current document
-* `$TM_FILENAME_BASE`: The filename of the current file without the file extension
+* `$TM_FILENAME_BASE`: The filename of the current file **without** the file extension
 * `$TM_FILEPATH`: Full file path of the current file
 * `$TM_DIRECTORY`: Directory name of the current file
 * `$WORKSPACE_NAME`: Name of the opened workspace or folder
@@ -297,7 +303,7 @@ If I'm working on a large query with different sections, I find it useful to add
 
 ## Whole queries
 
-Lastly, snippets aren't just limited to small code blocks. You can use them to insert partial or complete queries with tables, joins, and columns specific to your database.
+Lastly, snippets aren't just limited to small code blocks. You can use them to insert **partial** or **complete queries** with tables, joins, and columns specific to your database.
 
 Capturing whole queries, joins, or clusters of columns as snippets can speed up writing ad-hoc, repetitive queries.
 
@@ -313,7 +319,7 @@ However, if you work with a database schema that is continually changing, it can
 
 ## Conclusion
 
-The utility of user snippets comes from quickly inserting code and the ability to customize them to your particular database(s). As we've seen, snippets are a useful tool that takes the hassle out of repetitive code.
+As we've seen, snippets are a useful tool that takes the hassle out of repetitive code. The utility of user snippets comes from quickly inserting code and the ability to customize them to your particular database(s).
 
 Investing time in snippets pays off with improved productivity. Hopefully, this article has got you thinking about developing your own snippets!
 
