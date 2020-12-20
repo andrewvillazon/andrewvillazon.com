@@ -316,3 +316,9 @@ However, if you work with a database schema that is continually changing, it can
 The utility of user snippets comes from quickly inserting code and the ability to customize them to your particular database(s). As we've seen, snippets are a useful tool that takes the hassle out of repetitive code.
 
 Investing time in snippets pays off with improved productivity. Hopefully, this article has got you thinking about developing your own snippets!
+
+### Further Reading
+
+* [Snippets in Visual Studio Code](https://code.visualstudio.com/docs/editor/userdefinedsnippets) (VSCode and Azure Data Studio share the same code base)
+* Gif recording via [LICEcap](https://www.cockos.com/licecap/)
+* [Demo Database](https://www.brentozar.com/archive/2015/10/how-to-download-the-stack-overflow-database-via-bittorrent/)
