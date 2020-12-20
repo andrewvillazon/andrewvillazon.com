@@ -1,6 +1,6 @@
 ---
 title: "Supercharge writing SQL with user snippets in Azure Data Studio"
-date: "2020-12-16"
+date: "2020-12-20"
 tags:
     - SQL Server
 ---
