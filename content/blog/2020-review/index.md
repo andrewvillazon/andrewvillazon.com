@@ -20,7 +20,7 @@ In reverse chronological order:
 * [Azure Data Studio tips and tricks](/auzre-data-studio-tips-tricks/)
 * [Validate YAML in Python with Schema](/validate-yaml-python-schema/)
 * [Parse delimited values in SQL Server with STRING_SPLIT](/sql-server-string-split/)
-* [Useful SQL Server functions: TRY_CAST & TRY_CONVERT](/sql-server-try-cast-convert/)
+* [Useful SQL Server functions: TRY\_CAST & TRY\_CONVERT](/sql-server-try-cast-convert/)
 * [Move data to a Database with Python: Pandas](/move-data-to-db-with-pandas/)
 * [Move data to a Database with Python: SQLAlchemy](/move-data-to-db-with-sqlalchemy/)
 * [Move data to a Database with Python: Pure Python](/move-data-to-db-with-pure-python/)
