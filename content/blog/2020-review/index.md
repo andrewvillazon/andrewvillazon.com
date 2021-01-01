@@ -53,7 +53,7 @@ It took some time to make useful but I'm pleased with the result. I can create [
 
 A quick glimpse of what's planned for 2021.
 
-Article ideas
+## Article ideas
 
 I've got a lot of topics I'd like to write about but here's a selection:
 
@@ -62,7 +62,7 @@ I've got a lot of topics I'd like to write about but here's a selection:
 * **Partitioning on a sequence of values in SQL:** How we can use SQL to group on a sequence of values. Also known as the gaps and islands problem.
 * **Snippets:** Small code samples or patterns that I use regularly.
 
-Site improvements
+## Site improvements
 
 * **Dark mode:** Toggle that switches the site colors from light to dark. Dark mode will give me an excuse to explore the [React Context API](https://www.gatsbyjs.com/blog/2019-01-31-using-react-context-api-with-gatsby/) and learn even more JavaScript.
 * **MDX:** [Markdown](****) is doing a good job, but there are a few limitations. With [MDX](https://www.gatsbyjs.com/docs/how-to/routing/mdx/), I should be able to make more of the site reuseable.
