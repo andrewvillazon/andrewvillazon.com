@@ -7,7 +7,7 @@ tags:
 
 With 2020 over it's time to take stock of the year that was.
 
-# 12 Articles
+## 12 Articles
 
 When I started this site in July, I set a goal to write ten articles, so I'm happy to have written twelve (excluding site updates). Roughly two a month.
 
@@ -28,13 +28,13 @@ In chronological order:
 * [Automatically deploying a Gatsby site with Github Actions](/automatically-deploying-with-github-actions/)
 * [Building my personal site in Gatsby without web development experience](/building-my-personal-site-in-gatsby/)
 
-# Publishing cadence
+## Publishing cadence
 
 I set an initial goal to publish at a rate of every two weeks. Looking back, an article every two weeks was a little ambitious. 
 
 Every three to four weeks seems to be the sweet spot. Three to four weeks is enough time without feeling the need to resort to content for content's sake.
 
-# Plan, code, write.
+## Plan, code, write.
 
 My content creation process is still developing, but this workflow has been helpful:
 
@@ -43,17 +43,17 @@ My content creation process is still developing, but this workflow has been help
 * **Write:** At this point all that's left to do is write!
 
 
-# Gatsby FTW!
+## Gatsby FTW!
 
 [Gatsby](https://www.gatsbyjs.com/) is my static site generator of choice. It's hard not to love the fantastic speed a Gatsby site has.
 
 It took some time to make useful but I'm pleased with the result. I can create [pages and posts from Markdown](https://www.gatsbyjs.com/docs/tutorial/part-seven/) and use [Github actions]((/automatically-deploying-with-github-actions/)) to automate deployment.
 
-# 2021
+## 2021
 
 A quick glimpse of what's planned for 2021.
 
-## Article ideas
+### Article ideas
 
 I've got a lot of topics I'd like to write about but here's a selection:
 
@@ -62,13 +62,13 @@ I've got a lot of topics I'd like to write about but here's a selection:
 * **Partitioning on a sequence of values in SQL:** How we can use SQL to group on a sequence of values. Also known as the gaps and islands problem.
 * **Snippets:** Small code samples or patterns that I use regularly.
 
-## Site improvements
+### Site improvements
 
 * **Dark mode:** Toggle that switches the site colors from light to dark. Dark mode will give me an excuse to explore the [React Context API](https://www.gatsbyjs.com/blog/2019-01-31-using-react-context-api-with-gatsby/) and learn even more JavaScript.
 * **MDX:** [Markdown](****) is doing a good job, but there are a few limitations. With [MDX](https://www.gatsbyjs.com/docs/how-to/routing/mdx/), I should be able to make more of the site reuseable.
 * **Upgrade to the latest Gatsby**
 
-# Summing up
+## Summing up
 
 The big takeaways from 2020, for me, came from starting and working on this blog. It's been time consuming but also rewarding.
 
