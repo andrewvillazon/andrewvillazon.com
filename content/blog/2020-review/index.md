@@ -5,11 +5,11 @@ tags:
     - Site
 ---
 
-With 2020 over it's time to take stock of the year that was.
+With **2020** over it's time to take stock of the year that was.
 
 ## 12 Articles
 
-When I started this site in July, I set a goal to write ten articles, so I'm happy to have written twelve (excluding site updates). Roughly two a month.
+When I started this site in **July**, I set a goal to write ten articles, so I'm happy to have written twelve (excluding site updates). Roughly two a month.
 
 I intended to only write about [SQL](/tags/sql-server/) and [Python](/tags/python/) but branched into [Gatsby](/tags/gatsby/) and [Github](/tags/github/).
 
@@ -51,7 +51,7 @@ It took some time to make useful but I'm pleased with the result. I can create [
 
 ## 2021
 
-A quick glimpse of what's planned for 2021.
+A quick glimpse of what's planned for **2021**.
 
 ### Article ideas
 
@@ -72,6 +72,6 @@ I've got a lot of topics I'd like to write about but here's a selection:
 
 The big takeaways from 2020, for me, came from starting and working on this blog. It's been time consuming but also rewarding.
 
-If you're thinking about it or on the fence, take the leap!
+If you're thinking about it or on the fence, **take the leap!**
 
 Thanks for reading in 2020.
