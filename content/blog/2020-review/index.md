@@ -9,7 +9,7 @@ With 2020 over it's time to take stock of the year that was.
 
 # 12 Articles
 
-When I started this site in July, I set a goal to write ten articles, so I'm happy to have written 12 (excluding site updates). Roughly two a month.
+When I started this site in July, I set a goal to write ten articles, so I'm happy to have written twelve (excluding site updates). Roughly two a month.
 
 I intended to only write about SQL Server and Python but branched into Gatsby and Github.
 
