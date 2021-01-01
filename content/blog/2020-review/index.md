@@ -13,7 +13,7 @@ When I started this site in July, I set a goal to write ten articles, so I'm hap
 
 I intended to only write about [SQL](/tags/sql-server/) and [Python](/tags/python/) but branched into [Gatsby](/tags/gatsby/) and [Github](/tags/github/).
 
-In chronological order:
+In reverse chronological order:
 
 * [Supercharge writing SQL with user snippets in Azure Data Studio](/azure-data-studio-user-snippets/)
 * [Use Python to quickly load lots of data to a Database](/quickly-load-data-db-python/)
