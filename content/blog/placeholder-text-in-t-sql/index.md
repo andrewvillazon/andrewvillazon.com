@@ -256,3 +256,11 @@ The final result is a string populated with our values. Pretty neat, right?
 ```
 USE WideWorldImporters; SELECT * FROM Warehouse.PackageTypes;
 ```
+
+## Conclusion
+
+While SQL isn't exactly known for its string processing abilities, here we've explored three different ways to achieve String Interpolation. These approaches can make complicated string construction cleaner, reusable, and easier to maintain.
+
+Next time you've got a complex string to build, give them a try.
+
+### Further reading
