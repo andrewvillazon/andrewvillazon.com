@@ -1,5 +1,5 @@
 ---
-title: "Placeholder text in T-SQL"
+title: "Placeholder text (String Interpolation) in T-SQL"
 date: "2021-01-23"
 tags:
     - SQL Server
@@ -175,4 +175,84 @@ SELECT FORMATMESSAGE(21821, 'Something', 'Some other thing');
 
 ```
 Specify one and only one of the parameters - Something or Some other thing.
+```
+
+## Using the Replace function
+
+This final method comes from Stefan Hoffmann via the MSDN forum and replicates String Interpolation functionality found in programming languages. It cleverly combines variable assignment with the `REPLACE` function.
+
+Let's see how it works.
+
+```sql
+DECLARE @stmt_with_placeholders NVARCHAR(MAX) = 'USE {database}; SELECT * FROM {schema}.{table};'
+DECLARE @stmt_processed NVARCHAR(MAX) = @stmt_with_placeholders
+
+DECLARE @placeholders TABLE (
+    placeholder NVARCHAR(20)
+    ,replacement_text NVARCHAR(200)
+)
+
+INSERT INTO @placeholders
+VALUES
+('{database}', 'WideWorldImporters'),
+('{schema}', 'Warehouse'),
+('{table}', 'PackageTypes')
+
+SELECT
+    @stmt_processed = REPLACE(@stmt_processed, 
+                            placeholder_values.placeholder,
+                            placeholder_values.replacement_text)
+FROM
+    @placeholders as placeholder_values
+
+SELECT @stmt_processed
+
+EXEC (@stmt_processed)
+```
+
+First, we create a string with placeholders. Because this method uses the `REPLACE` function, we can define the placeholders however we like. In this example, I've reproduced the string formatting syntax from Python, i.e., using curly braces.
+
+For this to work correctly requires another variable (`@stmt_processed`), which is assigned the value of `@stmt_with_placeholders`.
+
+```sql{2}
+DECLARE @stmt_with_placeholders NVARCHAR(MAX) = 'USE {database}; SELECT * FROM {schema}.{table};'
+DECLARE @stmt_processed NVARCHAR(MAX) = @stmt_with_placeholders
+```
+
+Then we create a table variable that stores the placeholders and their replacement values.
+
+```sql
+DECLARE @placeholders TABLE (
+    placeholder NVARCHAR(20)
+    ,replacement_text NVARCHAR(200)
+)
+
+INSERT INTO @placeholders
+VALUES
+('{database}', 'WideWorldImporters'),
+('{schema}', 'Warehouse'),
+('{table}', 'PackageTypes')
+```
+
+All that's needed then is to process the placeholders. 
+
+We do this by querying the placeholder table. As the SQL engine moves through each record, the corresponding placeholder is searched and replaced using the `REPLACE` function. 
+
+```sql
+SELECT
+    @stmt_processed = REPLACE(@stmt_processed, 
+                            placeholder_values.placeholder,
+                            placeholder_values.replacement_text)
+FROM
+    @placeholders as placeholder_values
+
+SELECT @stmt_processed
+
+EXEC (@stmt_processed)
+```
+
+The final result is a string populated with our values. Pretty neat, right?
+
+```
+USE WideWorldImporters; SELECT * FROM Warehouse.PackageTypes;
 ```
