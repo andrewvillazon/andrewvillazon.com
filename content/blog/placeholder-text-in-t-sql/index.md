@@ -96,3 +96,83 @@ EXEC (@stmt)
 * It's error messages are somewhat cryptic and unhelpful.
 
 With these limitations in mind, let's look at another option.
+
+## FORMATMESSAGE
+
+`FORMATMESSAGE` comes from the family of system functions. It's intended purpose is to combine system messages with data. However, it can also take a `msg_string` that includes placeholders.
+
+The syntax of `FORMATMESSAGE` is like this:
+
+```
+FORMATMESSAGE('text with placeholders', val_1, val_2, etc...)
+```
+
+To use `FORMATMESSAGE`, call it like a regular function.
+
+```sql
+SELECT
+    FORMATMESSAGE(N'USE %s; SELECT TOP %i * FROM %s.%s;',
+                'WideWorldImporters',
+                3,
+                'Warehouse',
+                'PackageTypes')
+```
+
+```
+USE WideWorldImporters; SELECT TOP 3 * FROM Warehouse.PackageTypes;
+```
+
+`FORMATMESSAGE` works with variables, which allows us to reuse placeholder text.
+
+```sql
+DECLARE @text_with_placeholders VARCHAR(MAX) = N'SELECT * FROM %s.%s.%s'
+DECLARE @text_filled VARCHAR(MAX)
+
+DECLARE @db VARCHAR(50) = 'WideWorldImporters'
+DECLARE @schema VARCHAR(50) = 'Warehouse'
+DECLARE @table VARCHAR(50) = 'PackageTypes'
+
+SET @text_filled = FORMATMESSAGE(@text_with_placeholders,
+                                @db,
+                                @schema,
+                                @table)
+
+EXEC(@text_filled)
+
+```
+
+`FORMATMESSAGE` also supports formatting based (generally) on the C programming language's `printf` function. As a result, formatting rules can be included with a placeholder.
+
+```sql
+SELECT FORMATMESSAGE('Integer with 5 leading zeros: %05i', 20)
+SELECT FORMATMESSAGE('10 characters of white space padding: %10s!', 'Foo')
+```
+
+```
+Integer with 5 leading zeros: 00020
+10 characters of white space padding:        Foo!
+```
+
+A more comprehensive list of the formatting rules is available in the `FORMATMESSAGE` documentation.
+
+#### Side note: What is FORMATMESSAGE?
+
+As mentioned earlier, `FORMATMESSAGE` combines system messages with data. These messages exist in the `sys.messages` System catalog view.
+
+You can view the messages via the following query:
+
+```sql
+SELECT * FROM sys.messages
+```
+
+Note how the `text` column contains a text message and placeholders. Looking closer at this result set, you're likely to see error messages you regularly encounter in SQL Server.
+
+You can populate the message with values by calling `FORMATMESSAGE` with a `message_id` from `sys.messages`. You'll only be able to call messages with an id above 13000, a limitation of `FORMATMESSAGE`—a `message_id` 13000 or less results in `NULL`.
+
+```sql
+SELECT FORMATMESSAGE(21821, 'Something', 'Some other thing');
+```
+
+```
+Specify one and only one of the parameters - Something or Some other thing.
+```
