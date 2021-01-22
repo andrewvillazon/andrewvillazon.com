@@ -44,7 +44,7 @@ SELECT @stmt
 
 We call the procedure with the `EXEC` statement and pass it a variable of `VARCHAR` type. Including the `OUTPUT` keyword *outputs* the result of the stored procedure to the variable `@stmt`. 
 
-After this, we provide a string that contains placeholders. We identify placeholders with `%s` We follow with the values that correspond to our placeholders. `xp_sprintf` **places the values in the order provided**.
+After this, we provide a string that contains placeholders. We identify placeholders with `%s` and follow with the values corresponding to our placeholders. `xp_sprintf` **places the values in the order provided**.
 
 The result is a string where the provided values replace the placeholders.
 
