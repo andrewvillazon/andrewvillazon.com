@@ -6,7 +6,7 @@ tags:
 ---
 If you've ever written SQL that uses a lot of [string concatenation](https://docs.microsoft.com/en-us/sql/t-sql/functions/concat-transact-sql?view=sql-server-2016), you might have wondered if there's a different way to combine strings and data. There is—something I call **Placeholder Text**, and in this post, we'll look at three methods for utilizing Placeholder Text in T-SQL (SQL Server).
 
-What do I mean by Placeholder Text? In programming, it's sometimes referred to as [String Interpolation](https://en.wikipedia.org/wiki/String_interpolation), Templating, or Format Strings. String Interpolation is a fancy term for a process that takes a string containing placeholders and replaces those with values.
+What do I mean by Placeholder Text? In programming, it's sometimes referred to as [String Interpolation](https://en.wikipedia.org/wiki/String_interpolation), **Templating**, or **Format Strings**. String Interpolation is a fancy term for a process that takes a string containing placeholders and replaces those with values.
 
 One of the useful applications of Placeholder Text is [Dynamic SQL](https://docs.microsoft.com/en-us/sql/odbc/reference/dynamic-sql?view=sql-server-ver15) (SQL constructed at execution time). Dynamic SQL often involves creating queries by combining strings of SQL code with data from the database.
 
@@ -40,11 +40,17 @@ EXEC xp_sprintf @stmt OUTPUT,
                 'PackageTypes'
 
 SELECT @stmt
-
-EXEC (@stmt);
 ```
 
-We call the procedure with the `EXEC` statement and pass it a variable of `VARCHAR` type. Including the `OUTPUT` keyword *outputs* the result of the stored procedure to the variable `@stmt`. We follow this with the values that correspond to our placeholders. `xp_sprintf` **places the values in the order provided**.
+We call the procedure with the `EXEC` statement and pass it a variable of `VARCHAR` type. Including the `OUTPUT` keyword *outputs* the result of the stored procedure to the variable `@stmt`. 
+
+After this, we provide a string that contains placeholders. We identify placeholders with `%s` We follow with the values that correspond to our placeholders. `xp_sprintf` **places the values in the order provided**.
+
+The result is a string where the provided values replace the placeholders.
+
+```
+USE WideWorldImporters; SELECT * FROM Warehouse.PackageTypes;
+```
 
 We can also achieve the same result using variables. Putting our placeholder text in a variable lets us reuse it with different values and cuts down on repeated code.
 
@@ -200,10 +206,10 @@ VALUES
 
 SELECT
     @stmt_processed = REPLACE(@stmt_processed, 
-                            placeholder_values.placeholder,
-                            placeholder_values.replacement_text)
+                            placeholders.placeholder,
+                            placeholders.replacement_text)
 FROM
-    @placeholders as placeholder_values
+    @placeholders as placeholders
 
 SELECT @stmt_processed
 
@@ -241,10 +247,10 @@ We do this by querying the placeholder table. As the SQL engine moves through ea
 ```sql
 SELECT
     @stmt_processed = REPLACE(@stmt_processed, 
-                            placeholder_values.placeholder,
-                            placeholder_values.replacement_text)
+                            placeholders.placeholder,
+                            placeholders.replacement_text)
 FROM
-    @placeholders as placeholder_values
+    @placeholders as placeholders
 
 SELECT @stmt_processed
 
