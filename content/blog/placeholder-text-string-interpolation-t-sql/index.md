@@ -150,12 +150,12 @@ EXEC(@text_filled)
 `FORMATMESSAGE` also supports **formatting** based (generally) on the C programming language's `printf` [function](https://en.wikipedia.org/wiki/Printf_format_string). As a result, [formatting rules](https://alvinalexander.com/programming/printf-format-cheat-sheet/) can be included with a placeholder.
 
 ```sql
-SELECT FORMATMESSAGE('Integer with 5 leading zeros: %05i', 20)
+SELECT FORMATMESSAGE('Integer with leading zeros: %05i', 2)
 SELECT FORMATMESSAGE('10 characters of white space padding: %10s!', 'Foo')
 ```
 
 ```
-Integer with 5 leading zeros: 00020
+Integer with leading zeros: 00002
 10 characters of white space padding:        Foo!
 ```
 
