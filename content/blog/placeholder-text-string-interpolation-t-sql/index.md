@@ -6,7 +6,7 @@ tags:
 ---
 If you've ever written SQL that uses a lot of [string concatenation](https://docs.microsoft.com/en-us/sql/t-sql/functions/concat-transact-sql?view=sql-server-2016), you might have wondered if there's a different way to combine strings and data. There is—something I call **Placeholder Text**, and in this post, we'll look at three methods for utilizing Placeholder Text in T-SQL (SQL Server).
 
-What do I mean by Placeholder Text? In programming, it's sometimes referred to as [String Interpolation](https://en.wikipedia.org/wiki/String_interpolation), **Templating**, or **Format Strings**. String Interpolation is a fancy term for a process that takes a string containing placeholders and replaces those with values.
+What do I mean by Placeholder Text? In programming, it's sometimes referred to as [String Interpolation](https://en.wikipedia.org/wiki/String_interpolation), **Templating**, or **Format Strings**. String Interpolation is a fancy term for a process that takes a string containing placeholders and replaces the placeholders with values.
 
 One of the useful applications of Placeholder Text is [Dynamic SQL](https://docs.microsoft.com/en-us/sql/odbc/reference/dynamic-sql?view=sql-server-ver15) (SQL constructed at execution time). Dynamic SQL often involves creating queries by combining strings of SQL code with data from the database.
 
