@@ -46,3 +46,9 @@ Gaps - rows where a row value does not sequentially follow another...
 17
 22
 ```
+
+## Identifying Gaps
+
+To identify Gaps, we need to determine where a sequence ends, and another begins. In between these points are where a gap starts and ends.
+
+In general, each approach compares the current row with the next row to determine if it's the next value in the sequence. If it isn't, then we've found a gap.
