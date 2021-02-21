@@ -159,3 +159,161 @@ WHERE
 | 13         | 19       |
 | 21         | 24       |
 ```
+
+### With the ROW_NUMBER function
+
+The approaches that follow come from the excellent book SQL Server MVP Deep Dives. Chapter 5 of the book is dedicated to the Gaps and Islands problem and is well worth a read.
+
+This approach leverages a Common Table Expression (CTE) joined to itself to create a result set of the current row and next row. Like the above approach, we compare the current row and the next row to identify a gap.
+
+First, we'll create a CTE of the rows and their row number.
+
+```sql{8,9}
+/* Data setup */
+
+;
+WITH current_row AS
+(
+SELECT
+    num_sequence.value_of_interest
+    ,ROW_NUMBER() 
+        OVER(ORDER BY num_sequence.value_of_interest) as row_num
+FROM
+    @sequences as num_sequence
+)
+SELECT
+    value_of_interest
+    ,row_num
+FROM
+    current_row;
+```
+
+```
+| value_of_interest | row_num |
+|-------------------|---------|
+| 1                 | 1       |
+| 2                 | 2       |
+| 3                 | 3       |
+| 6                 | 4       |
+| 7                 | 5       |
+| 9                 | 6       |
+| 11                | 7       |
+| 12                | 8       |
+| 20                | 9       |
+| 25                | 10      |
+```
+
+To get the current row and the next row, we join the CTE to itself based on the row number plus one.
+
+```sql{18-19}
+/* Data setup */
+
+;
+WITH current_row AS
+(
+SELECT
+    num_sequence.value_of_interest
+    ,ROW_NUMBER() 
+        OVER(ORDER BY num_sequence.value_of_interest) as row_num
+FROM
+    @sequences as num_sequence
+)
+SELECT
+    current_row.value_of_interest
+    ,next_row.value_of_interest as next_row_value
+FROM
+    current_row
+        INNER JOIN current_row as next_row
+            ON next_row.row_num = current_row.row_num + 1
+;
+```
+
+```
+| value_of_interest | next_row_value |
+|-------------------|----------------|
+| 1                 | 2              |
+| 2                 | 3              |
+| 3                 | 6              |
+| 6                 | 7              |
+| 7                 | 9              |
+| 9                 | 11             |
+| 11                | 12             |
+| 12                | 20             |
+| 20                | 25             |
+```
+
+To identify where a sequence ended, we subtract the current row from the next row. When the sequence ends, the result of the subtraction is greater than one.
+
+As we did in the previous solution, we isolate the sequence ends and starts by placing the subtraction in the `WHERE` clause.
+
+```sql{21}
+/* Data setup */
+
+;
+WITH current_row AS
+(
+SELECT
+    num_sequence.value_of_interest
+    ,ROW_NUMBER() 
+        OVER(ORDER BY num_sequence.value_of_interest) as row_num
+FROM
+    @sequences as num_sequence
+)
+SELECT
+    current_row.value_of_interest as sequence_ended
+    ,next_row.value_of_interest as sequence_began
+FROM
+    current_row
+        INNER JOIN current_row as next_row
+            ON next_row.row_num = current_row.row_num + 1
+WHERE
+    next_row.value_of_interest - current_row.value_of_interest > 1
+;
+```
+
+```
+| sequence_ended | sequence_began |
+|----------------|----------------|
+| 3              | 6              |
+| 7              | 9              |
+| 9              | 11             |
+| 12             | 20             |
+| 20             | 25             |
+```
+
+To derive the gap start and end points, we add 1 to the sequence end and subtract one from the sequence start.
+
+```sql{14-15}
+/* Data setup */
+
+;
+WITH current_row AS
+(
+SELECT
+    num_sequence.value_of_interest
+    ,ROW_NUMBER() 
+        OVER(ORDER BY num_sequence.value_of_interest) as row_num
+FROM
+    @sequences as num_sequence
+)
+SELECT
+    current_row.value_of_interest + 1 as gap_start
+    ,next_row.value_of_interest - 1 as gap_end
+FROM
+    current_row
+        INNER JOIN current_row as next_row
+            ON next_row.row_num = current_row.row_num + 1
+WHERE
+    next_row.value_of_interest - current_row.value_of_interest > 1
+;
+```
+
+```
+| gap_start | gap_end |
+|-----------|---------|
+| 4         | 5       |
+| 8         | 8       |
+| 10        | 10      |
+| 13        | 19      |
+| 21        | 24      |
+```
