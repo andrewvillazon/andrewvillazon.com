@@ -317,3 +317,206 @@ WHERE
 | 13        | 19      |
 | 21        | 24      |
 ```
+
+### Using Subqueries
+
+To see how this technique works, we'll explore its parts and put them together for a final result set.
+
+The first thing we'll need to do is identify where a sequence ended. To do this, we use a subquery inside the `SELECT`. The subquery result is the next row's value if it is the next in the sequence; otherwise, `NULL`.
+
+```sql
+/* Data setup */
+
+SELECT
+    num_sequence_main.value_of_interest
+    ,(
+        SELECT
+            num_sequence_where.value_of_interest
+        FROM
+            @sequences as num_sequence_where
+        WHERE
+            num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+    ) as sequence_end_ind
+FROM
+    @sequences as num_sequence_main
+```
+
+Rows with `NULL` indicate a sequence ended.
+
+```{5,7,8,10-12}
+| value_of_interest | sequence_end_ind |
+|-------------------|------------------|
+| 1                 | 2                |
+| 2                 | 3                |
+| 3                 | NULL             |
+| 6                 | 7                |
+| 7                 | NULL             |
+| 9                 | NULL             |
+| 11                | 12               |
+| 12                | NULL             |
+| 20                | NULL             |
+| 25                | NULL             |
+```
+
+Next, we need to determine where the next sequence started (or the end of our gap). We do this with another subquery that returns the first value after the current row.
+
+```sql
+/* Data setup */
+
+SELECT
+    num_sequence_main.value_of_interest
+    ,(
+        SELECT
+            num_sequence_where.value_of_interest
+        FROM
+            @sequences as num_sequence_where
+        WHERE
+                num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+    ) as sequence_end_ind
+    ,(
+        SELECT
+            MIN(num_sequence_select.value_of_interest)
+        FROM
+            @sequences as num_sequence_select
+        WHERE
+            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+    ) as sequence_start_ind
+FROM
+    @sequences as num_sequence_main
+```
+
+```
+| value_of_interest | sequence_ends | sequence_starts_again |
+|-------------------|---------------|-----------------------|
+| 1                 | 2             | 2                     |
+| 2                 | 3             | 3                     |
+| 3                 | NULL          | 6                     |
+| 6                 | 7             | 7                     |
+| 7                 | NULL          | 9                     |
+| 9                 | NULL          | 11                    |
+| 11                | 12            | 12                    |
+| 12                | NULL          | 20                    |
+| 20                | NULL          | 25                    |
+| 25                | NULL          | NULL                  |
+```
+
+Now we need to filter for the rows that are `NULL` in the sequence ends column. 
+
+We do this by moving our first subquery to the `WHERE` clause and combine it with `NOT EXISTS`. Here we are saying we want the rows where the next row value is not part of a sequence.
+
+```sql
+/* Data Setup */
+
+SELECT
+    num_sequence_main.value_of_interest as sequence_end_ind
+    ,(
+        SELECT
+            MIN(num_sequence_select.value_of_interest)
+        FROM
+            @sequences as num_sequence_select
+        WHERE
+            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+    ) as sequence_start_ind
+FROM
+    @sequences as num_sequence_main
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_where.value_of_interest
+        FROM
+            @sequences as num_sequence_where
+        WHERE
+            num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+    )
+```
+
+```
+| sequence_end_ind | sequence_start_ind |
+|------------------|-----------------------|
+| 3                | 6                     |
+| 7                | 9                     |
+| 9                | 11                    |
+| 12               | 20                    |
+| 20               | 25                    |
+| 25               | NULL                  |
+```
+
+There's just one problem with this result set. The last row gets included. We fix this by adding another WHERE condition that filters for values less than the max value.
+
+```sql
+/* Data Setup */
+
+SELECT
+    num_sequence_main.value_of_interest
+    ,(
+        SELECT
+            MIN(num_sequence_select.value_of_interest)
+        FROM
+            @sequences as num_sequence_select
+        WHERE
+            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+    ) as sequence_starts_again
+FROM
+    @sequences as num_sequence_main
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_where.value_of_interest
+        FROM
+            @sequences as num_sequence_where
+        WHERE
+                num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+        )
+    AND num_sequence_main.value_of_interest < (SELECT MAX(num_sequence_max.value_of_interest) FROM @sequences as num_sequence_max)
+```
+
+```
+| value_of_interest | sequence_starts_again |
+|-------------------|-----------------------|
+| 3                 | 6                     |
+| 7                 | 9                     |
+| 9                 | 11                    |
+| 12                | 20                    |
+| 20                | 25                    |
+```
+
+Great, now we have a result set of rows where a sequence ended, and another began - or where a gap started and ended.
+
+All that's left to is add one to the gap start and subtract one from the gap end.
+
+```sql
+/* Data Setup */
+
+SELECT
+    num_sequence_main.value_of_interest + 1 as gap_starts
+    ,(
+        SELECT
+            MIN(num_sequence_select.value_of_interest)
+        FROM
+            @sequences as num_sequence_select
+        WHERE
+            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+    ) - 1 as gap_ends
+FROM
+    @sequences as num_sequence_main
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_where.value_of_interest
+        FROM
+            @sequences as num_sequence_where
+        WHERE
+                num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+    )
+    AND num_sequence_main.value_of_interest < (SELECT MAX(num_sequence_max.value_of_interest) FROM @sequences as num_sequence_max)
+```
+
+```
+| gap_starts | gap_ends |
+|------------|----------|
+| 4          | 5        |
+| 8          | 8        |
+| 10         | 10       |
+| 13         | 19       |
+| 21         | 24       |
+```
