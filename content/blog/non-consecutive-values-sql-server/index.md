@@ -360,7 +360,7 @@ Rows with `NULL` indicate a sequence ended.
 
 Next, we need to determine where the next sequence started (or the end of our gap). We do this with another subquery that returns the first value after the current row.
 
-```sql
+```sql{13-20}
 /* Data setup */
 
 SELECT
@@ -371,7 +371,7 @@ SELECT
         FROM
             @sequences as sub
         WHERE
-                sub.value_of_interest = sequences_main.value_of_interest + 1
+            sub.value_of_interest = sequences_main.value_of_interest + 1
     ) as sequence_end_ind
     ,(
         SELECT
@@ -404,7 +404,7 @@ Now we need to filter for the rows that are `NULL` in the sequence ends column.
 
 We do this by moving our first subquery to the `WHERE` clause and combine it with `NOT EXISTS`. Here we are saying we want the rows where the next row value is not part of a sequence.
 
-```sql
+```sql{15-23}
 /* Data Setup */
 
 SELECT
@@ -430,7 +430,7 @@ WHERE NOT EXISTS
     )
 ```
 
-```
+```{8}
 | sequence_end_ind | sequence_start_ind |
 |------------------|-----------------------|
 | 3                | 6                     |
@@ -443,7 +443,7 @@ WHERE NOT EXISTS
 
 There's just one problem with this result set. The last row gets included. We fix this by adding another WHERE condition that filters for values less than the max value.
 
-```sql
+```sql{24}
 /* Data Setup */
 
 SELECT
@@ -484,7 +484,7 @@ Great, now we have a result set of rows where a sequence ended, and another bega
 
 All that's left to is add one to the gap start and subtract one from the gap end.
 
-```sql
+```sql{4,12}
 /* Data Setup */
 
 SELECT
