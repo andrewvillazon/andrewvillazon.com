@@ -364,25 +364,25 @@ Next, we need to determine where the next sequence started (or the end of our ga
 /* Data setup */
 
 SELECT
-    num_sequence_main.value_of_interest
+    sequences_main.value_of_interest
     ,(
         SELECT
-            num_sequence_where.value_of_interest
+            sub.value_of_interest
         FROM
-            @sequences as num_sequence_where
+            @sequences as sub
         WHERE
-                num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+                sub.value_of_interest = sequences_main.value_of_interest + 1
     ) as sequence_end_ind
     ,(
         SELECT
-            MIN(num_sequence_select.value_of_interest)
+            MIN(sub.value_of_interest)
         FROM
-            @sequences as num_sequence_select
+            @sequences as sub
         WHERE
-            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+            sub.value_of_interest > sequences_main.value_of_interest
     ) as sequence_start_ind
 FROM
-    @sequences as num_sequence_main
+    @sequences as sequences_main
 ```
 
 ```
@@ -408,25 +408,25 @@ We do this by moving our first subquery to the `WHERE` clause and combine it wit
 /* Data Setup */
 
 SELECT
-    num_sequence_main.value_of_interest as sequence_end_ind
+    sequences_main.value_of_interest
     ,(
         SELECT
-            MIN(num_sequence_select.value_of_interest)
+            MIN(sub.value_of_interest)
         FROM
-            @sequences as num_sequence_select
+            @sequences as sub
         WHERE
-            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
-    ) as sequence_start_ind
+            sub.value_of_interest > sequences_main.value_of_interest
+    ) as sequence_starts_again
 FROM
-    @sequences as num_sequence_main
+    @sequences as sequences_main
 WHERE NOT EXISTS
     (
         SELECT
-            num_sequence_where.value_of_interest
+            sub.value_of_interest
         FROM
-            @sequences as num_sequence_where
+            @sequences as sub
         WHERE
-            num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+            sub.value_of_interest = sequences_main.value_of_interest + 1
     )
 ```
 
@@ -447,17 +447,17 @@ There's just one problem with this result set. The last row gets included. We fi
 /* Data Setup */
 
 SELECT
-    num_sequence_main.value_of_interest
+    sequences_main.value_of_interest
     ,(
         SELECT
-            MIN(num_sequence_select.value_of_interest)
+            MIN(sub.value_of_interest)
         FROM
-            @sequences as num_sequence_select
+            @sequences as sub
         WHERE
-            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+            sub.value_of_interest > sequences_main.value_of_interest
     ) as sequence_starts_again
 FROM
-    @sequences as num_sequence_main
+    @sequences as sequences_main
 WHERE NOT EXISTS
     (
         SELECT
@@ -465,9 +465,9 @@ WHERE NOT EXISTS
         FROM
             @sequences as num_sequence_where
         WHERE
-                num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+                num_sequence_where.value_of_interest = sequences_main.value_of_interest + 1
         )
-    AND num_sequence_main.value_of_interest < (SELECT MAX(num_sequence_max.value_of_interest) FROM @sequences as num_sequence_max)
+    AND sequences_main.value_of_interest < (SELECT MAX(value_of_interest) FROM @sequences)
 ```
 
 ```
@@ -488,17 +488,17 @@ All that's left to is add one to the gap start and subtract one from the gap end
 /* Data Setup */
 
 SELECT
-    num_sequence_main.value_of_interest + 1 as gap_starts
+    sequences_main.value_of_interest + 1 as gap_starts
     ,(
         SELECT
-            MIN(num_sequence_select.value_of_interest)
+            MIN(sub.value_of_interest)
         FROM
-            @sequences as num_sequence_select
+            @sequences as sub
         WHERE
-            num_sequence_select.value_of_interest > num_sequence_main.value_of_interest
+            sub.value_of_interest > sequences_main.value_of_interest
     ) - 1 as gap_ends
 FROM
-    @sequences as num_sequence_main
+    @sequences as sequences_main
 WHERE NOT EXISTS
     (
         SELECT
@@ -506,9 +506,9 @@ WHERE NOT EXISTS
         FROM
             @sequences as num_sequence_where
         WHERE
-                num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
-    )
-    AND num_sequence_main.value_of_interest < (SELECT MAX(num_sequence_max.value_of_interest) FROM @sequences as num_sequence_max)
+                num_sequence_where.value_of_interest = sequences_main.value_of_interest + 1
+        )
+    AND sequences_main.value_of_interest < (SELECT MAX(value_of_interest) FROM @sequences)
 ```
 
 ```
