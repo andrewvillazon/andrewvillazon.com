@@ -520,3 +520,13 @@ WHERE NOT EXISTS
 | 13         | 19       |
 | 21         | 24       |
 ```
+
+## Conclusion
+
+In this post, we looked at solutions to the Gaps part of the Gaps and Islands problem. The key to identifying Gaps is working out where a sequence ends, and another begins.
+
+One aspect we didn't examine is the performance of each solution. I opted to avoid this to focus on ways to solve the problem. 
+
+If you're interested in the performance aspects, I highly recommend the book SQL Server MVP Deep Dives. Chapter 5, Gaps and Islands, by Itzik Ben-Gan, explores the Gaps and Islands solutions in substantial detail. Some solutions in this post are adapted from this chapter.
+
+This series's next post looks at the opposite problem, identifying consecutive values or Islands.
