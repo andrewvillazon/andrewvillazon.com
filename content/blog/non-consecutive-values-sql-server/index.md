@@ -324,21 +324,21 @@ To see how this technique works, we'll explore its parts and put them together f
 
 The first thing we'll need to do is identify where a sequence ended. To do this, we use a subquery inside the `SELECT`. The subquery result is the next row's value if it is the next in the sequence; otherwise, `NULL`.
 
-```sql
+```sql{5-12}
 /* Data setup */
 
 SELECT
-    num_sequence_main.value_of_interest
+    sequences_main.value_of_interest
     ,(
         SELECT
-            num_sequence_where.value_of_interest
+            sub.value_of_interest
         FROM
-            @sequences as num_sequence_where
+            @sequences as sub
         WHERE
-            num_sequence_where.value_of_interest = num_sequence_main.value_of_interest + 1
+            sub.value_of_interest = sequences_main.value_of_interest + 1
     ) as sequence_end_ind
 FROM
-    @sequences as num_sequence_main
+    @sequences as sequences_main
 ```
 
 Rows with `NULL` indicate a sequence ended.
