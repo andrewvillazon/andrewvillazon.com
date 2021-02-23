@@ -521,6 +521,113 @@ WHERE NOT EXISTS
 | 21         | 24       |
 ```
 
+### Gaps in DATE or DATETIME sequences
+
+What if the sequences are dates or datetimes? The solutions are the same but use the DATEDIFF and DATEADD functions.
+
+#### LEAD approach
+
+```sql{12,13,24}
+DECLARE @date_sequences TABLE (
+    date_of_interest DATE
+)
+INSERT INTO @date_sequences
+VALUES
+('2021-01-01'),('2021-01-02'),('2021-01-03'),('2021-01-06')
+,('2021-01-07'),('2021-01-09'),('2021-01-11'),('2021-01-12')
+,('2021-01-20'),('2021-01-25')
+
+
+SELECT
+    DATEADD(DAY,1, date_of_interest) as gap_starts
+    ,DATEADD(DAY,-1, next_row_value) as gap_ends
+FROM
+(
+    SELECT
+        date_of_interest
+        ,LEAD(date_of_interest,1, date_of_interest) 
+            OVER(ORDER BY date_of_interest) as next_row_value
+    FROM
+        @date_sequences
+) as curr_and_next
+WHERE
+    DATEDIFF(DAY,date_of_interest, next_row_value) > 1
+```
+
+#### ROW_NUMBER approach
+
+```sql{22,23,29}
+DECLARE @dtm_sequences TABLE (
+    dtm_of_interest DATETIME
+)
+INSERT INTO @dtm_sequences
+VALUES
+('2021-02-23 00:00:01.000'),('2021-02-23 00:00:02.000'),('2021-02-23 00:00:03.000'),
+('2021-02-23 00:00:06.000'),('2021-02-23 00:00:07.000'),('2021-02-23 00:00:09.000'),
+('2021-02-23 00:00:11.000'),('2021-02-23 00:00:12.000'),('2021-02-23 00:00:20.000'),
+('2021-02-23 00:00:25.000')
+
+;
+WITH current_row AS
+(
+SELECT
+    dtm_of_interest
+    ,ROW_NUMBER() 
+        OVER(ORDER BY dtm_of_interest) as row_num
+FROM
+    @dtm_sequences
+)
+SELECT
+    DATEADD(SECOND, 1, current_row.dtm_of_interest) as gap_start
+    ,DATEADD(SECOND, -1, next_row.dtm_of_interest) as gap_end
+FROM
+    current_row
+        INNER JOIN current_row as next_row
+            ON next_row.row_num = current_row.row_num + 1
+WHERE
+    DATEDIFF(SECOND, current_row.dtm_of_interest, next_row.dtm_of_interest) > 1
+;
+```
+
+#### Subquery approach
+
+```sql{12,13,32}
+DECLARE @date_sequences TABLE (
+    date_of_interest DATE
+)
+INSERT INTO @date_sequences
+VALUES
+('2021-01-01'),('2021-01-02'),('2021-01-03'),('2021-01-06')
+,('2021-01-07'),('2021-01-09'),('2021-01-11'),('2021-01-12')
+,('2021-01-20'),('2021-01-25')
+
+
+SELECT
+    DATEADD(DAY,1,sequences_main.date_of_interest) as gap_starts
+    ,DATEADD(DAY,-1, 
+        (
+        SELECT
+            MIN(sub.date_of_interest)
+        FROM
+            @date_sequences as sub
+        WHERE
+            sub.date_of_interest > sequences_main.date_of_interest
+        )
+    ) as gap_ends
+FROM
+    @date_sequences as sequences_main
+WHERE NOT EXISTS
+    (
+    SELECT
+        date_sequence_where.date_of_interest
+    FROM
+        @date_sequences as date_sequence_where
+    WHERE
+        date_sequence_where.date_of_interest = DATEADD(DAY, 1, sequences_main.date_of_interest)
+    )
+    AND sequences_main.date_of_interest < (SELECT MAX(date_of_interest) FROM @date_sequences)
+```
+
 ## Conclusion
 
 In this post, we looked at solutions to the Gaps part of the Gaps and Islands problem. The key to identifying Gaps is working out where a sequence ends, and another begins.
