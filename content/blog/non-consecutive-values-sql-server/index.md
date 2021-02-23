@@ -49,7 +49,7 @@ As the name implies, there are two components.
 
 ## Identifying Gaps
 
-To identify Gaps, we need to determine where a sequence ends, and another begins. In between these points are where a gap starts and ends.
+To identify Gaps, we need to **determine where a sequence ends, and another begins**. In between these points are where a gap starts and ends.
 
 In general, each approach compares the current row with the next row to determine if it's the next value in the sequence. If it isn't, then we've found a gap.
 
@@ -59,7 +59,7 @@ This approach uses the `LEAD` window function. The LEAD function lets you access
 
 First, we apply the `LEAD` function to generate a result set of the current row value and next row value.
 
-```sql
+```sql{12,13}
 -- Data setup
 DECLARE @sequences TABLE
 (
@@ -203,7 +203,7 @@ FROM
 | 25                | 10      |
 ```
 
-To get the current row and the next row, we join the CTE to itself based on the row number plus **1**.
+To get the current row and the next row, we join the CTE to itself based on the row number plus 1.
 
 ```sql{18-19}
 /* Data setup */
@@ -281,7 +281,7 @@ WHERE
 | 20             | 25             |
 ```
 
-To derive the gap start and end points, we add **1** to the sequence end and subtract **1** from the sequence start.
+To derive the gap start and end points, we **add 1** to the sequence end and **subtract 1** from the sequence start.
 
 ```sql{14-15}
 /* Data setup */
@@ -630,9 +630,9 @@ WHERE NOT EXISTS
 
 ## Conclusion
 
-In this post, we looked at solutions to the Gaps part of the Gaps and Islands problem. The key to identifying Gaps is working out where a sequence ends, and another begins.
+In this post, we looked at solutions to the **Gaps** part of the **Gaps and Islands** problem. The key to identifying Gaps is working out where a sequence ends, and another begins.
 
-One aspect we didn't examine is the performance of each solution. I opted to avoid this to focus on ways to solve the problem. 
+One aspect we *didn't* examine is the performance of each solution. I opted to avoid this to focus on ways to solve the problem. 
 
 If you're interested in the performance aspects, I highly recommend the book SQL Server MVP Deep Dives. Chapter 5, Gaps and Islands, by Itzik Ben-Gan, explores the Gaps and Islands solutions in substantial detail. Two solutions in this post are adapted from this chapter.
 
