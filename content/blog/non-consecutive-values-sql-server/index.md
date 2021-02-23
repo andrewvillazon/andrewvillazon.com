@@ -5,17 +5,17 @@ tags:
     - SQL Server
 ---
 
-In this two-part series, we'll look at different solutions to a SQL problem - how to identify consecutive or non-consecutive values in a column. Also known as the Gaps and Islands problem. 
+In this two-part series, we'll look at different solutions to a SQL problem - how to identify consecutive or non-consecutive values in a column. Also known as the **Gaps and Islands** problem. 
 
 Understanding the Gaps and Islands problem is useful for analyzing data that features sequences or breaks in sequences.
 
-This post, part one of the series, will look at methods for identifying non-consecutive values (or Gaps). In part two, we explore ways to identify consecutive values (Islands).
+This post, part one of the series, will look at methods for identifying non-consecutive values (Gaps). In part two, we explore ways to identify consecutive values (Islands).
 
 ## What is the Gaps and Islands problem?
 
 As the name implies, there are two components.
 
-Gaps - rows where a row value does not sequentially follow another...
+**Gaps** - rows where a row value *does not* sequentially follow another...
 
 ```{2-3,6-7,9-10}
 1
@@ -30,7 +30,7 @@ Gaps - rows where a row value does not sequentially follow another...
 22
 ```
 
-...and Islands - rows where a row value follows another in an unbroken succession.
+...and **Islands** - rows where a row value follows another in an unbroken succession.
 
 ``` {1-2,4-7,9-11}
 1
@@ -57,7 +57,7 @@ In general, each approach compares the current row with the next row to determin
 
 This approach uses the `LEAD` window function. The LEAD function lets you access values from rows that follow the current row.
 
-First, we apply the Lead function to generate a result set of the current row value and next row value.
+First, we apply the `LEAD` function to generate a result set of the current row value and next row value.
 
 ```sql
 -- Data setup
@@ -92,7 +92,7 @@ FROM
 | 25                | 25             |
 ```
 
-To identify gaps, we subtract the current row value from the next row value. For rows where a sequence ends, the difference will be greater than 1.
+To identify gaps, we subtract the current row value from the next row value. For rows where a sequence ends, the difference will be **greater than 1**.
 
 ```sql
 /* Data setup */
@@ -127,9 +127,9 @@ FROM
 | 25                | 25             | 0            |
 ```
 
-To isolate the sequence end and starts, we filter for the rows where the difference is greater than 1.
+To isolate the sequence end and starts, we filter for the rows where the **difference is greater than 1**.
 
-To arrive at the gaps, we add 1 to the sequence end and subtract 1 from the sequence start.
+To arrive at the gaps, we **add 1** to the sequence end and **subtract 1** from the sequence start.
 
 ```sql{4,5,16}
 /* Data setup */
@@ -203,7 +203,7 @@ FROM
 | 25                | 10      |
 ```
 
-To get the current row and the next row, we join the CTE to itself based on the row number plus one.
+To get the current row and the next row, we join the CTE to itself based on the row number plus **1**.
 
 ```sql{18-19}
 /* Data setup */
@@ -281,7 +281,7 @@ WHERE
 | 20             | 25             |
 ```
 
-To derive the gap start and end points, we add 1 to the sequence end and subtract one from the sequence start.
+To derive the gap start and end points, we add **1** to the sequence end and subtract **1** from the sequence start.
 
 ```sql{14-15}
 /* Data setup */
@@ -441,7 +441,7 @@ WHERE NOT EXISTS
 | 25               | NULL                  |
 ```
 
-There's just one problem with this result set. The last row gets included. We fix this by adding another WHERE condition that filters for values less than the max value.
+There's just one problem with this result set. The last row gets included. We fix this by adding another `WHERE` condition that filters for values less than the maximum value.
 
 ```sql{24}
 /* Data Setup */
@@ -482,7 +482,7 @@ WHERE NOT EXISTS
 
 Great, now we have a result set of rows where a sequence ended, and another began - or where a gap started and ended.
 
-All that's left to is add one to the gap start and subtract one from the gap end.
+All that's left to is add **1** to the gap start and subtract **1** from the gap end.
 
 ```sql{4,12}
 /* Data Setup */
@@ -523,7 +523,7 @@ WHERE NOT EXISTS
 
 ### Gaps in DATE or DATETIME sequences
 
-What if the sequences are dates or datetimes? The solutions are the same but use the DATEDIFF and DATEADD functions.
+What if the sequences are `DATE` or `DATETIME`? The solutions are the same but use the `DATEDIFF` and `DATEADD` functions.
 
 #### LEAD approach
 
@@ -634,6 +634,6 @@ In this post, we looked at solutions to the Gaps part of the Gaps and Islands pr
 
 One aspect we didn't examine is the performance of each solution. I opted to avoid this to focus on ways to solve the problem. 
 
-If you're interested in the performance aspects, I highly recommend the book SQL Server MVP Deep Dives. Chapter 5, Gaps and Islands, by Itzik Ben-Gan, explores the Gaps and Islands solutions in substantial detail. Some solutions in this post are adapted from this chapter.
+If you're interested in the performance aspects, I highly recommend the book SQL Server MVP Deep Dives. Chapter 5, Gaps and Islands, by Itzik Ben-Gan, explores the Gaps and Islands solutions in substantial detail. Two solutions in this post are adapted from this chapter.
 
-This series's next post looks at the opposite problem, identifying consecutive values or Islands.
+This series's next post looks at the opposite problem, identifying consecutive values or **Islands**.
