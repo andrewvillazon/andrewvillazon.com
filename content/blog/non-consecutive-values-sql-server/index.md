@@ -5,7 +5,7 @@ tags:
     - SQL Server
 ---
 
-In this two-part series, we'll look at different solutions to a SQL problem - how to identify consecutive or non-consecutive values in a column. Also known as the **Gaps and Islands** problem. 
+In this two-part series, we'll look at different solutions to a SQL problem - how to **identify consecutive** or **non-consecutive values** in a column. Also known as the **Gaps and Islands** problem. 
 
 Understanding the Gaps and Islands problem is useful for analyzing data that features sequences or breaks in sequences.
 
@@ -55,7 +55,7 @@ In general, each approach compares the current row with the next row to determin
 
 ### With the LEAD window function
 
-This approach uses the `LEAD` window function. The LEAD function lets you access values from rows that follow the current row.
+This approach uses the `LEAD` window function. The [LEAD function](https://docs.microsoft.com/en-us/sql/t-sql/functions/lead-transact-sql?view=sql-server-ver15) lets you access values from rows that follow the current row.
 
 First, we apply the `LEAD` function to generate a result set of the current row value and next row value.
 
@@ -162,11 +162,9 @@ WHERE
 
 ### With the ROW_NUMBER function
 
-The approaches that follow come from the excellent book SQL Server MVP Deep Dives. Chapter 5 of the book is dedicated to the Gaps and Islands problem and is well worth a read.
+This approach leverages a [Common Table Expression (CTE)](https://docs.microsoft.com/en-us/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver15) joined to itself to create a result set of the current row and next row. Like the above approach, we compare the current row and the next row to identify a gap.
 
-This approach leverages a Common Table Expression (CTE) joined to itself to create a result set of the current row and next row. Like the above approach, we compare the current row and the next row to identify a gap.
-
-First, we'll create a CTE of the rows and their row number.
+First, we'll create a CTE of the rows and their [row number](https://docs.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql?view=sql-server-ver15).
 
 ```sql{8,9}
 /* Data setup */
@@ -203,7 +201,7 @@ FROM
 | 25                | 10      |
 ```
 
-To get the current row and the next row, we join the CTE to itself based on the row number plus 1.
+To get the current row and the next row, we join the CTE to itself based on the **row number plus 1**.
 
 ```sql{18-19}
 /* Data setup */
@@ -242,7 +240,7 @@ FROM
 | 20                | 25             |
 ```
 
-To identify where a sequence ended, we subtract the current row from the next row. When the sequence ends, the result of the subtraction is greater than one.
+To identify where a sequence ended, we subtract the current row from the next row. When the sequence ends, the result of the subtraction is **greater than 1**.
 
 As we did in the previous solution, we isolate the sequence ends and starts by placing the subtraction in the `WHERE` clause.
 
@@ -482,7 +480,7 @@ WHERE NOT EXISTS
 
 Great, now we have a result set of rows where a sequence ended, and another began - or where a gap started and ended.
 
-All that's left to is add **1** to the gap start and subtract **1** from the gap end.
+All that's left to is **add 1** to the gap start and **subtract 1** from the gap end.
 
 ```sql{4,12}
 /* Data Setup */
@@ -634,6 +632,12 @@ In this post, we looked at solutions to the **Gaps** part of the **Gaps and Isla
 
 One aspect we *didn't* examine is the performance of each solution. I opted to avoid this to focus on ways to solve the problem. 
 
-If you're interested in the performance aspects, I highly recommend the book SQL Server MVP Deep Dives. Chapter 5, Gaps and Islands, by Itzik Ben-Gan, explores the Gaps and Islands solutions in substantial detail. Two solutions in this post are adapted from this chapter.
+If you're interested in the performance aspects, I highly recommend the book [SQL Server MVP Deep Dives](https://livebook.manning.com/book/sql-server-mvp-deep-dives/about-this-book/). Chapter 5, [Gaps and Islands, by Itzik Ben-Gan](https://livebook.manning.com/book/sql-server-mvp-deep-dives/chapter-5/1), explores the Gaps and Islands solutions in substantial detail. Two solutions in this post are adapted from this chapter.
 
 This series's next post looks at the opposite problem, identifying consecutive values or **Islands**.
+
+## Further Reading
+* [SQL Server MVP Deep Dives, Ch 5. Gaps and Islands](https://livebook.manning.com/book/sql-server-mvp-deep-dives/chapter-5/1)
+* [Gaps and Islands in SQL Server data](https://www.red-gate.com/simple-talk/sql/t-sql-programming/gaps-islands-sql-server-data/)
+* [SQL Server Window Functions Gaps and Islands Problem](https://www.mssqltips.com/sqlservertutorial/9130/sql-server-window-functions-gaps-and-islands-problem/)
+* [Introduction to Gaps and Islands Analysis](https://www.red-gate.com/simple-talk/sql/t-sql-programming/introduction-to-gaps-and-islands-analysis/)
