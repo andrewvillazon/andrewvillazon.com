@@ -1,6 +1,6 @@
 ---
 title: "Identify non-consecutive values in SQL Server"
-date: "2021-02-21"
+date: "2021-02-24"
 tags:
     - SQL Server
 ---
