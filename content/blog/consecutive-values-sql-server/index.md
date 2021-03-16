@@ -55,21 +55,120 @@ To identify islands, there are two approaches. Use a sequence identifier to grou
 
 We're going to use `DENSE_RANK` to help create an identifier to group values that are part of a sequence. Begin by applying the `DENSE_RANK` function to the rows.
 
-[CODE 1]
+```sql
+-- Data setup
+DECLARE @sequences TABLE
+(
+    value_of_interest INTEGER
+)
+
+INSERT INTO @sequences
+VALUES (1),(2),(3),(6),(7),(9),(11),(12),(20),(25)
+
+-- Solution begins
+SELECT
+    num_sequence.value_of_interest
+    ,DENSE_RANK() OVER(ORDER BY value_of_interest) as dense_rank_result
+FROM
+    @sequences as num_sequence
+```
+
+```
+| value_of_interest | dense_rank_result |
+|-------------------|-------------------|
+| 1                 | 1                 |
+| 2                 | 2                 |
+| 3                 | 3                 |
+| 6                 | 4                 |
+| 7                 | 5                 |
+| 9                 | 6                 |
+| 11                | 7                 |
+| 12                | 8                 |
+| 20                | 9                 |
+| 25                | 10                |
+```
 
 To produce the group identifier, we can subtract the result of `DENSE_RANK` from the row value. As the sequence increases, the result of this calculation remains constant but then changes when a new sequence starts. We use this constant to identify the islands.
 
-[CODE 2]
+```sql{5}
+/* Data setup */
+
+SELECT
+    num_sequence.value_of_interest
+    ,num_sequence.value_of_interest - DENSE_RANK() OVER(ORDER BY value_of_interest) as sequence_identifier
+FROM
+    @sequences as num_sequence
+```
+
+```
+| value_of_interest | sequence_identifier |
+|-------------------|---------------------|
+| 1                 | 0                   |
+| 2                 | 0                   |
+| 3                 | 0                   |
+| 6                 | 2                   |
+| 7                 | 2                   |
+| 9                 | 3                   |
+| 11                | 4                   |
+| 12                | 4                   |
+| 20                | 11                  |
+| 25                | 15                  |
+```
 
 To find the sequence start and end, we subquery the result set and aggregate it by the sequence identifier.
 
 If we were doing analysis, at this point, we have enough to summarize a sequence, e.g., `COUNT`, `AVG`, etc.
 
-[CODE 3]
+```sql{4,5,10}
+/* Data setup */
+
+SELECT
+    MIN(sequences.value_of_interest) as sequence_started
+    ,MAX(sequences.value_of_interest) as sequence_started
+FROM
+(
+    SELECT
+        num_sequence.value_of_interest
+        ,num_sequence.value_of_interest - DENSE_RANK() OVER(ORDER BY value_of_interest) as sequence_identifier
+    FROM
+        @sequences as num_sequence
+) as sequences
+GROUP BY
+    sequence_identifier
+```
+
+```
+| sequence_started | sequence_started |
+|------------------|------------------|
+| 1                | 3                |
+| 6                | 7                |
+| 9                | 9                |
+| 11               | 12               |
+| 20               | 20               |
+| 25               | 25               |
+```
 
 If you need to exclude sequences with only 1 row, include the `HAVING` clause filtering for row counts greater than 1.
 
-[CODE 4]
+```sql{16,17}
+/* Data setup */
+
+SELECT
+    MIN(sequences.value_of_interest) as sequence_start
+    ,MAX(sequences.value_of_interest) as sequence_end
+FROM
+(
+    SELECT
+        num_sequence.value_of_interest
+        ,num_sequence.value_of_interest - DENSE_RANK() OVER(ORDER BY value_of_interest) as sequence_identifier
+    FROM
+        @sequences as num_sequence
+) as sequences
+GROUP BY
+    sequence_identifier
+HAVING
+    COUNT(*) > 1
+```
 
 If you're curious about why we're using `DENSE_RANK` and not `ROW_NUMBER`, this is to handle duplicates. The result of `DENSE_RANK` will produce the same group identifier for duplicate sequences.
 
