@@ -72,3 +72,39 @@ If you need to exclude sequences with only 1 row, include the `HAVING` clause fi
 [CODE 4]
 
 If you're curious about why we're using `DENSE_RANK` and not `ROW_NUMBER`, this is to handle duplicates. The result of `DENSE_RANK` will produce the same group identifier for duplicate sequences.
+
+### Using Subqueries, ROW_NUMBER, and CTEs
+
+Recall from the article on Identifying Gaps that this involves working out where a sequence ends and a new one begins. We can apply the same technique to help identify islands.
+
+This query has a few different parts, so we'll break it apart and build it into a final query.
+
+First, let's look at the following query. It uses two similar subqueries to identify where a sequence started or ended.
+
+Notice that we get `NULL` in the columns when a sequence starts or ends.
+
+[CODE 1]
+
+Now we need a way to filter for the `NULL`s in the `sequence_started` and `sequence_ended` columns. 
+
+To do this, we move the subquery into the `WHERE` clause and combine it with `NOT EXISTS`. This condition filters for rows where the subquery returns `NULL`.
+
+[CODE 2]
+
+At this point, we're still working with two separate result sets—a set of sequence starting points and a set of sequence ending points.
+
+Because each result set contains equal rows, we can connect them with the `ROW_NUMBER` function.
+
+[CODE 3]
+
+To finish, we put each result set in a CTE and combine them based on their row numbers. A temp table would also work in this situation.
+
+[CODE 4]
+
+If you only want sequences with more than 1 row, filter for rows where the sequence's start and end are not the same value.
+
+[CODE 5]
+
+Lastly, as an interesting side note, if we modify the join, it's possible to arrive at the gaps!
+
+[CODE 6]
