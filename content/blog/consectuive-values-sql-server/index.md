@@ -108,3 +108,19 @@ If you only want sequences with more than 1 row, filter for rows where the seque
 Lastly, as an interesting side note, if we modify the join, it's possible to arrive at the gaps!
 
 [CODE 6]
+
+## Conclusion
+
+In this post, we looked at solutions to the **Islands** part of the **Gaps and Islands** problem.
+
+An aspect we *didn't* examine is the performance of each solution. I opted to avoid this to focus on ways to solve the problem. 
+
+If you're interested in the performance aspects, I highly recommend the book [SQL Server MVP Deep Dives](https://livebook.manning.com/book/sql-server-mvp-deep-dives/about-this-book/). Chapter 5, [Gaps and Islands, by Itzik Ben-Gan](https://livebook.manning.com/book/sql-server-mvp-deep-dives/chapter-5/1), explores the Gaps and Islands solutions in substantial detail.
+
+For the solutions to the Gaps problem, see the [previous post](/non-consecutive-values-sql-server) in this series.
+
+## Further Reading
+* [SQL Server MVP Deep Dives, Ch 5. Gaps and Islands](https://livebook.manning.com/book/sql-server-mvp-deep-dives/chapter-5/1)
+* [Gaps and Islands in SQL Server data](https://www.red-gate.com/simple-talk/sql/t-sql-programming/gaps-islands-sql-server-data/)
+* [SQL Server Window Functions Gaps and Islands Problem](https://www.mssqltips.com/sqlservertutorial/9130/sql-server-window-functions-gaps-and-islands-problem/)
+* [Introduction to Gaps and Islands Analysis](https://www.red-gate.com/simple-talk/sql/t-sql-programming/introduction-to-gaps-and-islands-analysis/)
