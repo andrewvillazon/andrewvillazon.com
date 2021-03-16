@@ -50,3 +50,25 @@ As the name implies, there are two components.
 ## Identifying Islands
 
 To identify islands, there are two approaches. Use a sequence identifier to group values that are in sequence. Or identify where a sequence starts and ends. Let's look at how to do both.
+
+### Using DENSE_RANK
+
+We're going to use `DENSE_RANK` to help create an identifier to group values that are part of a sequence. Begin by applying the `DENSE_RANK` function to the rows.
+
+[CODE 1]
+
+To produce the group identifier, we can subtract the result of `DENSE_RANK` from the row value. As the sequence increases, the result of this calculation remains constant but then changes when a new sequence starts. We use this constant to identify the islands.
+
+[CODE 2]
+
+To find the sequence start and end, we subquery the result set and aggregate it by the sequence identifier.
+
+If we were doing analysis, at this point, we have enough to summarize a sequence, e.g., `COUNT`, `AVG`, etc.
+
+[CODE 3]
+
+If you need to exclude sequences with only 1 row, include the `HAVING` clause filtering for row counts greater than 1.
+
+[CODE 4]
+
+If you're curious about why we're using `DENSE_RANK` and not `ROW_NUMBER`, this is to handle duplicates. The result of `DENSE_RANK` will produce the same group identifier for duplicate sequences.
