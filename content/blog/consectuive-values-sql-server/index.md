@@ -46,3 +46,7 @@ As the name implies, there are two components.
 17
 22
 ```
+
+## Identifying Islands
+
+To identify islands, there are two approaches. Use a sequence identifier to group values that are in sequence. Or identify where a sequence starts and ends. Lets look at how to do both.
