@@ -180,9 +180,17 @@ This query has a few different parts, so we'll break it apart and build it into 
 
 First, let's look at the following query. It uses two similar subqueries to identify where a sequence started or ended.
 
-```sql
-/* Data setup */
+```sql{19,27}
+-- Data setup
+DECLARE @sequences TABLE
+(
+    value_of_interest INTEGER
+)
 
+INSERT INTO @sequences
+VALUES (1),(2),(3),(6),(7),(9),(11),(12),(20),(25)
+
+-- Solution begins
 SELECT
     num_sequence_outer.value_of_interest
     ,(
