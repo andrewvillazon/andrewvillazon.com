@@ -40,7 +40,7 @@ const IndexPage = ({ data }) => {
       {/* Topics */}
       <section>
         <div class="container">
-          <h2>Topics</h2>
+          <h2>Explore</h2>
           <div class="flex article-tags">
             <DistinctTags />
           </div>
