@@ -634,7 +634,7 @@ One aspect we *didn't* examine is the performance of each solution. I opted to a
 
 If you're interested in the performance aspects, I highly recommend the book [SQL Server MVP Deep Dives](https://livebook.manning.com/book/sql-server-mvp-deep-dives/about-this-book/). Chapter 5, [Gaps and Islands, by Itzik Ben-Gan](https://livebook.manning.com/book/sql-server-mvp-deep-dives/chapter-5/1), explores the Gaps and Islands solutions in substantial detail. Two solutions in this post are adapted from this chapter.
 
-This series's next post looks at the opposite problem, identifying consecutive values or **Islands**.
+In the [next post](consecutive-values-sql-server) we'll look at the opposite problem, identifying consecutive values or **Islands**.
 
 ## Further Reading
 * [SQL Server MVP Deep Dives, Ch 5. Gaps and Islands](https://livebook.manning.com/book/sql-server-mvp-deep-dives/chapter-5/1)
