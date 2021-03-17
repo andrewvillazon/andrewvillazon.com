@@ -21,9 +21,9 @@ Because of this, you'll probably find my content very "data centric."
 
 ## About this site
 
-This site was built with Gatsby. If you're interested in reading about the experience of working with Gatsby, I documented it here.
+This site was built with Gatsby. If you're interested in reading about the experience of working with Gatsby, I documented it [here](/building-my-personal-site-in-gatsby/).
 
-Unlike many Gatsby sites, I opted not to host on Netlify. To get equivalent automation, I use Github Actions and wrote about my setup here.
+Unlike many Gatsby sites, I opted not to host on Netlify. To get equivalent automation, I use Github Actions and wrote about my setup [here](/automatically-deploying-with-github-actions/).
 
 ## Acknowledgments
 
