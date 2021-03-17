@@ -180,33 +180,242 @@ This query has a few different parts, so we'll break it apart and build it into 
 
 First, let's look at the following query. It uses two similar subqueries to identify where a sequence started or ended.
 
+```sql
+/* Data setup */
+
+SELECT
+    num_sequence_outer.value_of_interest
+    ,(
+        SELECT
+            num_sequence_sub.value_of_interest
+        FROM
+            @sequences as num_sequence_sub
+        WHERE
+            num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest - 1
+    ) as sequence_started
+    ,(
+        SELECT
+            num_sequence_sub.value_of_interest
+        FROM
+            @sequences as num_sequence_sub
+        WHERE
+            num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest + 1
+    ) as sequence_ended
+FROM
+    @sequences as num_sequence_outer
+```
+
 Notice that we get `NULL` in the columns when a sequence starts or ends.
 
-[CODE 1]
+```
+| value_of_interest | sequence_started | sequence_ended |
+|-------------------|------------------|----------------|
+| 1                 | NULL             | 2              |
+| 2                 | 1                | 3              |
+| 3                 | 2                | NULL           |
+| 6                 | NULL             | 7              |
+| 7                 | 6                | NULL           |
+| 9                 | NULL             | NULL           |
+| 11                | NULL             | 12             |
+| 12                | 11               | NULL           |
+| 20                | NULL             | NULL           |
+| 25                | NULL             | NULL           |
+```
 
 Now we need a way to filter for the `NULL`s in the `sequence_started` and `sequence_ended` columns. 
 
 To do this, we move the subquery into the `WHERE` clause and combine it with `NOT EXISTS`. This condition filters for rows where the subquery returns `NULL`.
 
-[CODE 2]
+```sql{15,30}
+/* Data setup */
+
+-- sequence starts
+SELECT
+    num_sequence_outer.value_of_interest
+FROM
+    @sequences as num_sequence_outer
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_sub.value_of_interest
+        FROM
+            @sequences as num_sequence_sub
+        WHERE
+            num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest - 1
+    )
+
+-- sequence endings
+SELECT
+    num_sequence_outer.value_of_interest
+FROM
+    @sequences as num_sequence_outer
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_sub.value_of_interest
+        FROM
+            @sequences as num_sequence_sub
+        WHERE
+            num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest + 1
+    )
+```
 
 At this point, we're still working with two separate result sets—a set of sequence starting points and a set of sequence ending points.
 
+```
+| value_of_interest |   | value_of_interest |
+|-------------------|   |-------------------|
+| 1                 |   | 3                 |
+| 6                 |   | 7                 |
+| 9                 |   | 9                 |
+| 11                |   | 12                |
+| 20                |   | 20                |
+| 25                |   | 25                |
+```
+
 Because each result set contains equal rows, we can connect them with the `ROW_NUMBER` function.
 
-[CODE 3]
+```sql{5,20}
+/* Data setup */
+
+SELECT
+    num_sequence_outer.value_of_interest
+    ,ROW_NUMBER() OVER(ORDER BY value_of_interest) as row_n
+FROM
+    @sequences as num_sequence_outer
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_sub.value_of_interest
+        FROM
+            @sequences as num_sequence_sub
+        WHERE
+            num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest - 1
+    )
+
+SELECT
+    num_sequence_outer.value_of_interest
+    ,ROW_NUMBER() OVER(ORDER BY value_of_interest) as row_n
+FROM
+    @sequences as num_sequence_outer
+WHERE NOT EXISTS
+    (
+        SELECT
+            num_sequence_sub.value_of_interest
+        FROM
+            @sequences as num_sequence_sub
+        WHERE
+            num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest + 1
+    )
+```
+
+```
+| value_of_interest | row_n |   | value_of_interest | row_n |
+|-------------------|-------|   |-------------------|-------|
+| 1                 | 1     |   | 3                 | 1     |
+| 6                 | 2     |   | 7                 | 2     |
+| 9                 | 3     |   | 9                 | 3     |
+| 11                | 4     |   | 12                | 4     |
+| 20                | 5     |   | 20                | 5     |
+| 25                | 6     |   | 25                | 6     |
+```
 
 To finish, we put each result set in a CTE and combine them based on their row numbers. A temp table would also work in this situation.
 
-[CODE 4]
+```sql{4,21,44}
+/* Data setup */
+
+;
+WITH sequence_starts AS
+    (
+    SELECT
+        num_sequence_outer.value_of_interest
+        ,ROW_NUMBER() OVER(ORDER BY value_of_interest) as row_num
+    FROM
+        @sequences as num_sequence_outer
+    WHERE NOT EXISTS
+        (
+            SELECT
+                num_sequence_sub.value_of_interest
+            FROM
+                @sequences as num_sequence_sub
+            WHERE
+                num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest - 1
+        )
+    ),
+    sequence_ends AS (
+        SELECT
+            num_sequence_outer.value_of_interest
+            ,ROW_NUMBER() OVER(ORDER BY value_of_interest) as row_num
+        FROM
+            @sequences as num_sequence_outer
+        WHERE NOT EXISTS
+            (
+                SELECT
+                    num_sequence_sub.value_of_interest
+                FROM
+                    @sequences as num_sequence_sub
+                WHERE
+                    num_sequence_sub.value_of_interest = num_sequence_outer.value_of_interest + 1
+            )
+    )
+
+SELECT
+    sequence_starts.value_of_interest as island_start
+    ,sequence_ends.value_of_interest as island_ends
+FROM
+    sequence_starts
+        INNER JOIN sequence_ends
+            ON sequence_starts.row_num = sequence_ends.row_num
+```
 
 If you only want sequences with more than 1 row, filter for rows where the sequence's start and end are not the same value.
 
-[CODE 5]
+```sql{11}
+-- ...
+
+SELECT
+    sequence_starts.value_of_interest as island_start
+    ,sequence_ends.value_of_interest as island_ends
+FROM
+    sequence_starts
+        INNER JOIN sequence_ends
+            ON sequence_starts.row_num = sequence_ends.row_num
+WHERE
+    sequence_starts.value_of_interest <> sequence_ends.value_of_interest
+```
+
+```
+| island_start | island_ends |
+|--------------|-------------|
+| 1            | 3           |
+| 6            | 7           |
+| 11           | 12          |
+```
 
 Lastly, as an interesting side note, if we modify the join, it's possible to arrive at the gaps!
 
-[CODE 6]
+```sql{9}
+-- ...
+
+SELECT
+    sequence_ends.value_of_interest + 1 as sequence_ends
+    ,sequence_starts.value_of_interest - 1 as sequence_start
+FROM
+    sequence_starts
+        INNER JOIN sequence_ends
+            ON sequence_starts.row_num = sequence_ends.row_num + 1
+```
+
+```
+| sequence_ends | sequence_start |
+|---------------|----------------|
+| 4             | 5              |
+| 8             | 8              |
+| 10            | 10             |
+| 13            | 19             |
+| 21            | 24             |
+```
 
 ## Conclusion
 
