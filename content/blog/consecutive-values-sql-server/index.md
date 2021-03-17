@@ -1,15 +1,15 @@
 ---
 title: "Identify consecutive values in SQL Server"
-date: "2021-03-18"
+date: "2021-03-17"
 tags:
     - SQL Server
 ---
 
-In this two-part series, we'll look at different solutions to a SQL problem - how to **identify consecutive** or **non-consecutive values** in a column. Also known as the **Gaps and Islands** problem. 
+In this two-part series, we look at different solutions to a SQL problem - how to **identify consecutive** or **non-consecutive values** in a column. Also known as the **Gaps and Islands** problem. 
 
 Understanding the Gaps and Islands problem is useful for analyzing data that features sequences or breaks in sequences.
 
-This post, part two of the series, will look at methods for identifying **consecutive values (Islands)**. In part one, we explored ways to identify non-consecutive values (Gaps).
+This post, part two of the series, will look at methods for identifying **consecutive values (Islands)**. In [part one](/non-consecutive-values-sql-server), we explored ways to identify non-consecutive values (Gaps).
 
 ## What is the Gaps and Islands problem?
 
@@ -49,11 +49,13 @@ As the name implies, there are two components.
 
 ## Identifying Islands
 
-To identify islands, there are two approaches. Use a sequence identifier to group values that are in sequence. Or identify where a sequence starts and ends. Let's look at how to do both.
+To identify islands, there are two approaches. Use a **sequence identifier** to group values that are in sequence. Or identify where a **sequence starts and ends**. Let's look at how to do both.
 
 ### Using DENSE_RANK
 
-We're going to use `DENSE_RANK` to help create an identifier to group values that are part of a sequence. Begin by applying the `DENSE_RANK` function to the rows.
+We're going to use the [DENSE_RANK function](https://docs.microsoft.com/en-us/sql/t-sql/functions/dense-rank-transact-sql?view=sql-server-ver15) to help create an identifier to group values that are part of a sequence. 
+
+Begin by applying the `DENSE_RANK` function to the rows.
 
 ```sql
 -- Data setup
@@ -88,7 +90,9 @@ FROM
 | 25                | 10                |
 ```
 
-To produce the group identifier, we can subtract the result of `DENSE_RANK` from the row value. As the sequence increases, the result of this calculation remains constant but then changes when a new sequence starts. We use this constant to identify the islands.
+To produce the group identifier, we **subtract** the result of `DENSE_RANK` from the row value. 
+
+As the sequence increases, the result of this calculation remains constant but then changes when a new sequence starts. We use this constant to identify the islands.
 
 ```sql{5}
 /* Data setup */
@@ -174,7 +178,7 @@ If you're curious about why we're using `DENSE_RANK` and not `ROW_NUMBER`, this 
 
 ### Using Subqueries, ROW_NUMBER, and CTEs
 
-Recall from the article on Identifying Gaps that this involves working out where a sequence ends and a new one begins. We can apply the same technique to help identify islands.
+Recall from the article on [Identifying Gaps](/non-consecutive-values-sql-server) that this involves working out where a sequence ends and a new one begins. We can apply the same technique to help identify islands.
 
 This query has a few different parts, so we'll break it apart and build it into a final query.
 
@@ -213,7 +217,7 @@ FROM
     @sequences as num_sequence_outer
 ```
 
-Notice that we get `NULL` in the columns when a sequence starts or ends.
+Notice that we get `NULL` in the columns when a **sequence starts or ends**.
 
 ```
 | value_of_interest | sequence_started | sequence_ended |
@@ -328,7 +332,7 @@ WHERE NOT EXISTS
 | 25                | 6     |   | 25                | 6     |
 ```
 
-To finish, we put each result set in a CTE and combine them based on their row numbers. A temp table would also work in this situation.
+To finish, we put each result set in a [Common Table Expression (CTE)](https://docs.microsoft.com/en-us/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver15) and combine them based on their row numbers. A temp table would also work in this situation.
 
 ```sql{4,21,44}
 /* Data setup */
@@ -377,7 +381,7 @@ FROM
             ON sequence_starts.row_num = sequence_ends.row_num
 ```
 
-If you only want sequences with more than 1 row, filter for rows where the sequence's start and end are not the same value.
+If you only want sequences with more than 1 row, filter for rows where the sequence's start and end are **not** the same value.
 
 ```sql{11}
 -- ...
