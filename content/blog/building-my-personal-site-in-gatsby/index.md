@@ -1,5 +1,5 @@
 ---
-title: "Building my personal site in Gatsby without web development experience"
+title: "Building my personal site in Gatsby"
 date: "2020-07-01"
 tags:
     - Gatsby
