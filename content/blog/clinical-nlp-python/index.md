@@ -1,5 +1,5 @@
 ---
-title: "A guide to Clinical Natural Language Processing in Python"
+title: "Clinical Natural Language Processing in Python"
 date: "2021-04-17"
 tags:
     - Python
@@ -23,6 +23,12 @@ We're going to combine three libraries to perform Clinical NLP:
 * negspaCy: for detecting negation of terms.
 
 The goal of this guide is not a detailed tutorial on each of these libraries. For that, I highly recommend starting with Advanced NLP with spaCy, a free online course from the spaCy team.
+
+### Contents
+
+```toc
+exclude: ["Overview","Contents"]
+```
 
 ## Processing text with spaCy
 
