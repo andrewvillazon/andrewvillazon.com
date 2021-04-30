@@ -6,7 +6,7 @@ tags:
 ---
 When working with health data, some of the most valuable information is inside Clinical Documentation. Notes made by Clinicians document many details, including diseases present, treatments, medications, or procedures, providing insight into a patient's condition.
 
-In this guide, we'll see how to use modern NLP tools in Python to extract meaningful information from Clinical Texts.
+In this guide, we'll see how to use modern NLP tools in [Python](https://www.python.org/) to extract meaningful information from Clinical Texts.
 
 #### Prerequisites
 
@@ -62,10 +62,9 @@ The convention in spaCy is to assign a pipeline object to a variable named `nlp`
 ```python
 from spacy.lang.en import English
 
-
 nlp = English()
 
-doc = nlp("Something is rotten in the state of Denmark and Hamlet is taking out the trash!")
+doc = nlp("Get to the chopper!")
 
 ```
 
@@ -80,12 +79,12 @@ The `Doc` behaves like a sequence. When used in a for loop, the `Doc` object ret
 ```python
 from spacy.lang.en import English
 
-
 nlp = English()
 doc = nlp("Iced that guy, cone a phrase.")
 
 for token in doc:
     print(token)
+
 ```
 
 ```
@@ -112,16 +111,13 @@ spaCy gives us a large amount of information about a token, including:
 
 Below examines a selection of attributes for the tokens in a `Doc` object.
 
-```python
+```python{10}
 from spacy.lang.en import English
 
-
 nlp = English()
-
 doc = nlp("Two years from now, spam will be solved.")
 
 fmt_str = "{:<8}| {:<10}| {:<10}| {:<10}"
-
 print(fmt_str.format("token", "is_alpha","is_punct", "like_num"))
 
 for token in doc:
@@ -176,15 +172,13 @@ nlp = spacy.load("en_core_web_sm")
 
 As we saw earlier, we call `nlp()` on the text to process it and create a `Doc` object.
 
-```python
+```python{3,4}
 import spacy
 
 nlp = spacy.load("en_core_web_sm")
-
 doc = nlp("Early one morning, Peter opened the gate and walked out into the big green meadow.")
 
 fmt_str = "{:<8}| {:<6}| {:<8}| {:<8}"
-
 print(fmt_str.format("token","pos", "label","parent"))
 
 for token in doc:
@@ -264,19 +258,15 @@ scispaCy pipelines are created and used like other spaCy trained pipelines, i.e.
 
 Below we create a scispaCy pipeline using an **Entity Detection model**. We then call it on a clinical text and inspect the token attributes.
 
-```python
+```python{4}
 import scispacy
 import spacy
 
-
 nlp = spacy.load("en_core_sci_sm")
 
-clinical_text = "An allograft was used to recreate the coracoacromial ligaments and then secured to decorticate with a bioabsorbable tenodesis screw and then to the clavicle."
-
-doc = nlp(clinical_text)
+doc = nlp("An allograft was used to recreate the coracoacromial ligaments and then secured to decorticate with a bioabsorbable tenodesis screw and then to the clavicle.")
 
 fmt_str = "{:<15}| {:<6}| {:<7}| {:<8}"
-
 print(fmt_str.format("token", "pos", "label", "parent"))
 
 for token in doc:
@@ -302,19 +292,15 @@ Notice how the pipeline has done part of speech tagging, identified syntactic de
 
 Here we do the same but replace the Entity Detector with a **NER model**.
 
-```python{5}
+```python{4}
 import scispacy
 import spacy
 
-
 nlp = spacy.load("en_ner_bionlp13cg_md")
 
-clinical_text = "An allograft was used to recreate the coracoacromial ligaments and then secured to decorticate with a bioabsorbable tenodesis screw and then to the clavicle."
-
-doc = nlp(clinical_text)
+doc = nlp("An allograft was used to recreate the coracoacromial ligaments and then secured to decorticate with a bioabsorbable tenodesis screw and then to the clavicle.")
 
 fmt_str = "{:<15}| {:<6}| {:<7}| {:<8}"
-
 print(fmt_str.format("token", "pos", "label", "parent"))
 
 for token in doc:
@@ -352,7 +338,6 @@ import spacy
 from scispacy.abbreviation import AbbreviationDetector
 
 nlp = spacy.load("en_core_sci_sm")
-
 # Add the abbreviation pipe to the spacy pipeline.
 nlp.add_pipe("abbreviation_detector")
 
@@ -361,7 +346,6 @@ doc = nlp(
 )
 
 fmt_str = "{:<6}| {:<30}| {:<6}| {:<6}"
-
 print(fmt_str.format("Short", "Long", "Starts", "Ends"))
 
 for abrv in doc._.abbreviations:
@@ -390,7 +374,7 @@ CLL   | Chronic lymphocytic leukemia  | 36    | 37
 
 scispaCy's `EntityLinker` class is a [spaCy pipeline component](https://spacy.io/usage/processing-pipelines#pipelines) that links entities identified by the trained pipeline with various clinical ontologies. In spaCy, these ontologies are called Knowledge Bases.
 
-As of writing, scispaCy supports the following: [Unified Medical Language System](https://www.nlm.nih.gov/research/umls/index.html), [Medical Subject Headings](https://www.nlm.nih.gov/mesh/meshhome.html), the [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) Ontology, the [Gene(http://geneontology.org/)] Ontology, and the [Human Phenotype](https://hpo.jax.org/app/) Ontology.
+As of writing, scispaCy supports the following: [Unified Medical Language System](https://www.nlm.nih.gov/research/umls/index.html), [Medical Subject Headings](https://www.nlm.nih.gov/mesh/meshhome.html), the [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) Ontology, the [Gene](http://geneontology.org/) Ontology, and the [Human Phenotype](https://hpo.jax.org/app/) Ontology.
 
 The `EntityLinker` uses an **approximate nearest neighbors search** to compare each identified entity to entries in the knowledge base.
 
@@ -476,7 +460,7 @@ Lastly, we can query the knowledge base for more detail using the `EntityLinker`
 
 To query, we first retrieve the `EntityLinker` from the pipeline using the `get_pipe()` method. We then look up the CUI in the `linker.kb.cui_to_entity` dictionary using the CUI as the key.
 
-```python{10,18}
+```python{10,17}
 import spacy
 import scispacy
 from scispacy.linking import EntityLinker
@@ -489,7 +473,6 @@ doc = nlp("Patient has prostate cancer with metastatic disease to his bladder.")
 linker = nlp.get_pipe("scispacy_linker")
 
 fmt_str = "{:<20}| {:<10}| {:<32}| {:<20}"
-
 print(fmt_str.format("Entity", "1st CUI", "Canonical Name", "Definition"))
 
 for entity in doc.ents:
@@ -627,14 +610,19 @@ To modify the termset negspaCy provides the `add_patterns()` and `remove_pattern
 
 These modifications should occur **before adding negspaCy** to the trained pipeline. Once modified, include the new termset when adding the negspaCy to the pipeline.
 
-```python
+```python{9,10}
 import scispacy
 import spacy
 from negspacy.negation import Negex
 from negspacy.termsets import termset
 
 ts = termset("en_clinical")
-ts.add_patterns({"preceding_negations":["unable"], "following_negations": ["was negative"]})
+ts.add_patterns(
+    {
+        "preceding_negations":["unable"],
+        "following_negations": ["was negative"]
+    }
+)
 
 
 nlp = spacy.load("en_core_sci_sm")
@@ -665,7 +653,7 @@ If you're using scispaCy, you may find that it combines negations and entities i
 
 To address this, we can include a `"chunk_prefix"` key in the `config` dictionary with a list of negations that could appear with an entity.
 
-```python
+```python{6}
 import scispacy
 import spacy
 from negspacy.negation import Negex
