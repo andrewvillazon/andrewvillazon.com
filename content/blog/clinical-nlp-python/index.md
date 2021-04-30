@@ -397,6 +397,13 @@ nlp.add_pipe("scispacy_linker", config={"linker_name": "umls"})
 
 ```
 
+<div class="call-out call-out-info">
+    <h4>EntityLinker takes a long time to run</h4>
+    <p>
+        The first time running the <code>EntityLinker</code> will take a long time. This is because the <code>EntityLinker</code> must download the Knowledge Base. For the UMLS, this is a 1GB json file!. Once downloaded, it'll be cached, and future use much faster.
+    </p>
+</div>
+
 #### Configuring the EntityLinker
 
 To configure the `EntityLinker`, we include an optional dictionary of configuration key-value pairs with the call to `add_pipe()`
