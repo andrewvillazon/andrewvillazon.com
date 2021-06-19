@@ -1,6 +1,6 @@
 ---
 title: "The Table Value Constructor (aka the VALUES keyword)"
-date: "2021-06-17"
+date: "2021-06-19"
 tags:
     - SQL Server
 ---
