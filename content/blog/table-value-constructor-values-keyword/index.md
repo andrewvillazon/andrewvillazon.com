@@ -5,15 +5,15 @@ tags:
     - SQL Server
 ---
 
-In this post, we'll look at a helpful but lesser-known feature of [T-SQL](https://docs.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver15), the Table Value Constructor.
+In this post, we'll look at a helpful but lesser-known feature of [T-SQL](https://docs.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver15), the **Table Value Constructor**.
 
-You've probably seen it used as part of an Insert Statement, where it is easily identifiable as the `VALUES` keyword.
+You've probably seen it used as part of an `INSERT` Statement, where it is easily identifiable as the `VALUES` keyword.
 
-However, the VALUES keyword isn't exclusive to an Insert Statement and can be used in other ways that we'll explore below.
+However, the `VALUES` keyword isn't exclusive to an `INSERT` Statement and can be used in other ways that we'll explore below.
 
 ## What is the Table Value Constructor?
 
-The TVC is an expression that allows you to define a table row by row (known as row expressions) using the keyword `VALUES`
+The TVC is an expression that allows you to define a table **row by row** (known as row expressions) using the keyword `VALUES`
 
 The Table Value Constructor has the following layout:
 
@@ -27,7 +27,7 @@ VALUES
 
 The TVC starts with the keyword `VALUES`, followed by a list of rows that form the returned table. 
 
-Each row and its column values go inside parentheses, with a comma separating the column values. Each additional row follows with a comma and parentheses.
+Each row and its column values go inside parentheses `()`, with a comma separating the column values. Each additional row follows with a comma and parentheses.
 
 ## Using the Table Value Constructor
 
@@ -35,7 +35,7 @@ So how do we use the Table Value Constructor? In a couple of ways.
 
 ### Multi-row Insert Statement
 
-Here is where you'll commonly see the Table Value Constructor. In a [Multi-row Insert](https://docs.microsoft.com/en-us/sql/t-sql/statements/insert-transact-sql?view=sql-server-ver15#b-inserting-multiple-rows-of-data), the Table Value Constructor defines a table that gets inserted as a whole rather than row by row.
+Here is where you'll commonly see the Table Value Constructor. In a [Multi-row Insert](https://docs.microsoft.com/en-us/sql/t-sql/statements/insert-transact-sql?view=sql-server-ver15#b-inserting-multiple-rows-of-data), the Table Value Constructor defines a table that gets **inserted as a whole** rather than row by row.
 
 ```sql{11-16}
 DROP TABLE IF EXISTS #hundred_meter_records
@@ -62,7 +62,7 @@ SELECT * FROM #hundred_meter_records
 
 An interesting feature of the TVC is that it also functions as a [derived table](https://www.mssqltips.com/sqlservertip/6038/sql-server-derived-table-example/).
 
-To do this, we wrap the TVC in parenthesis and include it in the FROM clause of a query. As you'd expect, it is then available to use in the SELECT statement.
+To do this, we wrap the TVC in parenthesis `()` and include it in the `FROM` clause of a query. As you'd expect, it is then available to use in the `SELECT` statement.
 
 ```sql
 SELECT
@@ -79,7 +79,7 @@ FROM
     ) as olympics(olympiad, host_city)
 ```
 
-One thing to point out with the TVC, it's not possible to name columns as part of the TVC call. So instead, we alias the returned table and assign column names inside the parentheses which follow.
+One thing to point out with the TVC, it's **not** possible to name columns as part of the TVC call. So instead, we **alias the returned table** and assign column names inside the parentheses which follow.
 
 ```sql{2}
 ...
@@ -87,7 +87,7 @@ One thing to point out with the TVC, it's not possible to name columns as part o
 ...
 ```
 
-As you might have guessed, this also works in a join.
+As you might have guessed, this also works in a **join**.
 
 ```sql{15-21}
 SELECT
@@ -199,7 +199,7 @@ FROM
             ON country_filter.country = #high_cities.country
 ```
 
-Keep in mind that the `IN` operator is a syntax shortcut for multiple `OR` conditions in the `WHERE` clause. Depending on your data, this approach may turn out to be faster than using the `IN` operator.
+Keep in mind that the `IN` operator is a syntax shortcut for multiple `OR` conditions in the `WHERE` clause. Depending on your data, this approach *may* turn out to be faster than using the `IN` operator.
 
 Likewise, the TVC can be used to replace multiple `LIKE` operators.
 
@@ -234,7 +234,7 @@ Lastly, there's a cool feature of the TVC that lets us reference an external col
 
 Hat tip to [Dwain Camps on sqlservercentral.com](https://www.sqlservercentral.com/articles/an-alternative-better-method-to-unpivot-sql-spackle) for the great explainer on this technique.
 
-In short, what we CROSS APPLY a Table Value Constructor where each column is a row in the TVC. The effect of this is we end up with a derived table of column values applied to each associated row.
+In short, we `CROSS APPLY` a Table Value Constructor where **each column is a row** in the TVC. The effect of this is we end up with a derived table of column values applied to each associated row.
 
 ```sql{23-26}
 -- Setup some data
@@ -266,7 +266,7 @@ FROM
         ) as cols_to_rows(measure, measure_value)
 ```
 
-Notice that the columns you're transposing will need to be the same or compatible data types for this to work.
+Notice that the columns you're transposing will need to be the **same or compatible data types** for this to work.
 
 ## Conclusion
 
