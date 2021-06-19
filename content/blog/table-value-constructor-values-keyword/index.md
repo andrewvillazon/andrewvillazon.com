@@ -5,7 +5,7 @@ tags:
     - SQL Server
 ---
 
-In this post, we'll look at a helpful but lesser-known feature of T-SQL, the Table Value Constructor.
+In this post, we'll look at a helpful but lesser-known feature of [T-SQL](https://docs.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver15), the Table Value Constructor.
 
 You've probably seen it used as part of an Insert Statement, where it is easily identifiable as the `VALUES` keyword.
 
@@ -35,7 +35,7 @@ So how do we use the Table Value Constructor? In a couple of ways.
 
 ### Multi-row Insert Statement
 
-Here is where you'll commonly see the Table Value Constructor. In a Multi-row Insert, the Table Value Constructor defines a table that gets inserted as a whole rather than row by row.
+Here is where you'll commonly see the Table Value Constructor. In a [Multi-row Insert](https://docs.microsoft.com/en-us/sql/t-sql/statements/insert-transact-sql?view=sql-server-ver15#b-inserting-multiple-rows-of-data), the Table Value Constructor defines a table that gets inserted as a whole rather than row by row.
 
 ```sql{11-16}
 DROP TABLE IF EXISTS #hundred_meter_records
@@ -60,7 +60,7 @@ SELECT * FROM #hundred_meter_records
 
 ### Using as a derived table
 
-An interesting feature of the TVC is that it can also function as a derived table.
+An interesting feature of the TVC is that it also functions as a [derived table](https://www.mssqltips.com/sqlservertip/6038/sql-server-derived-table-example/).
 
 To do this, we wrap the TVC in parenthesis and include it in the FROM clause of a query. As you'd expect, it is then available to use in the SELECT statement.
 
@@ -136,7 +136,7 @@ SELECT
     ,6.02
 ```
 
-The goal of this code is to generate a table or result set. We can refactor this code with the Table Value Constructor and generate the same result.
+The goal of this code is to generate a table or result set. We can [refactor](https://en.wikipedia.org/wiki/Code_refactoring) this code with the Table Value Constructor and get the same result.
 
 ```sql
 SELECT
@@ -152,7 +152,7 @@ FROM
 
 Notice how it becomes more precise and less repetitive.
 
-#### Refactoring IN and LIKE operators
+#### Alternative IN and LIKE operators
 
 Interestingly, it's also possible to use the TVC as an alternative to the `IN` and `LIKE` operators because of this derived table functionality.
 
@@ -230,7 +230,7 @@ FROM
 
 #### Transpose Columns into Rows
 
-Lastly, there's a cool feature of the TVC that lets us reference an external column inside the TVC itself. This feature lends itself to succinctly turning columns into rows.
+Lastly, there's a cool feature of the TVC that lets us reference an external column inside the TVC itself. This feature lends itself to succinctly turning [columns into rows](https://docs.microsoft.com/en-us/sql/t-sql/queries/from-using-pivot-and-unpivot?view=sql-server-ver15#unpivot-example).
 
 Hat tip to [Dwain Camps on sqlservercentral.com](https://www.sqlservercentral.com/articles/an-alternative-better-method-to-unpivot-sql-spackle) for the great explainer on this technique.
 
