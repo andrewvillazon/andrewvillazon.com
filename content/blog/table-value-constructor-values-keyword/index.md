@@ -273,3 +273,7 @@ Notice that the columns you're transposing will need to be the same or compatibl
 As we've seen, the Table Value Constructor has some handy uses outside of the Multi-row Insert. Some of these can make your queries cleaner and faster. This expression is one of my favorite hidden gems in T-SQL.
 
 ### Further Reading
+
+* [Table Value Constructor (T-SQL)]([https://docs.microsoft.com/en-us/sql/t-sql/queries/table-value-constructor-transact-sql?view=sql-server-ver15)
+* [Table Value Constructors in SQL Server 2008](https://www.red-gate.com/simple-talk/sql/t-sql-programming/table-value-constructors-in-sql-server-2008/)
+* [An Alternative (Better?) Method to UNPIVOT](https://www.sqlservercentral.com/articles/an-alternative-better-method-to-unpivot-sql-spackle)
