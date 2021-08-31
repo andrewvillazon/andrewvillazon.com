@@ -127,6 +127,50 @@ FROM
     #demo_data
 ```
 
+## Outer Apply Solution
+
+This solution is similar to the above but uses `OUTER APPLY` in place of the subquery in the `SELECT` clause.
+
+If you're unfamiliar with `CROSS` & `OUTER APPLY` in t-sql, these *apply* their subquery results to each row of the table to the left.
+
+```sql
+SELECT
+    *
+FROM
+    #demo_data
+        OUTER APPLY (
+            SELECT TOP 1
+                inner_resultset.measurement as forward_filled
+            FROM
+                #demo_data as inner_resultset
+            WHERE
+                    inner_resultset.event_id = #demo_data.event_id
+                AND inner_resultset.measured_on <= #demo_data.measured_on
+                AND inner_resultset.measurement IS NOT NULL
+            ORDER BY
+                inner_resultset.measured_on DESC
+        ) as first_non_null
+```
+
+```
+| event_id | measured_on | measurement | forward_filled |
+|----------|-------------|-------------|----------------|
+| 1        | 2021-06-06  | NULL        | NULL           |
+| 1        | 2021-06-07  | 5           | 5              |
+| 1        | 2021-06-08  | NULL        | 5              |
+| 1        | 2021-06-09  | NULL        | 5              |
+| 2        | 2021-05-22  | 42          | 42             |
+| 2        | 2021-05-23  | 42          | 42             |
+| 2        | 2021-05-25  | NULL        | 42             |
+| 2        | 2021-05-26  | 11          | 11             |
+| 2        | 2021-05-27  | NULL        | 11             |
+| 2        | 2021-05-27  | NULL        | 11             |
+| 3        | 2021-07-01  | NULL        | NULL           |
+| 3        | 2021-07-03  | NULL        | NULL           |
+```
+
+Note that if we use `CROSS APPLY` instead of `OUTER APPLY`, we will eliminate the rows with `NULL` inside the column we're trying to carry forward.
+
 ## Using a Window Function
 
 The first component of this approach creates a column that groups the last non-null and null rows by `event_id`. 
@@ -175,7 +219,7 @@ SELECT
     event_id
     ,measured_on
     ,measurement
-    ,MAX(measurement) OVER (PARTITION BY event_id, grouper) as forward_fill
+    ,MAX(measurement) OVER (PARTITION BY event_id, grouper) as forward_filled
 FROM
     (
         SELECT
@@ -190,3 +234,21 @@ ORDER BY
     event_id
     ,measured_on
 ```
+
+```
+| event_id | measured_on | measurement | forward_filled |
+|----------|-------------|-------------|----------------|
+| 1        | 2021-06-06  | NULL        | NULL           |
+| 1        | 2021-06-07  | 5           | 5              |
+| 1        | 2021-06-08  | NULL        | 5              |
+| 1        | 2021-06-09  | NULL        | 5              |
+| 2        | 2021-05-22  | 42          | 42             |
+| 2        | 2021-05-23  | 42          | 42             |
+| 2        | 2021-05-25  | NULL        | 42             |
+| 2        | 2021-05-26  | 11          | 11             |
+| 2        | 2021-05-27  | NULL        | 11             |
+| 2        | 2021-05-27  | NULL        | 11             |
+| 3        | 2021-07-01  | NULL        | NULL           |
+| 3        | 2021-07-03  | NULL        | NULL           |
+```
+
