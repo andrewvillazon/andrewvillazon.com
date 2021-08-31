@@ -127,3 +127,66 @@ FROM
     #demo_data
 ```
 
+## Using a Window Function
+
+The first component of this approach creates a column that groups the last non-null and null rows by `event_id`. 
+
+To create this column, we use the `COUNT` aggregate function with the `OVER` clause. `OVER` turns the `COUNT` into a window function and applies a `COUNT` function per group of `event_id` rows.
+
+
+```sql{9}
+SELECT
+    *
+FROM
+    (
+        SELECT
+            event_id
+            ,measured_on
+            ,measurement
+            ,COUNT(measurement) OVER (PARTITION BY event_id ORDER BY measured_on) as grouper
+        FROM
+            #demo_data
+    ) as grouped
+```
+
+Run this query. You'll see that the `grouper` column increments only if a value is inside the measurement column and per `event_id`.
+
+```
+| event_id | measured_on | measurement | grouper |
+|----------|-------------|-------------|---------|
+| 1        | 2021-06-06  | NULL        | 0       |
+| 1        | 2021-06-07  | 5           | 1       |
+| 1        | 2021-06-08  | NULL        | 1       |
+| 1        | 2021-06-09  | NULL        | 1       |
+| 2        | 2021-05-22  | 42          | 1       |
+| 2        | 2021-05-23  | 42          | 2       |
+| 2        | 2021-05-25  | NULL        | 2       |
+| 2        | 2021-05-26  | 11          | 3       |
+| 2        | 2021-05-27  | NULL        | 3       |
+| 2        | 2021-05-27  | NULL        | 3       |
+| 3        | 2021-07-01  | NULL        | 0       |
+| 3        | 2021-07-03  | NULL        | 0       |
+```
+
+To forward fill, all we do is retrieve the `MAX` value by the new `grouper` column.
+
+```sql{5}
+SELECT
+    event_id
+    ,measured_on
+    ,measurement
+    ,MAX(measurement) OVER (PARTITION BY event_id, grouper) as forward_fill
+FROM
+    (
+        SELECT
+            event_id
+            ,measured_on
+            ,measurement
+            ,COUNT(measurement) OVER (PARTITION BY event_id ORDER BY measured_on) as grouper
+        FROM
+            #demo_data
+    ) as grouped
+ORDER BY
+    event_id
+    ,measured_on
+```
