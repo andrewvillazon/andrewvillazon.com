@@ -1,13 +1,13 @@
 ---
 title: "Four ways to forward-fill values in T-SQL (the last non NULL problem)"
-date: "2021-08-31"
+date: "2021-09-01"
 tags:
     - SQL Server
 ---
 
 In this post, we will look at how to forward-fill values in T-SQL, also known as the **last non-NULL problem**.
 
-By forward-filling, we're taking the previous row's value and using it in the current row if the current row value is `NULL` - in effect carrying the last non-NULL value forward.
+By forward-filling, we're taking the previous row's value and using it in the current row if the current row value is `NULL` - in effect carrying the last non-NULL value *forward*.
 
 The table below demonstrates forward-filling:
 
@@ -83,11 +83,9 @@ exclude: ["Setting up the data","Conclusion"]
 
 The first method uses a [subquery inside the SELECT](https://docs.microsoft.com/en-us/sql/relational-databases/performance/subqueries?view=sql-server-ver15#expression) clause to get the first non-NULL value before the current row.
 
-The solution has two parts. 
-
 First, we create a subquery that returns the first non-NULL value before the current row.
 
-```sql{10}
+```sql{10,12}
 SELECT
     *
     ,(SELECT TOP 1
@@ -121,7 +119,9 @@ FROM
 | 3        | 2021-07-03  | NULL        | NULL   |
 ```
 
-However, the last non-NULL value carries forward but only after the starting row. To fix this, we wrap the subquery in a `CASE` statement which returns the subquery if the current value is `NULL`; otherwise, the non-NULL value.
+The last non-NULL value carries forward but only after the starting row. 
+
+To fix this, we wrap the subquery in a `CASE` statement which returns the subquery if the current value is `NULL`; otherwise, the non-NULL value.
 
 ```sql{4,16,17}
 SELECT
@@ -248,7 +248,7 @@ Run this query. You'll see that the `grouper` column increments only if a value 
 | 3        | 2021-07-03  | NULL        | 0       |
 ```
 
-To forward fill, all we do is retrieve the `MAX` value by the new `grouper` column.
+To forward-fill, all we do is retrieve the `MAX` value by the new `grouper` column.
 
 ```sql{5}
 SELECT
@@ -312,7 +312,7 @@ To set up the recursive query, we first retrieve the first row of each `event_id
 
 In the `FROM` clause, we `INNER JOIN` the recursing query and offset the `idx` column by 1. This offsetting allows us to access the previous row.
 
-To achieve the forward filling, we use `ISNULL` in the `SELECT` statement to substitute the previous row's value if the current row value is `NULL`.
+To achieve the forward-filling, we use `ISNULL` in the `SELECT` statement to substitute the previous row's value if the current row value is `NULL`.
 
 ```sql{3,18,26,30,31}
 ;WITH base_data AS (
@@ -412,7 +412,7 @@ ORDER BY
 | 3        | 2021-07-03  | NULL           |
 ```
 
-At this point, we've forward filled. To arrive at a solution that includes the original last non-NULL values, `LEFT JOIN` the base data.
+At this point, we've forward-filled. To arrive at a solution that includes the original last non-NULL values, `LEFT JOIN` the base data.
 
 ```sql{6,10-12}
 --- ... Recursive setup
