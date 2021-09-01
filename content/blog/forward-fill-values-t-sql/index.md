@@ -1,5 +1,5 @@
 ---
-title: "Four ways to forward fill values in T-SQL (the last non null problem)"
+title: "Four ways to forward-fill values in T-SQL (the last non NULL problem)"
 date: "2021-08-31"
 tags:
     - SQL Server
@@ -81,7 +81,7 @@ exclude: ["Setting up the data","Conclusion"]
 
 ## 1. With a subquery in the SELECT clause
 
-The first method uses a subquery inside the `SELECT` clause to get the first non-null value before the current row.
+The first method uses a [subquery inside the SELECT](https://docs.microsoft.com/en-us/sql/relational-databases/performance/subqueries?view=sql-server-ver15#expression) clause to get the first non-null value before the current row.
 
 The solution has two parts. 
 
@@ -165,7 +165,7 @@ FROM
 
 ## 2. Using Outer Apply
 
-This solution is similar to the above but uses `OUTER APPLY` in place of the subquery in the `SELECT` clause.
+This solution is similar to the above but uses [OUTER APPLY](https://docs.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql?view=sql-server-ver15#using-apply) in place of the subquery in the `SELECT` clause.
 
 If you're unfamiliar with `CROSS` & `OUTER APPLY` in t-sql, these *apply* their subquery results to each row of the table to the left.
 
@@ -211,7 +211,7 @@ Note that if we use `CROSS APPLY` instead of `OUTER APPLY`, we will eliminate th
 
 The first component of this approach creates a column that groups the last non-null and null rows by `event_id`. 
 
-To create this column, we use the `COUNT` aggregate function with the `OVER` clause. `OVER` turns the `COUNT` into a window function and applies a `COUNT` function per group of `event_id` rows.
+To create this column, we use the `COUNT` aggregate function with the `OVER` clause. `OVER` turns the `COUNT` into a [window function](https://docs.microsoft.com/en-us/sql/t-sql/queries/select-over-clause-transact-sql?view=sql-server-ver15) and applies a `COUNT` function per group of `event_id` rows.
 
 
 ```sql{9}
@@ -290,7 +290,7 @@ ORDER BY
 
 ## 4. Using a Recursive CTE
 
-This solution uses a more advanced technique known as a recursive CTE. Recursive CTEs are a special kind of Common Table Expression in which the CTE references itself. The goal of this post is not to explain CTEs, so I'll assume you're familiar with them.
+This solution uses a more advanced technique known as a [Recursive CTE](https://docs.microsoft.com/en-us/sql/t-sql/queries/select-over-clause-transact-sql?view=sql-server-ver15). Recursive CTEs are a special kind of [Common Table Expression](https://docs.microsoft.com/en-us/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver15) in which the CTE references itself. The goal of this post is not to explain CTEs, so I'll assume you're familiar with them.
 
 There's a bit to unpack in this solution, but let's start with the recursive CTE itself.
 
@@ -435,3 +435,10 @@ ORDER BY
 ## Conclusion
 
 As we've seen, there are multiple ways to solve the last non-null problem. The best solution will likely depend on the profile of your data.
+
+### Further Reading
+* [The Last non NULL Puzzle - Itzik Ben-Gan](https://www.itprotoday.com/sql-server/last-non-null-puzzle)
+* [Filling In Missing Values Using the T-SQL Window Frame](https://www.red-gate.com/simple-talk/sql/t-sql-programming/filling-in-missing-values-using-the-t-sql-window-frame/)
+* [Replace null value with previous available value in Row](https://stackoverflow.com/questions/35050674/replace-null-value-with-previous-available-value-in-row-sql-server-query)
+* [How to get the last not-null value in an ordered column of a huge table?](https://dba.stackexchange.com/questions/233610/how-to-get-the-last-not-null-value-in-an-ordered-column-of-a-huge-table)
+* [Carry forward non-null value with a windowing function?](https://dba.stackexchange.com/questions/259554/carry-forward-non-null-value-with-a-windowing-function)
