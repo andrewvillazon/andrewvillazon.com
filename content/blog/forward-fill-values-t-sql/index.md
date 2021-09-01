@@ -9,7 +9,18 @@ In this post, we will look at how to forward-fill values in T-SQL, also known as
 
 By forward-filling, we're taking the previous row's value and using it in the current row if the current row value is `NULL` - in effect carrying the last non-null value forward.
 
-[TABLE DEMO WITH BEFORE AND AFTER]
+The table below demonstrates forward-filling:
+
+```
+| value_with_nulls | forward_filled |
+|------------------|----------------|
+| 12               | 12             |
+| NULL             | 12             |
+| NULL             | 12             |
+| 93               | 93             |
+| 27               | 27             |
+| NULL             | 27             |
+```
 
 ## Setting up the data
 
