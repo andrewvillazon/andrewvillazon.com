@@ -5,9 +5,9 @@ tags:
     - SQL Server
 ---
 
-In this post, we will look at how to forward-fill values in T-SQL, also known as the **last non-null problem**.
+In this post, we will look at how to forward-fill values in T-SQL, also known as the **last non-NULL problem**.
 
-By forward-filling, we're taking the previous row's value and using it in the current row if the current row value is `NULL` - in effect carrying the last non-null value forward.
+By forward-filling, we're taking the previous row's value and using it in the current row if the current row value is `NULL` - in effect carrying the last non-NULL value forward.
 
 The table below demonstrates forward-filling:
 
@@ -81,11 +81,11 @@ exclude: ["Setting up the data","Conclusion"]
 
 ## 1. With a subquery in the SELECT clause
 
-The first method uses a [subquery inside the SELECT](https://docs.microsoft.com/en-us/sql/relational-databases/performance/subqueries?view=sql-server-ver15#expression) clause to get the first non-null value before the current row.
+The first method uses a [subquery inside the SELECT](https://docs.microsoft.com/en-us/sql/relational-databases/performance/subqueries?view=sql-server-ver15#expression) clause to get the first non-NULL value before the current row.
 
 The solution has two parts. 
 
-First, we create a subquery that returns the first non-null value before the current row.
+First, we create a subquery that returns the first non-NULL value before the current row.
 
 ```sql{10}
 SELECT
@@ -121,7 +121,7 @@ FROM
 | 3        | 2021-07-03  | NULL        | NULL   |
 ```
 
-However, the last non-null value carries forward but only after the starting row. To fix this, we wrap the subquery in a `CASE` statement which returns the subquery if the current value is `NULL`; otherwise, the non-null value.
+However, the last non-NULL value carries forward but only after the starting row. To fix this, we wrap the subquery in a `CASE` statement which returns the subquery if the current value is `NULL`; otherwise, the non-NULL value.
 
 ```sql{4,16,17}
 SELECT
@@ -209,7 +209,7 @@ Note that if we use `CROSS APPLY` instead of `OUTER APPLY`, we will eliminate th
 
 ## 3. Combining window functions and subqueries
 
-The first component of this approach creates a column that groups the last non-null and null rows by `event_id`. 
+The first component of this approach creates a column that groups the last non-NULL and `NULL` rows by `event_id`. 
 
 To create this column, we use the `COUNT` aggregate function with the `OVER` clause. `OVER` turns the `COUNT` into a [window function](https://docs.microsoft.com/en-us/sql/t-sql/queries/select-over-clause-transact-sql?view=sql-server-ver15) and applies a `COUNT` function per group of `event_id` rows.
 
@@ -412,7 +412,7 @@ ORDER BY
 | 3        | 2021-07-03  | NULL           |
 ```
 
-At this point, we've forward filled. To arrive at a solution that includes the original last non-null values, `LEFT JOIN` the base data.
+At this point, we've forward filled. To arrive at a solution that includes the original last non-NULL values, `LEFT JOIN` the base data.
 
 ```sql{6,10-12}
 --- ... Recursive setup
@@ -434,7 +434,7 @@ ORDER BY
 
 ## Conclusion
 
-As we've seen, there are multiple ways to solve the last non-null problem. The best solution will likely depend on the profile of your data.
+As we've seen, there are multiple ways to solve the last non-NULL problem. The best solution will likely depend on the profile of your data.
 
 ### Further Reading
 * [The Last non NULL Puzzle - Itzik Ben-Gan](https://www.itprotoday.com/sql-server/last-non-null-puzzle)
