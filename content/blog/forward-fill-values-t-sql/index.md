@@ -24,9 +24,7 @@ The table below demonstrates forward-filling:
 
 ## Setting up the data
 
-Before we begin, let's set up some example data. There's just one thing our data needs, and that's a column to order the rows. In this data, I've used a date column, `measured_on`
-
-I've also included a column `event_id`. While it's not strictly required, it adds a grouping element that is more like real-world data.
+Each solution listed will use the same example data, set up as a temporary table in the SQL below.
 
 ```sql
 DROP TABLE IF EXISTS #demo_data
