@@ -140,6 +140,23 @@ FROM
     #demo_data
 ```
 
+```
+| event_id | measured_on | measurement | forward_filled |
+|----------|-------------|-------------|----------------|
+| 1        | 2021-06-06  | NULL        | NULL           |
+| 1        | 2021-06-07  | 5           | 5              |
+| 1        | 2021-06-08  | NULL        | 5              |
+| 1        | 2021-06-09  | NULL        | 5              |
+| 2        | 2021-05-22  | 42          | 42             |
+| 2        | 2021-05-23  | 42          | 42             |
+| 2        | 2021-05-25  | NULL        | 42             |
+| 2        | 2021-05-26  | 11          | 11             |
+| 2        | 2021-05-27  | NULL        | 11             |
+| 2        | 2021-05-27  | NULL        | 11             |
+| 3        | 2021-07-01  | NULL        | NULL           |
+| 3        | 2021-07-03  | NULL        | NULL           |
+```
+
 ## Outer Apply Solution
 
 This solution is similar to the above but uses `OUTER APPLY` in place of the subquery in the `SELECT` clause.
