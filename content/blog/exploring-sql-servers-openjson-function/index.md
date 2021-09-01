@@ -1,5 +1,5 @@
 ---
-title: "Exploring SQL Server's OPENJSON function"
+title: "How to use SQL Server's OPENJSON function"
 date: "2020-08-05"
 tags:
     - SQL Server
