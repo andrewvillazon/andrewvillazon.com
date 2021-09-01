@@ -52,6 +52,10 @@ VALUES
 ,(3,'2021-07-03',NULL);
 ```
 
+There's just one thing the data needs, and that's a column to order the rows. In this data, I've used a date column, `measured_on`. 
+
+I've also included a column `event_id`. While it's not strictly required, it adds a grouping element that is more like real-world data.
+
 Here's what the final result set should look like:
 
 ```
