@@ -1,5 +1,5 @@
 ---
-title: "Forward fill values in T-SQL (the last non null problem)"
+title: "Four ways to forward fill values in T-SQL (the last non null problem)"
 date: "2021-08-31"
 tags:
     - SQL Server
@@ -252,3 +252,146 @@ ORDER BY
 | 3        | 2021-07-03  | NULL        | NULL           |
 ```
 
+## Recursive CTE solution
+
+This solution uses a more advanced technique known as a recursive CTE. Recursive CTEs are a special kind of Common Table Expression in which the CTE references itself. The goal of this post is not to explain CTEs, so I'll assume you're familiar with them.
+
+There's a bit to unpack in this solution, but let's start with the recursive CTE itself.
+
+We start with creating a base query and include a column with an incrementing row number per event_id. We call this column `idx` 
+
+```sql{3}
+;WITH base_data AS (
+    SELECT 
+        ROW_NUMBER() OVER (PARTITION BY #demo_data.event_id ORDER BY #demo_data.measured_on) AS idx
+        ,#demo_data.event_id
+        ,#demo_data.measured_on
+        ,#demo_data.measurement
+    FROM
+        #demo_data
+)
+```
+
+To set up the recursive query, we first retrieve the first row of each `event_id`. Then we `UNION ALL` the remaining rows from the base query. 
+
+In the `FROM` clause, we `INNER JOIN` the recursing query and offset the `idx` column by 1. This offsetting allows us to access the previous row.
+
+To achieve the forward filling, we use `ISNULL` in the `SELECT` statement to substitute the previous row's value if the current row value is `NULL`.
+
+```sql{3,18,26,30,31}
+;WITH base_data AS (
+    SELECT 
+        ROW_NUMBER() OVER (PARTITION BY #demo_data.event_id ORDER BY #demo_data.measured_on) AS idx
+        ,#demo_data.event_id
+        ,#demo_data.measured_on
+        ,#demo_data.measurement
+    FROM
+        #demo_data
+), recursing_query AS (
+    SELECT 
+        idx
+        ,event_id
+        ,measured_on
+        ,measurement
+    FROM 
+        base_data
+    WHERE 
+        idx = 1
+    
+    UNION ALL
+
+    SELECT 
+        base_data.idx
+        ,base_data.event_id
+        ,base_data.measured_on
+        ,ISNULL(base_data.measurement, recursing_query.measurement)
+    FROM
+        base_data
+            INNER JOIN recursing_query
+                ON recursing_query.event_id = base_data.event_id 
+                AND recursing_query.idx = base_data.idx - 1
+)
+```
+
+Now we can `SELECT` the values from the CTE. The `ORDER BY` ensures the rows come out as expected.
+
+```sql{39-41}
+;WITH base_data AS (
+    SELECT 
+        ROW_NUMBER() OVER (PARTITION BY #demo_data.event_id ORDER BY #demo_data.measured_on) AS idx
+        ,#demo_data.event_id
+        ,#demo_data.measured_on
+        ,#demo_data.measurement
+    FROM
+        #demo_data
+), recursing_query AS (
+    SELECT 
+        idx
+        ,event_id
+        ,measured_on
+        ,measurement
+    FROM 
+        base_data
+    WHERE 
+        idx = 1
+    
+    UNION ALL
+
+    SELECT 
+        base_data.idx
+        ,base_data.event_id
+        ,base_data.measured_on
+        ,ISNULL(base_data.measurement, recursing_query.measurement)
+    FROM
+        base_data
+            INNER JOIN recursing_query
+                ON recursing_query.event_id = base_data.event_id 
+                AND recursing_query.idx = base_data.idx - 1
+)
+SELECT
+    recursing_query.event_id
+    ,recursing_query.measured_on
+    ,recursing_query.measurement as forward_filled
+FROM
+    recursing_query
+ORDER BY
+    recursing_query.event_id
+    ,recursing_query.measured_on
+```
+
+```
+| event_id | measured_on | forward_filled |
+|----------|-------------|----------------|
+| 1        | 2021-06-06  | NULL           |
+| 1        | 2021-06-07  | 5              |
+| 1        | 2021-06-08  | 5              |
+| 1        | 2021-06-09  | 5              |
+| 2        | 2021-05-22  | 42             |
+| 2        | 2021-05-23  | 42             |
+| 2        | 2021-05-25  | 42             |
+| 2        | 2021-05-26  | 11             |
+| 2        | 2021-05-27  | 11             |
+| 2        | 2021-05-27  | 11             |
+| 3        | 2021-07-01  | NULL           |
+| 3        | 2021-07-03  | NULL           |
+```
+
+At this point, we've forward filled. To arrive at a solution that includes the original last non-null values, `LEFT JOIN` the base data.
+
+```sql{6,10-12}
+--- ... Recursive setup
+
+SELECT
+    recursing_query.event_id
+    ,recursing_query.measured_on
+    ,base_data.measurement
+    ,recursing_query.measurement as forward_filled
+FROM
+    recursing_query
+        LEFT OUTER JOIN base_data
+            ON base_data.event_id = recursing_query.event_id
+            AND base_data.idx = recursing_query.idx
+ORDER BY
+    recursing_query.event_id
+    ,recursing_query.measured_on
+```
