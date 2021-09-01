@@ -73,7 +73,13 @@ Here's what the final result set should look like:
 | 3        | 2021-07-03  | NULL        | NULL           |
 ```
 
-## Using a subquery in the SELECT clause
+If you'd like to jump straight into a solution, here is the complete list
+
+```toc
+exclude: ["Setting up the data","Conclusion"]
+```
+
+## 1. With a subquery in the SELECT clause
 
 The first method uses a subquery inside the `SELECT` clause to get the first non-null value before the current row.
 
@@ -157,7 +163,7 @@ FROM
 | 3        | 2021-07-03  | NULL        | NULL           |
 ```
 
-## Outer Apply Solution
+## 2. Using Outer Apply
 
 This solution is similar to the above but uses `OUTER APPLY` in place of the subquery in the `SELECT` clause.
 
@@ -201,7 +207,7 @@ FROM
 
 Note that if we use `CROSS APPLY` instead of `OUTER APPLY`, we will eliminate the rows with `NULL` inside the column we're trying to carry forward.
 
-## Using a Window Function
+## 3. Combining window functions and subqueries
 
 The first component of this approach creates a column that groups the last non-null and null rows by `event_id`. 
 
@@ -282,7 +288,7 @@ ORDER BY
 | 3        | 2021-07-03  | NULL        | NULL           |
 ```
 
-## Recursive CTE solution
+## 4. Using a Recursive CTE
 
 This solution uses a more advanced technique known as a recursive CTE. Recursive CTEs are a special kind of Common Table Expression in which the CTE references itself. The goal of this post is not to explain CTEs, so I'll assume you're familiar with them.
 
@@ -425,3 +431,7 @@ ORDER BY
     recursing_query.event_id
     ,recursing_query.measured_on
 ```
+
+## Conclusion
+
+As we've seen, there are multiple ways to solve the last non-null problem. The best solution will likely depend on the profile of your data.
