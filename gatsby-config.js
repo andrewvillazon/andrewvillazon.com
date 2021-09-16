@@ -49,8 +49,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-vscode`,
             options: {
-              theme: `Night Owl`,
-              extensions: ['night-owl'], // Or install your favorite theme from GitHub
+              theme: `Panda Syntax`,
+              extensions: ['theme-panda'], // Or install your favorite theme from GitHub
             },
           },
         ],
