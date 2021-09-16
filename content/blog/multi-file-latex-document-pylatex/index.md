@@ -6,9 +6,9 @@ tags:
     - Snippets
 ---
 
-On a large or complex LaTeX document, it can be helpful to break the document into smaller files bringing them together under a main file. We can achieve Multi-file documents with the subfiles package outlined here at Overleaf.
+On a large or complex [LaTeX](https://www.latex-project.org/) document, it can be helpful to break the document into smaller files bringing them together under a **main** file. We can achieve **Multi-file documents** with the [subfiles](https://github.com/gsalzer/subfiles) package outlined here at [Overleaf](https://www.overleaf.com/learn/latex/Multi-file_LaTeX_projects).
 
-Here's how we can do the same thing using Pylatex.
+Here's how we can do the same thing using [Pylatex](https://jeltef.github.io/PyLaTeX/current/index.html).
 
 Directory layout:
 
