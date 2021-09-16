@@ -30,8 +30,6 @@ from pylatex.utils import NoEscape
 
 
 def setup_main_doc(main_doc):
-    # Packages used by the sub files need to be specified
-    # in the main doc.
     main_doc.packages.append(Package("blindtext"))
     main_doc.packages.append(Package("subfiles"))
 
@@ -79,4 +77,14 @@ if __name__ == "__main__":
     main_doc.generate_pdf("main")
     main_doc.generate_tex("main")
 
+```
+
+## Notes
+
+* The packages required by the sub-document are imported into the main document. It is recommended that the subfiles package be imported last.
+
+```python
+def setup_main_doc(main_doc):
+    main_doc.packages.append(Package("blindtext"))
+    main_doc.packages.append(Package("subfiles"))
 ```
