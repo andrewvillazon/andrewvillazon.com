@@ -19,7 +19,7 @@ Notably, it supports the standard data analysis tools associated with Python, su
 
 ### Installing
 
-The easiest way to install is via pip:
+The easiest way to install statsmodels is via pip:
 
 ```bash
 pip install statsmodels
