@@ -197,4 +197,4 @@ print(X[:5])
 4        1.0          1.0  ...                         1.0  35.0
 ```
 
-Specifically for the building of design matrices, Patsy is well worth exploring if you're coming from the R language or need advanced variable treatment.
+Specifically for building design matrices, Patsy is well worth exploring if you're coming from the R language or need advanced variable treatment.
