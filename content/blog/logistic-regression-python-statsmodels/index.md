@@ -115,3 +115,45 @@ log_reg = smf.logit("survived ~ sex + age + embark_town", data=titanic).fit()
 # Summary of results
 print(log_reg.summary())
 ```
+
+## Advanced Usage
+
+Here we'll look at some of the more advanced features of statsmodels and its Logistic Regression implementation.
+
+### What happens with formula strings? Patsy, and Design Matrices
+
+Most of the models in statsmodels require design matrices. You can think of design matrices as representing data in a way compatible with model building.
+
+When we use the formula api with a formula string, internally, this formula string is turned into a design matrix by the Patsy library.
+
+We can explore how patsy is transforming the data by using the `patsy.dmatrices()` function.
+
+```python{2, 7-9}
+import pandas as pd
+import patsy
+
+
+titanic = pd.read_csv("titanic.csv")
+
+y, X = patsy.dmatrices("survived ~ sex + age + embark_town",
+                        data=titanic,
+                        return_type="dataframe")
+
+```
+
+Inspecting `X`, we can see that patsy converted categorical variables into dummy variables and added a constant `Intercept` column.
+
+```python
+print(X[:5])
+```
+
+```
+   Intercept  sex[T.male]  ...  embark_town[T.Southampton]   age
+0        1.0          1.0  ...                         1.0  22.0
+1        1.0          0.0  ...                         0.0  38.0
+2        1.0          0.0  ...                         1.0  26.0
+3        1.0          0.0  ...                         1.0  35.0
+4        1.0          1.0  ...                         1.0  35.0
+```
+
+Specifically for the building of design matrices, Patsy is well worth exploring if you're coming from the R language or need advanced variable treatment.
