@@ -120,6 +120,47 @@ print(log_reg.summary())
 
 Here we'll look at some of the more advanced features of statsmodels and its Logistic Regression implementation.
 
+### Accessing model parameters
+
+In statsmodels, the `fit()` method returns a `Result` object. The model coefficients, standard errors, p-values, etc., are all available from this object.
+
+Conveniently these are stored as pandas data frames with the parameter name as the data frame index.
+
+```python
+# ... imports, load data, etc.
+
+# Define and fit model
+log_reg = smf.logit("survived ~ sex + age + embark_town", data=titanic).fit()
+
+# Inspect paramaters
+print(log_reg.params)
+```
+
+```
+Intercept                     0.321796
+sex[T.male]                   0.190807
+embark_town[T.Queenstown]     0.535031
+embark_town[T.Southampton]    0.236857
+age                           0.006550
+dtype: float64
+```
+
+Here are some of the relevant values for a Logistic Regression.
+
+| attr/func | Description |
+|---|---|---|
+| `params`  | Estimated model parameters. Appears as `coef` when calling `summary()` on a fitted model. |
+| `bse` | Standard error. |
+| `tvalues` | `z` column when calling `summary()` on a fitted model. |
+| `pvalues` | Model's p values. |
+| `conf_int(alpha)` | Method that calculates the confidence interval for the estimated parameters. To call: `model.conf_int(0.05)` |
+
+To see the complete list of available attributes and methods, use Python's built-in `dir()` function on the fitted model.
+
+```python
+print(dir(log_reg))
+```
+
 ### What happens with formula strings? Patsy, and Design Matrices
 
 Most of the models in statsmodels require design matrices. You can think of design matrices as representing data in a way compatible with model building.
