@@ -161,6 +161,41 @@ To see the complete list of available attributes and methods, use Python's built
 print(dir(log_reg))
 ```
 
+### Calculating Odds Ratios
+
+After fitting a Logistic Regression, you'll likely want to calculate the Odds Ratios of the estimated parameters. As mentioned above, everything we need is available from the `Results` object that comes from a model fit.
+
+Here we take the estimated parameters and confidence intervals, combine them into a DataFrame and apply NumPy's `exp()` function to the whole DataFrame.
+
+```python
+# ... imports, load data, etc.
+import numpy as np
+
+# ... Define and fit model
+
+odds_ratios = pd.DataFrame(
+    {
+        "OR": log_reg.params,
+        "Lower CI": log_reg.conf_int()[0],
+        "Upper CI": log_reg.conf_int()[1],
+    }
+)
+odds_ratios = np.exp(odds_ratios)
+
+print(odds_ratios)
+```
+
+```
+                                  OR  Lower CI   Upper CI
+Intercept                   9.066489  4.825321  17.035387
+sex[T.male]                 0.084082  0.057848   0.122213
+embark_town[T.Queenstown]   0.162742  0.057027   0.464428
+embark_town[T.Southampton]  0.365332  0.229654   0.581167
+age                         0.991954  0.979300   1.004771
+```
+
+Hat tip to [hedz.nz](https://heds.nz/) for the inspiration for this [approach](https://heds.nz/posts/logistic-regression-python/).
+
 ### What happens with formula strings? Patsy, and Design Matrices
 
 Most of the models in statsmodels require design matrices. You can think of design matrices as representing data in a way compatible with model building.
