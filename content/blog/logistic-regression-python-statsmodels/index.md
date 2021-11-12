@@ -275,3 +275,70 @@ C(pclass, Treatment(reference=3))[T.2]     1.0748      0.197      5.469      0.0
 ```
 
 For more on categorical treatments, see here and here from the Patsy docs.
+
+### Customizing the fit summary
+
+After we've fit a model, we'll typically inspect the results by calling `summary()` on the returned result. Let's look at some of the helpful things this method can do.
+
+#### Accessing the summary tables
+
+When we print `summary()`, we see two areas of information, fit details and a table of parameter estimates. We can access these tables from the `Summary` object's `tables` attribute.
+
+```python
+fit_summary = log_reg.summary().tables[0]
+```
+
+These tables can also be outputted as Latex or HTML with the `as_latex_tabular()` or `as_html()` methods.
+
+```python
+fit_summary = log_reg.summary().tables[0]
+fit_summary.as_html()
+```
+
+#### Relabel parameter names
+
+To relabel the parameter names, the summary method provides an `xname` argument. 
+
+`xname` is a list of labels that will be applied to each row of the summary's coefficient table. The length `xname` must match the length of the `params` attribute of the `Summary` object.
+
+Default:
+
+```python
+print(log_reg.summary())
+```
+
+```
+==================================================================================
+                     coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept          0.6286      0.155      4.061      0.000       0.325       0.932
+C(pclass)[T.2]    -0.7096      0.217     -3.269      0.001      -1.135      -0.284
+C(pclass)[T.3]    -1.7844      0.199     -8.987      0.000      -2.174      -1.395
+==================================================================================
+```
+
+Using `xname`:
+
+```python
+print(log_reg.summary(xname=["1st class", "2nd class", "3rd class"]))
+```
+
+```
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+1st class      0.6286      0.155      4.061      0.000       0.325       0.932
+2nd class     -0.7096      0.217     -3.269      0.001      -1.135      -0.284
+3rd class     -1.7844      0.199     -8.987      0.000      -2.174      -1.395
+==============================================================================
+```
+
+### Output summary to various formats
+
+When we call `summary()`, this returns a `Summary` object. The Summary object supports outputting the text summary to various formats, including Latex, HTML, and CSV.
+
+| Format | Method | Note |
+|---|---|---|
+| Latex | `log_reg.summary().as_latex()` | Merges into a single table. statsmodels documentation recommend using `as_latex_tabular()` directly on individual summary tables. |
+| HTML | `log_reg.summary().as_html()` | Output to an HTML `<table>` |
+| CSV | `log_reg.summary().as_csv()` |  |
