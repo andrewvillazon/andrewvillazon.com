@@ -233,3 +233,45 @@ print(X[:5])
 ```
 
 Specifically for building design matrices, Patsy is well worth exploring if you're coming from the R language or need advanced variable treatment.
+
+### Setting a reference or base level for categorical variables
+
+With Categorical Variables, you'll sometimes want to set the reference category to be a specific value. This can help make the results more interpretable.
+
+In the Titanic Dataset used above, we could examine how likely survival was for first-class passengers relative to third-class. We can do this with Patsy's categorical treatments.
+
+In the Titanic dataset, the `pclass` column gets interpreted as an integer. We change this by wrapping it in an uppercase `C` and parentheses `()`.
+
+```python{1}
+formula = "survived ~ C(pclass)"
+log_reg = smf.logit(formula, data=titanic).fit()
+```
+
+```
+==================================================================================
+                     coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept          0.6286      0.155      4.061      0.000       0.325       0.932
+C(pclass)[T.2]    -0.7096      0.217     -3.269      0.001      -1.135      -0.284
+C(pclass)[T.3]    -1.7844      0.199     -8.987      0.000      -2.174      -1.395
+==================================================================================
+```
+
+Notice, though, this only signals to Patsy to treat `pclass` as categorical. The reference level hasn't changed. To set the reference level, we include a `Treatment` argument with a `reference` set to the desired value.
+
+```python{1}
+formula = "survived ~ C(pclass, Treatment(reference=3))"
+log_reg = smf.logit(formula, data=titanic).fit()
+```
+
+```
+==========================================================================================================
+                                             coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------------------------
+Intercept                                 -1.1558      0.124     -9.293      0.000      -1.400      -0.912
+C(pclass, Treatment(reference=3))[T.1]     1.7844      0.199      8.987      0.000       1.395       2.174
+C(pclass, Treatment(reference=3))[T.2]     1.0748      0.197      5.469      0.000       0.690       1.460
+==========================================================================================================
+```
+
+For more on categorical treatments, see here and here from the Patsy docs.
