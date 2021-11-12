@@ -202,7 +202,7 @@ Most of the models in statsmodels require design matrices. You can think of desi
 
 When we use the formula api with a formula string, internally, this formula string is turned into a design matrix by the Patsy library.
 
-We can explore how patsy is transforming the data by using the `patsy.dmatrices()` function.
+We can explore how patsy transforms the data by using the `patsy.dmatrices()` function.
 
 ```python{2, 7-9}
 import pandas as pd
