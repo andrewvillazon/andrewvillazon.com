@@ -14,6 +14,14 @@ For this post, I'm going to assume a couple of things:
 * Familiar with popular data libraries like pandas and NumPy.
 * Have an understanding of Logistic Regression and associated statistical modeling terms such as coefficients and parameters.
 
+## Overview
+
+```toc
+exclude: ["Overview"]
+from-heading: 2
+to-heading: 3
+```
+
 ## What is the statsmodels package?
 
 statsmodels is a Python package orientated towards data exploration with statistical methods. It provides a wide range of statistical models, tests, plotting functions, etc.
