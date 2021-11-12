@@ -5,11 +5,14 @@ tags:
     - Python
 ---
 
-In this post, we'll look at performing Logistic Regression in Python with the statsmodels package.
+The Logistic Regression model is a relatively simple, powerful, and fast statistical model and an excellent tool for Data Analysis. In this post, we'll look at Logistic Regression in Python with the statsmodels package. 
 
-First, we'll look at the different ways to do Logistic Regression in statsmodels and inspect the results. Then we'll look at some of the other things you might do with a Logistic Regression, such as accessing the model parameters, calculating odds ratios, and setting reference levels for categorical variables. 
+We'll look at how to fit a Logistic Regression to data, inspect the results, and related tasks such as accessing model parameters, calculating odds ratios, and setting reference values.
 
-Note that we won't cover using statsmodels Logistic Regression to make predictions (e.g., in a Machine Learning context). Instead, we'll cover using it as a tool for data exploration.
+For this post, I'm going to assume a couple of things:
+* Basic knowledge of Python.
+* Familiar with popular data libraries like pandas and NumPy.
+* Have an understanding of Logistic Regression and associated statistical modeling terms such as coefficients and parameters.
 
 ## What is the statsmodels package?
 
