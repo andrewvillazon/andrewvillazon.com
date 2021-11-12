@@ -14,6 +14,8 @@ For this post, I'm going to assume a couple of things:
 * Familiar with popular data libraries like pandas and NumPy.
 * Have an understanding of Logistic Regression and associated statistical modeling terms such as coefficients and parameters.
 
+If you're unfamiliar with Logistic Regression, I highly recommend starting with the [Logistic Regression Playlist](https://youtube.com/playlist?list=PLblh5JKOoLUKxzEP5HA2d-Li7IJkHfXSe) from [StatQuest with Josh Starmer](https://www.youtube.com/c/joshstarmer) on YouTube.
+
 ## Overview
 
 ```toc
