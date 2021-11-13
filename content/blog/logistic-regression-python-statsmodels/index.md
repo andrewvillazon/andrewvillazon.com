@@ -358,3 +358,17 @@ The summary method also returns a `Summary` object. The `Summary` object has som
 | Latex | `log_reg.summary().as_latex()` | Merges into a single table. statsmodels documentation recommend using `as_latex_tabular()` directly on individual summary tables. |
 | HTML | `log_reg.summary().as_html()` | Output to an HTML `<table>` |
 | CSV | `log_reg.summary().as_csv()` |  |
+
+## Conclusion
+
+In this guide, we looked at how to do Logistic Regression in Python with the statsmodels package. We covered how to fit the model to data and some of the other things associated with Logistic Regression. I hope you found it helpful!
+
+### Further reading
+
+* [statsmodels.org Getting started](https://www.statsmodels.org/stable/gettingstarted.html)
+* [Regression with Discrete Dependent Variable](https://www.statsmodels.org/stable/discretemod.html)
+* [endog, exog, what’s that?](https://www.statsmodels.org/stable/endog_exog.html)
+* [Patsy: How formulas work](https://patsy.readthedocs.io/en/latest/formulas.html)
+* [Patsy: Coding categorical data](https://patsy.readthedocs.io/en/latest/categorical-coding.html)
+* [Simple logistic regression with Python](https://heds.nz/posts/logistic-regression-python/)
+* [StatQuest: Logistic Regression](https://youtube.com/playlist?list=PLblh5JKOoLUKxzEP5HA2d-Li7IJkHfXSe)
