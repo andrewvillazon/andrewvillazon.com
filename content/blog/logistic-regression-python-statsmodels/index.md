@@ -26,9 +26,7 @@ to-heading: 3
 
 ## What is statsmodels?
 
-statsmodels is a Python package orientated towards data exploration with statistical methods. It provides a wide range of statistical models, tests, plotting functions, etc.
-
-Notably, it supports the standard data analysis tools associated with Python, such as NumPy and Pandas, and can use the "R-style" formula specifications for fitting models.
+statsmodels is a Python package geared towards data exploration with statistical methods. It provides a wide range of statistical tools, integrates with pandas and NumPy, and uses the "R-style" formula strings to define models.
 
 ### Installing
 
@@ -40,7 +38,7 @@ pip install statsmodels
 
 ## Logistic Regression with statsmodels
 
-Before we get started, it's worth mentioning there are two ways to do Logistic Regression in statsmodels:
+Before starting, it's worth mentioning there are two ways to do Logistic Regression in statsmodels:
 
 * `statsmodels.api`: The standard API. Data gets separated into explanatory variables (exog) and a response variable (endog). Specifying a model is done through classes.
 * `statsmodels.formula.api`: The formula API. It uses the R-style formula syntax and dataframes.
@@ -74,9 +72,12 @@ The data we're using is the seaborn version of the Titanic Dataset and can be do
 
 Fitting is a two-step process. First, we specify a model, then we fit. Typically the `fit()` call is chained to the model specification.
 
+The string provided to logit, `"survived ~ sex + age + embark_town"`, is called the formula string and defines the model to build. 
+
 ```python
 log_reg = smf.logit("survived ~ sex + age + embark_town", data=titanic).fit()
 ```
+We read the formula string as "survived given (~) sex and age and emark town"—an explanation of formula strings can be found below.
 
 ### Examining fit results
 
@@ -106,7 +107,7 @@ age                           -0.0081      0.007     -1.233      0.217      -0.0
 ==============================================================================================
 ```
 
-The `summary()` method has several features helpful for outputting results explored further below in this guide.
+The `summary()` method has some helpful features explored further below.
 
 ### In-full
 
@@ -348,7 +349,9 @@ print(log_reg.summary(xname=["1st class", "2nd class", "3rd class"]))
 
 ### Output summary to various formats
 
-When we call `summary()`, this returns a `Summary` object. The Summary object supports outputting the text summary to various formats, including Latex, HTML, and CSV.
+As you saw above, after we fit the model to the data, we called and printed the `summary()` method to examine the specific details of the model fit.
+
+The summary method also returns a `Summary` object. The `Summary` object has some useful methods for outputting to other formats.
 
 | Format | Method | Note |
 |---|---|---|
