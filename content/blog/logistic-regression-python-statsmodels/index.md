@@ -24,7 +24,7 @@ from-heading: 2
 to-heading: 3
 ```
 
-## What is the statsmodels package?
+## What is statsmodels?
 
 statsmodels is a Python package orientated towards data exploration with statistical methods. It provides a wide range of statistical models, tests, plotting functions, etc.
 
