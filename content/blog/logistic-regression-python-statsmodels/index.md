@@ -5,13 +5,13 @@ tags:
     - Python
 ---
 
-Logistic Regression is a relatively simple, powerful, and fast statistical model and an excellent tool for Data Analysis. In this post, we'll look at Logistic Regression in Python with the statsmodels package. 
+[Logistic Regression](https://www.ibm.com/topics/logistic-regression) is a relatively simple, powerful, and fast statistical model and an excellent tool for Data Analysis. In this post, we'll look at Logistic Regression in Python with the [statsmodels](https://www.statsmodels.org/stable/index.html) package.
 
 We'll look at how to fit a Logistic Regression to data, inspect the results, and related tasks such as accessing model parameters, calculating odds ratios, and setting reference values.
 
 For this post, I'm going to assume a couple of things:
 * Basic knowledge of Python.
-* Familiar with popular data libraries like pandas and NumPy.
+* Familiar with popular data libraries like Pandas and NumPy.
 * Have an understanding of Logistic Regression and associated statistical modeling terms such as coefficients and parameters.
 
 If you're unfamiliar with Logistic Regression, I highly recommend starting with the [Logistic Regression Playlist](https://youtube.com/playlist?list=PLblh5JKOoLUKxzEP5HA2d-Li7IJkHfXSe) from [StatQuest with Josh Starmer](https://www.youtube.com/c/joshstarmer) on YouTube.
@@ -26,7 +26,7 @@ to-heading: 3
 
 ## What is statsmodels?
 
-statsmodels is a Python package geared towards data exploration with statistical methods. It provides a wide range of statistical tools, integrates with pandas and NumPy, and uses the "R-style" formula strings to define models.
+[statsmodels](https://www.statsmodels.org/stable/index.html) is a Python package geared towards data exploration with statistical methods. It provides a wide range of statistical tools, integrates with Pandas and NumPy, and uses the R-style formula strings to define models.
 
 ### Installing
 
@@ -40,16 +40,16 @@ pip install statsmodels
 
 Before starting, it's worth mentioning there are two ways to do Logistic Regression in statsmodels:
 
-* `statsmodels.api`: The standard API. Data gets separated into explanatory variables (exog) and a response variable (endog). Specifying a model is done through classes.
-* `statsmodels.formula.api`: The formula API. It uses the R-style formula syntax and dataframes.
+* `statsmodels.api`: The Standard API. Data gets separated into explanatory variables ([exog](https://www.statsmodels.org/devel/endog_exog.html)) and a response variable ([endog](https://www.statsmodels.org/devel/endog_exog.html)). Specifying a model is done through classes.
+* `statsmodels.formula.api`: The Formula API. It uses the R-style formula syntax and dataframes.
 
-For this guide, I've opted to use the formula api. The formula api is a more convenient way of building models that abstracts away the boilerplate required by the standard api. 
+For this guide, I've opted to use the Formula API. The Formula API is a more convenient way of building models that abstracts away the boilerplate required by the Standard API. 
 
-Under the hood, both the standard and formula APIs use the same underlying models.
+Under the hood, both the Standard and Formula APIs use the same underlying models.
 
 ### Imports
 
-First we need import pandas and the statsmodels formula api. Convention is to alias `statsmodels.formula.api` to `smf`.
+First we need import Pandas and the statsmodels Formula API. Convention is to alias `statsmodels.formula.api` to `smf`.
 
 ```python
 import pandas as pd
@@ -66,7 +66,7 @@ titanic = titanic[["survived", "pclass", "sex", "age", "embark_town"]]
 titanic = titanic.dropna()
 ```
 
-The data we're using is the seaborn version of the Titanic Dataset and can be downloaded [here](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv). The seaborn version is a minimal dataset with some pre-processing applied.
+The data we're using is the [seaborn](https://seaborn.pydata.org/) version of the Titanic Dataset and can be downloaded [here](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv). The seaborn version is a minimal dataset with some pre-processing applied.
 
 ### Fitting a Logistic Regression
 
@@ -77,7 +77,7 @@ The string provided to logit, `"survived ~ sex + age + embark_town"`, is called 
 ```python
 log_reg = smf.logit("survived ~ sex + age + embark_town", data=titanic).fit()
 ```
-We read the formula string as "survived given (~) sex and age and emark town"—an explanation of formula strings can be found below.
+We read the formula string as "survived given (~) sex and age and emark town"—an explanation of formula strings can be found [below](#what-happens-with-formula-strings-patsy-and-design-matrices).
 
 ### Examining fit results
 
@@ -107,7 +107,7 @@ age                           -0.0081      0.007     -1.233      0.217      -0.0
 ==============================================================================================
 ```
 
-The `summary()` method has some helpful features explored further below.
+The `summary()` method has some helpful features explored further [below](#customizing-the-fit-summary).
 
 ### In-full
 
@@ -138,7 +138,7 @@ Here we'll look at some of the more advanced features of statsmodels and its Log
 
 In statsmodels, the `fit()` method returns a `Result` object. The model coefficients, standard errors, p-values, etc., are all available from this object.
 
-Conveniently these are stored as pandas data frames with the parameter name as the data frame index.
+Conveniently these are stored as Pandas dataframes with the parameter name as the dataframe index.
 
 ```python
 # ... imports, load data, etc.
@@ -161,7 +161,7 @@ dtype: float64
 
 Here are some of the relevant values for a Logistic Regression.
 
-| attr/func | Description |
+| Attr/func | Description |
 |---|---|---|
 | `params`  | Estimated model parameters. Appears as `coef` when calling `summary()` on a fitted model. |
 | `bse` | Standard error. |
@@ -177,9 +177,9 @@ print(dir(log_reg))
 
 ### Calculating Odds Ratios
 
-After fitting a Logistic Regression, you'll likely want to calculate the Odds Ratios of the estimated parameters. As mentioned above, everything we need is available from the `Results` object that comes from a model fit.
+After fitting a Logistic Regression, you'll likely want to calculate the [Odds Ratios](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/) of the estimated parameters. As mentioned above, everything we need is available from the `Results` object that comes from a model fit.
 
-Here we take the estimated parameters and confidence intervals, combine them into a DataFrame and apply NumPy's `exp()` function to the whole DataFrame.
+Here we take the estimated parameters and confidence intervals, combine them into a dataframe and apply NumPy's `exp()` function to the whole dataframe.
 
 ```python
 # ... imports, load data, etc.
@@ -212,11 +212,11 @@ Hat tip to [hedz.nz](https://heds.nz/) for the inspiration for this [approach](h
 
 ### What happens with formula strings? Patsy, and Design Matrices
 
-Most of the models in statsmodels require design matrices. You can think of design matrices as representing data in a way compatible with model building.
+Most of the models in statsmodels require [design matrices](https://www.statlect.com/glossary/design-matrix). You can think of design matrices as representing data in a way compatible with model building.
 
-When we use the formula api with a formula string, internally, this formula string is turned into a design matrix by the Patsy library.
+When we use the formula api with a formula string, internally, this formula string is turned into a design matrix by the [Patsy](https://patsy.readthedocs.io/en/latest/overview.html) library.
 
-We can explore how patsy transforms the data by using the `patsy.dmatrices()` function.
+We can explore how Patsy transforms the data by using the `patsy.dmatrices()` function.
 
 ```python{2, 7-9}
 import pandas as pd
@@ -231,7 +231,7 @@ y, X = patsy.dmatrices("survived ~ sex + age + embark_town",
 
 ```
 
-Inspecting `X`, we can see that patsy converted categorical variables into dummy variables and added a constant `Intercept` column.
+Inspecting `X`, we can see that Patsy converted categorical variables into dummy variables and added a constant `Intercept` column.
 
 ```python
 print(X[:5])
@@ -288,7 +288,7 @@ C(pclass, Treatment(reference=3))[T.2]     1.0748      0.197      5.469      0.0
 ==========================================================================================================
 ```
 
-For more on categorical treatments, see here and here from the Patsy docs.
+For more on categorical treatments, see [here](https://patsy.readthedocs.io/en/latest/categorical-coding.html) and [here](https://patsy.readthedocs.io/en/latest/API-reference.html#handling-categorical-data) from the [Patsy docs](https://patsy.readthedocs.io/en/latest/index.html).
 
 ### Customizing the fit summary
 
@@ -302,7 +302,7 @@ When we print `summary()`, we see two areas of information, fit details and a ta
 fit_summary = log_reg.summary().tables[0]
 ```
 
-These tables can also be outputted as Latex or HTML with the `as_latex_tabular()` or `as_html()` methods.
+These tables can also be outputted as [LaTeX](https://www.latex-project.org/about/) or HTML with the `as_latex_tabular()` or `as_html()` methods.
 
 ```python
 fit_summary = log_reg.summary().tables[0]
@@ -311,9 +311,9 @@ fit_summary.as_html()
 
 #### Relabel parameter names
 
-To relabel the parameter names, the summary method provides an `xname` argument. 
+To relabel the parameter names, the `summary()` method provides an `xname` argument. 
 
-`xname` is a list of labels that will be applied to each row of the summary's coefficient table. The length `xname` must match the length of the `params` attribute of the `Summary` object.
+`xname` is a list of labels that will be applied to each row of the summary's coefficient table. The length `xname` must match the length of the `params` attribute of the `Result` object returned by calling `fit()`.
 
 Default:
 
@@ -355,7 +355,7 @@ The summary method also returns a `Summary` object. The `Summary` object has som
 
 | Format | Method | Note |
 |---|---|---|
-| Latex | `log_reg.summary().as_latex()` | Merges into a single table. statsmodels documentation recommend using `as_latex_tabular()` directly on individual summary tables. |
+| LaTeX | `log_reg.summary().as_latex()` | Merges into a single table. statsmodels documentation recommend using `as_latex_tabular()` directly on individual summary tables. |
 | HTML | `log_reg.summary().as_html()` | Output to an HTML `<table>` |
 | CSV | `log_reg.summary().as_csv()` |  |
 
