@@ -26,11 +26,11 @@ to-heading: 3
 
 ## What is statsmodels?
 
-[statsmodels](https://www.statsmodels.org/stable/index.html) is a Python package geared towards data exploration with statistical methods. It provides a wide range of statistical tools, integrates with Pandas and NumPy, and uses the R-style formula strings to define models.
+[statsmodels](https://www.statsmodels.org/stable/index.html) is a Python package geared towards data exploration with statistical methods. It provides a wide range of statistical tools, integrates with Pandas and NumPy, and uses the **R-style** formula strings to define models.
 
 ### Installing
 
-The easiest way to install statsmodels is via pip:
+The easiest way to install statsmodels is via **pip**:
 
 ```bash
 pip install statsmodels
@@ -38,12 +38,12 @@ pip install statsmodels
 
 ## Logistic Regression with statsmodels
 
-Before starting, it's worth mentioning there are two ways to do Logistic Regression in statsmodels:
+Before starting, it's worth mentioning there are **two** ways to do Logistic Regression in statsmodels:
 
 * `statsmodels.api`: The Standard API. Data gets separated into explanatory variables ([exog](https://www.statsmodels.org/devel/endog_exog.html)) and a response variable ([endog](https://www.statsmodels.org/devel/endog_exog.html)). Specifying a model is done through classes.
 * `statsmodels.formula.api`: The Formula API. It uses the R-style formula syntax and dataframes.
 
-For this guide, I've opted to use the Formula API. The Formula API is a more convenient way of building models that abstracts away the boilerplate required by the Standard API. 
+For this guide, I've opted to use the **Formula API**. The Formula API is a more convenient way of building models that abstracts away the boilerplate required by the Standard API. 
 
 Under the hood, both the Standard and Formula APIs use the same underlying models.
 
@@ -70,14 +70,14 @@ The data we're using is the [seaborn](https://seaborn.pydata.org/) version of th
 
 ### Fitting a Logistic Regression
 
-Fitting is a two-step process. First, we specify a model, then we fit. Typically the `fit()` call is chained to the model specification.
+Fitting is a two-step process. First, we **specify** a model, then we **fit**. Typically the `fit()` call is chained to the model specification.
 
 The string provided to logit, `"survived ~ sex + age + embark_town"`, is called the formula string and defines the model to build. 
 
 ```python
 log_reg = smf.logit("survived ~ sex + age + embark_town", data=titanic).fit()
 ```
-We read the formula string as "survived given (~) sex and age and emark town"—an explanation of formula strings can be found [below](#what-happens-with-formula-strings-patsy-and-design-matrices).
+We read the formula string as *"survived given (~) sex and age and emark town"* —an explanation of formula strings can be found [below](#what-happens-with-formula-strings-patsy-and-design-matrices).
 
 ### Examining fit results
 
@@ -136,7 +136,7 @@ Here we'll look at some of the more advanced features of statsmodels and its Log
 
 ### Accessing model parameters
 
-In statsmodels, the `fit()` method returns a `Result` object. The model coefficients, standard errors, p-values, etc., are all available from this object.
+In statsmodels, the `fit()` method returns a `Result` object. The model coefficients, standard errors, p-values, etc., are all available from this `Result` object.
 
 Conveniently these are stored as Pandas dataframes with the parameter name as the dataframe index.
 
@@ -212,7 +212,7 @@ Hat tip to [hedz.nz](https://heds.nz/) for the inspiration for this [approach](h
 
 ### What happens with formula strings? Patsy, and Design Matrices
 
-Most of the models in statsmodels require [design matrices](https://www.statlect.com/glossary/design-matrix). You can think of design matrices as representing data in a way compatible with model building.
+Most of the models in statsmodels require [design matrices](https://www.statlect.com/glossary/design-matrix). You can think of design matrices as **representing data** in a way compatible with model building.
 
 When we use the formula api with a formula string, internally, this formula string is turned into a design matrix by the [Patsy](https://patsy.readthedocs.io/en/latest/overview.html) library.
 
@@ -252,7 +252,7 @@ Specifically for building design matrices, Patsy is well worth exploring if you'
 
 With Categorical Variables, you'll sometimes want to set the reference category to be a specific value. This can help make the results more interpretable.
 
-In the Titanic Dataset used above, we could examine how likely survival was for first-class passengers relative to third-class. We can do this with Patsy's categorical treatments.
+In the Titanic Dataset used above, we could examine how likely survival was for first-class passengers relative to third-class. We can do this with Patsy's **categorical treatments**.
 
 In the Titanic dataset, the `pclass` column gets interpreted as an integer. We change this by wrapping it in an uppercase `C` and parentheses `()`.
 
