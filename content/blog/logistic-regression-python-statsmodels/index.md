@@ -214,7 +214,7 @@ Hat tip to [hedz.nz](https://heds.nz/) for the inspiration for this [approach](h
 
 Most of the models in statsmodels require [design matrices](https://www.statlect.com/glossary/design-matrix). You can think of design matrices as **representing data** in a way compatible with model building.
 
-When we use the formula api with a formula string, internally, this formula string is turned into a design matrix by the [Patsy](https://patsy.readthedocs.io/en/latest/overview.html) library.
+When we use the Formula API with a formula string, internally, this formula string is turned into a design matrix by the [Patsy](https://patsy.readthedocs.io/en/latest/overview.html) library.
 
 We can explore how Patsy transforms the data by using the `patsy.dmatrices()` function.
 
@@ -313,7 +313,7 @@ fit_summary.as_html()
 
 To relabel the parameter names, the `summary()` method provides an `xname` argument. 
 
-`xname` is a list of labels that will be applied to each row of the summary's coefficient table. The length `xname` must match the length of the `params` attribute of the `Result` object returned by calling `fit()`.
+`xname` is a list of labels that will be applied to each row of the summary's coefficient table. The length of `xname` must match the length of the `params` attribute of the `Result` object returned when calling `fit()`.
 
 Default:
 
