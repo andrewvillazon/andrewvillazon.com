@@ -1,6 +1,6 @@
 ---
 title: "Logistic Regression in Python with statsmodels"
-date: "2021-11-15"
+date: "2021-11-14"
 tags:
     - Python
 ---
