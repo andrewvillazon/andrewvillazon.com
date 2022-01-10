@@ -13,7 +13,7 @@ In 2019 I was awarded Health Research Council (HRC) funding for a Machine Learni
 
 The project's goal is to develop Machine Learning models for predicting Hospital Admissions from the Emergency Department. I'm the sole person on the project and have been responsible for every aspect from Data Engineering, to Predictive Modelling, to Deployment.
 
-I'll write more about what I learned on the project when completed in the first quarter of 2022.
+It's been a steep learning curve, at times frustrating and slow, but ultimately a very satisfying project to have worked on. I'll write more about what I learned on the project when completed in the first quarter of 2022.
 
 ## Wrote eight articles
 
