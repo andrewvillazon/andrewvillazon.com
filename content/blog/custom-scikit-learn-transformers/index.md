@@ -152,3 +152,84 @@ print(df)
 1 -6  5 -24
 2  9  6  27
 ```
+
+## Function Transformers
+
+Sometimes it makes more sense for a transformation to come from a function rather than a class. For this, scikit-learn provides the `FunctionTransformer` class. The `FunctionTransformer` wraps a function and makes it work as a Transformer.
+
+In the below example, we wrap the `pandas.get_dummies()` function to perform one-hot encoding as part of a pipeline.
+
+```python{14}
+import pandas as pd
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import FunctionTransformer
+
+
+data = {
+    "id": [1, 2, 3, 4, 5, 6, 7],
+    "fruit": ["Apple", "Apple", "Peach", "Banana", "Peach", "Orange"],
+}
+df = pd.DataFrame({k: pd.Series(v) for k, v in data.items()})
+
+pipe = Pipeline(
+    steps=[
+        ("simple_one_hot_encode", FunctionTransformer(pd.get_dummies))
+    ]
+)
+transformed_df = pipe.fit_transform(df)
+
+print(transformed_df)
+
+```
+
+```
+   id  fruit_Apple  fruit_Banana  fruit_Orange  fruit_Peach
+0   1            1             0             0            0
+1   2            1             0             0            0
+2   3            0             0             0            1
+3   4            0             1             0            0
+4   5            0             0             0            1
+5   6            0             0             1            0
+6   7            0             0             0            0
+```
+
+If the wrapped function has additional arguments, these are passed to the function using the `kw_args` argument.
+
+```python{15-17}
+import pandas as pd
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import FunctionTransformer
+
+
+data = {
+    "id": [1, 2, 3, 4, 5, 6, 7],
+    "fruit": ["Apple", "Apple", "Peach", "Banana", "Peach", "Orange"],
+}
+df = pd.DataFrame({k: pd.Series(v) for k, v in data.items()})
+
+pipe = Pipeline(
+    steps=[
+        (
+            "simple_one_hot_encode",
+            FunctionTransformer(
+                pd.get_dummies, kw_args={"dummy_na": True, "dtype": "float"}
+            ),
+        )
+    ]
+)
+transformed_df = pipe.fit_transform(df)
+
+print(transformed_df)
+
+```
+
+```
+   id  fruit_Apple  fruit_Banana  fruit_Orange  fruit_Peach  fruit_nan
+0   1          1.0           0.0           0.0          0.0        0.0
+1   2          1.0           0.0           0.0          0.0        0.0
+2   3          0.0           0.0           0.0          1.0        0.0
+3   4          0.0           1.0           0.0          0.0        0.0
+4   5          0.0           0.0           0.0          1.0        0.0
+5   6          0.0           0.0           1.0          0.0        0.0
+6   7          0.0           0.0           0.0          0.0        1.0
+```
