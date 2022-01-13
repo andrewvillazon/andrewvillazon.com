@@ -202,8 +202,8 @@ from sklearn.preprocessing import FunctionTransformer
 
 
 data = {
-    "id": [1, 2, 3, 4, 5, 6, 7],
-    "fruit": ["Apple", "Apple", "Peach", "Banana", "Peach", "Orange"],
+    "id": [1, 2, 3, 4, 5,],
+    "fruit": ["Apple", "Apple", "Peach", "Banana"],
 }
 df = pd.DataFrame({k: pd.Series(v) for k, v in data.items()})
 
@@ -224,12 +224,10 @@ print(transformed_df)
 ```
 
 ```
-   id  fruit_Apple  fruit_Banana  fruit_Orange  fruit_Peach  fruit_nan
-0   1          1.0           0.0           0.0          0.0        0.0
-1   2          1.0           0.0           0.0          0.0        0.0
-2   3          0.0           0.0           0.0          1.0        0.0
-3   4          0.0           1.0           0.0          0.0        0.0
-4   5          0.0           0.0           0.0          1.0        0.0
-5   6          0.0           0.0           1.0          0.0        0.0
-6   7          0.0           0.0           0.0          0.0        1.0
+   id  fruit_Apple  fruit_Banana  fruit_Peach  fruit_nan
+0   1          1.0           0.0          0.0        0.0
+1   2          1.0           0.0          0.0        0.0
+2   3          0.0           0.0          1.0        0.0
+3   4          0.0           1.0          0.0        0.0
+4   5          0.0           0.0          0.0        1.0
 ```
