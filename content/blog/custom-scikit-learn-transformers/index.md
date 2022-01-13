@@ -18,7 +18,7 @@ Before looking at Custom Transformers, here are a couple of things worth being f
 To create a Custom Transformer, we only need to meet a couple of basic requirements:
 * The Transformer is a class (function transformers detailed below).
 * The class inherits from the `BaseEstimator` and `TransformerMixin` classes found in the `sklearn.base` module.
-* The class implements the instance methods `fit()` and `transform()`. The `transform()` method should return a pandas DataFrame or numpy array (typically called `X`) to ensure compatibility with the other parts of scikit-learn.
+* The class implements the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a DataFrame or NumPy array to ensure compatibility with pipelines.
 
 ```python
 from numpy.random import randint
@@ -126,8 +126,8 @@ from sklearn.preprocessing import FunctionTransformer
 
 
 data = {
-    "id": [1, 2, 3, 4, 5, 6, 7],
-    "fruit": ["Apple", "Apple", "Peach", "Banana", "Peach", "Orange"],
+    "id": [1, 2, 3, 4, 5,],
+    "fruit": ["Apple", "Apple", "Peach", "Banana"],
 }
 df = pd.DataFrame({k: pd.Series(v) for k, v in data.items()})
 
@@ -143,14 +143,12 @@ print(transformed_df)
 ```
 
 ```
-   id  fruit_Apple  fruit_Banana  fruit_Orange  fruit_Peach
-0   1            1             0             0            0
-1   2            1             0             0            0
-2   3            0             0             0            1
-3   4            0             1             0            0
-4   5            0             0             0            1
-5   6            0             0             1            0
-6   7            0             0             0            0
+   id  fruit_Apple  fruit_Banana  fruit_Peach
+0   1            1             0            0
+1   2            1             0            0
+2   3            0             0            1
+3   4            0             1            0
+4   5            0             0            0
 ```
 
 If the wrapped function has additional arguments, these are passed to the function using the `kw_args` argument.
