@@ -7,18 +7,18 @@ tags:
 
 In scikit-learn, Transformers are objects that transform a dataset into a new one to prepare the dataset for predictive modeling, e.g., scaling numeric values, one-hot encoding categoricals, etc.
 
-While scikit-learn has many standard Transformers, it's often helpful to create our own. In this post, we'll look at how to create custom Transformers that operate like scikit-learn Transformers.
+While scikit-learn has many Transformers, it's often helpful to create our own. This post will look at three ways to make your own Custom Transformers: Creating a Custom Transformer from scratch, using the `FunctionTransformer`, and subclassing an existing Transformer.
 
 Before looking at Custom Transformers, here are a couple of things worth being familiar with:
-* Using scikit-learn Transformers and using Transformers in Pipelines.
-* Creating classes and inheritance.
+* Using scikit-learn Transformers either with the `fit_transform()` method or in Pipelines.
+* Creating classes, inheritance, and the `super()` function.
 
 ## Creating a Custom Transformer
 
 To create a Custom Transformer, we only need to meet a couple of basic requirements:
-* The Transformer is a class (function transformers detailed below).
+* The Transformer is a class (for function transformers, see below).
 * The class inherits from the `BaseEstimator` and `TransformerMixin` classes found in the `sklearn.base` module.
-* The class implements the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a DataFrame or NumPy array to ensure compatibility with pipelines.
+* The class implements the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a DataFrame or NumPy array to ensure compatibility with Pipelines.
 
 ```python
 from numpy.random import randint
@@ -117,7 +117,7 @@ print(df)
 
 Sometimes it makes more sense for a transformation to come from a function rather than a class. For this, scikit-learn provides the `FunctionTransformer` class. The `FunctionTransformer` wraps a function and makes it work as a Transformer.
 
-In the below example, we wrap the `pandas.get_dummies()` function to perform one-hot encoding as part of a pipeline.
+In the below example, we wrap the `pandas.get_dummies` function to perform one-hot encoding as part of a pipeline.
 
 ```python{14}
 import pandas as pd
