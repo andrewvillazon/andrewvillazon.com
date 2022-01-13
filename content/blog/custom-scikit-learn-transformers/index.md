@@ -26,7 +26,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 
 class CustomTransformer(BaseEstimator, TransformerMixin):
-    def fit(self, y=None):
+    def fit(self, X, y=None):
         return self
 
     def transform(self, X, y=None):
