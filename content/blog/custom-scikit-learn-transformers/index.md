@@ -277,3 +277,12 @@ print("Categories: ", enc.categories_)
 2       1       1
 Categories:  [array(['Apple', 'Cherry', 'Pears'], dtype=object), array(['Green', 'Red'], dtype=object)]
 ```
+
+## Custom scikit-learn Transformer libraries
+
+Lastly, it's worth considering some of the existing projects dedicated to scikit-learn Transformers before creating your own:
+
+* Category Encoders - a large set of Categorical Variable transformations. 
+* Feature Engine - excellent range of Numeric and Categorical variable transformations. Easy to use with a lot of useful functionality.
+* sklearn-pandas - Useful library for mapping the results of a transformation back to a DataFrame.
+* scikit-lego
