@@ -231,3 +231,91 @@ print(transformed_df)
 3   4          0.0           1.0          0.0        0.0
 4   5          0.0           0.0          0.0        1.0
 ```
+
+## Customizing existing scikit-learn Transformers
+
+What if you want to modify the functionality of an existing scikit-learn Transformer? A way to do this is to take advantage of Python's inheritance mechanism and subclass the Transformer. Credit to [Sebastian Flennerhag](http://flennerhag.com/2017-01-08-Recursive-Override/) for this method.
+
+In the example below, we're creating an Ordinal Encoder that returns a pandas DataFrame instead of the usual NumPy array.
+
+```python
+import pandas as pd
+from sklearn.preprocessing import OrdinalEncoder
+
+
+class CustomOrdinalEncoder(OrdinalEncoder):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+    
+    def transform(self, X, y=None):
+        transformed_X = super().transform(X)
+        new_X = pd.DataFrame(transformed_X, columns=self.feature_names_in_)
+
+        return new_X
+
+```
+
+Here's how it works.
+
+The first step is to create an `__init__()` method. The method does two things. It initializes the scikit-learn OrdinalEncoder via the `super()` method, allowing us access to the OrdinalEncoder functionality, *and* passes on keyword arguments using `**kwargs`.
+
+```python{3}
+class CustomOrdinalEncoder(OrdinalEncoder):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+```
+
+To have a DataFrame returned instead of an array, we override the transform method and define our own. Inside our transform method, the scikit-learn OrdinalEncoder performs the transformation via `super().transform(X)`, however, we map the result back to a DataFrame and return that.
+
+```python{5-9}
+class CustomOrdinalEncoder(OrdinalEncoder):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+    
+    def transform(self, X, y=None):
+        transformed_X = super().transform(X)
+        new_X = pd.DataFrame(transformed_X, columns=self.feature_names_in_)
+
+        return new_X
+```
+
+And thanks to inheritance, our `CustomOrdinalEncoder` behaves just like the scikit-learn OrdinalEncoder.
+
+```python
+import pandas as pd
+from sklearn.preprocessing import OrdinalEncoder
+
+
+class CustomOrdinalEncoder(OrdinalEncoder):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def transform(self, X, y=None):
+        transformed_X = super().transform(X)
+        new_X = pd.DataFrame(transformed_X, columns=self.feature_names_in_)
+
+        return new_X
+
+
+data = pd.DataFrame(
+    {
+        "fruits": ["Apple", "Pears", "Cherry"],
+        "colors": ["Green", "Green", "Red"],
+    }
+)
+
+enc = CustomOrdinalEncoder(dtype=int)
+new_data = enc.fit_transform(data)
+
+print(new_data)
+print("Categories: ", enc.categories_)
+
+```
+
+```
+   fruits  colors
+0       0       0
+1       2       0
+2       1       1
+Categories:  [array(['Apple', 'Cherry', 'Pears'], dtype=object), array(['Green', 'Red'], dtype=object)]
+```
