@@ -64,49 +64,9 @@ print(df)
 
 ### Passing arguments to a Custom Transformer
 
-If you need to pass extra data or objects to the Custom Transformer, give the Custom Transformer an `__init__()` (initialize) method. This additional data will then be available to use in the transformation.
+If you need to pass extra data or objects to the Custom Transformer, give the custom Transformer an `__init__()` (initialize) method. This additional data will then be available to use in the transformation.
 
-```python{7,8,15,24}
-import pandas as pd
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.pipeline import Pipeline
-
-
-class MultiplyColumns(BaseEstimator, TransformerMixin):
-    def __init__(self, by=1):
-        self.by = by
-    
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X, y=None):
-        columns = list(X.columns)
-        X[columns] = X[columns] * self.by
-        return X
-
-
-# Use Custom Transformer
-df = pd.DataFrame({"a": [1, -2, 3], "b": [-4, 5, 6], "c": [-7, -8, 9]})
-
-pipe = Pipeline(
-    steps=[
-        ("multiply_cols_by_7", MultiplyColumns(7))
-    ]
-)
-transformed_df = pipe.fit_transform(df)
-
-print(df)
-
-```
-
-```
-    a   b   c
-0   7 -28 -49
-1 -14  35 -56
-2  21  42  63
-```
-
-Including parameters in your Custom Transformer can make them more flexible and reusable. A nice use of the `__init__()` method is configuring the columns to apply the transformation to.
+Here we include a parameter to specify the columns the Transformer should modify.
 
 ```python{7,8,9,29}
 import pandas as pd
