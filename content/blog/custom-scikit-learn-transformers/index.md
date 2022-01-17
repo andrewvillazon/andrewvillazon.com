@@ -16,9 +16,9 @@ Before looking at Custom Transformers, here are a couple of things worth being f
 ## Creating a Custom Transformer
 
 To create a Custom Transformer, we only need to meet a couple of basic requirements:
-* The Transformer is a class (for function transformers, see below).
-* The class inherits from the `BaseEstimator` and `TransformerMixin` classes found in the `sklearn.base` module.
-* The class implements the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a [pandas](https://pandas.pydata.org/) **DataFrame** or [NumPy](https://numpy.org/) **array** to ensure compatibility with Pipelines.
+* The Transformer is a **class** (for function transformers, see below).
+* The class **inherits** from the `BaseEstimator` and `TransformerMixin` classes found in the `sklearn.base` module.
+* The class **implements** the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a [pandas](https://pandas.pydata.org/) **DataFrame** or [NumPy](https://numpy.org/) **array** to ensure compatibility with Pipelines.
 
 ```python
 from numpy.random import randint
