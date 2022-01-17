@@ -5,20 +5,20 @@ tags:
     - Python
 ---
 
-In scikit-learn, Transformers are objects that transform a dataset into a new one to prepare the dataset for predictive modeling, e.g., scaling numeric values, one-hot encoding categoricals, etc.
+In [scikit-learn](https://scikit-learn.org/stable/), Transformers are objects that **transform** a dataset into a new one to [prepare the dataset](https://scikit-learn.org/stable/modules/preprocessing.html) for predictive modeling, e.g., scaling numeric values, one-hot encoding categoricals, etc.
 
-While scikit-learn has many Transformers, it's often helpful to create our own. This post will look at three ways to make your own Custom Transformers: Creating a Custom Transformer from scratch, using the `FunctionTransformer`, and subclassing an existing Transformer.
+While scikit-learn has many Transformers, it's often helpful to create our own. This post will look at three ways to make your own **Custom Transformers**: Creating a Custom Transformer from scratch, using the `FunctionTransformer`, and subclassing an existing Transformer.
 
 Before looking at Custom Transformers, here are a couple of things worth being familiar with:
 * Using scikit-learn Transformers either with the `fit_transform()` method or in Pipelines.
-* Creating classes, inheritance, and the `super()` function.
+* Creating classes, inheritance, and Python's `super()` function.
 
 ## Creating a Custom Transformer
 
 To create a Custom Transformer, we only need to meet a couple of basic requirements:
 * The Transformer is a class (for function transformers, see below).
 * The class inherits from the `BaseEstimator` and `TransformerMixin` classes found in the `sklearn.base` module.
-* The class implements the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a DataFrame or NumPy array to ensure compatibility with Pipelines.
+* The class implements the instance methods `fit()` and `transform()`. These methods need to have both `X` and `y` parameters, and `transform()` should return a [pandas](https://pandas.pydata.org/) **DataFrame** or [NumPy](https://numpy.org/) **array** to ensure compatibility with Pipelines.
 
 ```python
 from numpy.random import randint
@@ -64,7 +64,7 @@ print(df)
 
 ### Passing arguments to a Custom Transformer
 
-If you need to pass extra data or objects to the Custom Transformer, give the custom Transformer an `__init__()` (initialize) method. This additional data will then be available to use in the transformation.
+If you need to pass extra data or objects to the Custom Transformer, give the Custom Transformer an `__init__()` (initialize) method. This additional data will then be available to use in the transformation.
 
 Here we include a parameter to specify the columns the Transformer should modify.
 
@@ -117,7 +117,7 @@ print(df)
 
 Sometimes it makes more sense for a transformation to come from a function rather than a class. For this, scikit-learn provides the `FunctionTransformer` class. The `FunctionTransformer` wraps a function and makes it work as a Transformer.
 
-In the below example, we wrap the `pandas.get_dummies` function to perform one-hot encoding as part of a pipeline.
+In the below example, we wrap the `pandas.get_dummies` function to perform one-hot encoding as part of a Pipeline.
 
 ```python{14}
 import pandas as pd
@@ -192,7 +192,7 @@ print(transformed_df)
 
 ## Customizing existing scikit-learn Transformers
 
-What if you want to modify the functionality of an existing scikit-learn Transformer? A way to do this is to take advantage of Python's inheritance mechanism and subclass the Transformer. Credit to [Sebastian Flennerhag](http://flennerhag.com/2017-01-08-Recursive-Override/) for this method.
+What if you want to modify the functionality of an existing scikit-learn Transformer? A way to do this is to take advantage of Python's [inheritance mechanism](https://realpython.com/inheritance-composition-python/) and subclass the Transformer. Credit to [Sebastian Flennerhag](http://flennerhag.com/2017-01-08-Recursive-Override/) for this method.
 
 In the example below, we're creating an Ordinal Encoder that returns a pandas DataFrame instead of the usual NumPy array.
 
@@ -215,7 +215,7 @@ class CustomOrdinalEncoder(OrdinalEncoder):
 
 Here's how it works.
 
-The first step is to create an `__init__()` method. The method does two things. It initializes the scikit-learn OrdinalEncoder via the `super()` method, allowing us access to the OrdinalEncoder functionality, *and* passes on keyword arguments using `**kwargs`.
+The first step is to create an `__init__()` method. The method does two things. It initializes the scikit-learn `OrdinalEncoder` via the `super()` method, allowing us access to the `OrdinalEncoder` functionality, *and* passes on keyword arguments using `**kwargs`.
 
 ```python{3}
 class CustomOrdinalEncoder(OrdinalEncoder):
@@ -223,7 +223,7 @@ class CustomOrdinalEncoder(OrdinalEncoder):
         super().__init__(**kwargs)
 ```
 
-To have a DataFrame returned instead of an array, we override the transform method and define our own. Inside our transform method, the scikit-learn OrdinalEncoder performs the transformation via `super().transform(X)`, however, we map the result back to a DataFrame and return that.
+To have a DataFrame returned instead of an array, we [override](https://en.wikipedia.org/wiki/Method_overriding) the `transform()` method and define our own. Inside our `transform()` method, the scikit-learn `OrdinalEncoder` performs the transformation via `super().transform(X)`, however, we map the result back to a `DataFrame` and return that.
 
 ```python{5-9}
 class CustomOrdinalEncoder(OrdinalEncoder):
@@ -237,7 +237,7 @@ class CustomOrdinalEncoder(OrdinalEncoder):
         return new_X
 ```
 
-And thanks to inheritance, our `CustomOrdinalEncoder` behaves just like the scikit-learn OrdinalEncoder.
+And thanks to inheritance, our `CustomOrdinalEncoder` behaves just like the scikit-learn `OrdinalEncoder`.
 
 ```python
 import pandas as pd
