@@ -293,6 +293,7 @@ As we've seen, Custom Transformers give you a lot of flexibility and control ove
 
 ### Further Reading
 
+* [Preprocessing data](https://scikit-learn.org/stable/modules/preprocessing.html)
 * [Dataset transformations](https://scikit-learn.org/stable/data_transforms.html)
 * [FunctionTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer)
 * [Wrapping sklearn classes](http://flennerhag.com/2017-01-08-Recursive-Override)
