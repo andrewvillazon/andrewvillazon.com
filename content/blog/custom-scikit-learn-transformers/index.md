@@ -282,10 +282,10 @@ Categories:  [array(['Apple', 'Cherry', 'Pears'], dtype=object), array(['Green',
 
 Lastly, it's worth considering some of the existing projects dedicated to scikit-learn Transformers before creating your own:
 
-* Category Encoders - a large set of Categorical Variable transformations. 
-* Feature Engine - excellent range of Numeric and Categorical variable transformations. Easy to use with a lot of useful functionality.
-* sklearn-pandas - Useful library for mapping the results of a transformation back to a DataFrame.
-* scikit-lego
+* [Category Encoders](https://contrib.scikit-learn.org/category_encoders/index.html) - a large set of Categorical Variable transformations. 
+* [Feature Engine](https://feature-engine.readthedocs.io/) - excellent range of Numeric and Categorical variable transformations. Easy to use with a lot of useful functionality.
+* [sklearn-pandas](https://github.com/scikit-learn-contrib/sklearn-pandas) - Useful library for mapping the results of a transformation back to a DataFrame.
+* [scikit-lego](https://github.com/koaning/scikit-lego)
 
 ## Conclusion
 
