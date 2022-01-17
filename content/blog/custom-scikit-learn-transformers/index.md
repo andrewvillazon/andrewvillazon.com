@@ -286,3 +286,13 @@ Lastly, it's worth considering some of the existing projects dedicated to scikit
 * Feature Engine - excellent range of Numeric and Categorical variable transformations. Easy to use with a lot of useful functionality.
 * sklearn-pandas - Useful library for mapping the results of a transformation back to a DataFrame.
 * scikit-lego
+
+## Conclusion
+
+As we've seen, Custom Transformers give you a lot of flexibility and control over your Data Preprocessing. I've found them particularly good for encapsulating a step in the Data Processing process, making the code much more manageable. They're well worth a try.
+
+### Further Reading
+
+* [Dataset transformations](https://scikit-learn.org/stable/data_transforms.html)
+* [FunctionTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer)
+* [Wrapping sklearn classes](http://flennerhag.com/2017-01-08-Recursive-Override)
