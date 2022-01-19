@@ -51,6 +51,18 @@ Got a compact statement that could fit on one line? Use the **Join Lines** comma
 
 On Windows, the Join Lines command is **not** bound to a keyboard shortcut but can be set in [Keyboard Shortcuts](https://docs.microsoft.com/en-us/sql/azure-data-studio/keyboard-shortcuts?view=sql-server-ver15#edit-existing-keyboard-shortcuts).
 
+## Expand * to all columns in a SELECT *
+
+Known as **Star Expansion**, this takes an asterisk in the `SELECT` clause and replaces it with all column names.
+
+To trigger Star Expansion:
+* Place the cursor beside the asterisk `*`
+* Trigger IntelliSense (Windows: <kbd>ctrl + space</kbd>, Mac: <kbd>ctrl + space</kbd>). You should see a concatenated list of all column names
+* Press <kbd>Enter</kbd> to replace `*` with all column names.
+* This also works for tables, i.e., `SELECT table.*`
+
+<p><img src="StarExpansion.gif" class="article-img" title="Star Expansion" alt="Code Folding"></p>
+
 ## Hide a region of a query
 
 Want to hide a region of a query, e.g., hide a sub-query while editing the outer query. Try **Code Folding**.
