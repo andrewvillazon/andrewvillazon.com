@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Link } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCode, faDatabase, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import { faCode, faComment, faDatabase, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 import { faGithub, faPython, faReact } from "@fortawesome/free-brands-svg-icons"
 
 const _ = require("lodash")
@@ -19,7 +19,8 @@ export default function BlogPost({ data }) {
     "SQL Server": faDatabase,
     Gatsby: faReact,
     Site: faInfoCircle,
-    "Snippets": faCode,
+    Snippets: faCode,
+    Discussion: faComment,
   }
 
   return (
