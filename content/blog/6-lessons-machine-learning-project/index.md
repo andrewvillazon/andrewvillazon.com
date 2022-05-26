@@ -98,9 +98,9 @@ Perhaps you'll get excellent results, perhaps your models will be marginally bet
 
 Thanks for reading.
 
-## Further reading
+## Further Reading
 
-* Machine Learning in Practice
-* What is CRISP DM?
-* Machine Learning: The High-Interest Credit Card of Technical Debt
-* Full Stack Deep Learning Lecture 8: Data Management
+* [Machine Learning in Practice](https://medium.com/machine-learning-in-practice)
+* [What is CRISP DM?](https://www.datascience-pm.com/crisp-dm-2/)
+* [Machine Learning: The High-Interest Credit Card of Technical Debt](https://research.google/pubs/pub43146/)
+* [Full Stack Deep Learning Lecture 8: Data Management](https://fullstackdeeplearning.com/spring2021/lecture-8/)
