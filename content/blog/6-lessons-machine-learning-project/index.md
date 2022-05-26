@@ -66,7 +66,7 @@ A little upfront thinking and planning can go a long way to mitigating Technical
 * Is this the right place to be doing this? e.g., does it make sense to do data transformations in SQL, or better to do them in Python?
 * What Tools are available to manage complexity e.g., scikit-learn Pipelines and Transformers?
 
-For a detailed discussion on the kinds of Technical Debt that can come with an ML project, this paper from the Google Research Team is well worth a read.
+For a detailed discussion on the kinds of Technical Debt that can come with Machine Learning, see: [Machine Learning: The High-Interest Credit Card of Technical Debt](https://research.google/pubs/pub43146/) by the Google Research Team, which is well worth a read.
 
 ## Make decisions to make progress
 
