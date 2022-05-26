@@ -38,6 +38,8 @@ It's also essential to have access to a Domain Expert who can help you along the
 ## Don't underestimate the "Data Work"
 
 >"80% of a project is spent on data wrangling."
+>
+> <cite>Common Data Science trope</cite>
 
 If you hang around Machine Learning long enough, you'll run into some variation of this classic quote. 80% seems wildly exaggerated, but the important message is that a lot of time gets spent on data.
 
@@ -90,7 +92,7 @@ By targeting a Minimum Viable Model, we aim to realize the value of a "good enou
 
 ## Exciting results are not guaranteed
 
-"Exciting results are what everyone wants to find, but they're not exactly guaranteed."
+> "Exciting results are what everyone wants to find, but they're not exactly guaranteed."
 
 Lastly, this quote was something that I came across on StackOverflow, and it succinctly captures what can happen on a Machine Learning project.
 
