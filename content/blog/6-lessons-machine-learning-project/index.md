@@ -5,7 +5,7 @@ tags:
     - Discussion
 ---
 
-Machine Learning is a lot of fun, but it's not always straightforward and can be complex and sometimes messy. This post aims to reflect on some of the key learnings I took from recent work on a Machine Learning project.
+[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is a lot of fun, but it's not always straightforward and can be complex and sometimes messy. This post aims to reflect on some of the key learnings I took from recent work on a Machine Learning project.
 
 Information about the practice of Machine Learning doesn't always get the attention it should. Hopefully, these thoughts give some insight that the practitioner finds useful.
 
@@ -19,7 +19,7 @@ Now, onto the lessons learned.
 
 ## Know your data
 
-The recommended first step in most Data Science tutorials is Exploratory Data Analysis (EDA), typically done with data visualizations. EDA is helpful, but arguably more essential is developing a detailed understanding of your data.
+The recommended first step in most Data Science tutorials is **Exploratory Data Analysis (EDA)**, typically done with data visualizations. [EDA](https://www.ibm.com/cloud/learn/exploratory-data-analysis) is helpful, but arguably more essential is developing a **detailed understanding** of your data.
 
 That means drilling deeper into the context of your data, trying to understand these kinds of things:
 
@@ -33,7 +33,7 @@ Real-world data comes from Information Systems, and those Information Systems ar
 
 When you know the data, it can help to speed up development. For example, it's easy to drop a feature knowing it's unreliable rather than wasting time searching for a signal that isn't there.
 
-It's also essential to have access to a Domain Expert who can help you along the way. Domain Experts can help you understand what's happening in the data, direct you to valuable features, and also help to validate your models.
+It's also essential to have access to a [Domain Expert](https://blog.ml.cmu.edu/2020/08/31/1-domain-knowledge/) who can help you along the way. **Domain Experts** can help you understand what's happening in the data, direct you to valuable features, and also help to validate your models.
 
 ## Don't underestimate the "Data Work"
 
@@ -43,9 +43,9 @@ It's also essential to have access to a Domain Expert who can help you along the
 
 If you hang around Machine Learning long enough, you'll run into some variation of this classic quote. 80% seems wildly exaggerated, but the important message is that a lot of time gets spent on data.
 
-While the quote is probably directed at data cleansing, it's also essential to think about Data Management - the collection, organizing, and accessing of the data you'll use for modeling.
+While the quote is probably directed at data cleansing, it's also essential to think about **Data Management** - the collection, organizing, and accessing of the data you'll use for modeling.
 
-It involves thinking about the following:
+[Data Management](https://fullstackdeeplearning.com/spring2021/lecture-8/) involves thinking of things such as:
 
 * How do you source the data? Is it coming from a single source or multiple different sources?
 * How diverse are those sources, e.g., a spreadsheet, a rest API, or a Database?
@@ -57,7 +57,7 @@ When Data Management is good, it's easy to add new data, and updating your Data 
 
 ## Pay attention to Technical Debt
 
-Technical Debt is the idea that there is a cost to choosing an "easy" solution now instead of a better approach that takes longer. Working with code, you'll inevitably encounter times where you'll accrue Technical Debt, and a Machine Learning project is no different.
+**Technical Debt** is the idea that there is a cost to choosing an "easy" solution now instead of a better approach that takes longer. Working with code, you'll inevitably encounter times where you'll accrue Technical Debt, and a Machine Learning project is no different.
 
 Throwaway code and quick solutions have a habit of becoming embedded. Before you know it, your project is difficult to change, breaks easily (brittle), or needs significant amounts of rework to make progress.
 
@@ -84,7 +84,7 @@ The idea of "good enough" is closely related to the next point.
 
 ## Target the Minimum Viable Model
 
-The Minimum Viable Model (MVM) is the Machine Learning equivalent of the Minimum Viable Product. Like the MVP, an MVM is a model that is just good enough to provide value for its users for the least amount of effort.
+The **Minimum Viable Model (MVM)** is the Machine Learning equivalent of the Minimum Viable Product. Like the [MVP](https://www.productplan.com/glossary/minimum-viable-product/), an MVM is a model that is just "good enough" to provide value for its users for the least amount of effort.
 
 Defining "good enough" is something negotiated with your customer or end-user, but the characteristics of an MVM could include simple models, a small feature set, minimal tuning, etc.
 
@@ -94,7 +94,7 @@ By targeting a Minimum Viable Model, we aim to realize the value of a "good enou
 
 > "Exciting results are what everyone wants to find, but they're not exactly guaranteed."
 
-Lastly, this quote was something that I came across on StackOverflow, and it succinctly captures what can happen on a Machine Learning project.
+Lastly, this quote was something that I came across on [StackOverflow](https://workplace.stackexchange.com/a/130549/134355), and it succinctly captures what can happen on a Machine Learning project.
 
 Perhaps you'll get excellent results, perhaps your models will be marginally better than a random guess, or perhaps somewhere in the middle. But sometimes, that's what it's like trying to solve real-world problems with real-world data.
 
