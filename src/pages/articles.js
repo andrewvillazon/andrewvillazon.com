@@ -15,7 +15,7 @@ const ArticlePage = ({ data }) => {
         <div className="container">
           <header>
             <h1>Articles</h1>
-            <div className="flex">
+            <div className="flex-wrapped">
               <DistinctTags />
             </div>
           </header>

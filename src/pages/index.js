@@ -41,7 +41,7 @@ const IndexPage = ({ data }) => {
       <section>
         <div class="container">
           <h2>Explore</h2>
-          <div class="flex article-tags">
+          <div class="flex-wrapped article-tags">
             <DistinctTags />
           </div>
         </div>

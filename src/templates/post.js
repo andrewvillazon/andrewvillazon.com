@@ -34,7 +34,7 @@ export default function BlogPost({ data }) {
               <p>
                 <time class="article-time">{post.frontmatter.date}</time>
               </p>
-              <div class="flex article-tags">
+              <div class="flex-wrapped article-tags">
                 {tags.map(tag => (
                   <Link to={`/tags/${_.kebabCase(tag)}/`} className={`tag ${_.kebabCase(tag)}`}>
                     <FontAwesomeIcon icon={icons[tag]} />
