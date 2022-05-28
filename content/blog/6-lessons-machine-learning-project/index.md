@@ -1,6 +1,6 @@
 ---
 title: "6 lessons from a Machine Learning project"
-date: "2022-05-26"
+date: "2022-05-28"
 tags:
     - Discussion
 ---
@@ -37,7 +37,7 @@ It's also essential to have access to a [Domain Expert](https://blog.ml.cmu.edu/
 
 ## Don't underestimate the "Data Work"
 
->"80% of a project is spent on data wrangling."
+>"80% of a Data Science project is spent on data wrangling."
 >
 > <cite>Common Data Science trope</cite>
 
@@ -53,7 +53,7 @@ While the quote is probably directed at data cleansing, it's also essential to t
 * How will you organize and coordinate data collection?
 * Will it be easy to bring in new data?
 
-When Data Management is good, it's easy to add new data, and updating your Data is simple. Managing the data well also means more time and resources to put into activities that improve model performance.
+When Data Management is good, it's easy to add new data, and updating your data is simple. Managing the data well also means more time and resources to put into activities that improve model performance.
 
 ## Pay attention to Technical Debt
 
@@ -64,9 +64,9 @@ Throwaway code and quick solutions have a habit of becoming embedded. Before you
 A little upfront thinking and planning can go a long way to mitigating Technical Debt. It's helpful to step back and ask questions such as:
 
 * How easy will this be to change?
-* Can I build on this without much difficulty? e.g., will it be easy to add new data to an existing dataset or into an existing pipeline?
-* Is this the right place to be doing this? e.g., does it make sense to do data transformations in SQL, or better to do them in Python?
-* What Tools are available to manage complexity e.g., scikit-learn Pipelines and Transformers?
+* Can I build on this without much difficulty? E.g., will it be easy to add new data to an existing dataset or into an existing pipeline?
+* Is this the right place to be doing this? E.g., does it make sense to do data transformations in SQL, or better to do them in Python?
+* What Tools are available to manage complexity E.g., scikit-learn Pipelines and Transformers?
 
 For a detailed discussion on the kinds of Technical Debt that can come with Machine Learning, see: [Machine Learning: The High-Interest Credit Card of Technical Debt](https://research.google/pubs/pub43146/) by the Google Research Team, which is well worth a read.
 
@@ -84,7 +84,7 @@ The idea of "good enough" is closely related to the next point.
 
 ## Target the Minimum Viable Model
 
-The **Minimum Viable Model (MVM)** is the Machine Learning equivalent of the Minimum Viable Product. Like the [MVP](https://www.productplan.com/glossary/minimum-viable-product/), an MVM is a model that is just "good enough" to provide value for its users for the least amount of effort.
+The **Minimum Viable Model (MVM)** is the Machine Learning equivalent of the Minimum Viable Product (MVP). Like the [MVP](https://www.productplan.com/glossary/minimum-viable-product/), an MVM is a model that is just "good enough" to provide value for its users for the least amount of effort.
 
 Defining "good enough" is something negotiated with your customer or end-user, but the characteristics of an MVM could include simple models, a small feature set, minimal tuning, etc.
 
