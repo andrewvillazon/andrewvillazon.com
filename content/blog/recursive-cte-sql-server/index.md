@@ -5,13 +5,13 @@ tags:
     - SQL Server
 ---
 
-One of the more interesting features of Common Table Expressions is their ability to refer to themselves. This ability allows the CTE to perform something called Recursion, and in this post, we'll look at how to build Recursive CTEs in T-SQL and a couple of situations where you might use Recursive CTEs.
+One of the more interesting features of Common Table Expressions (CTEs) is their ability to refer to themselves. This ability allows the CTE to perform something called Recursion, and in this post, we'll look at how to build Recursive CTEs in T-SQL and situations where you might use Recursive CTEs.
 
 For this post, I will assume that you're already familiar with Common Table Expressions and are comfortable using them in a query. If you're not but want to learn more, I highly recommend Itzik Ben-Gan's exploration of CTEs.
 
 ## What is Recursion?
 
-In programming, Recursion is a technique used to solve problems by breaking them down into smaller and smaller sub-tasks of the same type. Recursion is typically understood as a function that calls itself until a condition is met.
+In programming, Recursion is a technique used to solve problems by breaking them into smaller and smaller sub-tasks of the same type. Recursion is typically understood as a function that calls itself until a condition is met.
 
 Recursion works well on certain problems, particularly involving hierarchical data (think tree-style structures) or where a problem naturally suits being broken into sub-problems.
 
@@ -23,9 +23,9 @@ SQL Server implements Recursion through Recursive CTEs, a unique type of CTE tha
 
 A Recursive CTE has three components:
 
-* Anchor query: Think of this as the starting point for the query. The anchor provides the initial result set.
-* Recursive query: Following the anchor query, the Recursive query runs iteratively until a condition is met. The result set from each iteration serves as input into the next.
-* Break condition (optional): Also called the termination condition. The predicate or condition that stops any further iteration.
+* Anchor Query: Think of this as the starting point for the query. The anchor provides the initial result set.
+* Recursive Query: Following the anchor query, the Recursive query runs iteratively until a condition is met. The result set from each iteration serves as input into the next.
+* Break Condition (optional): Also called the Termination Condition. The predicate or condition that stops any further iteration.
 
 Recursive CTEs have the following layout:
 
@@ -92,11 +92,11 @@ If visualized, the data might look something like this.
 
 Let's create a Recursive CTE to traverse and query this data.
 
-### Anchor query
+### Anchor Query
 
-The first step in a Recursive CTE is creating the anchor query. In the anchor query, we select the first level of the hierarchy, i.e., the rows that don't have an ancestor.
+The first step in a Recursive CTE is creating the Anchor Query. In the Anchor Query, we select the first level of the hierarchy, i.e., the rows that don't have an ancestor.
 
-You can think of the anchor query as the starting point for our iterative query.
+You can think of the Anchor Query as the starting point for our iterative query.
 
 ```sql{13,14}
 WITH 
@@ -118,7 +118,7 @@ WITH
 
 ### Recursive query
 
-Next comes the recursive query, where the CTE will reference itself.
+Next comes the Recursive Query, where the CTE will reference itself.
 
 ```sql{27,28}
 WITH 
@@ -152,7 +152,7 @@ WITH
     )
 ```
 
-It's important to note the `INNER JOIN`, which references `recursive_cte`. The join steps the query into the next level of the hierarchy because the recursive query returns only rows that match the `ancestor_id` from the previous anchor query.
+It's important to note the `INNER JOIN`, which references `recursive_cte`. The join steps the query into the next level of the hierarchy because the Recursive Query returns only rows that match the `ancestor_id` from the previous Anchor Query.
 
 And lastly, as with a regular CTE, we query the CTE with a `SELECT`.
 
@@ -197,24 +197,24 @@ FROM
     recursive_cte
 ```
 
-### What about a break condition?
+### What about a Break Condition?
 
-As mentioned above, the break condition is the 3rd and optional component of a Recursive CTE. The break condition tells the query when to stop the Recursive iteration.
+As mentioned above, the Break Condition is the 3rd and optional component of a Recursive CTE. The Break Condition tells the query when to stop the Recursive iteration.
 
-In the case of hierarchical data, we don't need a break condition, as SQL Server will continue down the hierarchy until it reaches the end.
+In the case of hierarchical data, we don't need a Break Condition, as SQL Server will continue down the hierarchy until it reaches the end.
 
 ### How it works
 
 There are a couple of key ideas to understanding how SQL Server processes the Recursive CTE:
 
 * The result set gets built iteratively, i.e., step by step.
-* At each iteration, only the result set of the previous iteration is available to the Recursive query, not the accumulating result set.
+* At each iteration, only the result set of the previous iteration is available to the Recursive Query, not the accumulating result set.
 
 Let's look at how the result set gets built up as the query iterates over the data.
 
 #### Initial query
 
-The query begins with the anchor, which returns all rows without an ancestor, i.e., the top of the hierarchy.
+The query begins with the Anchor, which returns all rows without an ancestor, i.e., the top of the hierarchy.
 
 ```sql
 -- Anchor Query
@@ -241,7 +241,7 @@ At this iteration, the `result` set of `recursive_cte` looks like this.
 
 #### Iteration 1
 
-After this, the Recursion starts, and the query engine repeatedly runs the Recursive query.
+After this, the Recursion starts, and the query engine repeatedly runs the Recursive Query.
 
 `recursive_cte` is joined to the original data. The effect of this is a result set of descendants of rows from the previous iteration.
 
@@ -273,7 +273,7 @@ The result set of `recursive_cte` now looks like this.
 
 #### Iteration 2
 
-The Recursive query repeats and the result set of the previous iteration is joined back to the original data, which steps us into the next level of the hierarchy.
+The Recursive Query repeats and the result set of the previous iteration is joined back to the original data, which steps us into the next level of the hierarchy.
 
 The result set of `recursive_cte` now looks like this.
 
@@ -287,7 +287,7 @@ The result set of `recursive_cte` now looks like this.
 
 #### The last iteration
 
-The Recursive query repeats once more, stepping into the last level of the hierarchy.
+The Recursive Query repeats once more, stepping into the last level of the hierarchy.
 
 ```
 | cat_id | cat          | ancestor_id | ancestor  | level | lineage                                         |
@@ -366,7 +366,7 @@ Apart from hierarchical data, Recursive CTEs have a couple of other uses.
 
 Recursive CTEs can be used to generate a sequence of values.
 
-Here the Anchor query sets the starting value, and each iteration of the Recursive query adds to the iteration before it.
+Here the Anchor Query sets the starting value, and each iteration of the Recursive Query adds to the iteration before it.
 
 ```sql{12}
 WITH recursive_sequence(sequence_num) AS (
@@ -388,7 +388,7 @@ FROM
     recursive_sequence
 ```
 
-Notice that we included a Termination Condition in the Recursive query of the CTE. The Termination Condition tells the Recursive CTE when to end iterating; without this, the query would continue repeating until hitting the max recursion limit.
+Notice that we included a Termination Condition in the Recursive Query of the CTE. The Termination Condition tells the Recursive CTE when to end iterating; without this, the query would continue repeating until hitting the max recursion limit (see above).
 
 Here we apply the same idea to create a simple calendar using a Recursive CTE and the `DATEADD` function.
 
@@ -516,7 +516,7 @@ In this situation, we'll need a column that uniquely identifies a row to ensure 
 
 First, we use the `LEFT()` function to get the value before the first comma. Then we take the value before the first comma and use `SUBSTRING()` remove it from our comma-separated column.
 
-This process repeats in the Recursive query, with each iteration working on a smaller and smaller list of comma-separated values. When there are no more values left, the Recursion stops.
+This process repeats in the Recursive Query, with each iteration working on a smaller and smaller list of comma-separated values. When there are no more values left, the Recursion stops.
 
 ```sql{17,18,28,29}
 DECLARE @csv_table TABLE (
@@ -582,7 +582,7 @@ And that's a wrap on Recursive CTEs. Here's a summary of the things we covered:
 * A Recursive CTE refers to itself, which enables Recursion.
 * Recursive CTEs iterate, rather than loop, and break down a task into smaller pieces with each iteration.
 * Traversing hierarchical data or generating sequences are good problems for a Recursive CTE.
-* Consider break or termination conditions to prevent recursing indefinitely.
+* Consider Break or Termination Conditions to prevent iterating indefinitely.
 
 ## Further Reading
 
