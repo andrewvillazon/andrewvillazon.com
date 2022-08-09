@@ -210,7 +210,7 @@ There are a couple of key ideas to understanding how SQL Server processes the Re
 * The result set gets built **recursively**, i.e., step by step.
 * At each recursion, only the result set of the previous step is available to the Recursive Query, not the accumulating result set.
 
-Let's look at how the result set gets built up as the query iterates over the data.
+Let's look at how the result set gets built up as the query steps through the data.
 
 #### Initial query
 
