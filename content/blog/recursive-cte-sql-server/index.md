@@ -5,7 +5,7 @@ tags:
     - SQL Server
 ---
 
-One of the more interesting features of Common Table Expressions (CTEs) is their ability to refer to themselves. This ability allows the CTE to perform something called **Recursion**, and in this post, we'll look at how to build Recursive CTEs in T-SQL and situations where you might use Recursive CTEs.
+One of the more interesting features of [Common Table Expressions (CTEs)](https://docs.microsoft.com/en-us/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver16) is their ability to refer to themselves. This ability allows the CTE to perform something called **Recursion**, and in this post, we'll look at how to build Recursive CTEs in T-SQL and situations where you might use Recursive CTEs.
 
 For this post, I will assume that you're already familiar with Common Table Expressions and are comfortable using them in a query. If you're not but want to learn more, I highly recommend Itzik Ben-Gan's exploration of CTEs.
 
@@ -239,11 +239,11 @@ At this iteration, the `result` set of `recursive_cte` looks like this.
 | 1      | Felidae | NULL        | NULL     | 0     | Felidae |
 ```
 
-#### Iteration 1
+#### Recursion 1
 
 After this, the Recursion starts, and the query engine repeatedly runs the Recursive Query.
 
-`recursive_cte` is joined to the original data. The effect of this is a result set of descendants of rows from the previous iteration.
+`recursive_cte` is joined to the original data. The effect of this is a result set of descendants of rows from the previous step.
 
 ```sql{13,14}
 -- Recursive query
@@ -271,9 +271,9 @@ The result set of `recursive_cte` now looks like this.
 | 3      | Felinae     | 1           | Felidae  | 1     | Felidae > Felinae     |
 ```
 
-#### Iteration 2
+#### Recursion 2
 
-The Recursive Query repeats and the result set of the previous iteration is joined back to the original data, which steps us into the next level of the hierarchy.
+The Recursive Query repeats and the result set of the previous step is joined back to the original data, which takes us into the next level of the hierarchy.
 
 The result set of `recursive_cte` now looks like this.
 
@@ -285,7 +285,7 @@ The result set of `recursive_cte` now looks like this.
 | 4      | Panthera  | 2           | Pantherinae | 2     | Felidae > Pantherinae > Panthera |
 ```
 
-#### The last iteration
+#### The last Recursion
 
 The Recursive Query repeats once more, stepping into the last level of the hierarchy.
 
@@ -327,11 +327,11 @@ It began with the root of the hierarchy, then traveled down to the Felidae branc
 
 ## Recursion Limit Error
 
-Due to the potential for Recursive CTEs to run indefinitely, SQL Server has protections that limit how many times it runs the Recursive query. SQL Server sets the default Recursion Limit to **100**, i.e., 100 iterations.
+Due to the potential for Recursive CTEs to run indefinitely, SQL Server has protections that limit how many times it runs the Recursive query. SQL Server sets the default Recursion Limit to **100**, i.e., 100 Recursive Query calls.
 
-To modify this, we can include the `OPTION` clause with the `MAXRECURSION` option. The `MAXRECURSION` option takes a number specifying how many iterations of the Recursive query to allow.
+To modify this, we can include the `OPTION` clause with the `MAXRECURSION` option. The `MAXRECURSION` option takes a number specifying how many calls of the Recursive query to allow.
 
-Setting `MAXRECURSION` to `0` allows indefinite iterations or as many iterations as required to complete the query.
+Setting `MAXRECURSION` to `0` allows indefinite recursions or as many recursions as required to complete the query.
 
 ```sql{18}
 WITH recursive_cte(list_of_col_names) AS (
@@ -354,7 +354,7 @@ FROM
 OPTION (MAXRECURSION 0)
 ```
 
-When dealing with Recursion, it's a good idea to consider using a Break Condition or setting a limit on the iterations to an expected value. For example, using Recursion to generate a result set of days in a year (see below), you might set the `MAXRECURSION` to `365`.
+When dealing with Recursion, it's a good idea to consider using a Break Condition or setting a limit to an expected value. For example, using Recursion to generate a result set of days in a year (see below), you might set the `MAXRECURSION` to `365`.
 
 Setting a limit on the Recursion helps protect against unexpected behavior due to data changing.
 
@@ -366,7 +366,7 @@ Apart from hierarchical data, Recursive CTEs have a couple of other uses.
 
 Recursive CTEs can be used to generate a sequence of values.
 
-Here the Anchor Query sets the starting value, and each iteration of the Recursive Query adds to the iteration before it.
+Here the Anchor Query sets the starting value, and each call of the Recursive Query adds to the iteration before it.
 
 ```sql{12}
 WITH recursive_sequence(sequence_num) AS (
@@ -388,7 +388,7 @@ FROM
     recursive_sequence
 ```
 
-Notice that we included a Termination Condition in the Recursive Query of the CTE. The Termination Condition tells the Recursive CTE when to end iterating; without this, the query would continue repeating until hitting the max recursion limit (see above).
+Notice that we included a Termination Condition in the Recursive Query of the CTE. The Termination Condition tells the Recursive CTE when to stop; without this, the query would continue repeating until hitting the max recursion limit (see above).
 
 Here we apply the same idea to create a simple calendar using a Recursive CTE and the `DATEADD` function.
 
@@ -516,7 +516,7 @@ In this situation, we'll need a column that uniquely identifies a row to ensure 
 
 First, we use the `LEFT()` function to get the value before the first comma. Then we take the value before the first comma and use `SUBSTRING()` remove it from our comma-separated column.
 
-This process repeats in the Recursive Query, with each iteration working on a smaller and smaller list of comma-separated values. When there are no more values left, the Recursion stops.
+This process repeats in the Recursive Query, with each Recursion working on a smaller and smaller list of comma-separated values. When there are no more values left, the Recursion stops.
 
 ```sql{17,18,28,29}
 DECLARE @csv_table TABLE (
@@ -580,7 +580,7 @@ We can see from the result set how the column of comma-separated values becomes 
 And that's a wrap on Recursive CTEs. Here's a summary of the things we covered:
 
 * A Recursive CTE refers to itself, which enables Recursion.
-* Recursive CTEs iterate, rather than loop, and break down a task into smaller pieces with each iteration.
+* Recursive CTEs repeatidly call themselves and break down a task into smaller pieces with each call.
 * Traversing hierarchical data or generating sequences are good problems for a Recursive CTE.
 * Consider Break or Termination Conditions to prevent iterating indefinitely.
 
