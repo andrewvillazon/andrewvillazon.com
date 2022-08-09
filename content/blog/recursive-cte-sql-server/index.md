@@ -207,8 +207,8 @@ In the case of hierarchical data, we don't need a Break Condition, as SQL Server
 
 There are a couple of key ideas to understanding how SQL Server processes the Recursive CTE:
 
-* The result set gets built **iteratively**, i.e., step by step.
-* At each iteration, only the result set of the previous iteration is available to the Recursive Query, not the accumulating result set.
+* The result set gets built **recursively**, i.e., step by step.
+* At each recursion, only the result set of the previous step is available to the Recursive Query, not the accumulating result set.
 
 Let's look at how the result set gets built up as the query iterates over the data.
 
