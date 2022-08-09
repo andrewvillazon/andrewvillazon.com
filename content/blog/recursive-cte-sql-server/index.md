@@ -5,13 +5,13 @@ tags:
     - SQL Server
 ---
 
-One of the more interesting features of Common Table Expressions (CTEs) is their ability to refer to themselves. This ability allows the CTE to perform something called Recursion, and in this post, we'll look at how to build Recursive CTEs in T-SQL and situations where you might use Recursive CTEs.
+One of the more interesting features of Common Table Expressions (CTEs) is their ability to refer to themselves. This ability allows the CTE to perform something called **Recursion**, and in this post, we'll look at how to build Recursive CTEs in T-SQL and situations where you might use Recursive CTEs.
 
 For this post, I will assume that you're already familiar with Common Table Expressions and are comfortable using them in a query. If you're not but want to learn more, I highly recommend Itzik Ben-Gan's exploration of CTEs.
 
 ## What is Recursion?
 
-In programming, Recursion is a technique used to solve problems by breaking them into smaller and smaller sub-tasks of the same type. Recursion is typically understood as a function that calls itself until a condition is met.
+In programming, Recursion is a technique used to solve problems by breaking them into **smaller and smaller sub-tasks of the same type**. Recursion is typically understood as a function that calls itself until a condition is met.
 
 Recursion works well on certain problems, particularly involving hierarchical data (think tree-style structures) or where a problem naturally suits being broken into sub-problems.
 
@@ -23,9 +23,9 @@ SQL Server implements Recursion through Recursive CTEs, a unique type of CTE tha
 
 A Recursive CTE has three components:
 
-* Anchor Query: Think of this as the starting point for the query. The anchor provides the initial result set.
-* Recursive Query: Following the anchor query, the Recursive query runs iteratively until a condition is met. The result set from each iteration serves as input into the next.
-* Break Condition (optional): Also called the Termination Condition. The predicate or condition that stops any further iteration.
+* **Anchor Query:** Think of this as the starting point for the query. The anchor provides the initial result set.
+* **Recursive Query:** Following the anchor query, the Recursive query runs iteratively until a condition is met. The result set from each iteration serves as input into the next.
+* **Break Condition (optional):** Also called the **Termination Condition**. The predicate or condition that stops any further iteration.
 
 Recursive CTEs have the following layout:
 
@@ -84,7 +84,7 @@ VALUES
 There are a couple of features of this data to pay attention to:
 
 * The data represents the relationships between an organism and its common ancestors (known as a Cladogram). Each row is a family tree member, and the rows relate to each other.
-* The data has a hierarchy, so there will be a row(s) that represents the top of the hierarchy. These rows do not have an ancestor.
+* The data has a hierarchy, so there will be a row(s) that represents the top of the hierarchy. These rows *do not* have an ancestor.
 
 If visualized, the data might look something like this.
 
@@ -207,7 +207,7 @@ In the case of hierarchical data, we don't need a Break Condition, as SQL Server
 
 There are a couple of key ideas to understanding how SQL Server processes the Recursive CTE:
 
-* The result set gets built iteratively, i.e., step by step.
+* The result set gets built **iteratively**, i.e., step by step.
 * At each iteration, only the result set of the previous iteration is available to the Recursive Query, not the accumulating result set.
 
 Let's look at how the result set gets built up as the query iterates over the data.
@@ -327,7 +327,7 @@ It began with the root of the hierarchy, then traveled down to the Felidae branc
 
 ## Recursion Limit Error
 
-Due to the potential for Recursive CTEs to run indefinitely, SQL Server has protections that limit how many times it runs the Recursive query. SQL Server sets the default Recursion Limit to 100, i.e., 100 iterations.
+Due to the potential for Recursive CTEs to run indefinitely, SQL Server has protections that limit how many times it runs the Recursive query. SQL Server sets the default Recursion Limit to **100**, i.e., 100 iterations.
 
 To modify this, we can include the `OPTION` clause with the `MAXRECURSION` option. The `MAXRECURSION` option takes a number specifying how many iterations of the Recursive query to allow.
 
