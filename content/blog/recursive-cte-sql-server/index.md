@@ -7,7 +7,7 @@ tags:
 
 One of the more interesting features of [Common Table Expressions (CTEs)](https://docs.microsoft.com/en-us/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver16) is their ability to refer to themselves. This ability allows the CTE to perform something called **Recursion**, and in this post, we'll look at how to build Recursive CTEs in T-SQL and situations where you might use Recursive CTEs.
 
-For this post, I will assume that you're already familiar with Common Table Expressions and are comfortable using them in a query. If you're not but want to learn more, I highly recommend Itzik Ben-Gan's exploration of CTEs.
+For this post, I will assume that you're already familiar with Common Table Expressions and are comfortable using them in a query. If you're not but want to learn more, I highly recommend [Itzik Ben-Gan's exploration of CTEs](https://sqlperformance.com/2020/04/t-sql-queries/table-expressions-part-1).
 
 ## What is Recursion?
 
@@ -83,7 +83,7 @@ VALUES
 
 There are a couple of features of this data to pay attention to:
 
-* The data represents the relationships between an organism and its common ancestors (known as a Cladogram). Each row is a family tree member, and the rows relate to each other.
+* The data represents the relationships between an organism and its common ancestors (known as a [Cladogram](https://www.thoughtco.com/cladogram-definition-and-examples-4778452)). Each row is a family tree member, and the rows relate to each other.
 * The data has a hierarchy, so there will be a row(s) that represents the top of the hierarchy. These rows *do not* have an ancestor.
 
 If visualized, the data might look something like this.
@@ -508,7 +508,7 @@ FROM
 
 ### Separate delimited values into rows with a Recursive CTE
 
-*Note that this functionality is available from SQL Server 2016 onwards via the `STRING_SPLIT()` function.*
+*Note that this functionality is available from SQL Server 2016 onwards via the `STRING_SPLIT()` [function](/sql-server-string-split).*
 
 If we have a column of data and the data is separated by a delimiter, e.g., a comma, we can use Recursive CTEs to turn this into rows.
 
@@ -590,3 +590,4 @@ And that's a wrap on Recursive CTEs. Here's a summary of the things we covered:
 * [Recursive Queries Using Common Table Expressions](https://docs.microsoft.com/en-us/previous-versions/sql/sql-server-2008-r2/ms186243(v=sql.105))
 * [How do Recursive CTEs work in SQL Server?](https://stackoverflow.com/a/51177170/7372226)
 * [Fundamentals of table expressions, Part 6 – Recursive CTEs](https://sqlperformance.com/2020/09/t-sql-queries/fundamentals-of-table-expressions-part-6-recursive-ctes)
+* [Programming - Recursion - Utah School of Computing](https://www.cs.utah.edu/~germain/PPS/Topics/recursion.html)
