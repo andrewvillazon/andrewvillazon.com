@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-zinc-100 px-2 transition-[background-color];
+  }
+  
+  body.dark {
+    @apply bg-zinc-800;
+  }
