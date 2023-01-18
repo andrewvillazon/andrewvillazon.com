@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "gatsby";
 import DarkModeToggle from "../components/DarkmodeToggle";
 
 const IndexPage = () => {
@@ -12,12 +13,12 @@ const IndexPage = () => {
             </div>
             <div className="container mx-auto flex justify-between h16 items-center">
               <div class="flex space-x-5">
-                <a
-                  href="#"
-                  class="py-2 text-base font-medium hover:border-b-gray-200 border-transparent border-y-2"
+                <Link
+                  to="/articles/"
+                  className="py-2 text-base font-medium hover:border-b-gray-200 border-transparent border-y-2"
                 >
                   Blog
-                </a>
+                </Link>
                 <a
                   href="#"
                   class="py-2 text-base font-medium hover:border-b-gray-200 border-transparent border-y-2"
