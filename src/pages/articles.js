@@ -1,11 +1,13 @@
 import * as React from "react";
 
 import Posts from "../components/Posts";
+import Tags from "../components/Tags";
 
 const ArticlePage = () => {
   return (
     <div>
-      <Posts/>
+      <Tags/>
+      <Posts groupByYears={true} />
     </div>
   );
 };
