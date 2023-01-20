@@ -1,25 +1,7 @@
 import { graphql, useStaticQuery, Link } from "gatsby";
 import * as React from "react";
 
-const Posts = ({ groupByYears = false, limit = null }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      allMdx(sort: { frontmatter: { date: DESC } }) {
-        nodes {
-          frontmatter {
-            date
-            slug
-            title
-          }
-        }
-      }
-    }
-  `);
-
-  //   Setup the data to work with
-  const posts = data.allMdx.nodes;
-  const postLimit = limit ? Math.min(posts.length, limit) : posts.length;
-  posts.length = postLimit;
+const Posts = ({ posts, groupByYears = false }) => {
 
   //   Re-organise if grouping by year
   if (groupByYears) {
