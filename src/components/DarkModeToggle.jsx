@@ -44,7 +44,7 @@ export default function DarkModeToggle() {
 
   return (
     <button
-      className="p-2 rounded-full bg-purple-600 transition-all outline-none ring-purple-600 ring-offset-zinc-100 dark:ring-offset-zinc-800"
+      className="p-2 rounded-full bg-nord-0 transition-all"
       onClick={toggle}
     >
       <DarkModeIcon />
