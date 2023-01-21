@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body {
-    @apply bg-nord-0 px-2 transition-[background-color];
+    @apply bg-nord-4 px-2 transition-[background-color];
   }
   
 body.dark {
-  @apply bg-nord-4;
+  @apply bg-nord-0;
 }
