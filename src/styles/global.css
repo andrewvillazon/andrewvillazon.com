@@ -6,6 +6,6 @@ body {
     @apply bg-nord-0 px-2 transition-[background-color];
   }
   
-  body.dark {
-    @apply bg-nord-4;
-  }
+body.dark {
+  @apply bg-nord-4;
+}
