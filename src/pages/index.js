@@ -8,15 +8,15 @@ const IndexPage = () => {
     <Layout>
 
       <section>
-        <div className="container mx-auto">
-          <h1>Hi, I'm Andrew.</h1>
-          <p>
+        <div className="container mx-auto pr-96">
+          <h1 className="mb-8 text-6xl font-extrabold tracking-tight">Hi, I'm Andrew.</h1>
+          <p className="text-xl mb-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
             odit necessitatibus? In minus nulla hic aliquam eaque! Magnam
             voluptate quod commodi aperiam possimus! Placeat porro odit
             quibusdam suscipit accusamus corrupti!
           </p>
-          <p>Iusto, nobis accusantium omnis veniam tempore nesciunt ad.</p>
+          <p className="text-xl mb-6">Iusto, nobis accusantium omnis veniam tempore nesciunt ad.</p>
         </div>
       </section>
 
