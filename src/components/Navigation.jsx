@@ -10,27 +10,31 @@ const Navigation = () => {
   ];
 
   return (
-    <nav>
-      <div className="container mx-auto">
-        <div className="text-2xl font-bold text-gray-900">Andrew Villazon</div>
-        <div className="container mx-auto flex justify-between items-center">
-          <div class="flex space-x-5">
-            {navItems.map((item) => (
-              <Link
-                to={item.url}
-                key={item.text}
-                className="text-base font-medium hover:border-b-gray-200 border-transparent border-y-2"
-              >
-                {item.text}
-              </Link>
-            ))}
+    <section className="pt-8">
+      <nav>
+        <div className="container mx-auto">
+          <div className="text-2xl mb-2 font-bold text-gray-900">
+            Andrew Villazon
           </div>
-          <div>
-            <DarkModeToggle />
+          <div className="container mx-auto flex justify-between items-center">
+            <div class="flex space-x-5">
+              {navItems.map((item) => (
+                <Link
+                  to={item.url}
+                  key={item.text}
+                  className="text-base py-2 font-medium hover:border-b-gray-200 border-transparent border-y-2"
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </div>
+            <div>
+              <DarkModeToggle />
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </section>
   );
 };
 
