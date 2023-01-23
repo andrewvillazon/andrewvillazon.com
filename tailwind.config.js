@@ -5,6 +5,9 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      xl: '1024px',
+    },
     extend: {
       colors: {
         nord: {
