@@ -8,7 +8,7 @@ const IndexPage = () => {
     <Layout>
 
       <section>
-        <div className="container mx-auto pr-96">
+        <div className="container mx-auto pr-72">
           <h1 className="mb-8 text-6xl font-extrabold tracking-tight">Hi, I'm Andrew.</h1>
           <p className="text-xl mb-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
@@ -21,10 +21,10 @@ const IndexPage = () => {
       </section>
 
       <section>
-        <div className="container mx-auto">
-          <div>
-            <h2>Latest</h2>
-            <a href="#">View All</a>
+        <div className="container mx-auto mt-20">
+          <div className="flex justify-between items-center mb-9">
+            <h2 className="text-3xl font-semibold">Latest</h2>
+            <Link to={"/articles"} className="bg-nord-3 text-nord-6 font-bold py-2 px-4 rounded">View All</Link>
           </div>
           <article>
             <a href="#">
