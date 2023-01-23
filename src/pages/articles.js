@@ -2,10 +2,9 @@ import { graphql } from "gatsby";
 import * as React from "react";
 import Posts from "../components/Posts";
 import Tags from "../components/Tags";
-import { postsFromNodes } from "../helpers/helpers";
 
 const ArticlePage = ({ data }) => {
-  const posts = postsFromNodes(data.allMdx.edges);
+  const posts = data.allMdx.nodes;
 
   return (
     <div>
@@ -17,16 +16,14 @@ const ArticlePage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx {
-      edges {
-        node {
-          id
-          frontmatter {
-            date
-            slug
-            title
-          }
+    allMdx(sort: { frontmatter: { date: DESC } }) {
+      nodes {
+        frontmatter {
+          date
+          slug
+          title
         }
+        id
       }
     }
   }
