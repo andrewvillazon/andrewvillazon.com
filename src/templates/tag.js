@@ -1,21 +1,18 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { postsFromNodes } from "../helpers/helpers";
 import Posts from "../components/Posts";
 
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext;
-  const { edges, totalCount } = data.allMdx;
+  const { nodes, totalCount } = data.allMdx;
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
   } tagged with "${tag}"`;
 
-  const posts = postsFromNodes(edges);
-
   return (
     <div>
       <h1>{tagHeader}</h1>
-      <Posts posts={posts} groupByYears={true} />
+      <Posts posts={nodes} groupByYears={true} />
     </div>
   );
 };
@@ -29,15 +26,13 @@ export const pageQuery = graphql`
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
-      edges {
-        node {
-          frontmatter {
-            slug
-            title
-            date
-          }
-          id
+      nodes {
+        frontmatter {
+          date
+          slug
+          title
         }
+        id
       }
     }
   }
