@@ -1,77 +1,44 @@
 import * as React from "react";
-import { Link } from "gatsby";
-import Navigation from "../components/Navigation";
+import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
+import Posts from "../components/Posts";
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
+  const latestPosts = data.allMdx.nodes;
+
   return (
     <Layout>
-
       <section>
         <div className="container mx-auto pr-72">
-          <h1 className="mb-8 text-6xl font-extrabold tracking-tight">Hi, I'm Andrew.</h1>
+          <h1 className="mb-8 text-6xl font-extrabold tracking-tight">
+            Hi, I'm Andrew.
+          </h1>
           <p className="text-xl mb-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
             odit necessitatibus? In minus nulla hic aliquam eaque! Magnam
             voluptate quod commodi aperiam possimus! Placeat porro odit
             quibusdam suscipit accusamus corrupti!
           </p>
-          <p className="text-xl mb-6">Iusto, nobis accusantium omnis veniam tempore nesciunt ad.</p>
+          <p className="text-xl mb-6">
+            Iusto, nobis accusantium omnis veniam tempore nesciunt ad.
+          </p>
         </div>
       </section>
 
       <section>
         <div className="container mx-auto mt-20">
-          <div className="flex justify-between items-center mb-9">
+          <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-semibold">Latest</h2>
-            <Link to={"/articles"} className="bg-nord-3 text-nord-6 font-bold py-2 px-4 rounded">View All</Link>
+            <Link
+              to={"/articles"}
+              className="bg-nord-3 text-nord-6 font-bold py-2 px-4 rounded"
+            >
+              View All
+            </Link>
           </div>
-          <article>
-            <a href="#">
-              <div>
-                <h3>
-                  Sed tristique erat eget eros malesuada, at dictum mi
-                  vulputate.
-                </h3>
-                <time>16 Jan</time>
-              </div>
-            </a>
-          </article>
-          <article>
-            <a href="#">
-              <div>
-                <h3>Pellentesque pretium vulputate velit ac luctus.</h3>
-                <time>17 Jan</time>
-              </div>
-            </a>
-          </article>
-          <article>
-            <a href="#">
-              <div>
-                <h3>In porta vulputate condimentum.</h3>
-                <time>16 Jan</time>
-              </div>
-            </a>
-          </article>
-          <article>
-            <a href="#">
-              <div>
-                <h3>
-                  Proin ex mauris, placerat condimentum maximus ut, faucibus non
-                  lorem.
-                </h3>
-                <time>16 Jan</time>
-              </div>
-            </a>
-          </article>
-          <article>
-            <a href="#">
-              <div>
-                <h3>Vivamus accumsan orci quis quam feugiat lacinia.</h3>
-                <time>16 Jan</time>
-              </div>
-            </a>
-          </article>
+          <div>
+            <Posts posts={latestPosts} />
+          </div>
         </div>
       </section>
 
@@ -110,7 +77,10 @@ const IndexPage = () => {
         <footer>
           <div className="container mx-auto">
             <nav>
-              <a href="#">Home</a><a href="#">About</a><a href="">Contact</a><a href="#">Github</a>
+              <a href="#">Home</a>
+              <a href="#">About</a>
+              <a href="">Contact</a>
+              <a href="#">Github</a>
             </nav>
             <div>&copy; Andrew Villazon 2020</div>
           </div>
@@ -119,6 +89,21 @@ const IndexPage = () => {
     </Layout>
   );
 };
+
+export const query = graphql`
+  query {
+    allMdx(limit: 5, sort: { frontmatter: { date: DESC } }) {
+      nodes {
+        frontmatter {
+          date
+          slug
+          title
+        }
+        id
+      }
+    }
+  }
+`;
 
 export default IndexPage;
 
