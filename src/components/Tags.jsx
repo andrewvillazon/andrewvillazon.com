@@ -20,7 +20,11 @@ const Tags = () => {
   return (
     <div>
       {tags.map((tag) => (
-        <Link key={tag.fieldValue} to={`/tags/${kebabCase(tag.fieldValue)}`}>
+        <Link
+          key={tag.fieldValue}
+          to={`/tags/${kebabCase(tag.fieldValue)}`}
+          className="font-semibold border rounded py-2 px-2 border-nord-0 mr-2"
+        >
           {tag.fieldValue}
         </Link>
       ))}

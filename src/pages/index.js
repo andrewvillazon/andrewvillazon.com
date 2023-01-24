@@ -2,6 +2,7 @@ import * as React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import Posts from "../components/Posts";
+import Tags from "../components/Tags";
 
 const IndexPage = ({ data }) => {
   const latestPosts = data.allMdx.nodes;
@@ -43,23 +44,18 @@ const IndexPage = ({ data }) => {
       </section>
 
       <section>
-        <div className="container mx-auto">
-          <h2>Explore</h2>
-          <div>
-            <a href="#">Python</a>
-            <a href="#">SQL Server</a>
-            <a href="#">Snippets</a>
-            <a href="#">Github</a>
-            <a href="#">Gatsby</a>
-            <a href="#">Discussion</a>
+        <div className="container mx-auto mt-20">
+          <h2 className="text-3xl font-semibold mb-8">Explore</h2>
+          <div className="flex">
+            <Tags/>
           </div>
         </div>
       </section>
 
       <section>
-        <div className="container mx-auto">
+        <div className="container mx-auto mt-20">
           <div>
-            <h2>Projects</h2>
+            <h2 className="text-3xl font-semibold mb-8">Projects</h2>
           </div>
           <div>
             <div>
