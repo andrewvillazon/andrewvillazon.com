@@ -1,11 +1,12 @@
-import * as React from "react";
-import { graphql, Link } from "gatsby";
-import Layout from "../components/Layout";
-import Posts from "../components/Posts";
-import Tags from "../components/Tags";
+import * as React from "react"
+import { graphql, Link } from "gatsby"
+import Layout from "../components/Layout"
+import Posts from "../components/Posts"
+import Tags from "../components/Tags"
+import { projects } from "../data/projects"
 
 const IndexPage = ({ data }) => {
-  const latestPosts = data.allMdx.nodes;
+  const latestPosts = data.allMdx.nodes
 
   return (
     <Layout>
@@ -47,7 +48,7 @@ const IndexPage = ({ data }) => {
         <div className="container mx-auto mt-20">
           <h2 className="text-3xl font-semibold mb-8">Explore</h2>
           <div className="flex">
-            <Tags/>
+            <Tags />
           </div>
         </div>
       </section>
@@ -58,13 +59,31 @@ const IndexPage = ({ data }) => {
             <h2 className="text-3xl font-semibold mb-8">Projects</h2>
           </div>
           <div>
-            <div>
-              <a href="#">pbipy</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <div>
-                <a href="#">Source</a>
-              </div>
-            </div>
+            {projects.map((project) => {
+              return (
+                <div class="max-w-sm p-4 rounded-md shadow dark:bg-gray-800">
+                  <h5 class="mb-2 text-xl font-bold">{project.name}</h5>
+                  <p class="mb-3 text-base">{project.description}</p>
+                  <a
+                    href={project.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center hover:underline"
+                  >
+                    Source
+                    <svg
+                      class="w-5 h-5 ml-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -83,8 +102,8 @@ const IndexPage = ({ data }) => {
         </footer>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query {
@@ -99,8 +118,8 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default IndexPage;
+export default IndexPage
 
-export const Head = () => <title>Home Page</title>;
+export const Head = () => <title>Home Page</title>
