@@ -87,20 +87,6 @@ const IndexPage = ({ data }) => {
           </div>
         </div>
       </section>
-
-      <section>
-        <footer>
-          <div className="container mx-auto">
-            <nav>
-              <a href="#">Home</a>
-              <a href="#">About</a>
-              <a href="">Contact</a>
-              <a href="#">Github</a>
-            </nav>
-            <div>&copy; Andrew Villazon 2020</div>
-          </div>
-        </footer>
-      </section>
     </Layout>
   )
 }
