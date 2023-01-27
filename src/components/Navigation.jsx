@@ -17,7 +17,7 @@ const Navigation = () => {
             Andrew Villazon
           </div>
           <div className="container mx-auto flex justify-between items-center">
-            <div class="flex space-x-5">
+            <div className="flex space-x-5">
               {navItems.map((item) => (
                 <Link
                   to={item.url}
