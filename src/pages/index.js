@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import Posts from "../components/Posts"
 import Tags from "../components/Tags"
 import { projects } from "../data/projects"
+import { Seo } from "../components/Seo"
 
 const IndexPage = ({ data }) => {
   const latestPosts = data.allMdx.nodes
@@ -108,4 +109,4 @@ export const query = graphql`
 
 export default IndexPage
 
-export const Head = () => <title>Home Page</title>
+export const Head = () => <Seo />
