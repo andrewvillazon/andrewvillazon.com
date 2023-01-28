@@ -61,7 +61,7 @@ const IndexPage = ({ data }) => {
           <div>
             {projects.map((project) => {
               return (
-                <div className="max-w-sm p-4 rounded-md shadow dark:bg-gray-800">
+                <div className="max-w-sm p-4 rounded-md shadow dark:bg-gray-800" key={project.name}>
                   <h5 className="mb-2 text-xl font-bold">{project.name}</h5>
                   <p className="mb-3 text-base">{project.description}</p>
                   <a
