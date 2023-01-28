@@ -15,8 +15,6 @@ const Tags = () => {
 
   const tags = data.allMdx.group;
 
-  console.log(tags);
-
   return (
     <div>
       {tags.map((tag) => (
