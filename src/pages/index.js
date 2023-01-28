@@ -61,18 +61,18 @@ const IndexPage = ({ data }) => {
           <div>
             {projects.map((project) => {
               return (
-                <div class="max-w-sm p-4 rounded-md shadow dark:bg-gray-800">
-                  <h5 class="mb-2 text-xl font-bold">{project.name}</h5>
-                  <p class="mb-3 text-base">{project.description}</p>
+                <div className="max-w-sm p-4 rounded-md shadow dark:bg-gray-800">
+                  <h5 className="mb-2 text-xl font-bold">{project.name}</h5>
+                  <p className="mb-3 text-base">{project.description}</p>
                   <a
                     href={project.source}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center hover:underline"
+                    className="inline-flex items-center hover:underline"
                   >
                     Source
                     <svg
-                      class="w-5 h-5 ml-2"
+                      className="w-5 h-5 ml-2"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
