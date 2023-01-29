@@ -15,17 +15,20 @@ const Posts = ({ posts, groupByYears = false }) => {
 
     return years.map((year) => (
       <>
-        <h2 key={year}>{year}</h2>
-        {postsByYear[year].map((node) => (
-          <article key={node.id}>
-            <h3>
-              <Link to={`/${node.frontmatter.slug}`}>
-                {node.frontmatter.title}
+        <h2 className="text-3xl font-semibold mb-8" key={year}>{year}</h2>
+        <div className="mb-12">
+          {postsByYear[year].map((node) => (
+            <article key={node.id}>
+              <Link
+                to={`/${node.frontmatter.slug}`}
+                className="flex justify-between items-center py-3 border-b-2 border-nord-3"
+              >
+                <h2 className="text-lg">{node.frontmatter.title}</h2>
+                <time>{node.frontmatter.date}</time>
               </Link>
-            </h3>
-            <p>Posted: {node.frontmatter.date}</p>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </>
     ));
   } else {
