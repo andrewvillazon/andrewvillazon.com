@@ -20,7 +20,7 @@ const Posts = ({ posts, groupByYears = false }) => {
           {postsByYear[year].map((node) => (
             <article key={node.id}>
               <Link
-                to={`/${node.frontmatter.slug}`}
+                to={`${node.fields.slug}`}
                 className="flex justify-between items-center py-3 border-b-2 border-nord-3"
               >
                 <h2 className="text-lg">{node.frontmatter.title}</h2>
@@ -37,7 +37,7 @@ const Posts = ({ posts, groupByYears = false }) => {
         {posts.map((node) => (
           <article key={node.id}>
             <Link
-              to={`/${node.frontmatter.slug}`}
+              to={`${node.fields.slug}`}
               className="flex justify-between items-center py-3 border-b-2 border-nord-3"
             >
               <h2 className="text-lg">{node.frontmatter.title}</h2>

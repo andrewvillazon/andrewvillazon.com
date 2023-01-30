@@ -30,10 +30,12 @@ export const query = graphql`
       nodes {
         frontmatter {
           date
-          slug
           title
         }
         id
+        fields {
+          slug
+        }
       }
       distinct(field: {frontmatter: {tags: SELECT}})
     }

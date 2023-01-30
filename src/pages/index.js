@@ -50,7 +50,7 @@ const IndexPage = ({ data }) => {
         <div className="container mx-auto mt-20">
           <h2 className="text-3xl font-semibold mb-8">Explore</h2>
           <div className="flex">
-            <Tags tags={allTags}/>
+            <Tags tags={allTags} />
           </div>
         </div>
       </section>
@@ -63,7 +63,10 @@ const IndexPage = ({ data }) => {
           <div>
             {projects.map((project) => {
               return (
-                <div className="max-w-sm p-4 rounded-md shadow dark:bg-gray-800" key={project.name}>
+                <div
+                  className="max-w-sm p-4 rounded-md shadow dark:bg-gray-800"
+                  key={project.name}
+                >
                   <h5 className="mb-2 text-xl font-bold">{project.name}</h5>
                   <p className="mb-3 text-base">{project.description}</p>
                   <a
@@ -95,18 +98,20 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    latestPosts: allMdx(limit: 5, sort: {frontmatter: {date: DESC}}) {
+    latestPosts: allMdx(limit: 5, sort: { frontmatter: { date: DESC } }) {
       nodes {
         frontmatter {
           date
-          slug
           title
         }
         id
+        fields {
+          slug
+        }
       }
     }
     allTags: allMdx {
-      distinct(field: {frontmatter: {tags: SELECT}})
+      distinct(field: { frontmatter: { tags: SELECT } })
     }
   }
 `
