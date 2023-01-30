@@ -7,7 +7,8 @@ import { projects } from "../data/projects"
 import { Seo } from "../components/Seo"
 
 const IndexPage = ({ data }) => {
-  const latestPosts = data.allMdx.nodes
+  const latestPosts = data.latestPosts.nodes
+  const allTags = data.allTags.distinct
 
   return (
     <Layout>
@@ -49,7 +50,7 @@ const IndexPage = ({ data }) => {
         <div className="container mx-auto mt-20">
           <h2 className="text-3xl font-semibold mb-8">Explore</h2>
           <div className="flex">
-            <Tags />
+            <Tags tags={allTags}/>
           </div>
         </div>
       </section>
@@ -94,7 +95,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(limit: 5, sort: { frontmatter: { date: DESC } }) {
+    latestPosts: allMdx(limit: 5, sort: {frontmatter: {date: DESC}}) {
       nodes {
         frontmatter {
           date
@@ -103,6 +104,9 @@ export const query = graphql`
         }
         id
       }
+    }
+    allTags: allMdx {
+      distinct(field: {frontmatter: {tags: SELECT}})
     }
   }
 `

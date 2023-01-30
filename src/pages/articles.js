@@ -6,6 +6,7 @@ import Layout from "../components/Layout"
 
 const ArticlePage = ({ data }) => {
   const posts = data.allMdx.nodes
+  const tags = data.allMdx.distinct
 
   return (
     <Layout>
@@ -14,7 +15,7 @@ const ArticlePage = ({ data }) => {
           <h1 className="mb-12 text-5xl font-extrabold tracking-tight">Articles</h1>
           <h2 className="text-3xl font-semibold mb-8">Tags</h2>
           <div className="flex mb-12">
-            <Tags />
+            <Tags tags={tags}/>
           </div>
           <Posts posts={posts} groupByYears={true} />
         </div>
@@ -25,7 +26,7 @@ const ArticlePage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: { frontmatter: { date: DESC } }) {
+    allMdx(sort: {frontmatter: {date: DESC}}) {
       nodes {
         frontmatter {
           date
@@ -34,6 +35,7 @@ export const query = graphql`
         }
         id
       }
+      distinct(field: {frontmatter: {tags: SELECT}})
     }
   }
 `

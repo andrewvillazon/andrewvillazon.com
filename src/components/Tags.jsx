@@ -1,29 +1,17 @@
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { Link } from "gatsby";
 import React from "react";
 import kebabCase from "lodash/kebabCase";
 
-const Tags = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allMdx {
-        group(field: { frontmatter: { tags: SELECT } }) {
-          fieldValue
-        }
-      }
-    }
-  `);
-
-  const tags = data.allMdx.group;
-
+const Tags = ({tags}) => {
   return (
     <div>
       {tags.map((tag) => (
         <Link
-          key={tag.fieldValue}
-          to={`/tags/${kebabCase(tag.fieldValue)}`}
+          key={tag}
+          to={`/tags/${kebabCase(tag)}`}
           className="font-semibold border rounded py-2 px-2 border-nord-0 mr-2"
         >
-          {tag.fieldValue}
+          {tag}
         </Link>
       ))}
     </div>
