@@ -12,10 +12,10 @@ const Post = ({ data, children }) => {
             {data.mdx.frontmatter.title}
           </h1>
           <p className="text-base mb-8">{data.mdx.frontmatter.date}</p>
-          <div className="mb-8">
+          <div className="mb-12">
             <Tags tags={data.mdx.frontmatter.tags} />
           </div>
-          {children}
+          <div className="markdown">{children}</div>
         </div>
       </section>
     </Layout>

@@ -10,11 +10,11 @@ Earlier this year I wanted to try something a bit different and create a persona
 
 I chose to build the site with the Static Site Generator [Gatsby](https://www.gatsbyjs.org/) which looking back probably seemed like an odd choice without web development experience. This article reflects on what the experience was like.
 
-### Choosing Gatsby
+## Choosing Gatsby
 
 These are the main reasons I chose Gatsby:
 
-#### Static content
+### Static content
 
 Listening to the [Syntax podcast](https://syntax.fm/) one day they were discussing Static Site Generators (SSG). Tools that help generate static HTML. At first it seemed a bit strange, almost primitive. Generate static HTML in this era of ubiquitous web apps? But the more I thought about it the more it made sense. After all, what more is a blog other than static content?
 
@@ -22,25 +22,25 @@ With a Static Site Generator pages are built in advance and don't originate in a
 
 The appeal of this approach is there are fewer moving parts. No back-end configuration, no database, and less security to consider (famous last words).
 
-#### Speed
+### Speed
 
 What stands out when you encounter a Gatsby site is how fast it feels. There's a real 'snap' to the page loading. It's a refreshing alternative to the modern web experience.
 
 Gatsby does a bunch of cool things like pre-fetch data and predicts where the next page request will come from. It's hard to believe that website can be that fast.
 
-#### Blog posts as Markdown
+### Blog posts as Markdown
 
 However, what really caught my attention was the ability to store content as [Markdown](https://daringfireball.net/projects/markdown/) and have Gatsby turn it into pages.
 
 I liked this for a couple of reasons. Firstly you can store your posts as an **.md** file in your project and secondly if you're developing with git you can use it to version control your content—a kind of rudimentary form of content management.
 
-### The development experience
+## The development experience
 
 As someone without web dev experience when they began I found the development experience to be pretty smooth. There were moments of frustration of course (why are there 50 different ways to define a Component?!) but on the whole it was a positive experience.
 
 The process I followed was based on the [official tutorial](https://www.gatsbyjs.org/tutorial/ "Gatsby Official Tutorial"). Here are some of the highlights:
 
-#### The Gatsby approach
+### The Gatsby approach
 
 Gatsby seemed a little vague at first but it quickly became intuitive. Gatsby's approach is something like this:
 * You have data you want to put into a site e.g. in text files or a database, etc.
@@ -50,7 +50,7 @@ Gatsby seemed a little vague at first but it quickly became intuitive. Gatsby's 
 
 Once I understood this process development became relatively straightforward.
 
-#### Modularity with React
+### Modularity with React
 
 I really liked working in [React](https://reactjs.org/).
 
@@ -58,7 +58,7 @@ How I understand React is you break up a website into self-contained components 
 
 This approach feels very natural if you're familiar with a programming language like [Python](https://www.python.org/) where you compose an application from packages, modules, and classes. In fact, a React component feels very much like a class representing a part of a site and knows how to render itself as HTML.
 
-#### Plugins! Lots of Plugins.
+### Plugins! Lots of Plugins.
 
 Extending the site and adding new features was simple with Gatsby's massive [plugin library](https://www.gatsbyjs.org/plugins/). It's not an exaggeration to say there are thousands of plugins. If I wanted to add a feature to the site I always ended up with a plugin.
 
@@ -67,7 +67,7 @@ As well as the plugins that went with the offical tutorial I also used:
 * [gatsby-remark-autolink-headers](https://www.gatsbyjs.org/packages/gatsby-remark-autolink-headers/) - automatically adds links to header tags
 * [gatsby-plugin-sass](https://www.gatsbyjs.org/packages/gatsby-plugin-sass/) - enables the use of SASS for CSS styling and management
 
-#### Documentation
+### Documentation
 
 The Gatsby documentation was a super useful resource throughout and is a credit to the project.
 

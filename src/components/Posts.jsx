@@ -21,7 +21,7 @@ const Posts = ({ posts, groupByYears = false }) => {
             <article key={node.id}>
               <Link
                 to={`${node.fields.slug}`}
-                className="flex justify-between items-center py-3 border-b-2 border-nord-3"
+                className="flex justify-between items-center py-3 border-b border-gray-200"
               >
                 <h2 className="text-lg">{node.frontmatter.title}</h2>
                 <time>{node.frontmatter.date}</time>
