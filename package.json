@@ -22,6 +22,7 @@
     "gatsby-plugin-sharp": "^5.4.0",
     "gatsby-plugin-sitemap": "^6.4.0",
     "gatsby-plugin-use-dark-mode": "^2.0.0",
+    "gatsby-remark-images": "^7.5.0",
     "gatsby-remark-prismjs": "^7.5.0",
     "gatsby-source-filesystem": "^5.4.0",
     "gatsby-transformer-remark": "^6.5.0",
