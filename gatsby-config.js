@@ -21,7 +21,6 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {},
     },
-    "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
