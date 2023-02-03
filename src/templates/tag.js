@@ -4,7 +4,7 @@ import Posts from "../components/Posts"
 
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
-  const { nodes, totalCount } = data.allMdx
+  const { nodes, totalCount } = data.allMarkdownRemark
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
   } tagged with "${tag}"`
@@ -21,7 +21,7 @@ export default Tags
 
 export const pageQuery = graphql`
   query ($tag: String) {
-    allMdx(
+    allMarkdownRemark(
       sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {

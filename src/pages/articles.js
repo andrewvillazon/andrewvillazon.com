@@ -5,8 +5,8 @@ import Tags from "../components/Tags"
 import Layout from "../components/Layout"
 
 const ArticlePage = ({ data }) => {
-  const posts = data.allMdx.nodes
-  const tags = data.allMdx.distinct
+  const posts = data.allMarkdownRemark.nodes
+  const tags = data.allMarkdownRemark.distinct
 
   return (
     <Layout>
@@ -26,7 +26,7 @@ const ArticlePage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: {frontmatter: {date: DESC}}) {
+    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
       nodes {
         frontmatter {
           date

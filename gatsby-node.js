@@ -5,7 +5,7 @@ const _ = require("lodash")
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `Mdx`) {
+  if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode, basePath: `blog` })
 
     createNodeField({
@@ -21,7 +21,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     query {
-      allMdx {
+      allMarkdownRemark {
         distinct(field: { frontmatter: { tags: SELECT } })
       }
     }
@@ -29,7 +29,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // Make tag pages
   const tagTemplate = path.resolve("src/templates/tag.js")
-  const tags = result.data.allMdx.distinct
+  const tags = result.data.allMarkdownRemark.distinct
 
   tags.forEach((tag) => {
     console.log(tag)

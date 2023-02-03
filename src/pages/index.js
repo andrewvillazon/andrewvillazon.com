@@ -98,7 +98,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    latestPosts: allMdx(limit: 5, sort: { frontmatter: { date: DESC } }) {
+    latestPosts: allMarkdownRemark(limit: 5, sort: { frontmatter: { date: DESC } }) {
       nodes {
         frontmatter {
           date
@@ -110,7 +110,7 @@ export const query = graphql`
         }
       }
     }
-    allTags: allMdx {
+    allTags: allMarkdownRemark {
       distinct(field: { frontmatter: { tags: SELECT } })
     }
   }
