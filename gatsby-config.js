@@ -19,7 +19,14 @@ module.exports = {
     },
     {
       resolve: `gatsby-transformer-remark`,
-      options: {},
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: { classPrefix: "language-" },
+          },
+        ],
+      },
     },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
@@ -53,4 +60,4 @@ module.exports = {
       },
     },
   ],
-};
+}
