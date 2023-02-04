@@ -1,19 +1,21 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Posts from "../components/Posts"
+import Layout from "../components/Layout"
 
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
   const { nodes, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
 
   return (
-    <div>
-      <h1>{tagHeader}</h1>
-      <Posts posts={nodes} groupByYears={true} />
-    </div>
+    <Layout>
+      <section>
+        <div className="container mx-auto">
+        <h1 className="mb-12 text-5xl font-extrabold tracking-tight">Posts tagged <u>{tag}</u> ({totalCount})</h1>
+          <Posts posts={nodes} groupByYears={true} />
+        </div>
+      </section>
+    </Layout>
   )
 }
 
