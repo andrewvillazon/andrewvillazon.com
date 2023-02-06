@@ -12,10 +12,12 @@ const ArticlePage = ({ data }) => {
     <Layout>
       <section>
         <div className="container mx-auto">
-          <h1 className="mb-12 text-5xl font-extrabold tracking-tight">Articles</h1>
+          <h1 className="mb-12 text-5xl font-extrabold tracking-tight">
+            Articles
+          </h1>
           <h2 className="text-3xl font-semibold mb-8">Tags</h2>
           <div className="flex mb-12">
-            <Tags tags={tags}/>
+            <Tags tags={tags} />
           </div>
           <Posts posts={posts} groupByYears={true} />
         </div>
@@ -26,7 +28,10 @@ const ArticlePage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+    allMarkdownRemark(
+      sort: { frontmatter: { date: DESC } }
+      filter: { fields: { contentType: { eq: "post" } } }
+    ) {
       nodes {
         frontmatter {
           date
@@ -37,7 +42,7 @@ export const query = graphql`
           slug
         }
       }
-      distinct(field: {frontmatter: {tags: SELECT}})
+      distinct(field: { frontmatter: { tags: SELECT } })
     }
   }
 `

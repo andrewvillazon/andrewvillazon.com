@@ -98,7 +98,11 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    latestPosts: allMarkdownRemark(limit: 5, sort: { frontmatter: { date: DESC } }) {
+    latestPosts: allMarkdownRemark(
+      limit: 5
+      sort: {frontmatter: {date: DESC}}
+      filter: {fields: {contentType: {eq: "post"}}}
+    ) {
       nodes {
         frontmatter {
           date
