@@ -35,7 +35,7 @@ const IndexPage = ({ data }) => {
             <h2 className="text-3xl font-semibold">Latest</h2>
             <Link
               to={"/articles"}
-              className="bg-nord-3 text-nord-6 font-bold py-2 px-4 rounded"
+              className="bg-slate-600 text-slate-500 font-bold py-2 px-4 rounded"
             >
               View All
             </Link>

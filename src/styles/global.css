@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body {
-    @apply bg-nord-4 px-2 transition-[background-color];
+    @apply bg-gray-100 px-2 transition-[background-color];
   }
   
 body.dark {
-  @apply bg-nord-0;
+  @apply bg-slate-800;
 }
 
 .markdown h2 {
