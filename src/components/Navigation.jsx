@@ -14,7 +14,7 @@ const Navigation = () => {
       <nav>
         <div className="container mx-auto">
           <div className="text-2xl mb-2 font-bold text-gray-900">
-            Andrew Villazon
+            <Link to="/">Andrew Villazon</Link>
           </div>
           <div className="container mx-auto flex justify-between items-center">
             <div className="flex space-x-5">
