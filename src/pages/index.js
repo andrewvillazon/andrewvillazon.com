@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <section>
-        <div className="container mx-auto pr-72">
+        <div className="container mx-auto pr-28">
           <h1 className="mb-8 text-6xl font-extrabold tracking-tight">
             Hi, I'm Andrew.
           </h1>
