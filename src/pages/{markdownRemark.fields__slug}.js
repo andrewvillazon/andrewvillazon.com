@@ -23,7 +23,7 @@ const MarkdownPage = ({ data }) => {
             </div>
           ) : null}
           <div
-            className="markdown"
+            className="prose prose-lg max-w-none prose-h2:border-b prose-h2:border-gray-200 prose-h2:py-2 prose-a:text-blue-600"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>

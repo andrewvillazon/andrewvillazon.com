@@ -3,29 +3,9 @@
 @tailwind utilities;
 
 body {
-    @apply bg-gray-100 px-2 transition-[background-color];
-  }
-  
+  @apply bg-gray-100 px-2 transition-[background-color];
+}
+
 body.dark {
   @apply bg-slate-800;
-}
-
-.markdown h2 {
-  @apply text-3xl font-semibold mb-10 border-b border-gray-200 py-3
-}
-
-.markdown h3 {
-  @apply text-2xl font-semibold mb-10
-}
-
-.markdown ul {
-  @apply space-y-1 list-disc list-inside mb-8 pl-8
-}
-
-.markdown p {
-  @apply mb-8
-}
-
-.markdown a {
-  @apply font-medium text-blue-600 hover:underline
 }
