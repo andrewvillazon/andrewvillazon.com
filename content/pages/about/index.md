@@ -20,7 +20,8 @@ Most of my content centers on my experience working in Data and Analytics. Some 
 ## Contact
 
 It's neat to hear from people who've read my site. If you want to get in touch, you contact me by email: andrew dot villazon at gmail dot com
-About this site
+
+## About this site
 
 This site is built in Gatsby and uses Tailwind CSS for styling. Gatsby is a static site generator that uses the JavaScript framework React. Almost all of this site is Markdown files that Gatsby has turned into pages.
 
