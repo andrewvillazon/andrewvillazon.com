@@ -15,7 +15,7 @@ const Posts = ({ posts, groupByYears = false }) => {
 
     return years.map((year) => (
       <>
-        <h2 className="text-3xl font-semibold mb-8" key={year}>{year}</h2>
+        <h2 className="text-3xl font-semibold mb-8 text-slate-900" key={year}>{year}</h2>
         <div className="mb-12">
           {postsByYear[year].map((node) => (
             <article key={node.id}>
@@ -23,7 +23,7 @@ const Posts = ({ posts, groupByYears = false }) => {
                 to={`${node.fields.slug}`}
                 className="flex justify-between items-center py-3 border-b border-gray-200"
               >
-                <h2 className="text-lg">{node.frontmatter.title}</h2>
+                <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium">{node.frontmatter.title}</h2>
                 <time>{node.frontmatter.date}</time>
               </Link>
             </article>
@@ -40,7 +40,7 @@ const Posts = ({ posts, groupByYears = false }) => {
               to={`${node.fields.slug}`}
               className="flex justify-between items-center py-3 border-b border-gray-200"
             >
-              <h2 className="text-lg">{node.frontmatter.title}</h2>
+              <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium">{node.frontmatter.title}</h2>
               <time>{node.frontmatter.date}</time>
             </Link>
           </article>

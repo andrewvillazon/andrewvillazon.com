@@ -13,16 +13,16 @@ const Navigation = () => {
     <section className="pt-8">
       <nav>
         <div className="container mx-auto">
-          <div className="text-2xl mb-2 font-bold text-gray-900">
+          <div className="text-2xl mb-2 font-bold text-gray-800">
             <Link to="/">Andrew Villazon</Link>
           </div>
           <div className="container mx-auto flex justify-between items-center">
-            <div className="flex space-x-5">
+            <div className="flex space-x-6">
               {navItems.map((item) => (
                 <Link
                   to={item.url}
                   key={item.text}
-                  className="text-base py-2 font-medium hover:border-b-gray-200 border-transparent border-y-2"
+                  className="text-lg py-2 text-gray-700 font-medium hover:border-b-blue-600 hover:text-blue-600 border-transparent border-y-2"
                 >
                   {item.text}
                 </Link>
