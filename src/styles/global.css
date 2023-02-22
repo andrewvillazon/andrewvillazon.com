@@ -9,3 +9,8 @@ body {
 body.dark {
   @apply bg-slate-800;
 }
+
+/* Tailwind typography class seems to mess with gatsy-remark-autolink-headers. This overwrites */
+.prose .anchor svg {
+  @apply inline
+}
