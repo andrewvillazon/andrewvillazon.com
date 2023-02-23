@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="flex flex-wrap justify-center gap-12">
               <Link to={"/articles"} className="hover:underline hover:text-blue-600">Blog</Link>
               <Link to={"/about"} className="hover:underline hover:text-blue-600">About</Link>
-              <a href="/" className="hover:underline hover:text-blue-600">Contact</a>
+              <Link to={"/about/#contact"} className="hover:underline hover:text-blue-600">Contact</Link>
               <a
                 href="https://github.com/andrewvillazon"
                 target="_blank"

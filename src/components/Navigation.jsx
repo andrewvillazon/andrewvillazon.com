@@ -6,7 +6,7 @@ const Navigation = () => {
   const navItems = [
     { url: "/articles", text: "Blog" },
     { url: "/about", text: "About" },
-    { url: "/contact", text: "Contact" },
+    { url: "/about/#contact", text: "Contact" },
   ];
 
   return (
