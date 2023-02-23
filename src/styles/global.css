@@ -14,3 +14,25 @@ body.dark {
 .prose .anchor svg {
   @apply inline
 }
+
+.prose p code, .prose li code {
+  @apply text-base text-gray-200 rounded-md px-2 py-1 bg-gray-700
+}
+
+.gatsby-highlight {
+  @apply text-base
+}
+
+.gatsby-highlight pre {
+  @apply px-6 !important
+}
+
+.gatsby-highlight-code-line {
+  background-color: rgb(60, 71, 71);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid rgb(153, 255, 218);
+}
