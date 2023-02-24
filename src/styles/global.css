@@ -15,7 +15,7 @@ body.dark {
   @apply inline
 }
 
-.prose p code, .prose li code {
+.prose p code, .prose li code, .prose td code {
   @apply text-base text-gray-200 rounded-md px-2 py-1 bg-gray-700
 }
 
