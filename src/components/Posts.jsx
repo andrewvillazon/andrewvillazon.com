@@ -2,6 +2,11 @@ import { Link } from "gatsby";
 import * as React from "react";
 
 const Posts = ({ posts, groupByYears = false }) => {
+  function formatDate(date) {
+    const properDate = new Date(date)
+    return `${properDate.getUTCDate()} ${properDate.toLocaleString('default', { month: 'short' })}`
+  }
+
   //   Re-organise if grouping by year
   if (groupByYears) {
     const postsByYear = {};
@@ -24,7 +29,7 @@ const Posts = ({ posts, groupByYears = false }) => {
                 className="flex justify-between items-center py-3 border-b border-gray-200"
               >
                 <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium">{node.frontmatter.title}</h2>
-                <time>{node.frontmatter.date}</time>
+                <time>{formatDate(node.frontmatter.date)}</time>
               </Link>
             </article>
           ))}
@@ -41,7 +46,7 @@ const Posts = ({ posts, groupByYears = false }) => {
               className="flex justify-between items-center py-3 border-b border-gray-200"
             >
               <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium">{node.frontmatter.title}</h2>
-              <time>{node.frontmatter.date}</time>
+              <time>{formatDate(node.frontmatter.date)}</time>
             </Link>
           </article>
         ))}
