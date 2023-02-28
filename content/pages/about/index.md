@@ -34,7 +34,7 @@ This site wouldn't be possible without those who took the time to share what the
 Here are a few of them:
 
 * [Tania Rascia](https://www.taniarascia.com/) - The inspiration for this site, both in terms of design and implementation. I've lost count of the times I've read Tania's source code. If you're an aspiring Web Developer, her site is well worth the visit.
-* [https://rhysc.me/](https://rhysc.me/) - For the great post on how to [implement Dark Mode](https://rhysc.me/blog/tailwind-gatsby-dark-mode) in a Gatsby site.
+* [Rhys Camm](https://rhysc.me/) - For the great post on how to [implement Dark Mode](https://rhysc.me/blog/tailwind-gatsby-dark-mode) in a Gatsby site.
 * [Code Concisely](https://www.codeconcisely.com/) - For the excellent tip on using the Gatsby File API for [automatic page generation](https://www.codeconcisely.com/posts/how-to-create-pages-with-gatsby-file-system-route-api/). Saved a lot of mucking about in gatsby-node.js
 * [Paul Scanlon](https://paulie.dev/) - Paul documents and explains approaches to many things you'll encounter when creating a Gatsby site.
 * [Tim Addison](https://tjaddison.com/) - For the awesome suggestion on [styling Gatsby Markdown](https://tjaddison.com/blog/2019/08/styling-markdown-tailwind-gatsby/) pages with Tailwind.
