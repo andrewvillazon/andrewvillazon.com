@@ -3,6 +3,7 @@ import * as React from "react"
 import Posts from "../components/Posts"
 import Tags from "../components/Tags"
 import Layout from "../components/Layout"
+import { Seo } from "../components/Seo"
 
 const ArticlePage = ({ data }) => {
   const posts = data.allMarkdownRemark.nodes
@@ -47,6 +48,6 @@ export const query = graphql`
   }
 `
 
-export const Head = () => <title>Articles</title>
+export const Head = () => <Seo title={"Articles"}/>
 
 export default ArticlePage

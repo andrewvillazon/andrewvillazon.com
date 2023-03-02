@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Tags from "../components/Tags"
+import { Seo } from "../components/Seo"
 
 const MarkdownPage = ({ data }) => {
   const { markdownRemark } = data
@@ -45,6 +46,6 @@ export const pageQuery = graphql`
   }
 `
 
-export const Head = () => <title>Home Page</title>
+export const Head = ({data}) => <Seo title={data.markdownRemark.frontmatter.title}/>
 
 export default MarkdownPage
