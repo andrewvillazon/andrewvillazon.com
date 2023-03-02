@@ -55,7 +55,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const tags = result.data.allMarkdownRemark.distinct
 
   tags.forEach((tag) => {
-    console.log(tag)
     createPage({
       path: `/tags/${_.kebabCase(tag)}/`,
       component: tagTemplate,
