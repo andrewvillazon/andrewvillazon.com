@@ -9,7 +9,7 @@ const LightModeIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-4 h-4 stroke-zinc-100 block dark:hidden"
+      className="w-4 h-4 stroke-slate-100 block dark:hidden"
     >
       <path
         strokeLinecap="round"
@@ -28,7 +28,7 @@ const DarkModeIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-4 h-4 stroke-zinc-100 hidden dark:block"
+      className="w-4 h-4 stroke-slate-800 hidden dark:block"
     >
       <path
         strokeLinecap="round"
@@ -44,7 +44,7 @@ export default function DarkModeToggle() {
 
   return (
     <button
-      className="p-2 rounded-full bg-slate-800 transition-all"
+      className="p-2 rounded-full bg-slate-800 shadow transition-all dark:bg-slate-300"
       onClick={toggle}
     >
       <DarkModeIcon />

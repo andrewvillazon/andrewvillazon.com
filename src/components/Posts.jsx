@@ -22,22 +22,25 @@ const Posts = ({ posts, groupByYears = false }) => {
 
     return years.map((year) => (
       <>
-        <h2 className="text-3xl font-semibold mb-8 text-slate-900" key={year}>
+        <h2
+          className="text-3xl font-semibold mb-8 text-slate-900 dark:text-slate-300"
+          key={year}
+        >
           {year}
         </h2>
         <div className="mb-12">
           <ul>
             {postsByYear[year].map((node) => (
-              <li className="py-4 border-b border-gray-200 last:border-hidden">
+              <li className="py-4 border-b border-gray-200 last:border-hidden dark:border-slate-700">
                 <article key={node.id}>
                   <Link
                     to={`${node.fields.slug}`}
                     className="flex justify-between items-center"
                   >
-                    <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium">
+                    <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium dark:text-slate-300 dark:hover:text-blue-500">
                       {node.frontmatter.title}
                     </h2>
-                    <time className="text-sm text-slate-400 font-semibold">
+                    <time className="text-sm text-slate-400 font-semibold dark:text-slate-500">
                       {formatDate(node.frontmatter.date)}
                     </time>
                   </Link>
@@ -53,16 +56,16 @@ const Posts = ({ posts, groupByYears = false }) => {
       <div>
         <ul>
           {posts.map((node) => (
-            <li className="py-4 border-b border-gray-200 last:border-hidden">
+            <li className="py-4 border-b border-gray-200 last:border-hidden dark:border-slate-700">
               <article key={node.id}>
                 <Link
                   to={`${node.fields.slug}`}
                   className="flex justify-between items-center"
                 >
-                  <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium">
+                  <h2 className="text-lg text-slate-800 hover:text-blue-600 font-medium dark:text-slate-300 dark:hover:text-blue-500">
                     {node.frontmatter.title}
                   </h2>
-                  <time className="text-sm text-slate-400 font-semibold">
+                  <time className="text-sm text-slate-400 font-semibold dark:text-slate-500">
                     {formatDate(node.frontmatter.date)}
                   </time>
                 </Link>

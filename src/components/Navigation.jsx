@@ -13,7 +13,7 @@ const Navigation = () => {
     <section className="pt-8">
       <nav>
         <div className="container mx-auto">
-          <div className="text-2xl mb-2 font-bold text-gray-800">
+          <div className="text-2xl mb-2 font-bold text-gray-800 dark:text-slate-300">
             <Link to="/">Andrew Villazon</Link>
           </div>
           <div className="container mx-auto flex justify-between items-center">
@@ -22,7 +22,7 @@ const Navigation = () => {
                 <Link
                   to={item.url}
                   key={item.text}
-                  className="text-lg py-2 text-gray-700 font-medium hover:border-b-blue-600 hover:text-blue-600 border-transparent border-y-2"
+                  className="text-lg py-2 text-gray-700 font-medium hover:border-b-blue-600 hover:text-blue-600 border-transparent border-y-2 dark:text-slate-400 dark:hover:border-b-blue-500 dark:hover:text-blue-500"
                 >
                   {item.text}
                 </Link>

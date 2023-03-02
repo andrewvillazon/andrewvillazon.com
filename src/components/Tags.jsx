@@ -9,7 +9,7 @@ const Tags = ({tags}) => {
         <Link
           key={tag}
           to={`/tags/${kebabCase(tag)}`}
-          className="font-semibold text-slate-700 border rounded py-2 px-2 border-slate-400 mr-2 bg-slate-100"
+          className="font-semibold text-slate-700 border rounded py-2 px-2 border-slate-400 mr-2 bg-slate-100 dark:bg-slate-700 dark:border-gray-600 dark:text-gray-400"
         >
           {tag}
         </Link>

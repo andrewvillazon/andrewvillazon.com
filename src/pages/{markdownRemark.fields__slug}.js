@@ -11,11 +11,11 @@ const MarkdownPage = ({ data }) => {
     <Layout>
       <section>
         <div className="container mx-auto">
-          <h1 className="mb-8 text-5xl font-extrabold tracking-tight">
+          <h1 className="mb-8 text-5xl font-extrabold tracking-tight dark:text-slate-50">
             {frontmatter.title}
           </h1>
           {frontmatter.date ? (
-            <p className="text-base mb-8">{frontmatter.date}</p>
+            <p className="text-base mb-8 dark:text-slate-400">{frontmatter.date}</p>
           ) : null}
           {frontmatter.tags ? (
             <div className="mb-12">
@@ -23,7 +23,7 @@ const MarkdownPage = ({ data }) => {
             </div>
           ) : null}
           <div
-            className="prose prose-lg max-w-none prose-h2:border-b prose-h2:border-gray-200 prose-h2:py-2 prose-a:text-blue-600 prose-code:before:content-none prose-code:after:content-none"
+            className="prose prose-lg max-w-none prose-h2:border-b prose-h2:border-gray-200 prose-h2:py-2 prose-a:text-blue-600 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-blue-500"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>

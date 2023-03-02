@@ -14,16 +14,16 @@ const IndexPage = ({ data }) => {
     <Layout>
       <section>
         <div className="container mx-auto pr-28">
-          <h1 className="mb-8 text-6xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="mb-8 text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-300">
             Hi, I'm Andrew 👋
           </h1>
-          <p className="text-xl mb-6 leading-9 text-slate-700">
+          <p className="text-xl mb-6 leading-9 text-slate-700 dark:text-gray-400">
             I'm a Data Professional that specialises in SQL, Python, and Data
             Visualisation. My website is a collection of the things I've learned
             over the years - a place to document those "Aha!" moments.
           </p>
-          <p className="text-xl mb-6 leading-9 text-slate-700">
-            Feel free to read my <Link to={"/articles"} className="text-blue-600 hover:underline">posts</Link> or <Link to={"/contact"} className="text-blue-600 hover:underline">get in touch</Link>.
+          <p className="text-xl mb-6 leading-9 text-slate-700 dark:text-gray-400">
+            Feel free to read my <Link to={"/articles"} className="text-blue-600 hover:underline dark:text-blue-500">posts</Link> or <Link to={"/contact"} className="text-blue-600 hover:underline dark:text-blue-500">get in touch</Link>.
           </p>
         </div>
       </section>
@@ -31,13 +31,13 @@ const IndexPage = ({ data }) => {
       <section>
         <div className="container mx-auto mt-24">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-semibold text-slate-900">Latest</h2>
+            <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-300">Latest</h2>
           </div>
           <div>
             <Posts posts={latestPosts} />
           </div>
           <div className="mt-8">
-            <Link to={"/articles"} className="text-sm text-slate-500 hover:underline hover:text-blue-600">
+            <Link to={"/articles"} className="text-sm text-slate-500 hover:underline hover:text-blue-600 dark:hover:text-blue-500 dark:text-slate-400">
               View more →
             </Link>
           </div>
@@ -46,7 +46,7 @@ const IndexPage = ({ data }) => {
 
       <section>
         <div className="container mx-auto mt-20">
-          <h2 className="text-3xl font-semibold mb-8 text-slate-900">Explore</h2>
+          <h2 className="text-3xl font-semibold mb-8 text-slate-900 dark:text-slate-300">Explore</h2>
           <div className="flex">
             <Tags tags={allTags} />
           </div>
@@ -56,22 +56,22 @@ const IndexPage = ({ data }) => {
       <section>
         <div className="container mx-auto mt-20">
           <div>
-            <h2 className="text-3xl font-semibold mb-8 text-slate-900">Projects</h2>
+            <h2 className="text-3xl font-semibold mb-8 text-slate-900 dark:text-slate-300">Projects</h2>
           </div>
           <div>
             {projects.map((project) => {
               return (
                 <div
-                  className="max-w-sm p-4 rounded-md shadow dark:bg-gray-800"
+                  className="max-w-sm p-4 border rounded-md bg-slate-100 border-slate-300 shadow dark:bg-slate-700 dark:shadow-slate-600 dark:border-slate-500 dark:shadow-slate-700"
                   key={project.name}
                 >
-                  <h5 className="mb-2 text-xl font-bold">{project.name}</h5>
-                  <p className="mb-3 text-base">{project.description}</p>
+                  <h5 className="mb-2 text-xl font-bold dark:text-slate-300">{project.name}</h5>
+                  <p className="mb-3 text-base dark:text-slate-400">{project.description}</p>
                   <a
                     href={project.source}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center hover:underline hover:text-blue-600"
+                    className="inline-flex items-center hover:underline hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-500"
                   >
                     Source
                     <svg

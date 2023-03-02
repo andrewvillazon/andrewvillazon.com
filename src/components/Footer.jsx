@@ -8,14 +8,14 @@ const Footer = () => {
         <div className="mx-auto max-w-5xl px-4 pt-24 pb-16">
           <nav className="mt-10">
             <div className="flex flex-wrap justify-center gap-12">
-              <Link to={"/articles"} className="hover:underline hover:text-blue-600">Blog</Link>
-              <Link to={"/about"} className="hover:underline hover:text-blue-600">About</Link>
-              <Link to={"/about/#contact"} className="hover:underline hover:text-blue-600">Contact</Link>
+              <Link to={"/articles"} className="hover:underline hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-500">Blog</Link>
+              <Link to={"/about"} className="hover:underline hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-500">About</Link>
+              <Link to={"/about/#contact"} className="hover:underline hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-500">Contact</Link>
               <a
                 href="https://github.com/andrewvillazon"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center hover:underline hover:text-blue-600"
+                className="inline-flex items-center hover:underline hover:text-blue-600 dark:text-slate-400 dark:hover:border-b-blue-500 dark:hover:text-blue-500"
               >
                 Github
                 <svg
@@ -30,7 +30,7 @@ const Footer = () => {
               </a>
             </div>
           </nav>
-          <div className="mt-8 flex flex-wrap justify-center text-sm text-slate-600">
+          <div className="mt-8 flex flex-wrap justify-center text-sm text-slate-600 dark:text-slate-500">
             &copy; {new Date().getFullYear()} Andrew Villazon. All rights
             reserved.
           </div>

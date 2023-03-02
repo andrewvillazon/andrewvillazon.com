@@ -12,10 +12,10 @@ const ArticlePage = ({ data }) => {
     <Layout>
       <section>
         <div className="container mx-auto">
-          <h1 className="mb-12 text-5xl font-extrabold tracking-tight">
+          <h1 className="mb-12 text-5xl font-extrabold tracking-tight dark:text-slate-300">
             Articles
           </h1>
-          <h2 className="text-3xl font-semibold mb-8">Tags</h2>
+          <h2 className="text-3xl font-semibold mb-8 dark:text-slate-300">Tags</h2>
           <div className="flex mb-12">
             <Tags tags={tags} />
           </div>
