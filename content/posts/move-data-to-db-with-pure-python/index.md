@@ -23,7 +23,7 @@ Let's get started.
 
 ## Getting started
 
-Start by creating a new python file called **pp.py**
+Start by creating a new python file called `pp.py`
 
 To start loading our external data, we'll need to import two libraries:
 * `sqlite3` - gives us a Database to work with
