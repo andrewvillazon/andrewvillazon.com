@@ -40,3 +40,7 @@ body.dark {
   padding-left: 0.75em;
   border-left: 0.25em solid rgb(153, 255, 218);
 }
+
+.code-filename {
+  @apply -mb-4 border-slate-600 pl-2 pb-3 pt-1 bg-slate-600 rounded text-slate-300 font-mono text-base
+}
