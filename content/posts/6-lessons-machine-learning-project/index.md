@@ -92,7 +92,7 @@ By targeting a Minimum Viable Model, we aim to realize the value of a "good enou
 
 ## Exciting results are not guaranteed
 
-> "Exciting results are what everyone wants to find, but they're not exactly guaranteed."
+> Exciting results are what everyone wants to find, but they're not exactly guaranteed.
 
 Lastly, this quote was something that I came across on [StackOverflow](https://workplace.stackexchange.com/a/130549/134355), and it succinctly captures what can happen on a Machine Learning project.
 
