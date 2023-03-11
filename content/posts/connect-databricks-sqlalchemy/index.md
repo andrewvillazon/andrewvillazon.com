@@ -38,13 +38,13 @@ If you don't have Personal Access Token, create one by following the [instructio
 
 ### Connection String
 
-The connection string follows the sqlalchemy [Database URL](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls) format explained in the documentation.
+The connection string follows the sqlalchemy [Database URL](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls) format.
 
 ```
 databricks://token:<token>@<host>:<port>/<database>?http_path=<http_path>
 ```
 
-There are a couple of things to note: we're using `token` as the username value and your Personal Access Token as the password value; we've specified the `http_path` as a Database URL query parameter.
+There are a couple of things of note: we're using `token` as the username value and your Personal Access Token as the password value; we've specified the `http_path` as a Database URL [query parameter](https://docs.sqlalchemy.org/en/20/core/engines.html#add-parameters-to-the-url-query-string).
 
 ### Connecting with engine
 
