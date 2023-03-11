@@ -37,7 +37,7 @@ It's also essential to have access to a [Domain Expert](https://blog.ml.cmu.edu/
 
 ## Don't underestimate the "Data Work"
 
->"80% of a Data Science project is spent on data wrangling."
+>80% of a Data Science project is spent on data wrangling.
 >
 > <cite>Common Data Science trope</cite>
 
