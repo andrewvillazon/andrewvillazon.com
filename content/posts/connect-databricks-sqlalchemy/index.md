@@ -9,40 +9,42 @@ tags:
 
 If you want to use Databricks as a SQL data source in Python, you'll likely want to take advantage of sqlalchemy. Here's how we can connect sqlalchemy and Databricks.
 
+**Note: This is tested against sqlalchemy version 1.4 and may vary slightly in version 2.*
+
 ## Connecting to Databricks
 
 ### Install Connector
 
-Firstly, install the databricks-sql-python connecter (driver), published by Databricks. 
+Firstly, install the [databricks-sql-python connecter](https://docs.databricks.com/integrations/jdbc-odbc-bi.html#connection-details-cluster) (driver), published by Databricks. 
 
 ```sh
 pip install databricks-sql-connector
 ```
 
-The connector adds a Databricks dialect for sqlalchemy (the dialect is the system sqlalchemy uses to communicate with the Database).
+The connector adds a **Databricks dialect** for sqlalchemy (the dialect is the system sqlalchemy uses to communicate with the Database).
 
 ### Connection Information
 
 Before you connect, you'll need a handful of connection values:
 
-* Server hostname: The web address of your Databricks instance, e.g., example
-* Port number: The specific port number of your Databricks instance, default is 443
-* HTTP Path: The HTTP Path of your SQL Warehouse or Cluster
-* Personal Access Token: Access token that identifies the connecting user or application
+* **Server hostname**: The web address of your Databricks instance (excluding 'https://')
+* **Port number**: The specific port number of your Databricks instance, default is **443**
+* **HTTP Path**: The HTTP Path of your SQL Warehouse or Cluster
+* **Personal Access Token**: Access token that identifies the connecting user or application.
 
-All connection details can be found in the Databricks UI, as outlined here. 
+All connection details can be found in the Databricks UI, as outlined [here](https://docs.databricks.com/integrations/jdbc-odbc-bi.html#retrieve-the-connection-details). 
 
-If you don't have Personal Access Token, create one by following the instructions in the Databricks documentation. Creating a Personal Access Token specifically for your Python Apps is also good practice.
+If you don't have Personal Access Token, create one by following the [instructions](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) in the Databricks documentation. Creating a Personal Access Token specifically for Python is also good practice.
 
 ### Connection String
 
-The connection string follows the sqlalchemy Database URL format explained in the documentation.
+The connection string follows the sqlalchemy [Database URL](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls) format explained in the documentation.
 
 ```
 databricks://token:<token>@<host>:<port>/<database>?http_path=<http_path>
 ```
 
-There are a couple of things to note: we're using 'token' as the username value and your Personal Access Token as the password value; we've specified the http_path as a Database URL query parameter.
+There are a couple of things to note: we're using `token` as the username value and your Personal Access Token as the password value; we've specified the `http_path` as a Database URL query parameter.
 
 ### Connecting with engine
 
@@ -74,7 +76,7 @@ engine = create_engine(conn_string, echo=True)
 
 ### Connection string with URL class
 
-Alternatively, we can use sqlalchemy's URL class to build a connection string.
+Alternatively, we can use sqlalchemy's [URL class](https://docs.sqlalchemy.org/en/20/core/engines.html#creating-urls-programmatically) to build a connection string.
 
 ```python
 from sqlalchemy import create_engine
