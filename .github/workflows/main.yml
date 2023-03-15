@@ -20,6 +20,9 @@ jobs:
       - name: Install Project Dependencies
         run: npm ci --legacy-peer-deps
       
+      - name: Install Gatsby CLI
+        run: npm install -g gatsby-cli
+      
       - name: Build
         run: gatsby build
       
