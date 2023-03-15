@@ -1,5 +1,5 @@
 import React from "react";
-import DarkModeToggle from "./DarkmodeToggle";
+import DarkModeToggle from "../components/DarkmodeToggle";
 import { Link } from "gatsby";
 
 const Navigation = () => {
