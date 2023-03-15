@@ -21,7 +21,7 @@ jobs:
         run: npm ci
       
       - name: Build
-        run: npm run build
+        run: npm run build --legacy-peer-deps
       
       - name: Verify build
         run: ls -la public
