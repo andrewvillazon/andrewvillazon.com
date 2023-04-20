@@ -19,7 +19,7 @@
     "gatsby": "^5.3.3",
     "gatsby-plugin-image": "^3.4.0",
     "gatsby-plugin-manifest": "^5.4.0",
-    "gatsby-plugin-sharp": "^5.4.0",
+    "gatsby-plugin-sharp": "^5.8.1",
     "gatsby-plugin-sitemap": "^6.4.0",
     "gatsby-plugin-use-dark-mode": "^2.0.0",
     "gatsby-remark-autolink-headers": "^6.7.0",
