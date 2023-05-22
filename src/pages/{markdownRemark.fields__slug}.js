@@ -12,7 +12,7 @@ const MarkdownPage = ({ data }) => {
     <Layout>
       <section>
         <div className="container mx-auto">
-          <h1 className="mb-8 text-5xl font-extrabold tracking-tight dark:text-slate-50">
+          <h1 className="mb-8 text-5xl font-bold tracking-tight leading-snug dark:text-slate-50">
             {frontmatter.title}
           </h1>
           {frontmatter.date ? (
