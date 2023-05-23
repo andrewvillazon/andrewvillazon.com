@@ -3,6 +3,7 @@ title: "Clinical Natural Language Processing in Python"
 date: "2021-04-30"
 tags:
     - Python
+    - Machine Learning
 ---
 When working with health data, some of the most valuable information is inside Clinical Documentation. Notes made by Clinicians document many details, including diseases present, treatments, medications, or procedures, providing insight into a patient's condition.
 

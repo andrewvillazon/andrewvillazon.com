@@ -3,6 +3,7 @@ title: "Creating custom scikit-learn Transformers"
 date: "2022-01-17"
 tags:
     - Python
+    - Machine Learning
 ---
 
 In [scikit-learn](https://scikit-learn.org/stable/), Transformers are objects that **transform** a dataset into a new one to [prepare the dataset](https://scikit-learn.org/stable/modules/preprocessing.html) for predictive modeling, e.g., scaling numeric values, one-hot encoding categoricals, etc.

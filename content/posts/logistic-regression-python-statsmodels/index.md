@@ -3,6 +3,7 @@ title: "Logistic Regression in Python with statsmodels"
 date: "2021-11-14"
 tags:
     - Python
+    - Machine Learning
 ---
 
 [Logistic Regression](https://www.ibm.com/topics/logistic-regression) is a relatively simple, powerful, and fast statistical model and an excellent tool for Data Analysis. In this post, we'll look at Logistic Regression in Python with the [statsmodels](https://www.statsmodels.org/stable/index.html) package.

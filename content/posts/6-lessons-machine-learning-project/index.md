@@ -3,6 +3,7 @@ title: "6 lessons from a Machine Learning project"
 date: "2022-05-28"
 tags:
     - Discussion
+    - Machine Learning
 ---
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is a lot of fun, but it's not always straightforward and can be complex and sometimes messy. This post aims to reflect on some of the key learnings I took from recent work on a Machine Learning project.
