@@ -1,14 +1,13 @@
 ---
-title: "SQL Tips: Use a Temporary Table instead of UNION ALL"
+title: "Tame unweildly UNION ALLs with Temporary Tables"
 date: "2023-05-28"
 tags:
     - SQL Server
-    - SQL Tips
 ---
 
-In this post, we'll look at an alternative approach to combining data that uses Temporary Tables instead of `UNION ALL`.
+When combining result sets from different queries, we often use the `UNION ALL` operator to bring these together. In this post, we'll look at an alternative approach that uses Temporary Tables instead of `UNION ALL`.
 
-This tip won't make your SQL run faster, but it can help make the code more manageable for complex queries that combine data.
+This approach can help make the code more manageable for complex queries that combine data.
 
 ## How UNION ALL gets unwieldy
 
@@ -23,11 +22,11 @@ If a result set doesn't have the same number of columns, the usual solution is t
 
 [CODE]
 
-Adding NULL for a missing column isn't a big deal on small, simple queries. However, adding `NULL` to every `UNION ALL` becomes cumbersome as the combined result sets and columns grow.
+Adding `NULL` for a missing column isn't a big deal on small, simple queries. However, adding `NULL` to every `UNION ALL` becomes cumbersome as the combined result sets and columns grow.
 
 [CODE]
 
-Look familiar? Adding a new column to the 'X' result set involves adding more NULLs to the `SELECT` statements that come before and after.
+Look familiar? Adding a new column to the 'X' result set involves adding more `NULL`s to the `SELECT` statements that come before and after.
 
 ## Use a Temporary Table instead
 
