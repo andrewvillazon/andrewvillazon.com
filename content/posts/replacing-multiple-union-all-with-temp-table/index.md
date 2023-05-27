@@ -20,7 +20,7 @@ When we combine the result sets of two or more queries into a single result set,
 
 If a result set doesn't have the same number of columns, the usual solution is to add `NULL` where missing columns would be to meet the `UNION ALL` requirement.
 
-See the query below, which combines two arbitrary summaries of the StackOverflow Mini database into a single result set.
+See the query below, which combines two arbitrary summaries of the [StackOverflow Mini database](https://www.brentozar.com/archive/2023/01/how-to-install-sql-server-and-the-stack-overflow-database-on-a-mac/) into a single result set.
 
 ```sql{4,14}
 SELECT
@@ -243,3 +243,8 @@ ORDER BY
 ## Conclusion
 
 Here we've seen an alternative way to combine data that can make your SQL simpler, cleaner, and easier to maintain. Next time you're dealing with an unruly `UNION ALL`, give this alternative a go!
+
+### Demo Data
+
+* [Download the Current Stack Overflow Database for Free (2022-06)](https://www.brentozar.com/archive/2022/08/download-the-current-stack-overflow-database-for-free-2022-06/)
+* [How to Install SQL Server and the Stack Overflow Database on a Mac](https://www.brentozar.com/archive/2023/01/how-to-install-sql-server-and-the-stack-overflow-database-on-a-mac/)
