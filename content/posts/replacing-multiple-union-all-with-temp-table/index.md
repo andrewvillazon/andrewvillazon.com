@@ -88,7 +88,7 @@ Adding `NULL` for a missing column isn't a big deal on small, simple queries. Ho
 
 ## Use a Temporary Table instead.
 
-Instead of filling our code with `NULLs`, we can take advantage of the default behavior of Temp Tables.
+Instead of filling our code with `NULL`, we can take advantage of the default behavior of Temp Tables.
 
 When inserting data into a Temp Table, we can provide a column list that maps table columns to the columns of the proceeding `SELECT` or `VALUES`. When a table column is not listed in the `INSERT`, by default SQL Server fills that column with `NULL`, eliminating the need to add extra `NULL`s to each `SELECT`.
 
