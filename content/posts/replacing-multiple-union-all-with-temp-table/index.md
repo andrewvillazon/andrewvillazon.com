@@ -94,7 +94,7 @@ When inserting data into a Temp Table, we can provide a column list that maps ta
 
 ### How to use
 
-Recall the result set from above that used the `UNION ALL` operator.
+Recall the query from above that used the `UNION ALL` operator.
 
 ```sql
 SELECT
