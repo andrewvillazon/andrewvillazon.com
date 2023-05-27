@@ -233,12 +233,12 @@ ORDER BY
 * The code becomes cleaner, more concise, and more readable
 * We can modify a single result set, of our combined result set, without needing to adjust every other result set
 * To change or add a result set, we only need to change our Temp Table, not every other `SELECT`
-* If we need to, we can reference records from the temp table
+* If we need to, we can reference records from the temp table.
 
 ### Disadvantages
 
 * We're storing rows in an intermediate structure which can have performance implications.
-* If speed and performance are essential, then this approach is unlikely to be faster than a `UNION ALL`.
+* If speed and performance are essential, then this approach is unlikely to be faster than a `UNION ALL`
 
 ## Conclusion
 
