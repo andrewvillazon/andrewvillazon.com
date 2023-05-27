@@ -15,7 +15,7 @@ When we combine the result sets of two or more queries into a single result set,
 
 `UNION ALL` has a couple of basic rules:
 
-* The number and order of columns are the same
+* The **number and order of columns** are the same
 * Columns are compatible data types.
 
 If a result set doesn't have the same number of columns, the usual solution is to add `NULL` where missing columns would be to meet the `UNION ALL` requirement.
