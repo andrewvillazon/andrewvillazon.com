@@ -21,11 +21,67 @@ If a result set doesn't have the same number of columns, the usual solution is t
 
 See the query below, which combines two arbitrary summaries of the StackOverflow Mini database into a single result set.
 
-[CODE]
+```sql{4,14}
+SELECT
+    'Most viewed post' AS summary_name
+    ,Posts.Title AS most_viewed_post
+    ,NULL AS posts_per_day
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN (SELECT MAX(ViewCount) AS view_count FROM StackOverflowMini.dbo.Posts) AS most_viewed
+            ON Posts.ViewCount = most_viewed.view_count
+
+UNION ALL
+
+SELECT
+    'Posts per day'
+    ,NULL
+    ,COUNT(*)
+    /
+    DATEDIFF(DAY, MIN(Posts.CreationDate), MAX(Posts.CreationDate)) AS posts_per_day
+FROM
+    StackOverflowMini.dbo.Posts
+```
 
 Look familiar? Adding a new column to the result set involves adding more NULLs to all SELECTs involved in the UNION.
 
-[CODE]
+```sql{4,5,15,19,27,28}
+SELECT
+    'Most viewed post' AS summary_name
+    ,Posts.Title AS most_viewed_post
+    ,NULL AS posts_per_day
+    ,NULL AS avg_answer_count
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN (SELECT MAX(ViewCount) AS view_count FROM StackOverflowMini.dbo.Posts) AS most_viewed
+            ON Posts.ViewCount = most_viewed.view_count
+
+UNION ALL
+
+SELECT
+    'Posts per day'
+    ,NULL
+    ,COUNT(*)
+    /
+    DATEDIFF(DAY, MIN(Posts.CreationDate), MAX(Posts.CreationDate)) AS posts_per_day
+    ,NULL
+FROM
+    StackOverflowMini.dbo.Posts
+
+UNION ALL
+
+SELECT
+    'Average answer count'
+    ,NULL
+    ,NULL
+    ,AVG(Posts.AnswerCount)
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN StackOverflowMini.dbo.PostTypes
+            ON PostTypes.Id = Posts.PostTypeId
+WHERE
+    PostTypes.[Type] = 'Question'
+```
 
 Adding NULL for a missing column isn't a big deal on small, simple queries. However, adding NULL to every UNION ALL becomes cumbersome as the combined result sets and columns grow.
 
@@ -39,23 +95,137 @@ When inserting data into a Temp Table, we can provide a column list that maps ta
 
 Recall the result set from above that used the UNION ALL operator.
 
-[CODE]
+```sql
+SELECT
+    'Most viewed post' AS summary_name
+    ,Posts.Title AS most_viewed_post
+    ,NULL AS posts_per_day
+    ,NULL AS avg_answer_count
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN (SELECT MAX(ViewCount) AS view_count FROM StackOverflowMini.dbo.Posts) AS most_viewed
+            ON Posts.ViewCount = most_viewed.view_count
+
+UNION ALL
+
+SELECT
+    'Posts per day'
+    ,NULL
+    ,COUNT(*)
+    /
+    DATEDIFF(DAY, MIN(Posts.CreationDate), MAX(Posts.CreationDate)) AS posts_per_day
+    ,NULL
+FROM
+    StackOverflowMini.dbo.Posts
+
+UNION ALL
+
+SELECT
+    'Average answer count'
+    ,NULL
+    ,NULL
+    ,AVG(Posts.AnswerCount)
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN StackOverflowMini.dbo.PostTypes
+            ON PostTypes.Id = Posts.PostTypeId
+WHERE
+    PostTypes.[Type] = 'Question'
+```
 
 Now let's rewrite to use a Temp Table. First, we define the Temp Table that will hold our combined result set.
 
-[CODE]
+```sql
+DROP TABLE IF EXISTS #so_summary
+CREATE TABLE #so_summary (
+    summary_name VARCHAR(50)
+    ,most_view_post VARCHAR(200)
+    ,posts_per_day INT
+    ,avg_answer_count INT
+)
+```
 
 Then we replace each UNION ALL with the required INSERT.
 
-[CODE]
+```sql{1,10,19}
+INSERT INTO #so_summary(summary_name, most_view_post)
+SELECT
+    'Most viewed post'
+    ,Posts.Title
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN (SELECT MAX(ViewCount) AS view_count FROM StackOverflowMini.dbo.Posts) AS most_viewed
+            ON Posts.ViewCount = most_viewed.view_count
+
+INSERT INTO #so_summary(summary_name, posts_per_day)
+SELECT
+    'Posts per day'
+    ,COUNT(*)
+    /
+    DATEDIFF(DAY, MIN(Posts.CreationDate), MAX(Posts.CreationDate)) AS posts_per_day
+FROM
+    StackOverflowMini.dbo.Posts
+
+INSERT INTO #so_summary(summary_name, avg_answer_count)
+SELECT
+    'Average answer count'
+    ,AVG(Posts.AnswerCount)
+FROM
+    StackOverflowMini.dbo.Posts
+        INNER JOIN StackOverflowMini.dbo.PostTypes
+            ON PostTypes.Id = Posts.PostTypeId
+WHERE
+    PostTypes.[Type] = 'Question'
+```
 
 Lastly, SELECT from the Temp Table.
 
-[CODE]
+```sql
+SELECT * FROM #so_summary
+```
 
 If we want to add more result sets, we only need to extend the Temporary Table definition.
 
-[CODE]
+```sql{7,8,9,22}
+DROP TABLE IF EXISTS #so_summary
+CREATE TABLE #so_summary (
+    summary_name VARCHAR(50)
+    ,most_view_post VARCHAR(200)
+    ,posts_per_day INT
+    ,avg_answer_count INT
+    ,tag VARCHAR(50)
+    ,tag_count INT
+    ,ranking INT
+)
+
+
+INSERT INTO #so_summary(summary_name, most_view_post)
+SELECT ...
+
+INSERT INTO #so_summary(summary_name, posts_per_day)
+SELECT ...
+
+INSERT INTO #so_summary(summary_name, avg_answer_count)
+SELECT ...
+
+INSERT INTO #so_summary(summary_name,tag ,tag_count ,ranking)
+SELECT
+    TOP 5
+    'Top 5 tags'
+    ,tag.[value]
+    ,COUNT(*) AS tag_count
+    ,DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS ranking
+FROM
+    StackOverflowMini.dbo.Posts
+        CROSS APPLY string_split(REPLACE(REPLACE(Posts.Tags, '<' ,''), '>', ','), ',') as tag
+WHERE
+    Posts.Tags IS NOT NULL
+    AND tag.[value] <> ''
+GROUP BY
+    tag.[value]
+ORDER BY
+    tag_count DESC
+```
 
 ### Benefits
 
