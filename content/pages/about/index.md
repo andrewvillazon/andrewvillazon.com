@@ -6,7 +6,7 @@ Hi, I'm **Andrew**, a Data Professional. Welcome to my corner of the web.
 
 I started this site to share how I'd solved a problem or something I'd discovered and thought others might find useful. I quite like the idea of a [Digital Garden](https://maggieappleton.com/garden-history) 🌱
 
-Most of my content centers on my experience working in Data and Analytics. Some of the stuff I know a thing or two about:
+I'm currently a Data Engineer and have been an Analyst, too. Most of my content comes from my experience working in Data and Analytics. Some of the stuff I know a thing or two about:
 
 * SQL (SQL Server and Oracle variants)
 * Python
