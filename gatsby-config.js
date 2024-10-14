@@ -70,11 +70,5 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
-    {
-      resolve: "gatsby-plugin-use-dark-mode",
-      options: {
-        classNameDark: "dark",
-      },
-    },
   ],
 }
