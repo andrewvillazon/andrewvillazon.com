@@ -1,5 +1,4 @@
 import React from "react";
-import DarkModeToggle from "./DarkModeToggle";
 import { Link } from "gatsby";
 
 const Navigation = () => {
@@ -29,7 +28,7 @@ const Navigation = () => {
               ))}
             </div>
             <div>
-              <DarkModeToggle />
+              
             </div>
           </div>
         </div>
