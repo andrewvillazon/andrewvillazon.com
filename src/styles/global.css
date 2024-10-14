@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-50 px-2 transition-[background-color];
+  @apply bg-slate-50 transition-[background-color];
 }
 
 body.dark {

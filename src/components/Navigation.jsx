@@ -1,40 +1,37 @@
-import React from "react";
-import { Link } from "gatsby";
+import React from "react"
+import { Link } from "gatsby"
+import { Sunset, Shrub, FileText, UserRound, Mail } from "lucide-react"
 
 const Navigation = () => {
   const navItems = [
-    { url: "/articles", text: "Blog" },
-    { url: "/about", text: "About" },
-    { url: "/about/#contact", text: "Contact" },
-  ];
+    { url: "/articles", text: "Blog", icon: FileText },
+    { url: "/about", text: "About", icon: UserRound },
+    { url: "/about/#contact", text: "Contact", icon: Mail },
+  ]
 
   return (
-    <section className="pt-8">
-      <nav>
-        <div className="container mx-auto">
-          <div className="text-2xl mb-2 font-bold text-gray-800 dark:text-slate-300">
-            <Link to="/">Andrew Villazon</Link>
+    <section>
+      <nav className="h-16 w-full border-b border-gray-300">
+        <div className="container mx-auto px-5 h-full flex items-center justify-between">
+          <Link to="/" className="flex-1">
+            <Shrub size="24" />
+            <span class="hidden">Andrew Villazon</span>
+          </Link>
+          <div className="flex space-x-5">
+            {navItems.map((item) => (
+              <Link to={item.url} key={item.url}>
+                <item.icon size={24} />
+                <span className="hidden">{item.text}</span>
+              </Link>
+            ))}
           </div>
-          <div className="container mx-auto flex justify-between items-center">
-            <div className="flex space-x-6">
-              {navItems.map((item) => (
-                <Link
-                  to={item.url}
-                  key={item.text}
-                  className="text-lg py-2 text-gray-700 font-medium hover:border-b-blue-600 hover:text-blue-600 border-transparent border-y-2 dark:text-slate-400 dark:hover:border-b-blue-500 dark:hover:text-blue-500"
-                >
-                  {item.text}
-                </Link>
-              ))}
-            </div>
-            <div>
-              
-            </div>
-          </div>
+          <button className="ml-8">
+            <Sunset size="24" />
+          </button>
         </div>
       </nav>
     </section>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation
