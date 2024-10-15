@@ -5,85 +5,91 @@ import Posts from "../components/Posts"
 import Tags from "../components/Tags"
 import { projects } from "../data/projects"
 import { Seo } from "../components/Seo"
+import { Boxes, Github } from "lucide-react"
 
 const IndexPage = ({ data }) => {
   const latestPosts = data.latestPosts.nodes
-  const allTags = data.allTags.distinct
+  const allTags = data.allTags.group
+
+  console.log(allTags)
 
   return (
     <Layout>
       <section>
-        <div className="container mx-auto pr-28">
-          <h1 className="mb-8 text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-300">
-            Hi, I'm Andrew 👋
-          </h1>
-          <p className="text-xl mb-6 leading-9 text-slate-700 dark:text-gray-400">
-            I'm a Data Professional that specialises in SQL, Python, and Data
-            Visualisation. My website is a collection of the things I've learned
-            over the years - a place to document those "Aha!" moments.
-          </p>
-          <p className="text-xl mb-6 leading-9 text-slate-700 dark:text-gray-400">
-            Feel free to read my <Link to={"/articles"} className="text-blue-600 hover:underline dark:text-blue-500">posts</Link> or <Link to={"/contact"} className="text-blue-600 hover:underline dark:text-blue-500">get in touch</Link>.
-          </p>
-        </div>
+        <h1 className="text-4xl mb-8 font-semibold">
+          Hi, I'm <span className="text-red-600">Andrew</span>
+        </h1>
+        <p className="mb-4 text-lg">
+          I'm a Data Engineer writing about some of the things I've learned
+          working in Data & Analytics.
+        </p>
+        <p className="mb-4 text-lg">
+          On this site, you can read some of my&nbsp;
+          <Link to="/articles" className="text-red-600">
+            articles
+          </Link>
+          , learn more&nbsp;
+          <Link to="/about" className="text-red-600">
+            about me
+          </Link>
+          , or&nbsp;
+          <Link to="/about/#contact" className="text-red-600">
+            get in touch
+          </Link>
+          !
+        </p>
       </section>
 
       <section>
-        <div className="container mx-auto mt-24">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-300">Latest</h2>
-          </div>
-          <div>
-            <Posts posts={latestPosts} />
-          </div>
+        <div className="mt-12">
+          <h2 className="text-3xl font-semibold mb-8">Latest</h2>
+          <Posts posts={latestPosts} />
           <div className="mt-8">
-            <Link to={"/articles"} className="text-sm text-slate-500 hover:underline hover:text-blue-600 dark:hover:text-blue-500 dark:text-slate-400">
-              View more →
+            <Link to={"/articles"} className="text-sm text-gray-700">
+              All articles →
             </Link>
           </div>
         </div>
       </section>
 
       <section>
-        <div className="container mx-auto mt-20">
-          <h2 className="text-3xl font-semibold mb-8 text-slate-900 dark:text-slate-300">Explore</h2>
-          <div className="flex">
-            <Tags tags={allTags} />
-          </div>
+        <div className="mt-12">
+          <h2 className="text-3xl font-semibold mb-8">Explore</h2>
+          <Tags tags={allTags} />
         </div>
       </section>
 
       <section>
-        <div className="container mx-auto mt-20">
+        <div className="mt-12">
           <div>
-            <h2 className="text-3xl font-semibold mb-8 text-slate-900 dark:text-slate-300">Projects</h2>
+            <h2 className="text-3xl font-semibold mb-8">Open Source</h2>
           </div>
           <div>
             {projects.map((project) => {
               return (
-                <div
-                  className="max-w-sm p-4 border rounded-md bg-slate-100 border-slate-300 shadow dark:bg-slate-700 dark:shadow-slate-600 dark:border-slate-500 dark:shadow-slate-700"
-                  key={project.name}
-                >
-                  <h5 className="mb-2 text-xl font-bold dark:text-slate-300">{project.name}</h5>
-                  <p className="mb-3 text-base dark:text-slate-400">{project.description}</p>
-                  <a
-                    href={project.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center hover:underline hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-500"
-                  >
-                    Source
-                    <svg
-                      className="w-5 h-5 ml-1"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
+                <div class="border border-gray-300 bg-gray-100 rounded-lg px-3 pt-2 pb-3 mb-6">
+                  <h3 class="text-lg font-semibold text-gray-900">
+                    {project.name}
+                  </h3>
+                  <p class="mt-4 mb-5 text-gray-600">{project.description}</p>
+                  <div class="flex">
+                    <a
+                      href={project.pypi}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mr-2"
                     >
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                    </svg>
-                  </a>
+                      <Boxes size={24} />
+                    </a>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="ml-2"
+                    >
+                      <Github size="24" />
+                    </a>
+                  </div>
                 </div>
               )
             })}
@@ -105,6 +111,7 @@ export const query = graphql`
         frontmatter {
           date
           title
+          description
         }
         id
         fields {
@@ -113,7 +120,10 @@ export const query = graphql`
       }
     }
     allTags: allMarkdownRemark {
-      distinct(field: { frontmatter: { tags: SELECT } })
+      group(field: { frontmatter: { tags: SELECT } }) {
+        totalCount
+        fieldValue
+      }
     }
   }
 `

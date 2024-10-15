@@ -15,7 +15,7 @@ const Navigation = () => {
         <div className="container mx-auto px-5 h-full flex items-center justify-between">
           <Link to="/" className="flex-1">
             <Shrub size="24" />
-            <span class="hidden">Andrew Villazon</span>
+            <span className="hidden">Andrew Villazon</span>
           </Link>
           <div className="flex space-x-5">
             {navItems.map((item) => (
