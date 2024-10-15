@@ -3,6 +3,7 @@ title: "Replacing multiple UNION ALLs with a Temporary Table"
 date: "2023-05-28"
 tags:
     - SQL Server
+description: "A technique for combining data without repeated `UNION ALL`s."
 ---
 
 When combining result sets from different queries, we often use the `UNION ALL` operator to bring these together. In this post, we'll look at an alternative approach that uses Temporary Tables instead of `UNION ALL`.

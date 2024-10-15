@@ -3,6 +3,7 @@ title: "Adding source file information to tables in Databricks"
 date: "2024-03-01"
 tags:
     - Databricks
+description: "How to add source file information to your tables for improved debugging and traceability."
 ---
 
 Data pipelines are often complex, and because of this, debugging and pinpointing errors in a pipeline can sometimes be challenging. A practice that can help is including source file information with the data when ingested.

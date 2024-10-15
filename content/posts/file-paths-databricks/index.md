@@ -3,6 +3,7 @@ title: "Understanding file paths in Databricks"
 date: "2023-10-06"
 tags:
     - Databricks
+description: "Making sense of file paths and the file systems in Databricks."
 ---
 
 When first getting started with Databricks, one of the confusing aspects can be figuring out how to specify file paths to read or write files. This can lead to frustrating `FileNotFound` errors or wandering the file system searching for that file you're pretty sure you just serialized... somewhere.  

@@ -3,6 +3,7 @@ title: "2023 Year in review"
 date: "2024-01-19"
 tags:
     - Site
+description: "A look back at the past year's highlights."
 ---
 
 With 2023 all but over, it's time to reflect on the past year's highlights.
