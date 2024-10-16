@@ -7,21 +7,17 @@ import { Seo } from "../components/Seo"
 
 const ArticlePage = ({ data }) => {
   const posts = data.allMarkdownRemark.nodes
-  const tags = data.allMarkdownRemark.distinct
+  const tags = data.allTags.group
 
   return (
     <Layout>
       <section>
-        <div className="container mx-auto">
-          <h1 className="mb-12 text-5xl font-extrabold tracking-tight dark:text-slate-300">
-            Articles
-          </h1>
-          <h2 className="text-3xl font-semibold mb-8 dark:text-slate-300">Tags</h2>
-          <div className="flex mb-12">
-            <Tags tags={tags} />
-          </div>
-          <Posts posts={posts} groupByYears={true} />
+        <h1 className="mb-12 text-4xl font-bold tracking-tight">Articles</h1>
+        <h2 className="text-3xl font-semibold mb-8">Tags</h2>
+        <div className="mb-12">
+          <Tags tags={tags} />
         </div>
+        <Posts posts={posts} groupByYears={true} />
       </section>
     </Layout>
   )
@@ -53,6 +49,6 @@ export const query = graphql`
   }
 `
 
-export const Head = () => <Seo title={"Articles"}/>
+export const Head = () => <Seo title={"Articles"} />
 
 export default ArticlePage
