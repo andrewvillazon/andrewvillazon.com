@@ -43,7 +43,12 @@ export const query = graphql`
           slug
         }
       }
-      distinct(field: { frontmatter: { tags: SELECT } })
+    }
+    allTags: allMarkdownRemark {
+      group(field: { frontmatter: { tags: SELECT } }) {
+        totalCount
+        fieldValue
+      }
     }
   }
 `
