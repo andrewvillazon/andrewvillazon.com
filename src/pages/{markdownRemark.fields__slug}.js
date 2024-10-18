@@ -8,19 +8,25 @@ const MarkdownPage = ({ data }) => {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
 
+  const tags = frontmatter.tags
+    ? frontmatter.tags.map((tag) => ({ fieldValue: tag }))
+    : null
+
   return (
     <Layout>
       <section>
         <div className="container mx-auto">
-          <h1 className="mb-8 text-5xl font-bold tracking-tight leading-snug dark:text-slate-50">
+          <h1 className="mb-8 text-4xl font-bold tracking-tight">
             {frontmatter.title}
           </h1>
           {frontmatter.date ? (
-            <p className="text-base mb-8 dark:text-slate-400">{frontmatter.date}</p>
+            <p className="text-sm text-gray-500 font-mono mb-8">
+              <time className="">{frontmatter.date}</time>
+            </p>
           ) : null}
           {frontmatter.tags ? (
-            <div className="mb-12">
-              <Tags tags={frontmatter.tags} />
+            <div className="mb-8 text-sm">
+              <Tags tags={tags} />
             </div>
           ) : null}
           <div
@@ -43,9 +49,17 @@ export const pageQuery = graphql`
         tags
       }
     }
+    allMarkdownRemark {
+      tagCounts: group(field: { frontmatter: { tags: SELECT } }) {
+        fieldValue
+        totalCount
+      }
+    }
   }
 `
 
-export const Head = ({data}) => <Seo title={data.markdownRemark.frontmatter.title}/>
+export const Head = ({ data }) => (
+  <Seo title={data.markdownRemark.frontmatter.title} />
+)
 
 export default MarkdownPage
