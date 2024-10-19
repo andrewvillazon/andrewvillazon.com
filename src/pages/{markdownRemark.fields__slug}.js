@@ -12,13 +12,18 @@ const MarkdownPage = ({ data }) => {
     ? frontmatter.tags.map((tag) => ({ fieldValue: tag }))
     : null
 
+  function Header({ title }) {
+    if (title === "About me") {
+      return <h1 className="mb-8 text-4xl font-bold tracking-tight">{title}</h1>
+    }
+    return <h1 className="mb-8 text-3xl font-bold tracking-tight">{title}</h1>
+  }
+
   return (
     <Layout>
       <section>
         <div className="container mx-auto">
-          <h1 className="mb-8 text-4xl font-bold tracking-tight">
-            {frontmatter.title}
-          </h1>
+          <Header title={frontmatter.title} />
           {frontmatter.date ? (
             <p className="text-sm text-gray-500 font-mono mb-8">
               <time className="">{frontmatter.date}</time>
@@ -30,7 +35,7 @@ const MarkdownPage = ({ data }) => {
             </div>
           ) : null}
           <div
-            className="prose prose-lg max-w-none prose-h2:border-b prose-h2:border-gray-200 prose-h2:py-2 prose-a:text-blue-600 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-blue-500"
+            className="prose max-w-none prose-h2:border-b prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-blue-600 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-blue-500"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>
