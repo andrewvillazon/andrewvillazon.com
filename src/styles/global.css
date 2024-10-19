@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -15,23 +15,25 @@ body.dark {
 
 /* Tailwind typography class seems to mess with gatsy-remark-autolink-headers. This overwrites */
 .prose .anchor svg {
-  @apply inline
+  @apply inline;
 }
 
-.prose p code, .prose li code, .prose td code {
-  @apply text-base text-gray-200 rounded-md px-2 py-1 bg-gray-700
+.prose p code,
+.prose li code,
+.prose td code {
+  @apply text-lime-500 rounded-md px-2 py-1 bg-gray-600;
 }
 
 .prose kbd {
-  @apply px-2 py-1.5 text-sm font-semibold text-gray-800 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500
+  @apply px-2 py-1.5 text-sm font-semibold text-gray-800 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500;
 }
 
 .gatsby-highlight {
-  @apply text-base
+  @apply text-base;
 }
 
 .gatsby-highlight pre {
-  @apply px-6 !important
+  @apply px-6 !important;
 }
 
 .gatsby-highlight-code-line {
@@ -45,5 +47,5 @@ body.dark {
 }
 
 .code-filename {
-  @apply -mb-4 border-slate-600 pl-2 pb-3 pt-1 bg-slate-600 rounded text-slate-300 font-mono text-base
+  @apply -mb-4 border-slate-600 pl-2 pb-3 pt-1 bg-slate-600 rounded text-slate-300 font-mono text-base;
 }
