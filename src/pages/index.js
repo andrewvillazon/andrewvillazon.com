@@ -11,8 +11,6 @@ const IndexPage = ({ data }) => {
   const latestPosts = data.latestPosts.nodes
   const allTags = data.allTags.group
 
-  console.log(allTags)
-
   return (
     <Layout>
       <section>
