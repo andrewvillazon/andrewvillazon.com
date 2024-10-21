@@ -65,17 +65,17 @@ const IndexPage = ({ data }) => {
           <div>
             {projects.map((project) => {
               return (
-                <div class="border border-gray-300 bg-gray-100 rounded-lg px-3 pt-2 pb-3 mb-6">
-                  <h3 class="text-lg font-semibold text-gray-900">
+                <div className="border border-gray-300 bg-gray-100 rounded-lg px-3 pt-2 pb-3 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900">
                     {project.name}
                   </h3>
-                  <p class="mt-4 mb-5 text-gray-600">{project.description}</p>
-                  <div class="flex">
+                  <p className="mt-4 mb-5 text-gray-600">{project.description}</p>
+                  <div className="flex">
                     <a
                       href={project.pypi}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="mr-2"
+                      className="mr-2"
                     >
                       <Boxes size={24} />
                     </a>
@@ -83,7 +83,7 @@ const IndexPage = ({ data }) => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="ml-2"
+                      className="ml-2"
                     >
                       <Github size="24" />
                     </a>

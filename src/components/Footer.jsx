@@ -5,9 +5,9 @@ import { Github, FileText, UserRound, Mail, Linkedin } from "lucide-react"
 const Footer = () => {
   return (
     <section>
-      <footer class=" bg-gray-300 mt-24 border border-t border-gray-400">
-        <div class="container mx-auto px-5 py-14">
-          <nav class="flex flex-wrap justify-center gap-5">
+      <footer className=" bg-gray-300 mt-24 border border-t border-gray-400">
+        <div className="container mx-auto px-5 py-14">
+          <nav className="flex flex-wrap justify-center gap-5">
             <Link to={"/articles"}>
               <FileText size={24} />
             </Link>
@@ -32,7 +32,7 @@ const Footer = () => {
               <Github size={24} />
             </a>
           </nav>
-          <div class="text-sm text-center mt-6 text-gray-500">
+          <div className="text-sm text-center mt-6 text-gray-500">
             &copy; {new Date().getFullYear()} Andrew Villazon. All rights
             reserved.
           </div>
