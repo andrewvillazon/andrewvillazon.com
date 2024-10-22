@@ -65,11 +65,16 @@ const IndexPage = ({ data }) => {
           <div>
             {projects.map((project) => {
               return (
-                <div className="border border-gray-300 bg-gray-100 rounded-lg px-3 pt-2 pb-3 mb-6">
+                <div
+                  key={project.name}
+                  className="border border-gray-300 bg-gray-100 rounded-lg px-3 pt-2 pb-3 mb-6"
+                >
                   <h3 className="text-lg font-semibold text-gray-900">
                     {project.name}
                   </h3>
-                  <p className="mt-4 mb-5 text-gray-600">{project.description}</p>
+                  <p className="mt-4 mb-5 text-gray-600">
+                    {project.description}
+                  </p>
                   <div className="flex">
                     <a
                       href={project.pypi}
