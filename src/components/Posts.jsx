@@ -26,8 +26,8 @@ const Posts = ({ posts, groupByYears = false }) => {
           {year}
         </h2>
         {postsByYear[year].map((node) => (
-          <div className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
-            <article key={node.id}>
+          <div key={node.id} className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
+            <article>
               <Link to={`${node.fields.slug}`}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {node.frontmatter.title}
@@ -50,8 +50,8 @@ const Posts = ({ posts, groupByYears = false }) => {
     return (
       <div>
         {posts.map((node) => (
-          <div className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
-            <article key={node.id}>
+          <div key={node.id} className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
+            <article>
               <Link to={`${node.fields.slug}`}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {node.frontmatter.title}
