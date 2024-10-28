@@ -5,12 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-200 transition-[background-color];
+html.dark body {
+  @apply bg-gray-800;
 }
 
-body.dark {
-  @apply bg-slate-800;
+html body {
+  @apply bg-gray-200 transition-[background-color];
 }
 
 /* Tailwind typography class seems to mess with gatsy-remark-autolink-headers. This overwrites */

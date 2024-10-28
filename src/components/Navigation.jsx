@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Sunset, Shrub, FileText, UserRound, Mail } from "lucide-react"
+import DarkModeToggle from "./DarkModeToggle"
 
 const Navigation = () => {
   const navItems = [
@@ -25,9 +26,9 @@ const Navigation = () => {
               </Link>
             ))}
           </div>
-          <button className="ml-8">
-            <Sunset size="24" />
-          </button>
+          <div className="ml-8">
+            <DarkModeToggle />
+          </div>
         </div>
       </nav>
     </section>
