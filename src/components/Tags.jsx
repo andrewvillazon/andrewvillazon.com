@@ -12,7 +12,7 @@ const Tags = ({ tags }) => {
           className="font-mono mr-4 mb-3 pt-2 pb-1"
         >
           <span className="text-gray-700">#</span>
-          <span className="border-b border-gray-900">{tag.fieldValue}</span>
+          <span className="border-b-2 border-dotted border-gray-900">{tag.fieldValue}</span>
           <sup>
             &nbsp;{tag.totalCount}
           </sup>
