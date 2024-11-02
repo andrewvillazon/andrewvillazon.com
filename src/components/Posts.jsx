@@ -22,21 +22,21 @@ const Posts = ({ posts, groupByYears = false }) => {
 
     return years.map((year) => (
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold mb-8" key={year}>
+        <h2 className="text-3xl font-semibold mb-8 text-gray-700 dark:text-gray-300" key={year}>
           {year}
         </h2>
         {postsByYear[year].map((node) => (
           <div key={node.id} className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
             <article>
               <Link to={`${node.fields.slug}`}>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-cyan-700 dark:text-yellow-500 mb-2">
                   {node.frontmatter.title}
                 </h3>
-                <time className="block text-sm text-gray-500 font-mono mb-3">
+                <time className="block text-sm text-gray-500 dark:text-gray-400 font-mono mb-3">
                   {formatDate(node.frontmatter.date)}
                 </time>
                 {node.frontmatter.description && (
-                  <p className="text-base text-gray-700 mb-5">
+                  <p className="text-base text-gray-700 dark:text-gray-400 mb-5">
                     {node.frontmatter.description}
                   </p>
                 )}
@@ -53,14 +53,14 @@ const Posts = ({ posts, groupByYears = false }) => {
           <div key={node.id} className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
             <article>
               <Link to={`${node.fields.slug}`}>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-cyan-700 mb-2 dark:text-yellow-500">
                   {node.frontmatter.title}
                 </h3>
-                <time className="block text-sm text-gray-500 font-mono mb-3">
+                <time className="block text-xs text-gray-500 dark:text-gray-400 font-mono mb-3">
                   {formatDate(node.frontmatter.date)}
                 </time>
                 {node.frontmatter.description && (
-                  <p className="text-base text-gray-700 mb-5">
+                  <p className="text-sm text-gray-600 mb-5 dark:text-gray-400">
                     {node.frontmatter.description}
                   </p>
                 )}
