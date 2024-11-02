@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Sunset, Sunrise } from "lucide-react"
+import { SunMedium, Moon } from "lucide-react"
 
 // Adapted from: https://www.joshwcomeau.com/react/dark-mode/
 function getCurrentTheme() {
@@ -48,8 +48,8 @@ export default function DarkModeToggle() {
   }
 
   return (
-    <button onClick={toggleDarkMode}>
-      {darkMode ? <Sunrise /> : <Sunset />}
+    <button onClick={toggleDarkMode} className="py-1 px-1 border border-gray-400 bg-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700">
+      {darkMode ? <SunMedium className="dark:stroke-orange-200 dark:fill-gray-800" /> : <Moon className="stroke-gray-600 fill-amber-300"/>}
     </button>
   )
 }
