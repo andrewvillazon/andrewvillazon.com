@@ -14,9 +14,9 @@ const MarkdownPage = ({ data }) => {
 
   function Header({ title }) {
     if (title === "About me") {
-      return <h1 className="mb-8 text-4xl font-bold tracking-tight">{title}</h1>
+      return <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
     }
-    return <h1 className="mb-8 text-3xl font-bold tracking-tight">{title}</h1>
+    return <h1 className="mb-8 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
   }
 
   return (
@@ -35,7 +35,7 @@ const MarkdownPage = ({ data }) => {
             </div>
           ) : null}
           <div
-            className="prose max-w-none prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-blue-600 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-blue-500"
+            className="prose max-w-none prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-cyan-700 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-yellow-500 dark:prose-h2:border-gray-700"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>
