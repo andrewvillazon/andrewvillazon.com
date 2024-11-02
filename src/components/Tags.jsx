@@ -9,10 +9,10 @@ const Tags = ({ tags }) => {
         <Link
           key={tag.fieldValue}
           to={`/tags/${kebabCase(tag.fieldValue)}`}
-          className="font-mono mr-4 mb-3 pt-2 pb-1"
+          className="font-mono mr-4 mb-3 pt-2 pb-1 text-cyan-700 dark:text-yellow-500"
         >
-          <span className="text-gray-700">#</span>
-          <span className="border-b-2 border-dotted border-gray-900">{tag.fieldValue}</span>
+          <span>#</span>
+          <span className="border-b-2 border-dotted border-cyan-800 dark:border-yellow-500">{tag.fieldValue}</span>
           <sup>
             &nbsp;{tag.totalCount}
           </sup>
