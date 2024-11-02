@@ -10,7 +10,7 @@ const Tags = ({ pageContext, data }) => {
   return (
     <Layout>
       <section>
-          <h1 className="mb-12 text-4xl font-extrabold tracking-tight dark:text-slate-50">
+          <h1 className="mb-12 text-4xl font-extrabold tracking-tight text-gray-700 dark:text-gray-300">
             Posts tagged <u>{tag}</u> ({totalCount})
           </h1>
           <Posts posts={nodes} groupByYears={true} />
