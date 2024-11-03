@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import { Shrub, FileText, UserRound, Mail, House } from "lucide-react"
+import { FileText, UserRound, Mail, House } from "lucide-react"
 import DarkModeToggle from "./DarkModeToggle"
 
 const Navigation = () => {
