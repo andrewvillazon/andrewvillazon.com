@@ -16,7 +16,7 @@ const MarkdownPage = ({ data }) => {
     if (title === "About me") {
       return <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
     }
-    return <h1 className="mb-8 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
+    return <h1 className="mb-5 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
   }
 
   return (
@@ -25,7 +25,7 @@ const MarkdownPage = ({ data }) => {
         <div className="container mx-auto">
           <Header title={frontmatter.title} />
           {frontmatter.date ? (
-            <p className="text-sm text-gray-500 font-mono mb-8">
+            <p className="text-sm text-gray-500 font-mono mb-4">
               <time className="">{frontmatter.date}</time>
             </p>
           ) : null}
