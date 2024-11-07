@@ -5,8 +5,8 @@ import { Boxes, Github } from "lucide-react"
 const Projects = () => {
   return (
     <div>
-      {projects.map((project) => {
-        ;<div key={project.name}>
+      {projects.map((project) => (
+        <div key={project.name}>
           <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             <a
               href={project.github}
@@ -45,7 +45,7 @@ const Projects = () => {
             </a>
           </div>
         </div>
-      })}
+      ))}
     </div>
   )
 }
