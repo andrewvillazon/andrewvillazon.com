@@ -3,7 +3,6 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import Posts from "../components/Posts"
 import Tags from "../components/Tags"
-import { projects } from "../data/projects"
 import { Seo } from "../components/Seo"
 import Projects from "../components/Projects"
 

@@ -1,6 +1,6 @@
 import React from "react"
 import { projects } from "../data/projects"
-import { Boxes, Github, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 
 const Projects = () => {
   return (
