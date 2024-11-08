@@ -48,8 +48,8 @@ export default function DarkModeToggle() {
   }
 
   return (
-    <button onClick={toggleDarkMode} className="py-1 px-1 border border-gray-400 bg-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700">
-      {darkMode ? <SunMedium className="dark:stroke-orange-200 dark:fill-gray-800" /> : <Moon className="stroke-gray-600 fill-amber-300"/>}
+    <button onClick={toggleDarkMode} className="py-1 px-1 border border-gray-400 bg-neutral-200 rounded-lg dark:border-gray-600 dark:bg-neutral-800">
+      {darkMode ? <SunMedium className="dark:stroke-green-200 dark:fill-gray-800" /> : <Moon className="stroke-gray-600 fill-green-300"/>}
     </button>
   )
 }

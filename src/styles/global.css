@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 html.dark body {
-  @apply bg-gray-800;
+  @apply bg-zinc-900;
 }
 
 html body {
@@ -21,7 +21,7 @@ html body {
 .prose p code,
 .prose li code,
 .prose td code {
-  @apply text-red-600 rounded-md px-2 py-1 bg-gray-300 dark:bg-gray-600 dark:text-cyan-500;
+  @apply text-stone-600 rounded-md px-2 py-1 bg-neutral-300 dark:bg-neutral-700 dark:text-stone-300;
 }
 
 .prose kbd {

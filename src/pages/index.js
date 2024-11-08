@@ -14,52 +14,53 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <section>
-        <div className="text-gray-700 dark:text-gray-300">
-          <h1 className="text-4xl mb-8 font-semibold">
+        <div className="">
+          <h1 className="text-gray-700 dark:text-gray-300 text-4xl mb-8 font-semibold">
             Hi, I'm{" "}
-            <span className="text-cyan-700 dark:text-yellow-500">Andrew</span>
+            <span className="text-sky-700 dark:text-green-500">Andrew</span>
           </h1>
-          <p className="mb-4 text-lg">
-            I'm a Data Engineer writing about some of the things I've learned
-            working in Data & Analytics.
-          </p>
-          <p className="mb-4 text-lg">
-            On this site, you can read some of my&nbsp;
-            <Link
-              to="/articles"
-              className="text-cyan-700 dark:text-yellow-500 font-semibold"
-            >
-              articles
-            </Link>
-            , learn more&nbsp;
-            <Link
-              to="/about"
-              className="text-cyan-700 dark:text-yellow-500 font-semibold"
-            >
-              about me
-            </Link>
-            , or&nbsp;
-            <Link
-              to="/about/#contact"
-              className="text-cyan-700 dark:text-yellow-500 font-semibold"
-            >
-              get in touch
-            </Link>
-            !
-          </p>
+          <div className="text-gray-700 dark:text-gray-400">
+            <p className="mb-6 text-lg leading-8">
+              I'm a <span className="font-semibold">Data Engineer</span> sharing a few of the things I've picked up working in Data & Analytics.
+            </p>
+            <p className="mb-6 text-lg leading-8">
+              On this site, you can read my&nbsp;
+              <Link
+                to="/articles"
+                className="text-sky-700 dark:text-green-500 font-semibold"
+              >
+                articles
+              </Link>
+              , learn more&nbsp;
+              <Link
+                to="/about"
+                className="text-sky-700 dark:text-green-500 font-semibold"
+              >
+                about me
+              </Link>
+              , or&nbsp;
+              <Link
+                to="/about/#contact"
+                className="text-sky-700 dark:text-green-500 font-semibold"
+              >
+                get in touch
+              </Link>
+              !
+            </p>
+          </div>
         </div>
       </section>
 
       <section>
         <div className="mt-12">
-          <h2 className="text-3xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
+          <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
             Latest
           </h2>
           <Posts posts={latestPosts} />
           <div className="mt-8">
             <Link
               to={"/articles"}
-              className="text-sm text-cyan-700 dark:text-yellow-500"
+              className="text-base text-sky-700 dark:text-green-500"
             >
               All articles →
             </Link>
@@ -69,7 +70,7 @@ const IndexPage = ({ data }) => {
 
       <section>
         <div className="mt-12">
-          <h2 className="text-3xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
+          <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
             Explore
           </h2>
           <Tags tags={allTags} />
@@ -79,7 +80,7 @@ const IndexPage = ({ data }) => {
       <section>
         <div className="mt-12">
           <div>
-            <h2 className="text-3xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
+            <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
               Open Source
             </h2>
           </div>
