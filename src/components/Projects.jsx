@@ -1,6 +1,6 @@
 import React from "react"
 import { projects } from "../data/projects"
-import { Boxes, Github } from "lucide-react"
+import { Boxes, Github, ExternalLink } from "lucide-react"
 
 const Projects = () => {
   return (
@@ -12,7 +12,7 @@ const Projects = () => {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cyan-700 dark:text-yellow-500"
+              className="text-sky-700 dark:text-green-500"
             >
               {project.name}
             </a>
@@ -20,29 +20,10 @@ const Projects = () => {
           <p className="mt-4 mb-5 text-gray-600 dark:text-gray-400 text-sm">
             {project.description}
           </p>
-          <div className="flex">
-            <a
-              href={project.pypi}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mr-2 py-1 px-2 text-sm inline-flex bg-gray-300 border border-gray-400 rounded-md dark:border-gray-600 dark:bg-gray-700"
-            >
-              <Boxes
-                size={24}
-                className="stroke-gray-600 dark:stroke-gray-400"
-              />
-            </a>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-1 py-1 px-2 text-sm inline-flex bg-gray-300 border border-gray-400 rounded-md dark:border-gray-600 dark:bg-gray-600"
-            >
-              <Github
-                size="24"
-                className="stroke-gray-600 dark:stroke-gray-400"
-              />
-            </a>
+          <div className="flex flex-wrap">
+            {project.additional_links.map((link) => (
+              <a href={link.url} className="mr-4 text-sm text-sky-700 font-medium dark:text-green-500">{link.text} <ExternalLink className="h-3 w-3 inline" /> </a>
+            ))}
           </div>
         </div>
       ))}
