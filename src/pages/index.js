@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => {
             Hi, I'm{" "}
             <span className="text-sky-700 dark:text-teal-500">Andrew</span>
           </h1>
-          <div className="text-gray-700 dark:text-gray-400">
+          <div className="text-gray-600 dark:text-gray-400">
             <p className="mb-6 text-lg leading-8">
               I'm a <span className="font-semibold">Data Engineer</span> sharing a few of the things I've picked up working in Data & Analytics.
             </p>
