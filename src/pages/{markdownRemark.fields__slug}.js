@@ -35,7 +35,7 @@ const MarkdownPage = ({ data }) => {
             </div>
           ) : null}
           <div
-            className="prose max-w-none prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-sky-700 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-green-500 dark:prose-h2:border-gray-700"
+            className="prose max-w-none prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-sky-700 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-teal-500 dark:prose-h2:border-gray-700"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>

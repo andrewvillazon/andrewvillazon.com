@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 html.dark body {
-  @apply bg-zinc-900;
+  @apply bg-zinc-800;
 }
 
 html body {

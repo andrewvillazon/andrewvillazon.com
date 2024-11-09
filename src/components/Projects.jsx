@@ -12,7 +12,7 @@ const Projects = () => {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sky-700 dark:text-green-500"
+              className="text-sky-700 dark:text-teal-500"
             >
               {project.name}
             </a>
@@ -22,7 +22,7 @@ const Projects = () => {
           </p>
           <div className="flex flex-wrap">
             {project.additional_links.map((link) => (
-              <a href={link.url} className="mr-4 text-sm text-sky-700 font-medium dark:text-green-500">{link.text} <ExternalLink className="h-3 w-3 inline" /> </a>
+              <a href={link.url} className="mr-4 text-sm text-sky-700 font-medium dark:text-teal-500">{link.text} <ExternalLink className="h-3 w-3 inline" /> </a>
             ))}
           </div>
         </div>

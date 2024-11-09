@@ -18,7 +18,7 @@ const Navigation = () => {
               <Link
                 to={item.url}
                 key={item.url}
-                className="font-semibold uppercase text-sm text-gray-600 dark:text-green-500 md:block md:text-lg"
+                className="font-semibold uppercase text-sm text-gray-600 dark:text-gray-400 md:block md:text-lg"
               >
                 {item.text}
               </Link>

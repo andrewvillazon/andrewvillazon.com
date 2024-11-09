@@ -29,7 +29,7 @@ const Posts = ({ posts, groupByYears = false }) => {
           <div key={node.id} className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
             <article>
               <Link to={`${node.fields.slug}`}>
-                <h3 className="text-lg font-semibold text-sky-700 dark:text-green-500 mb-2">
+                <h3 className="text-lg font-semibold text-sky-700 dark:text-teal-500 mb-2">
                   {node.frontmatter.title}
                 </h3>
                 <time className="block text-xs text-gray-500 dark:text-gray-400 font-mono mb-3">
@@ -53,7 +53,7 @@ const Posts = ({ posts, groupByYears = false }) => {
           <div key={node.id} className="border-b border-gray-500 border-dotted last:border-hidden mt-4">
             <article>
               <Link to={`${node.fields.slug}`}>
-                <h3 className="text-lg font-semibold text-sky-700 mb-2 dark:text-green-500">
+                <h3 className="text-lg font-semibold text-sky-700 mb-2 dark:text-teal-500">
                   {node.frontmatter.title}
                 </h3>
                 <time className="block text-xs text-gray-500 dark:text-gray-400 font-mono mb-3">

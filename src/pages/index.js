@@ -16,7 +16,7 @@ const IndexPage = ({ data }) => {
         <div className="">
           <h1 className="text-gray-700 dark:text-gray-300 text-4xl mb-8 font-semibold">
             Hi, I'm{" "}
-            <span className="text-sky-700 dark:text-green-500">Andrew</span>
+            <span className="text-sky-700 dark:text-teal-500">Andrew</span>
           </h1>
           <div className="text-gray-700 dark:text-gray-400">
             <p className="mb-6 text-lg leading-8">
@@ -26,21 +26,21 @@ const IndexPage = ({ data }) => {
               On this site, you can read my&nbsp;
               <Link
                 to="/articles"
-                className="text-sky-700 dark:text-green-500 font-semibold"
+                className="text-sky-700 dark:text-teal-500 font-semibold"
               >
                 articles
               </Link>
               , learn more&nbsp;
               <Link
                 to="/about"
-                className="text-sky-700 dark:text-green-500 font-semibold"
+                className="text-sky-700 dark:text-teal-500 font-semibold"
               >
                 about me
               </Link>
               , or&nbsp;
               <Link
                 to="/about/#contact"
-                className="text-sky-700 dark:text-green-500 font-semibold"
+                className="text-sky-700 dark:text-teal-500 font-semibold"
               >
                 get in touch
               </Link>
@@ -59,7 +59,7 @@ const IndexPage = ({ data }) => {
           <div className="mt-8">
             <Link
               to={"/articles"}
-              className="text-base text-sky-700 dark:text-green-500"
+              className="text-base text-sky-700 dark:text-teal-500"
             >
               All articles →
             </Link>
