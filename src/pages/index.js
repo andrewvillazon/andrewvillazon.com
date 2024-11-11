@@ -13,8 +13,8 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <section>
-        <div className="">
-          <h1 className="text-gray-700 dark:text-gray-300 text-4xl mb-8 font-semibold">
+        <div className="md:w-3/4">
+          <h1 className="text-gray-700 dark:text-gray-300 text-4xl mb-8 font-semibold md:text-5xl">
             Hi, I'm{" "}
             <span className="text-sky-700 dark:text-teal-500">Andrew</span>
           </h1>
@@ -51,12 +51,12 @@ const IndexPage = ({ data }) => {
       </section>
 
       <section>
-        <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
+        <div className="mt-12 md:mt-20">
+          <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 md:text-3xl">
             Latest
           </h2>
           <Posts posts={latestPosts} />
-          <div className="mt-8">
+          <div className="mt-8 md:mt-10">
             <Link
               to={"/articles"}
               className="text-base text-sky-700 dark:text-teal-500"
@@ -68,8 +68,8 @@ const IndexPage = ({ data }) => {
       </section>
 
       <section>
-        <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
+        <div className="mt-12 md:mt-20">
+          <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 md:text-3xl">
             Explore
           </h2>
           <Tags tags={allTags} />
@@ -77,9 +77,9 @@ const IndexPage = ({ data }) => {
       </section>
 
       <section>
-        <div className="mt-12">
+        <div className="mt-12 md:mt-20">
           <div>
-            <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
+            <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 md:text-3xl">
               Open Source
             </h2>
           </div>

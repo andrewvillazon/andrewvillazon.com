@@ -14,9 +14,17 @@ const MarkdownPage = ({ data }) => {
 
   function Header({ title }) {
     if (title === "About me") {
-      return <h1 className="mb-8 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
+      return (
+        <h1 className="mb-8 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300 md:text-4xl">
+          {title}
+        </h1>
+      )
     }
-    return <h1 className="mb-3 text-2xl font-bold tracking-tight text-gray-700 dark:text-gray-300">{title}</h1>
+    return (
+      <h1 className="mb-3 text-2xl font-bold tracking-tight text-gray-700 dark:text-gray-300 md:text-3xl">
+        {title}
+      </h1>
+    )
   }
 
   return (
@@ -30,12 +38,12 @@ const MarkdownPage = ({ data }) => {
             </p>
           ) : null}
           {frontmatter.tags ? (
-            <div className="mb-8 text-sm">
+            <div className="mb-8">
               <Tags tags={tags} />
             </div>
           ) : null}
           <div
-            className="prose max-w-none prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-sky-700 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-teal-500 dark:prose-h2:border-gray-700"
+            className="prose max-w-none prose-h2:border-b prose-h2:border-gray-300 prose-h2:py-2 prose-a:text-sky-700 prose-code:before:content-none prose-code:after:content-none dark:prose-invert dark:prose-a:text-teal-500 dark:prose-h2:border-gray-700 md:prose-lg"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>

@@ -12,8 +12,8 @@ const ArticlePage = ({ data }) => {
   return (
     <Layout>
       <section>
-        <h1 className="mb-12 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300">Articles</h1>
-        <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300">Tags</h2>
+        <h1 className="mb-12 text-3xl font-bold tracking-tight text-gray-700 dark:text-gray-300 md:text-4xl">Articles</h1>
+        <h2 className="text-2xl font-semibold mb-8 text-gray-700 dark:text-gray-300 md:text-3xl md:mt-20">Tags</h2>
         <div className="mb-12">
           <Tags tags={tags} />
         </div>

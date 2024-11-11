@@ -10,7 +10,7 @@ const Tags = ({ pageContext, data }) => {
   return (
     <Layout>
       <section>
-        <h1 className="mb-12 text-3xl font-extrabold tracking-tight text-gray-700 dark:text-gray-300">
+        <h1 className="mb-12 text-3xl font-extrabold tracking-tight text-gray-700 dark:text-gray-300 md:text-4xl md:mb-20">
           <u>#{tag}</u>
           <sup>&nbsp;{totalCount}</sup>
         </h1>

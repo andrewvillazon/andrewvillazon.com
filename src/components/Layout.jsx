@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     <div className="flex flex-col h-screen justify-between">
       <Navigation />
       <main className="mb-auto">
-        <div className="mt-10 mb-auto container mx-auto px-5">{children}</div>
+        <div className="mt-10 mb-auto container mx-auto px-5 md:mt-28">{children}</div>
       </main>
       <Footer />
     </div>
