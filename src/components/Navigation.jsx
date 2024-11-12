@@ -12,7 +12,7 @@ const Navigation = () => {
   return (
     <section>
       <nav className="h-16 w-full border-b border-gray-300 dark:border-gray-700 md:h-24">
-        <div className="container h-full mx-auto px-5 flex items-center justify-between">
+        <div className="container h-full mx-auto px-5 flex items-center justify-between max-w-3xl">
           <div className="flex space-x-5 ">
             {navItems.map((item) => (
               <Link
