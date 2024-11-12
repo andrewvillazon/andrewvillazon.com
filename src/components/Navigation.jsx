@@ -13,7 +13,7 @@ const Navigation = () => {
     <section>
       <nav className="h-16 w-full border-b border-gray-300 dark:border-gray-700 md:h-24">
         <div className="container h-full mx-auto px-5 flex items-center justify-between max-w-3xl">
-          <div className="flex space-x-5 ">
+          <div className="flex space-x-5 md:space-x-8">
             {navItems.map((item) => (
               <Link
                 to={item.url}
