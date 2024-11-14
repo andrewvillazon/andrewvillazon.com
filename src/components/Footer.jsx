@@ -5,7 +5,7 @@ import { Github, FileText, UserRound, Mail, Linkedin } from "lucide-react"
 const Footer = () => {
   return (
     <section>
-      <footer className="mt-24 border-t border-gray-300 dark:border-gray-700">
+      <footer className="mt-24 border-t border-gray-300 dark:border-gray-700 md:mt-36">
         <div className="container mx-auto px-5 py-14 max-w-3xl">
           <nav className="flex flex-wrap justify-center gap-5">
             <Link to={"/articles"}>
