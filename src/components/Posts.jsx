@@ -30,7 +30,7 @@ const Posts = ({ posts, groupByYears = false }) => {
                 <time className="block text-xs text-gray-400 dark:text-gray-500 font-mono mb-2 md:text-sm">
                   {formatDate(node.frontmatter.date)}
                 </time>
-                <h3 className="text-base font-semibold text-sky-700 dark:text-teal-500 mb-2 md:text-lg">
+                <h3 className="text-base font-semibold text-sky-700 dark:text-teal-500 mb-2 md:text-lg md:mb-4">
                   {node.frontmatter.title}
                 </h3>
                 {node.frontmatter.description && (
@@ -54,7 +54,7 @@ const Posts = ({ posts, groupByYears = false }) => {
                 <time className="block text-xs text-gray-400 dark:text-gray-500 font-mono mb-2 md:text-sm">
                   {formatDate(node.frontmatter.date)}
                 </time>
-                <h3 className="text-base font-semibold text-sky-700 mb-2 dark:text-teal-500 md:text-lg">
+                <h3 className="text-base font-semibold text-sky-700 mb-2 dark:text-teal-500 md:text-lg md:mb-4">
                   {node.frontmatter.title}
                 </h3>
                 {node.frontmatter.description && (
