@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react"
 import { SunMedium, Moon } from "lucide-react"
 
+// Check if window is defined (so if in the browser or in node.js).
+const isBrowser = typeof window !== "undefined"
+
 // Adapted from: https://www.joshwcomeau.com/react/dark-mode/
 function getCurrentTheme() {
-  const savedTheme = localStorage.getItem("theme")
-  if (savedTheme) {
-    return savedTheme
-  }
+  if (isBrowser) {
+    const savedTheme = localStorage.getItem("theme")
+    if (savedTheme) {
+      return savedTheme
+    }
 
-  const hasThemePreference = window.matchMedia("(prefers-color-scheme: dark)")
-  if (hasThemePreference) {
-    return hasThemePreference.matches ? "dark" : "light"
+    const hasThemePreference = window.matchMedia("(prefers-color-scheme: dark)")
+    if (hasThemePreference) {
+      return hasThemePreference.matches ? "dark" : "light"
+    }
   }
 
   return "light"
@@ -36,20 +41,26 @@ export default function DarkModeToggle() {
   }, [])
 
   const toggleDarkMode = () => {
-    if (document.documentElement.classList.contains("dark")) {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
-      setDarkMode(false)
-    } else {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
-      setDarkMode(true)
+    if (isBrowser) {
+      if (document.documentElement.classList.contains("dark")) {
+        document.documentElement.classList.remove("dark")
+        localStorage.setItem("theme", "light")
+        setDarkMode(false)
+      } else {
+        document.documentElement.classList.add("dark")
+        localStorage.setItem("theme", "dark")
+        setDarkMode(true)
+      }
     }
   }
 
   return (
     <button onClick={toggleDarkMode}>
-      {darkMode ? <SunMedium className="dark:stroke-gray-200 dark:fill-gray-800 h-6 w-6" /> : <Moon className="stroke-gray-700 h-6 w-6"/>}
+      {darkMode ? (
+        <SunMedium className="dark:stroke-gray-200 dark:fill-gray-800 h-6 w-6" />
+      ) : (
+        <Moon className="stroke-gray-700 h-6 w-6" />
+      )}
     </button>
   )
 }
