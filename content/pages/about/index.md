@@ -4,15 +4,15 @@ title: About me
 
 Hi, I'm **Andrew**, a Data Professional. Welcome to my corner of the web.
 
-I started this site to share how I'd solved a problem or something I'd discovered and thought others might find useful. I quite like the idea of a [Digital Garden](https://maggieappleton.com/garden-history) 🌱
+I've been in Data and Analytics for over a decade and a half, where I've done a few different things, from building dashboards to Machine Learning to now doing Data Engineering. Most of my content comes from my experience working in Data.
 
-I'm currently a Data Engineer and have been an Analyst, too. Most of my content comes from my experience working in Data and Analytics. Some of the stuff I know a thing or two about:
+I started this site to share how I'd solved a problem or something I'd discovered that I thought others might find helpful. It's something of a [Digital Garden](https://maggieappleton.com/garden-history) 🌱 and something of a place to document the things I don't want to forget.
 
-* SQL (SQL Server and Oracle variants)
+Some of the stuff I know and like to write about:
+
+* SQL
 * Python
-* dbt
-* Tableau
-* Power BI
+* Databricks
 * Data Modelling
 * Query tuning
 * Machine Learning
@@ -34,7 +34,6 @@ This site wouldn't be possible without those who took the time to share what the
 Here are a few of them:
 
 * [Tania Rascia](https://www.taniarascia.com/) - The inspiration for this site, both in terms of design and implementation. I've lost count of the times I've read Tania's source code. If you're an aspiring Web Developer, her site is well worth the visit.
-* [Rhys Camm](https://rhysc.me/) - For the great post on how to [implement Dark Mode](https://rhysc.me/blog/tailwind-gatsby-dark-mode) in a Gatsby site.
 * [Code Concisely](https://www.codeconcisely.com/) - For the excellent tip on using the Gatsby File API for [automatic page generation](https://www.codeconcisely.com/posts/how-to-create-pages-with-gatsby-file-system-route-api/). Saved a lot of mucking about in `gatsby-node.js`
-* [Paul Scanlon](https://paulie.dev/) - Paul documents and explains approaches to many things you'll encounter when creating a Gatsby site.
 * [Tim Addison](https://tjaddison.com/) - For the awesome suggestion on [styling Gatsby Markdown](https://tjaddison.com/blog/2019/08/styling-markdown-tailwind-gatsby/) pages with Tailwind.
+* [Josh W. Comeau](https://www.joshwcomeau.com/) - For the informative and detailed guide to [implementing dark mode](https://www.joshwcomeau.com/react/dark-mode/) in a react site.
