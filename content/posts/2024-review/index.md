@@ -1,6 +1,6 @@
 ---
 title: "2024 Year in review"
-date: "2025-07-23"
+date: "2025-07-24"
 tags:
     - Site
 description: "A little late, but a quick retrospective on 2025."
