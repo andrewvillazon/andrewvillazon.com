@@ -27,6 +27,6 @@ The library saw five new [releases](https://github.com/andrewvillazon/pbipy/rele
 
 ## Thoughts on 2025
 
-With 2025 almost halfway done, a significant change for me involves switching from working in Databricks to Snowflake, which should provide me with more inspiration for writing.
+With 2025 almost halfway done, a significant change for me involves switching from working in Databricks to **Snowflake**, which should provide me with more inspiration for writing.
 
 Thanks for reading in **2024**!
