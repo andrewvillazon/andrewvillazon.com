@@ -1,9 +1,10 @@
 ---
-title: "Querying LIST, SHOW, DESCRIBE, and other SQL Commands in Snowflake"
+title: "Querying LIST, SHOW, DESCRIBE, and other SQL commands in Snowflake"
 date: "2025-12-30"
 tags:
     - Snowflake
     - Snippets
+description: "How to query the outputs of various Snowflake SQL commands."
 ---
 
 In Snowflake, there are a number of helpful [SQL commands](https://docs.snowflake.com/en/sql-reference-commands) that provide details about objects in the platform, such as `LIST`, `SHOW`, and `DESCRIBE`.
