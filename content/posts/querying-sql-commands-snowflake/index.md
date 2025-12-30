@@ -6,15 +6,15 @@ tags:
     - Snippets
 ---
 
-In Snowflake, there are a number of helpful SQL commands that provide details about objects in the platform, such as `LIST`, `SHOW`, and `DESCRIBE`.
+In Snowflake, there are a number of helpful [SQL commands](https://docs.snowflake.com/en/sql-reference-commands) that provide details about objects in the platform, such as `LIST`, `SHOW`, and `DESCRIBE`.
 
-From time to time, you may find yourself wanting to query the outputs of these commands as part of routine administration on Snowflake, e.g., finding users that match a specific pattern or searching the contents of a stage.
+From time to time, you may find yourself wanting to query the outputs of these commands as part of routine administration or troubleshooting, e.g., finding users that match a specific pattern or searching the contents of a stage.
 
 In this post, we'll take a look at three different ways you can query the results of these commands to increase their utility.
 
-## The Pipe Operator
+## Using the Pipe Operator
 
-The Snowflake Pipe Operator is a special feature of Snowflake's SQL dialect that lets you *pipe* the result set from one statement into the `FROM` clause of the query that follows.
+The Snowflake [Pipe Operator](https://docs.snowflake.com/en/sql-reference/operators-flow#pipe) is a special feature of Snowflake's SQL dialect that lets you *pipe* the result set from one statement into the `FROM` clause of the query that follows.
 
 The Pipe operator, `->>`, uses a syntax that references the result set of the previous statement using the dollar sign (`$`) and its number in the sequence, e.g., `$1`
 
@@ -24,11 +24,12 @@ STATEMENT_1
 ->> SELECT ... FROM $2
 ->> SELECT ... FROM $3
 ...
+
 ```
 
-Let's see how this works by looking at an example that uses the `LIST` command to count the number of files that arrive at a stage each day. 
+Let's see how this works by looking at an example that uses the `LIST` command to count the number of files that arrive at a stage each day.
 
-Here we pipe the LIST command into our second query, making it accessible via `$1` in the subsequent query. In the subsequent query, we aggregate the file count to the day level and order it accordingly.
+Here we **pipe** the `LIST` command into our second query, making it accessible via `$1` in the subsequent query. In the subsequent query, we aggregate the file count to the day level and order accordingly.
 
 ```sql{1,2,12}
 LIST @my_db.my_schema.my_stage
@@ -46,21 +47,22 @@ LIST @my_db.my_schema.my_stage
     GROUP BY
         ALL
     ORDER BY
-        last_modified_date;
+        last_modified_date DESC;
+
 ```
 
 ## Using `LAST_QUERY_ID`, `RESULT_SCAN`, and `TABLE`
 
-Each time a SQL statement runs, Snowflake generates a unique query ID in the background. This ID can be used in conjunction with the `RESULT_SCAN` function and `TABLE` literal to query the result set of a previously run statement. 
+Each time a SQL statement runs, Snowflake generates a unique query ID in the background. This ID can be used in conjunction with the [RESULT_SCAN](https://docs.snowflake.com/en/sql-reference/functions/result_scan) function and [TABLE literals](https://docs.snowflake.com/en/sql-reference/literals-table) to query the result set of a previously run statement. 
 
 The syntax for this approach looks something like this.
 
 ```sql
 STATEMENT;
 SELECT 
-    cols 
+    cols
 FROM
-    TABLE(RESULT_SCAN(LAST_QUERY_ID()))
+    TABLE(RESULT_SCAN(LAST_QUERY_ID()));
 
 ```
 
@@ -79,13 +81,13 @@ WHERE
 
 ```
 
-First, we run `DESCRIBE NETWORK RULE;`, generating a unique query ID. The query ID produced by the statement can be retrieved using the `LAST_QUERY_ID` function.
+First, we run `DESCRIBE NETWORK RULE;`, generating a unique query ID. The query ID produced by the statement can be retrieved using the [LAST_QUERY_ID](https://docs.snowflake.com/en/sql-reference/functions/last_query_id) function.
 
 The `DESCRIBE NETWORK RULE` result has the allowed IPs as a comma-separated list in a single column. To turn this into rows, we use `LATERAL`, `FLATTEN`, and `SPLIT`. Lastly, the `WHERE` clause allows us to filter for the desired IPs.
 
 ## Using Snowpark
 
-This method uses a feature of Snowpark: the ability to capture the results of a SQL statement as a DataFrame, including SQL commands. With the results in a Dataframe, we can perform Dataframe operations to suit.
+This method uses a feature of [Snowpark](https://www.phdata.io/blog/what-is-snowpark/): the ability to capture the results of a SQL statement as a [DataFrame](https://docs.snowflake.com/en/developer-guide/snowpark/reference/python/latest/snowpark/api/snowflake.snowpark.DataFrame), including SQL commands. With the results in a Dataframe, we can perform Dataframe operations to suit.
 
 Consider the example below, where we want to find our Service Users and when they last logged in.
 
@@ -101,7 +103,7 @@ session.sql("SHOW USERS;") \
 
 ```
 
-First, we import and generate our session object with `get_active_session()`. Then we run the `SHOW USERS` command using the session's `sql` method. Calling the `sql` method returns a regular Dataframe, which we then filter and select as required.
+First, we import and generate our session object with `get_active_session()`. Then we run the `SHOW USERS` command using the session's [sql method](https://docs.snowflake.com/en/developer-guide/snowpark/reference/python/latest/snowpark/api/snowflake.snowpark.Session.sql). Calling the `sql` method returns a regular Dataframe, which we then `filter` and `select` as required.
 
 ## Summing Up
 
@@ -111,4 +113,7 @@ Next time you've got some complex administration or troubleshooting to do on Sno
 
 ## Further Reading
 
-* []()
+* [Flow operators](https://docs.snowflake.com/en/sql-reference/operators-flow)
+* [RESULT_SCAN](https://docs.snowflake.com/en/sql-reference/functions/result_scan)
+* [LAST_QUERY_ID]()
+* [SQL command reference](https://docs.snowflake.com/en/sql-reference-commands)
